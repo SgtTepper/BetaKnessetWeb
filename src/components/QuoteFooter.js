@@ -4,7 +4,7 @@ import { toNiceDate } from '../utils'
 import DocumentLink, { getDocumentLink } from './DocumentLink'
 
 export default function QuoteFooter(props) {
-    const {StartDate, TopicName, FilePath, Text, Speaker, isInProtocol} = props
+    const {StartDate, TopicName, Text, Speaker, isInProtocol} = props
     return (
         <>
             {isInProtocol 

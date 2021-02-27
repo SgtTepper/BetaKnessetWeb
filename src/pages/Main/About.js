@@ -11,7 +11,7 @@ export default function AboutDialog(props) {
             בטא מחוקקים הוא פרויקט קהילתי שהתחיל מהשאלה הפשוטה - <i>מה עושים חברי הכנסת?</i>
             </p>
             <p>
-            כשגילינו ש<a href="https://main.knesset.gov.il/Activity/Info/pages/databases.aspx" target="_blank">המידע של הכנסת זמין כבר מ-2016</a> ופתוח לכל,
+            כשגילינו ש<a href="https://main.knesset.gov.il/Activity/Info/pages/databases.aspx" rel="noreferrer" target="_blank">המידע של הכנסת זמין כבר מ-2016</a> ופתוח לכל,
             הבנו שיש פה הזדמנות לגשת להכל אחרת.
             </p>
             <p style={{ textIndent: 10 }}>

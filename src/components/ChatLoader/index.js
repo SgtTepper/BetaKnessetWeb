@@ -1,6 +1,5 @@
 import React from 'react'
-import classes from './index.css'
-
+import './index.css'
 
 export default function ChatLoader({show}) {
   if (!show)

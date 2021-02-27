@@ -1,5 +1,5 @@
 import React from 'react'
-import FullCalendar, { formatDate } from '@fullcalendar/react'
+import FullCalendar from '@fullcalendar/react'
 import heLocale from '@fullcalendar/core/locales/he'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
@@ -195,7 +195,7 @@ function truncateName(n, l) {
   return n.substring(0, l) + "..."
 }
 
-const formatMonth = (s,e) => `${s.getYear()}-${s.getMonth()}/${s.getYear()}-${s.getMonth()}`
+//const formatMonth = (s,e) => `${s.getYear()}-${s.getMonth()}/${s.getYear()}-${s.getMonth()}`
 
 
 

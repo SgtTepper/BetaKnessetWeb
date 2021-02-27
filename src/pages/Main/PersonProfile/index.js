@@ -82,8 +82,8 @@ export default PersonProfile
 
 const PersonAvatar = React.memo(function ({Name, imgPath, positionsByKnesset}) {
     const lastPositions = positionsByKnesset[Math.max(...Object.keys(positionsByKnesset))]
-    const restPositions = Object.entries(positionsByKnesset)
-            .filter(([k, _]) => k != lastPositions[0].KnessetNum)
+    //const restPositions = Object.entries(positionsByKnesset)
+    //        .filter(([k, _]) => k != lastPositions[0].KnessetNum)
     const faction = lastPositions.map(p => p.FactionName).filter(p => p)
 
     const desc = []
@@ -112,7 +112,7 @@ const PersonAvatar = React.memo(function ({Name, imgPath, positionsByKnesset}) {
 
 
 function parseResponse(contents) {
-    if (contents.length == 0)
+    if (contents.length === 0)
       return null
   
     // take generic values
@@ -169,6 +169,7 @@ function parseResponse(contents) {
     return res 
   }
   
+  /*
   function getStrongestPosition(positions) {
     const dutyDescs = positions.map(p => p.DutyDesc).filter(p => p)
     if (dutyDescs.length > 0) return dutyDescs.join(', ')
@@ -198,5 +199,5 @@ function parseResponse(contents) {
       {getStrongestPosition(positions)}
       {faction && `, ${faction}`}
     </>
-  }
+  }*/
   

@@ -19,7 +19,7 @@ const QuotesSearch = React.memo(function ({style, variant, showReset = true}) {
   
     const search = useCallback(() => 
         navigate({q: queryInput})
-    , [queryInput])
+    , [queryInput, navigate])
   
     useEffect(() => {
         setQueryInput(query)
@@ -99,17 +99,17 @@ function SearchDialogue(props) {
             <b>איך מחפשים מונח?</b>            
             <p>פשוט מקלידים את המילה ומחפשים, למשל:</p>
             <p style={{color: '#062350', textAlign: 'center'}}>
-                <b><i><a href="#" onClick={e => showQuotes(e, 'פנסיה')}>פנסיה</a></i></b>
+                <b><i><a href="/" onClick={e => showQuotes(e, 'פנסיה')}>פנסיה</a></i></b>
             </p>
             <b>איך מחפשים משפט?</b>
             <p>פשוט מקלידים את המשפט ומחפשים, למשל:</p>
             <p style={{color: '#062350', textAlign: 'center'}}>
-                <b><i><a href="#" onClick={e => showQuotes(e, 'ילדי תימן')}>ילדי תימן</a></i></b>
+                <b><i><a href="/" onClick={e => showQuotes(e, 'ילדי תימן')}>ילדי תימן</a></i></b>
             </p>
             <b>איך מחפשים כמה מונחים בו זמנית?</b>
             <p>פשוט מקלידים את המילים או המשפטים מופרדים עם התו ^, למשל:</p>
             <p style={{color: '#062350', textAlign: 'center'}}>
-                <b><i><a href="#" onClick={e => showQuotes(e, 'בעד^הקהילה הגאה')}>בעד^הקהילה הגאה</a></i></b>
+                <b><i><a href="/" onClick={e => showQuotes(e, 'בעד^הקהילה הגאה')}>בעד^הקהילה הגאה</a></i></b>
             </p>
         </Dialog>
     )

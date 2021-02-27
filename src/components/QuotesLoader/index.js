@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, useRef, useMemo } from 'react'
+import React, { useState, useEffect, useRef, useMemo } from 'react'
 import TextTransition, { presets } from "react-text-transition"
 import CircularProgress from '@material-ui/core/CircularProgress'
 
@@ -17,7 +17,7 @@ const Loader = React.memo(function ({show}) {
       else {
         clearInterval(intervalId.current)
       }
-    }, [show])
+    }, [show, shuffled])
   
   
     const currentQuote = shuffled[index % shuffled.length]

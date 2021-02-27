@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import "react-vis/dist/style.css"
 import Highlighter from "react-highlight-words"
 import {Treemap} from 'react-vis'
 import { withStyles } from '@material-ui/core/styles'
 import Tooltip from '@material-ui/core/Tooltip'
-import { useHistory } from "react-router-dom"
 
 import QuotesLoader from '../../../../components/QuotesLoader'
-import { useQuery, toNiceDate, imageOrDefault, useWindowSize, shuffleArray, useNavigate } from '../../../../utils'
+import { useQuery, toNiceDate, imageOrDefault, shuffleArray, useNavigate } from '../../../../utils'
 import config from '../../../../config'
 
 import defaultBubbles from './defaultBubbles'
@@ -76,8 +75,7 @@ const Bubble = React.memo(function ({viewPersonQuotes}) {
 export default Bubble
 
 const Chart = React.memo(function ({setLoading}) {
-    const history = useHistory()
-    const windowSize = useWindowSize()
+    //const windowSize = useWindowSize()
     const [data, setData] = useState(makeDefaultBubbles(defaultBubbles))
     const query = useQuery()
     const navigate = useNavigate()
@@ -151,7 +149,6 @@ const Chart = React.memo(function ({setLoading}) {
 })
 
 const PersonShortName = React.memo(function ({...props}) {
-  const [open, setOpen] = useState(false)
   const {FirstName, LastName, ratio} = props
 
   return (
@@ -161,8 +158,6 @@ const PersonShortName = React.memo(function ({...props}) {
       arrow
       interactive
       enterNextDelay={200}
-      onOpen={() => setOpen(true)}
-      onClose={() => setOpen(false)}
     >
       <div className='person-bubble'
         style={{

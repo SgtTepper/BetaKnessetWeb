@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import TextField from '@material-ui/core/TextField'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import PersonIcon from '@material-ui/icons/Person'
-import CloseIcon from '@material-ui/icons/Close'
 import Autocomplete from '@material-ui/lab/Autocomplete'
 import { usePersonID, useNavigate } from '../utils'
 

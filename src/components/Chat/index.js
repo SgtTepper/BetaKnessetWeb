@@ -59,8 +59,7 @@ function ChatItem(props) {
 
 const MAX_WORDS = 40
 function trimText(text, term) {
-    let index
-    if (!term || (index = text.indexOf(term) === -1)) {
+    if (!term || text.indexOf(term) === -1) {
         const parts = text.split(' ')
         if (parts.length <= MAX_WORDS)
             return text
@@ -82,7 +81,7 @@ function trimText(text, term) {
         i = Math.max(0, before.length - maxPerSlice - 1, lastMax)
         j = 0
 
-        if ((current !== 0 || i !== 0) && i != lastMax)
+        if ((current !== 0 || i !== 0) && i !== lastMax)
         words.push('...')
 
         while (words.length < MAX_WORDS && i < before.length) {
