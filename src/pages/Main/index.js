@@ -106,7 +106,7 @@ function TopBar() {
             אודות
           </Button>
           <Tooltip title={<h2>מזלגו אותנו ב-GitHub</h2>} arrow>
-            <IconButton href="https://github.com/SgtTepper/BetaKnesset">
+            <IconButton href="https://github.com/SgtTepper/BetaKnessetWeb">
               <GitHubIcon />
             </IconButton>
           </Tooltip>

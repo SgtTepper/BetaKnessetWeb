@@ -1,5 +1,5 @@
 {
-  "server": "http://localhost:7071/api",
-  "_server": "https://betaknesset.azurewebsites.net/api",
+  "server_debug": "http://localhost:7071/api",
+  "server": "https://betaknesset.azurewebsites.net/api",
   "defaultBubblesCount": 25
 }
