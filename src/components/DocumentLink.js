@@ -16,9 +16,9 @@ export default function DocumentLink({children, SessionType, DocumentID, Index})
 export function getDocumentLink({SessionType, DocumentID, Index, query, personID}) {
     switch (SessionType) {
         case "Committee":
-            return `/document/committee/${DocumentID}${personID ? `?person=${personID}&q=${query}` : ''}#q${Index}`
+            return `/document/committee/${DocumentID}${personID ? `?personID=${personID}&q=${query}` : ''}#q${Index}`
         case "Plenum":
-            return `/document/plenum/${DocumentID}${personID ? `?person=${personID}&q=${query}` : ''}#q${Index}`
+            return `/document/plenum/${DocumentID}${personID ? `?personID=${personID}&q=${query}` : ''}#q${Index}`
         default:
             return null
     }

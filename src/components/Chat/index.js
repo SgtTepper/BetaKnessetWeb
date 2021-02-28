@@ -30,14 +30,14 @@ function ChatItem(props) {
             className={clsx(
                 expanded && 'expanded',
                 isInProtocol ? 'in-protocol' : 'not-in-protocol', 
-                isSpeaker === true ? 'self' : 'other', 
+                isSpeaker === true ? 'self' : 'other',
                 isContinuation && 'continuation')}
             id={`q${Index}`}
         >
             <div className="avatar">
                 <div className="img" style={{backgroundImage: `url(${imageOrDefault(imgPath, Speaker)})`}}/>
             </div>
-            <div className="msg" onClick={() => setExpanded(!expanded)}>
+            <div className="msg" onClick={() => !isInProtocol && setExpanded(!expanded)}>
                 {Speaker &&
                     <p className="speaker" style={isSpeaker ? {} : {color: colorHash.hex(Speaker)}}>{Speaker}</p>}
                 <p className={clsx(expanded && "expanded")}>

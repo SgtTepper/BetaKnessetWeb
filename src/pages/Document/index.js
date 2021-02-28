@@ -5,22 +5,26 @@ import QuotesLoader from '../../components/QuotesLoader'
 import Chat from '../../components/Chat'
 import config from '../../config'
 import { useQuery, usePersonID } from '../../utils'
+import { ScrollPage } from '../../components/ScrollableView'
 
 const DocumentQuotes = React.memo(React.forwardRef(function ({type}, ref) {
     const [loading, setLoading] = useState(false)
     const {id} = useParams()
 
-    return (
-        <div ref={ref}>
-            {loading && <QuotesLoader />}
-            <QuoteView documentID={id} documentType={type} setLoading={setLoading} />
-        </div>
+    return (            
+        <ScrollPage id='document-quotes' parentStyle={{backgroundColor: 'black'}}>
+            <div ref={ref}>
+                {loading && <QuotesLoader />}
+                <QuoteView documentID={id} documentType={type} setLoading={setLoading} />
+            </div>
+        </ScrollPage>
     )
 }))
 export default DocumentQuotes
 
 const QuoteView = React.memo(function ({documentID, documentType, setLoading}) {
     const [data, setData] = useState([])
+    const [metadata, setMetadata] = useState([])
 
     const personID = usePersonID()
     const query = useQuery()
@@ -31,8 +35,10 @@ const QuoteView = React.memo(function ({documentID, documentType, setLoading}) {
             return
         setLoading(true)
         try {
-            const res = await (await fetch(`${config.server}/DocumentQuotes?documentId=${documentID}&documentType=${documentType}`)).json()
-            setData(res)
+            const quotes = await (await fetch(`${config.server}/DocumentQuotes?documentId=${documentID}&documentType=${documentType}`)).json()
+            const enrichment = await (await fetch(`${config.server}/DocumentTopics?documentId=${documentID}&documentType=${documentType}`)).json()
+            setData(quotes)            
+            setMetadata(enrichment)
         } catch(e) {
             // TODO handle errors
             console.error(e)
