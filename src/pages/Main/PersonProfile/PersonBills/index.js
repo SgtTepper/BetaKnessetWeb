@@ -12,7 +12,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import AccessTimeRoundedIcon from '@material-ui/icons/AccessTimeRounded';
 import CheckRoundedIcon from '@material-ui/icons/CheckRounded';
-import CallSplitRoundedIcon from '@material-ui/icons/CallSplitRounded';
+import LoopRoundedIcon from '@material-ui/icons/LoopRounded';
 import DescriptionRoundedIcon from '@material-ui/icons/DescriptionRounded';
 import HelpOutlineRoundedIcon from '@material-ui/icons/HelpOutlineRounded';
 
@@ -143,13 +143,15 @@ function StatusToIcon({statusID, desc}) {
       case 118:
           icon = <CheckRoundedIcon className={classes.accordionIcon} style={{ color: '#108737' }} />        
           break
-      case 161:
-      case 169:
-      case 158:
+      case 120:
       case 126:
+      case 158:
+      case 161:
       case 162:
-      case 122:
-          icon = <CallSplitRoundedIcon className={classes.accordionIcon} style={{ color: '#9c9c9c' }} />
+      case 165:
+      case 169:
+      case 175:
+          icon = <LoopRoundedIcon className={classes.accordionIcon} style={{ color: '#6f6f6f' }} />        
           break
       default:
           icon = <AccessTimeRoundedIcon className={classes.accordionIcon} style={{ color: '#e39e36' }} />            
@@ -164,13 +166,15 @@ function getReducedType(bill) {
         return 'נעצרה'
     case 118:
         return 'אושרה'
-    case 161:
-    case 169:
-    case 158:
+    case 120:
     case 126:
+    case 158:
+    case 161:
     case 162:
-    case 122:
-        return 'בתהליך'
+    case 165:
+    case 169:
+    case 175:
+        return 'אחר'
     default:
       return 'בתהליך'
   }
