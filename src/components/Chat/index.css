@@ -381,11 +381,13 @@ input.textarea {
 }
 
 .chat li .share-buttons {
+    text-align: center;
     opacity: 0;
     transform: scaleY(0) scaleX(.9); 
     transition: opacity .05s ease-in-out, transform .15s cubic-bezier(1,.32,.82,1.6);
 }
 .chat li:hover .share-buttons {
+    text-align: center;
     opacity: 1;
     transform: scale(1); 
 }

@@ -37,6 +37,7 @@
 }
 
 .share-buttons > * {
+  text-align: center;
   margin: 0 .15em;
 }
 
