@@ -6,9 +6,9 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import listPlugin from '@fullcalendar/list'
 import interactionPlugin from '@fullcalendar/interaction'
 
-import { ScrollPage } from '../../../components/ScrollableView'
+import { ScrollPage } from '../../components/ScrollableView'
 import './index.css'
-import config from '../../../config'
+import config from '../../config'
 
 class CalendarView extends React.Component {
 

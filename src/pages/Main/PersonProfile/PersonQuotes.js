@@ -4,7 +4,7 @@ import Loader from '../../../components/ChatLoader'
 import Chat from '../../../components/Chat'
 import config from '../../../config'
 import { useQuery } from '../../../utils'
-import QuotesSearch from '../../../components/QuotesSearch'
+import { WhiteQuotesSearch } from '../../../components/QuotesSearch'
 
 const PersonQuotes = React.memo(function ({personID}) {
     const [loading, setLoading] = useState(false)
@@ -12,7 +12,7 @@ const PersonQuotes = React.memo(function ({personID}) {
     return (
         <>
             <div style={{padding: '0 50px 0 .5em', width: '100%'}}>
-                <QuotesSearch style={{color: 'white', borderBottom: '2px solid white'}} variant="standard" showReset={false} />
+                <WhiteQuotesSearch showReset={false} />
             </div>
             <Loader show={loading} />
             <QuoteView personID={personID} setLoading={setLoading} />

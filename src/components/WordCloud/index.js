@@ -11,7 +11,8 @@ const options = {
   fontSizes: [20, 75],
   fontFamily: "sans-serif",
   fontWeight: "600",
-  padding: 3
+  padding: 3,
+  enableOptimizations: true,
 };
 
 export default React.memo(function WordCloud() {

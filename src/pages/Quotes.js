@@ -1,22 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react'
 
-import { ScrollPage } from '../../components/ScrollableView'
-import Loader from '../../components/ChatLoader'
-import Chat from '../../components/Chat'
-import config from '../../config'
-import { useQuery } from '../../utils'
-import { Typography } from '@material-ui/core'
+import { ScrollPage } from '../components/ScrollableView'
+import Loader from '../components/ChatLoader'
+import Chat from '../components/Chat'
+import { WhiteQuotesSearch } from '../components/QuotesSearch'
+import config from '../config'
+import { useQuery } from '../utils'
 
 const Quotes = React.memo(function () {
-    const query = useQuery()
     const [loading, setLoading] = useState(false)
     return (
         <ScrollPage limit id='quotes' parentStyle={{backgroundColor: '#223388'}}>
-            <Typography color="secondary" variant="h2" component="h2" gutterBottom 
-                    style={{textAlign: 'center', color: 'white', fontFamily: "'Secular One', sans-serif", paddingTop: '2vh'}}>
-                    {query.length ? `ציטוטים בנושא ״${query}״` : "אמירות אחרונות"}
-            </Typography>
-            <div style={{position: 'relative', width: '100%', maxWidth: '850px', height: '100%', overflowY: 'auto', zIndex: 2}}>
+            <div style={{position: 'relative', width: '100%', maxWidth: '850px', height: '100%', overflowY: 'auto', zIndex: 2, paddingTop: '1em'}}>
+                <WhiteQuotesSearch showReset={false} />
                 <Loader show={loading} />
                 <QuoteView setLoading={setLoading} />
             </div>

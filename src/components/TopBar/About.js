@@ -1,4 +1,4 @@
-import Dialog from '../../components/Dialog'
+import Dialog from '../Dialog'
 import { Typography } from '@material-ui/core'
 
 export default function AboutDialog(props) {

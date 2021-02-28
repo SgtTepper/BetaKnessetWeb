@@ -116,3 +116,8 @@ function SearchDialogue(props) {
 }
 
 export default QuotesSearch
+
+
+export function WhiteQuotesSearch({style, ...props}) {
+    return <QuotesSearch style={{color: 'white', borderBottom: '2px solid white', ...style}} variant="standard" {...props} />
+}

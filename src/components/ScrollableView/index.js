@@ -43,13 +43,7 @@ const useStyles = makeStyles({
     )
   }
 
-  export function ScrollPage(props) {
-    const { children, limit, parentStyle } = props
-
-    if (children) delete props[children]
-    if (limit) delete props[limit]
-    if (parentStyle) delete props[parentStyle]
-
+  export function ScrollPage({ children, limit, parentStyle, ...props }) {
     const classes = useStyles()
     return (
     <div className={clsx(classes.scrollPage, limit && classes.limitScreen)} style={parentStyle}>
