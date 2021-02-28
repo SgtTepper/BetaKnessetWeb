@@ -15,7 +15,7 @@ export default function Chat({items}) {
     return (
         <ScrollIntoView id={location.hash}>
             <ol className="chat">
-                {items.map(i => <ChatItem key={i.Index} {...i} />)}
+                {items.map(i => <ChatItem key={`${i.Index}-${i.DocumentID}`} {...i} />)}
             </ol>
         </ScrollIntoView>
     )
@@ -32,7 +32,7 @@ function ChatItem(props) {
                 isInProtocol ? 'in-protocol' : 'not-in-protocol', 
                 isSpeaker === true ? 'self' : 'other',
                 isContinuation && 'continuation')}
-            id={`q${Index}`}
+            id={isInProtocol ? `q${Index}` : null}
         >
             <div className="avatar">
                 <div className="img" style={{backgroundImage: `url(${imageOrDefault(imgPath, Speaker)})`}}/>

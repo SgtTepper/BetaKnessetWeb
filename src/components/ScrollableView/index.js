@@ -19,12 +19,12 @@ const useStyles = makeStyles({
     },
 
     wrapper: {
+      zIndex: 2,
       display: 'flex',
       placeContent: 'center',
       position: 'relative',
       width: '100%',
       minHeight: '100%',
-      zIndex: 2,
     },
 
     limitScreen: {

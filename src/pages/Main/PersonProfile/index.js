@@ -5,18 +5,19 @@ import WordCloud from '../../../components/WordCloud'
 import PersonBills from './PersonBills'
 import PersonBillsStats from './PersonBillsStats'
 import './index.css'
-import { CircularProgress, Typography } from '@material-ui/core'
+import Typography from '@material-ui/core/Typography'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import Button from '@material-ui/core/Button'
+import PeopleIcon from '@material-ui/icons/People'
 
 import config from '../../../config'
-import { imageOrDefault, usePersonID } from '../../../utils'
+import { useNavigate, imageOrDefault, usePersonID, getFullName } from '../../../utils'
 import { ScrollPage } from '../../../components/ScrollableView'
 import PersonSearch from '../../../components/PersonSearch'
 
 const PersonProfile = React.memo(function () {
-  const [persons, setPersons] = useState({})
   const personID = usePersonID()
-  const [person, setPerson] = useState(null)
-  const [billsFilter, setBillsFilter] = useState(null)
+  const [persons, setPersons] = useState({})
 
   useEffect(() => {
     (async () => {
@@ -28,6 +29,22 @@ const PersonProfile = React.memo(function () {
       setPersons(mapping)
     })()
   }, [])
+
+  return (
+      <ScrollPage parentStyle={{backgroundColor: '#091022'}} limit id='person'>
+        {personID 
+          && <PersonView persons={persons} personID={personID} />}
+        {!personID 
+          && <PersonSelectionView persons={persons} />}
+      </ScrollPage>
+  )
+})
+export default PersonProfile
+
+
+const PersonView = React.memo(function ({persons, personID}) { 
+  const [person, setPerson] = useState(null)
+  const [billsFilter, setBillsFilter] = useState(null)
     
   useEffect(() => {
       (async () => {
@@ -38,74 +55,137 @@ const PersonProfile = React.memo(function () {
   }, [personID])
 
   return (
-      <ScrollPage parentStyle={{backgroundColor: '#091022'}} limit id='person'>
-        <div className="person-grid-container" style={{width: '100%', position: 'relative', zIndex: 2}}>
-            <div className="info">
-              <div style={{padding: '0 1em 2em 1em', width: '100%'}}>
-                  <PersonSearch 
-                    style={{color: 'white', borderBottom: '2px solid white'}} 
-                    variant="standard"
-                    persons={persons}
-                  />
-              </div>
-              {person
-                  ? <PersonAvatar {...person} />
-                  : <CircularProgress />
-              }
-            </div>
-            <div className="mini-content">
-                <WordCloud />
-            </div>
-            <div className="mid-content">
-                <div className="content-wrapper">
-                    <div className="content-rtl">
-                        <PersonQuotes personID={personID} />
-                    </div>
-                </div>
-            </div>
-            <div className="side-content-top">
-              <PersonBillsStats personID={personID} filter={billsFilter} setFilter={setBillsFilter} />
-            </div>
-            <div className="side-content">
-              <div className="content-wrapper">
-                <div className="content-rtl">
-                  <PersonBills personID={personID} filter={billsFilter} />
-                </div>
-              </div>
-            </div>
+    <div className="person-grid-container" style={{width: '100%', position: 'relative', zIndex: 2}}>
+      <div className="info">
+        <div style={{padding: '0 1em 2em 1em', width: '100%'}}>
+            <PersonSearch 
+              style={{color: 'white', borderBottom: '2px solid white'}} 
+              variant="standard"
+              persons={persons}
+            />
         </div>
-      </ScrollPage>
+        {person
+            ? <SelectedPersonAvatar {...person} />
+            : <CircularProgress />
+        }
+      </div>
+      <div className="mini-content">
+          <WordCloud />
+      </div>
+      <div className="mid-content">
+          <div className="content-wrapper">
+              <div className="content-rtl">
+                  <PersonQuotes personID={personID} />
+              </div>
+          </div>
+      </div>
+      <div className="side-content-top">
+        <PersonBillsStats personID={personID} filter={billsFilter} setFilter={setBillsFilter} />
+      </div>
+      <div className="side-content">
+        <div className="content-wrapper">
+          <div className="content-rtl">
+            <PersonBills personID={personID} filter={billsFilter} />
+          </div>
+        </div>
+      </div>
+  </div>
   )
 })
-export default PersonProfile
+
+const PersonSelectionView = React.memo(function ({persons}) { 
+  const navigate = useNavigate()
+
+  const rands = []
+  const ids = Object.keys(persons)
+  while (rands.length < 5 && rands.length < ids.length) {
+    const index = parseInt(Math.random() * ids.length)
+    if (rands.indexOf(index) === -1)
+      rands.push(ids[index])
+  }
+
+  return (
+    <div style={{padding: '1em', width: '100%', height: '100%', display: 'flex', flexDirection: 'column', overflowY: 'auto'}}>
+        <PersonSearch 
+          style={{color: 'white', borderBottom: '2px solid white'}} 
+          variant="standard"
+          persons={persons}
+        />
+        <div style={{display: 'flex', flexWrap: 'wrap', alignItems: 'space-between', placeContent: 'space-around', width: '100%', flexGrow: 1, flexBasis: 1}}>
+          {rands.map(id => {
+            const p = persons[id]
+            const desc = []
+            if (p.FactionName)
+                desc.push(p.FactionName)
+            if (p.KnessetNum)
+                desc.push(`הכנסת ה-${p.KnessetNum}`)
+            return (
+              <Button key={id} onClick={() => navigate({personID: id})} >
+                <PersonAvatar name={getFullName(p)} imgPath={p.imgPath} description={desc.join(', ')} />
+              </Button>
+            )
+          })}
+          <Button onClick={() => navigate({personID: null})}>
+            <div style={{
+              display: 'inline-flex',
+              flexDirection: 'column',
+              placeItems: 'center',
+              padding: '0 1em',
+            }}>
+                <div className="person-avatar" style={{display: 'flex', placeItems: 'center', placeContent: 'center', background: '#ffffff1a'}}>
+                  <PeopleIcon style={{fill: 'white', fontSize: '650%'}} />
+                </div>
+                <Typography color="secondary" variant="h4" component="h2"
+                    style={{textAlign: 'center', color: 'white', fontFamily: "'Secular One', sans-serif"}}>
+                    עוד
+                </Typography>
+                <Typography color="primary" variant="h5" component="h3"
+                style={{textAlign: 'center', fontFamily: "'Secular One', sans-serif"}}>
+                  ח״כים מהשנים האחרונות
+            </Typography>
+            </div>
+          </Button>
+        </div>
+    </div>
+  )
+})
 
 
-const PersonAvatar = React.memo(function ({Name, imgPath, positionsByKnesset}) {
-    const lastPositions = positionsByKnesset[Math.max(...Object.keys(positionsByKnesset))]
-    //const restPositions = Object.entries(positionsByKnesset)
-    //        .filter(([k, _]) => k != lastPositions[0].KnessetNum)
-    const faction = lastPositions.map(p => p.FactionName).filter(p => p)
+const SelectedPersonAvatar = React.memo(function ({Name, imgPath, positionsByKnesset}) {
+  const lastPositions = positionsByKnesset[Math.max(...Object.keys(positionsByKnesset))]
+  //const restPositions = Object.entries(positionsByKnesset)
+  //        .filter(([k, _]) => k != lastPositions[0].KnessetNum)
+  const faction = lastPositions.map(p => p.FactionName).filter(p => p)
 
-    const desc = []
-    if (faction.length)
-        desc.push(faction[0])
-    if (lastPositions.length && lastPositions[0].KnessetNum)
-        desc.push(`הכנסת ה-${lastPositions[0].KnessetNum}`)
+  const desc = []
+  if (faction.length)
+      desc.push(faction[0])
+  if (lastPositions.length && lastPositions[0].KnessetNum)
+      desc.push(`הכנסת ה-${lastPositions[0].KnessetNum}`)
+
+  return <PersonAvatar name={Name} imgPath={imgPath} description={desc.join(", ")} />
+})
+const PersonAvatar = React.memo(function ({name, imgPath, description}) {
     return (
-        <>
-            <div className="avatar" style={{
-                background: `url(${imageOrDefault(imgPath, Name, 128)}) center center / cover no-repeat`,
+        <div style={{
+          display: 'inline-flex',
+          flexDirection: 'column',
+          placeItems: 'center',
+          padding: '0 1em',
+        }}>
+            <div className="person-avatar" style={{
+                background: `url(${imageOrDefault(imgPath, name, 128)}) center center / cover no-repeat`,
             }}>
             </div>
             <Typography color="secondary" variant="h4" component="h2"
                 style={{textAlign: 'center', color: 'white', fontFamily: "'Secular One', sans-serif"}}>
-                {Name}
+                {name}
             </Typography>
             <Typography color="primary" variant="h5" component="h3"
                 style={{textAlign: 'center', fontFamily: "'Secular One', sans-serif"}}>
-                {desc.join(", ")}
+                {description}
             </Typography>
-        </>
+        </div>
     )
 })
 

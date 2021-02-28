@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useLayoutEffect } from 'react'
 import TextField from '@material-ui/core/TextField'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import PersonIcon from '@material-ui/icons/Person'
+import ClearIcon from '@material-ui/icons/Clear'
+import IconButton from '@material-ui/core/IconButton'
 import Autocomplete from '@material-ui/lab/Autocomplete'
-import { usePersonID, useNavigate } from '../utils'
+import { usePersonID, useNavigate, getFullName } from '../utils'
 
 const PersonSearch = React.memo(function ({persons, style, variant}) {
     const navigate = useNavigate()
     const personID = usePersonID()
-    const [inputValue, setInputValue] = useState(null)
+    const [inputValue, setInputValue] = useState('')
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (personID)
             setInputValue(getFullName(persons[personID]))
     }, [persons, personID])
@@ -25,7 +27,8 @@ const PersonSearch = React.memo(function ({persons, style, variant}) {
         <Autocomplete
             options={Object.keys(persons)}
             getOptionLabel={id => getFullName(persons[id])}
-            value={personID || null}
+            getOptionSelected={id => parseInt(id) === personID}
+            value={personID || 0}
             onChange={(event, newValue) => {
               navigate({personID: newValue});
             }}
@@ -47,6 +50,16 @@ const PersonSearch = React.memo(function ({persons, style, variant}) {
                             <PersonIcon style={style?.color && {fill: style?.color}} />
                         </InputAdornment>                
                     ),
+                    endAdornment: (
+                        <InputAdornment position="end">
+                            <IconButton 
+                                onClick={() => navigate({personID: null})}
+                                disabled={personID == null}
+                            >
+                                <ClearIcon style={style?.color && personID ? {fill: style?.color} : {}} />
+                            </IconButton>
+                        </InputAdornment>
+                    ),
                 }}
             />)}
             forcePopupIcon={false}
@@ -57,11 +70,5 @@ const PersonSearch = React.memo(function ({persons, style, variant}) {
     </div>  
     )
 })
-
-const getFullName = (p) => {
-    if (!p) return ''
-    const {FirstName, LastName} = p
-    return `${FirstName} ${LastName}`
-}
 
 export default PersonSearch

@@ -4,10 +4,9 @@ import { useQuery } from '../../../utils'
 
 import config from '../../../config'
  
-export default React.memo(function HistogramView() {
+const CachedHistogramView = React.memo(function HistogramView({query}) {
     const [loading, setLoading] = useState(false)
     const [data, setData] = useState([])
-    const query = useQuery()
 
     useEffect(() => {
       (async () => {
@@ -69,9 +68,11 @@ export default React.memo(function HistogramView() {
           top: 5,
         }
       },
+      datasets: {
+        barPercentage: .95,
+      },
       scales: {
         xAxes: [{
-            barPercentage: .95,
             gridLines: {
                 display:false
             },
@@ -116,4 +117,10 @@ return (
     <Bar data={dataFn} height={17} options={options} />
   </div>
   )
+})
+
+export default React.memo(function HistogramView() {
+  const query = useQuery()
+
+  return <CachedHistogramView query={query} />
 })

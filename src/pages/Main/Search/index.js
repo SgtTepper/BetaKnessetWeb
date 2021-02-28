@@ -14,7 +14,6 @@ const useStyles = makeStyles({
         position: 'relative', 
         marginTop: '1em',
         placeContent: 'flex-start',
-        zIndex: 2,
     },
 })
 

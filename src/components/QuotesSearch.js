@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, useRef } from 'react'
+import React, { useCallback, useState, useLayoutEffect, useRef } from 'react'
 import Dialog from './Dialog'
 import { Typography } from '@material-ui/core'
 import TextField from '@material-ui/core/TextField'
@@ -21,7 +21,7 @@ const QuotesSearch = React.memo(function ({style, variant, showReset = true}) {
         navigate({q: queryInput})
     , [queryInput, navigate])
   
-    useEffect(() => {
+    useLayoutEffect(() => {
         setQueryInput(query)
     }, [query])
 

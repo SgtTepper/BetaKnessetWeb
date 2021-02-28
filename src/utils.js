@@ -1,5 +1,5 @@
-import { useCallback, useState, useEffect } from 'react'
-import { useHistory, useLocation } from "react-router-dom"
+import React, { useCallback, useState, useEffect } from 'react'
+import { useHistory, useLocation, useParams } from "react-router-dom"
 
 export const toNiceDate = (d, hours = false) =>  {
     let date = `${d.getDate()}.${d.getMonth() + 1}.${(d.getFullYear() % 100).toString().padStart(2, '0')}`
@@ -83,8 +83,8 @@ export function useWindowSize() {
   // Initialize state with undefined width/height so server and client renders match
   // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
   const [windowSize, setWindowSize] = useState({
-    width: undefined,
-    height: undefined,
+    width: window.innerWidth,
+    height: window.innerHeight,
   });
 
   useEffect(() => {
@@ -108,4 +108,10 @@ export function useWindowSize() {
   }, []); // Empty array ensures that effect is only run on mount
 
   return windowSize;
+}
+
+export const getFullName = (p) => {
+  if (!p) return ''
+  const {FirstName, LastName} = p
+  return `${FirstName} ${LastName}`
 }

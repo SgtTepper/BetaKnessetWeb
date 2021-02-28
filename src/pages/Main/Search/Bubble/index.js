@@ -1,24 +1,28 @@
-import React, { useState, useEffect } from 'react'
+import React, { useMemo, useState, useEffect } from 'react'
 
 import "react-vis/dist/style.css"
 import Highlighter from "react-highlight-words"
 import {Treemap} from 'react-vis'
 import { withStyles } from '@material-ui/core/styles'
 import Tooltip from '@material-ui/core/Tooltip'
+import Snackbar from '@material-ui/core/Snackbar'
 
 import QuotesLoader from '../../../../components/QuotesLoader'
-import { useQuery, toNiceDate, imageOrDefault, shuffleArray, useNavigate } from '../../../../utils'
+import { useQuery, useWindowSize, toNiceDate, imageOrDefault, shuffleArray, useNavigate } from '../../../../utils'
 import config from '../../../../config'
 
 import defaultBubbles from './defaultBubbles'
 
-const makeDefaultBubbles = queries => {
+const minWidth = 300
+const maxWidth = 750
+
+const makeDefaultBubbles = (queries, isBigScreen) => {
   shuffleArray(queries)
   const queriesCopy = queries.slice(0, config.defaultBubblesCount)
   const sizes = new Array(queriesCopy.length).fill(null).map(_ => 5 + Math.random() * 10)
   const max = Math.max(...sizes)
 
-  const res = queriesCopy.map((s, i) => makeDefaultBubble(s, sizes[i], max))
+  const res = queriesCopy.map((s, i) => makeDefaultBubble(s, sizes[i], max, isBigScreen))
   res.push({
     element: <MoreSuggestionsBubble />,
     query: null,
@@ -36,7 +40,7 @@ const makeDefaultBubbles = queries => {
   })
   return res
 }
-const makeDefaultBubble = (s, size, max) => {
+const makeDefaultBubble = (s, size, max, isBigScreen) => {
   const lightness = (.4 + Math.random() * .5)
   return {
     element: <SuggestionBubble key={s} query={s} />,
@@ -45,7 +49,7 @@ const makeDefaultBubble = (s, size, max) => {
     color: size,
     style: {
       color: lightness > .65 ? "#333" : "white",
-      fontSize: `${(.65 + size / max) * 100}%`,
+      fontSize: `${(.65 + size / max) * 100 * (isBigScreen ? 1 : .7)}%`,
       animation: `pulse ${4 + Math.random() * 10}s ease-in-out infinite`,
       animationDelay: `-${Math.random() * 10}s`,
       animationDirection: 'alternate',
@@ -64,34 +68,43 @@ const PersonTooltip = withStyles((theme) => ({
 
 const Bubble = React.memo(function ({viewPersonQuotes}) {
     const [loading, setLoading] = useState(false)
+    const query = useQuery()
 
     return (
         <>
             <QuotesLoader show={loading} />
-            <Chart setLoading={setLoading} viewPersonQuotes={viewPersonQuotes} />
+            <Chart query={query} setLoading={setLoading} viewPersonQuotes={viewPersonQuotes} />
         </>
     )
 })
 export default Bubble
 
-const Chart = React.memo(function ({setLoading}) {
-    //const windowSize = useWindowSize()
-    const [data, setData] = useState(makeDefaultBubbles(defaultBubbles))
-    const query = useQuery()
+const Chart = React.memo(function ({query, setLoading}) {
+    const windowSize = useWindowSize()
+    const isBigScreen = windowSize.width >= maxWidth
+    const defaults = useMemo(() => makeDefaultBubbles(defaultBubbles, isBigScreen), [isBigScreen])
+    const [data, setData] = useState(defaults)
+    const [error, setError] = useState(null)
     const navigate = useNavigate()
 
     useEffect(() => {
         (async () => {
         if (!query.length) {
-          setData(makeDefaultBubbles(defaultBubbles))
+          setData(makeDefaultBubbles(defaultBubbles, isBigScreen))
           return
         }
         setLoading(true)
+        setError(null)
         try {
             // handle hebrew quotes (״)
             const cleanQuery = query.replace('״', '"')
 
             const res = await (await fetch(`${config.server}/Keywords?keyword=${cleanQuery}`)).json()
+            if (!res.length) {
+              setError(<div>אין תוצאות :(&nbsp;&nbsp; נסו ללחוץ על אחת הבועות?</div>)
+              setData(defaults)
+              return
+            }
             const total = res.map(r => r.Counter).reduce((a, b) => a + b, 0)
             setData(res.filter(r => r.Counter / total > MIN_RATIO_FOR_IMAGE || r.mk_imgPath !== null).map(r => ({
             result: r,
@@ -106,9 +119,8 @@ const Chart = React.memo(function ({setLoading}) {
             }
             })))
         } catch(e) {
-            // TODO handle errors
-            console.error(e)
-            setData(makeDefaultBubbles(defaultBubbles))
+            setError("סורי, לא הצלחנו להביא תוצאות. שווה לנסות שוב")
+            setData(defaults)
         } finally {
             setLoading(false)
         }
@@ -117,7 +129,12 @@ const Chart = React.memo(function ({setLoading}) {
 
     return (
         <>
-        <div>
+          <Snackbar 
+            message={error}
+            open={!!error} 
+            style={{zIndex: 25}}
+          />
+          <div style={{zIndex: 2}}>
             <Treemap 
             padding={40}
             margin={0}
@@ -131,8 +148,8 @@ const Chart = React.memo(function ({setLoading}) {
                 children: data,
             }}
             mode="circlePack"
-            height={750}
-            width={750}
+            height={Math.max(minWidth, Math.min(maxWidth, windowSize.width))}
+            width={Math.max(minWidth, Math.min(maxWidth, windowSize.width))}
             getLabel={x => x.element}
             onLeafClick={n => {
               if (n.data.result)
@@ -222,4 +239,14 @@ const MoreSuggestionsBubble = React.memo(function () {
           </div>
       </div>
   )
+})
+
+const NoResultsBubble = React.memo(function () {
+  return (
+    <div className='suggestion'>
+        <div style={{textAlign: 'center', width: '100%'}}>
+          אין תוצאות
+        </div>
+    </div>
+)
 })

@@ -99,7 +99,7 @@ export default function TopBar() {
             <Button href="#contact">
               צרו קשר
             </Button>
-            <Button href onClick={() => setAboutOpen(true)}>
+            <Button onClick={() => setAboutOpen(true)}>
               אודות
             </Button>
             <Tooltip title={<h2>מזלגו אותנו ב-GitHub</h2>} arrow>
@@ -118,7 +118,7 @@ export default function TopBar() {
     const navigate = useNavigate()
     return (
       <div className={classes.logo}>
-        <a href="#top" onClick={() => navigate({hash: '#top'})}>
+        <a href="#top" onClick={() => navigate({location: '/', hash: '#top'})}>
           <Typography color="primary" variant="h2" component="h1" className={classes.title}>
               <span className={classes.bigLetter}>ב</span>טא מחוקקי<span className={classes.bigLetter}>ם</span>
           </Typography>
