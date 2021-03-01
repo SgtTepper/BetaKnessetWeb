@@ -35,7 +35,6 @@ export default React.memo(function PersonBillsStats({personID, filter, setFilter
       display: false,
       position: "right"
     },
-    maintainAspectRatio: true,
     plugins: {
       // Change options for ALL labels of THIS CHART
       datalabels: {
@@ -67,7 +66,6 @@ export default React.memo(function PersonBillsStats({personID, filter, setFilter
         {total} חוקים
       </div>
       <Doughnut
-        height={110}
         data={doughnutData} 
         options={options} 
       />
