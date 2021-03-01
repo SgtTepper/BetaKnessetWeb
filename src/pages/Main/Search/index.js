@@ -24,7 +24,7 @@ const Search = React.memo(function Search() {
     return (
         <ScrollPage limit id='top'>
             <div className={classes.root}>
-                <QuotesSearch />
+                <QuotesSearch placeholder="מה מעניין אותך?" />
                 <Bubble />
             </div>
             <Histogram />

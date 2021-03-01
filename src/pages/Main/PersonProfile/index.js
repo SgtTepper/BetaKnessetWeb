@@ -120,7 +120,7 @@ const PersonSelectionView = React.memo(function ({persons}) {
             if (p.KnessetNum)
                 desc.push(`הכנסת ה-${p.KnessetNum}`)
             return (
-              <Button key={id} onClick={() => navigate({personID: id})} >
+              <Button key={id} onClick={() => navigate({personID: id, q: null})} >
                 <PersonAvatar name={getFullName(p)} imgPath={p.imgPath} description={desc.join(', ')} />
               </Button>
             )

@@ -10,7 +10,7 @@ import { FormatQuote } from '@material-ui/icons'
 import IconButton from '@material-ui/core/IconButton'
 import { useQuery, useNavigate } from '../utils'
 
-const QuotesSearch = React.memo(function ({style, variant, showReset = true}) {
+const QuotesSearch = React.memo(function ({style, variant, placeholder, showReset = true}) {
     const textRef = useRef()
     const navigate = useNavigate()
     const query = useQuery()
@@ -41,7 +41,7 @@ const QuotesSearch = React.memo(function ({style, variant, showReset = true}) {
         <TextField
             color="primary"
             variant={variant || "outlined"}
-            placeholder="מה מעניין אותך?"
+            placeholder={placeholder}
             value={queryInput}
             inputRef={textRef}
             onInput={e => setQueryInput(e.target.value)}

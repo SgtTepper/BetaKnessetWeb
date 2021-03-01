@@ -12,7 +12,7 @@ const PersonQuotes = React.memo(function ({personID}) {
     return (
         <>
             <div style={{padding: '0 50px 0 .5em', width: '100%'}}>
-                <WhiteQuotesSearch showReset={false} />
+                <WhiteQuotesSearch placeholder="מה מעניין אותם?" showReset={false} />
             </div>
             <Loader show={loading} />
             <QuoteView personID={personID} setLoading={setLoading} />

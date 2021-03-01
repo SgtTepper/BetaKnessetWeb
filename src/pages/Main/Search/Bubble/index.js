@@ -11,7 +11,7 @@ import QuotesLoader from '../../../../components/QuotesLoader'
 import { useQuery, useWindowSize, toNiceDate, imageOrDefault, shuffleArray, useNavigate } from '../../../../utils'
 import config from '../../../../config'
 
-import defaultBubbles from './defaultBubbles'
+import defaultBubbles from '../../../../defaultTopics'
 
 const minWidth = 300
 const maxWidth = 750
