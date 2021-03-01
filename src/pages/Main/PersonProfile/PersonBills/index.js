@@ -34,7 +34,7 @@ export default React.memo(function PersonBills({personID, filter}) {
 
 
   if (loading) {
-    return (<div className={classes.root}><CircularProgress /></div>)
+    return (<div className={classes.loader}><CircularProgress /></div>)
   }
 
   const filteredData = data.filter(d => filter == null || getReducedType(d) === filter).slice(0, 100)
@@ -45,10 +45,13 @@ export default React.memo(function PersonBills({personID, filter}) {
 })
 
 const useStyles = makeStyles((theme) => ({
+    loader: {
+      width: '88%',
+      textAlign: 'center',
+    },  
     root: {
         padding: '1em',
         width: '88%',
-        textAlign: 'center'
     },
     heading: {
       fontSize: theme.typography.pxToRem(15),
