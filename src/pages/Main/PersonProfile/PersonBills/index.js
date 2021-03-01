@@ -19,9 +19,10 @@ import HelpOutlineRoundedIcon from '@material-ui/icons/HelpOutlineRounded';
 import Dialog from '../../../../components/Dialog'
 
 export default React.memo(function PersonBills({personID, filter}) {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [data, setData] = useState([])
-  
+  const classes = useStyles();
+
   useEffect(() => {
     (async () => {
       setLoading(true)
@@ -33,7 +34,7 @@ export default React.memo(function PersonBills({personID, filter}) {
 
 
   if (loading) {
-    return (<CircularProgress />)
+    return (<div className={classes.root}><CircularProgress /></div>)
   }
 
   const filteredData = data.filter(d => filter == null || getReducedType(d) === filter).slice(0, 100)
@@ -47,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         padding: '1em',
         width: '88%',
+        textAlign: 'center'
     },
     heading: {
       fontSize: theme.typography.pxToRem(15),
@@ -83,7 +85,7 @@ function ControlledAccordions({data}) {
         <strong>{dialog?.billName}</strong>
         <p>{dialog?.summaryLaw}</p>
       </Dialog>
-      {data.map((x, i) => 
+      {data.length > 0 ? data.map((x, i) => 
       <Accordion
           key={x.billID}
           className={clsx({[classes.accordionRow] : true, [classes.accordionRowOpen] : expanded === `panel${i}`})}
@@ -117,7 +119,10 @@ function ControlledAccordions({data}) {
           <div><ClickableDocs documents={x.documents} /></div>
         </AccordionDetails>          
       </Accordion>
-      )}
+      ) :
+        <Typography style={{color: 'white'}} variant='h3'>
+            לא נמצאו חוקים
+        </Typography>}
     </div>
   );
 }
