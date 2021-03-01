@@ -9,6 +9,9 @@ import Typography from '@material-ui/core/Typography'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Button from '@material-ui/core/Button'
 import PeopleIcon from '@material-ui/icons/People'
+import Dialog from '../../../components/Dialog'
+import IconButton from '@material-ui/core/IconButton'
+import InfoRoundedIcon from '@material-ui/icons/InfoRounded';
 
 import config from '../../../config'
 import { useNavigate, imageOrDefault, usePersonID, getFullName } from '../../../utils'
@@ -45,6 +48,8 @@ export default PersonProfile
 const PersonView = React.memo(function ({persons, personID}) { 
   const [person, setPerson] = useState(null)
   const [billsFilter, setBillsFilter] = useState(null)
+  const [wordCloudExplainerOpen, setWordCloudExplainerOpen] = useState(false)
+  const [billExplainerOpen, setBillExplainerOpen] = useState(false)
     
   useEffect(() => {
       (async () => {
@@ -69,8 +74,12 @@ const PersonView = React.memo(function ({persons, personID}) {
             : <CircularProgress />
         }
       </div>
-      <div className="mini-content">
-          <WordCloud />
+      <div className="mini-content">        
+        <WordCloud />
+        <IconButton href onClick={() => setWordCloudExplainerOpen(true)} style={{placeSelf: 'flex-start', padding: '0px'}}>
+          <InfoRoundedIcon style={{fill: 'white'}} />
+        </IconButton>
+        <WordCloudExplainer open={wordCloudExplainerOpen} setOpen={setWordCloudExplainerOpen}/>
       </div>
       <div className="mid-content">
           <div className="content-wrapper">
@@ -80,12 +89,16 @@ const PersonView = React.memo(function ({persons, personID}) {
           </div>
       </div>
       <div className="side-content-top">
-        <PersonBillsStats personID={personID} filter={billsFilter} setFilter={setBillsFilter} />
+        <PersonBillsStats personID={personID} filter={billsFilter} setFilter={setBillsFilter} />        
       </div>
       <div className="side-content">
         <div className="content-wrapper">
           <div className="content-rtl">
             <PersonBills personID={personID} filter={billsFilter} />
+            <IconButton href onClick={() => setBillExplainerOpen(true)} style={{placeSelf: 'flex-start', padding: '0px', position: 'sticky', top:'0px'}}>
+            <InfoRoundedIcon style={{fill: 'white'}} />
+              </IconButton>
+            <BillExplainer open={billExplainerOpen} setOpen={setBillExplainerOpen}/>
           </div>
         </div>
       </div>
@@ -249,6 +262,34 @@ function parseResponse(contents) {
     return res 
   }
   
+  function WordCloudExplainer(props) {
+    return (
+        <Dialog {...props} closeText={'בסדר'}>
+            <Typography color="primary" variant="h4" component="h4">
+              מה אני רואה פה?
+            </Typography>
+            <p>ענן מילים זה מבוסס על אוסף כל הציטוטים של הח"כ כפי שזיהינו אותם במערכת שלנו.</p>
+            <p>בעזרת מערכת בינה מלאכותית לעיבוד שפה טבעית <a href="https://hebrew-nlp.co.il" target="_blank" rel="noreferrer">https://hebrew-nlp.co.il</a></p>
+            <p>ביצענו "נורמליזציה" לאוצר המילים של הח"כ, כך מילים בעלות משמעות זהה התקבלו בכתיב אחיד, למשל "בטחון", "הבטחון", "לבטחון", "בבטחון" כולן עברו נורמליזציה למילה "בטחון".</p>
+            <p>כמו כן מענן מילים זה מחקנו מונחים רבים כגון מילות קישור או מילים חסרות הקשר.</p>
+            <p>לאחר עיבוד זה ספרנו את שכיחות השימוש במונחים, ככל שהח"כ משתמש\ת יותר במילה - כך המילה תופיע גדולה יותר בענן המילים.</p>
+        </Dialog>
+    )
+  }
+
+  function BillExplainer(props) {
+    return (
+        <Dialog {...props} closeText={'בסדר'}>
+            <Typography color="primary" variant="h4" component="h4">
+              מה אני רואה פה?
+            </Typography>
+            <p>ח"כים יכולים גם ליזום הצעות חוק וגם להצטרף להצעות חוק.</p>
+            <p>ברשימה לפניכם אנו מציגים עבור כל ח"כ את רשימת החוקים אותם יזם באופן ישיר בתור "יוזם ראשון".</p>
+            <p>פרטים נוספים על אודות שלבי החקיקה והליך החקיקה <a href="https://main.knesset.gov.il/Activity/Legislation/Documents/Explanation2.pdf" target="_blank" rel="noreferrer">תוכלו למצוא בקישור זה</a></p>
+        </Dialog>
+      )
+  }
+
   /*
   function getStrongestPosition(positions) {
     const dutyDescs = positions.map(p => p.DutyDesc).filter(p => p)

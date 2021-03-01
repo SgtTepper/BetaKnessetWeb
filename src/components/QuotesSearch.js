@@ -36,7 +36,7 @@ const QuotesSearch = React.memo(function ({style, variant, placeholder, showRese
             width: '100%',
         }}>
 
-        <SearchDialogue open={guideOpen} setOpen={setGuideOpen} />
+        <SearchDialog open={guideOpen} setOpen={setGuideOpen} />
 
         <TextField
             color="primary"
@@ -80,7 +80,7 @@ const QuotesSearch = React.memo(function ({style, variant, placeholder, showRese
     )
 })
 
-function SearchDialogue(props) {
+function SearchDialog(props) {
     const {setOpen} = props
     const navigate = useNavigate()
 
