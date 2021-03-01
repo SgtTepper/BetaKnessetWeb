@@ -5,6 +5,7 @@ import GitHubIcon from '@material-ui/icons/GitHub'
 import { AppBar, Button, Tooltip, Typography } from '@material-ui/core'
 import { useNavigate } from '../../utils'
 import AboutDialog from './About'
+import ContactUsDialog from './ContactUs'
 
 const useStyles = makeStyles({
     title: {
@@ -73,10 +74,12 @@ export default function TopBar() {
     const classes = useStyles()
     const navigate = useNavigate()
     const [ aboutOpen, setAboutOpen ] = useState(false)
+    const [ contactUsOpen, setContactUsOpen ] = useState(false)
   
     return (
       <AppBar position="sticky" classes={{root: classes.appbar}}>
         <AboutDialog open={aboutOpen} setOpen={setAboutOpen} />
+        <ContactUsDialog open={contactUsOpen} setOpen={setContactUsOpen} />
         <div className={classes.gridContainer}>
           <div className={classes.nav}>
             <Button onClick={() => navigate({location: '/', hash: '#top'})}>
@@ -96,7 +99,7 @@ export default function TopBar() {
           <Logo />
           <div className={classes.links}>
             <div className={classes.spacer} />
-            <Button href="#contact">
+            <Button  onClick={() => setContactUsOpen(true)} href="#contact">
               צרו קשר
             </Button>
             <Button onClick={() => setAboutOpen(true)}>
