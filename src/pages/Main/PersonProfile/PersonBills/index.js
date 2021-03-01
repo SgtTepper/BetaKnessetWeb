@@ -125,10 +125,13 @@ function ClickableDocs({documents}) {
   return <>
     {documents.map(x => 
       <div key={x.filePath}>
+        { x.filePath ?
           <a href={x.filePath} style={{textDecoration: 'none', display: '-webkit-inline-box', textIndent: '2em'}}>
               <DescriptionRoundedIcon className='accordionIcon' style={{ color: '#5d5d5d' }} />
               <Typography style={{ color: '#5d5d5d', fontSize: '.8em' }}>{x.groupTypeDesc}</Typography>
           </a>
+          : <Typography style={{ color: '#5d5d5d', fontSize: '.8em' }}>לא נמצאו מסמכים</Typography>
+        }
       </div>)}
   </>
 }
