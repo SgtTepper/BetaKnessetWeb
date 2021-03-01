@@ -128,6 +128,9 @@ const Metadata = React.memo(function ({documentID, documentType}) {
             return
         try {
             const enrichment = await (await fetch(`${config.server}/DocumentTopics?documentId=${documentID}&documentType=${documentType}`)).json()
+            if (!enrichment.length) {
+                console.error("No metadata found, this is a server error")
+            }
             setMetadata(enrichment)
         } catch(e) {
             // TODO handle errors
@@ -151,19 +154,19 @@ const Metadata = React.memo(function ({documentID, documentType}) {
         </Typography>
         <Typography variant="h6" component="h2">
             {documentType === 'committee' 
-            && (md.Name?.length ? md.Name : "ועדה (פרטים חלקיים)")}
+            && (md?.Name?.length ? md.Name : "ועדה (פרטים חלקיים)")}
             {documentType === 'plenum' 
             && "ישיבת מליאה"}
         </Typography>
-        {md.KnessetNum && 
+        {md?.KnessetNum && 
             <Typography className={classes.pos} color="textSecondary">
                 הכנסת ה-{md.KnessetNum}
                 {bull}
                 {toNiceDate(new Date(md.StartDate))}
             </Typography>}
-        <Typography variant="body2">
+        <Typography variant="body2" component="div">
             <List>
-                {metadata.filter(m => m.ItemName?.length).map(m => (
+                {metadata?.filter(m => m.ItemName?.length).map(m => (
                 <ListItem key={m.Ordinal}>
                     <ListItemIcon>
                         <ChatBubbleIcon />
@@ -176,10 +179,10 @@ const Metadata = React.memo(function ({documentID, documentType}) {
       </CardContent>
       <CardActions>
         <ButtonGroup size="small" variant="contained">
-        {md.FilePath
+        {md?.FilePath
             && <Button endIcon={<DescriptionIcon style={{paddingRight:'.5em'}}/>} 
                 href={md.FilePath} target="_blank" rel="noreferrer">לפרוטוקול המקורי</Button>}
-        {md.BroadcastUrl
+        {md?.BroadcastUrl
             && <Button endIcon={<LiveTvIcon style={{paddingRight:'.5em'}}/>} 
                 href={md.BroadcastUrl} target="_blank" rel="noreferrer">לשידור הישיבה</Button>}
         </ButtonGroup>
