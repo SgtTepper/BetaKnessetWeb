@@ -7,6 +7,7 @@ import { usePersonID } from '../../utils';
 const ReactWordcloud = lazy(() => import('react-wordcloud'))
 
 const options = {
+  colors: ["#40b2e6","#53b4e0","#4f91ab","#8aaebd","#bad3de", "#d8e3e8"],
   rotations: 3,
   rotationAngles: [-5, 5],
   fontSizes: [20, 75],
@@ -14,6 +15,7 @@ const options = {
   fontWeight: "600",
   padding: 3,
   enableOptimizations: true,
+  enableTooltip: false
 }
 const minSize = [200, 300]
 
