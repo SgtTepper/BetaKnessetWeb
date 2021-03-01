@@ -1,6 +1,0 @@
-{
-  "server_debug": "http://localhost:7071/api",
-  "server": "http://localhost:7071/api",
-  "defaultBubblesCount": 25,
-  "wordcloudCount": 60
-}
