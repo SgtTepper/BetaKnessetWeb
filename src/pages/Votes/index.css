@@ -1,0 +1,141 @@
+
+h1 {
+    color: #111;
+    font-family: Helvetica Neue, sans-serif;
+    font-size: 45px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    line-height: 1;
+    text-align: center;
+}
+
+h2 {
+    color: #efe8e8;
+    font-family: Helvetica Neue, sans-serif;
+    font-weight: bold;
+    letter-spacing: -1px;
+    text-align: center;
+    boxShadow: 3px 3px 5px 2px rgb(222, 216, 217)
+}
+
+h6 {
+    font-size: 15px;
+    font-family:Helvetica Neue, sans-serif;
+    color: rgb(24, 24, 53);
+    text-align: center;
+    letter-spacing: -1px;
+    line-height: 1;
+    font-weight: normal;
+}
+th1 {
+    background-color: black;
+    border-color: transparent;
+
+
+}
+
+
+p5 {
+    font-family: Helvetica Neue, sans-serif;
+    text-align: center;
+
+}
+table {
+    text-align: center;
+    font-family:Helvetica Neue, sans-serif;
+    color: rgba(24,24,53,1);
+    background-color: transparent;
+    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+    justify-content: space-between;
+    font-size: 12px;
+    min-height: 30px;
+
+
+}
+
+th {
+    text-align: center;
+    font-family: Helvetica Neue, sans-serif;
+    background-color: rgba(24,24,53,0.8);
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 9px 12px;
+
+
+}
+
+td {
+    text-align: center;
+    font-family: Helvetica Neue, sans-serif;
+    padding: 9px 12px;
+    background-color: transparent;
+    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+    justify-content: space-between;
+    font-size: 12px;
+
+
+}
+
+p {
+    color: #111;
+    font-family:Helvetica Neue, sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    line-height: 1;
+    text-align: center;
+}
+p3 {
+    color: #f6f2f2;
+    font-family: Helvetica Neue, sans-serif;
+    font-size: 15px;
+    letter-spacing: -1px;
+    line-height: 1;
+    text-align: center;
+}
+Typography{
+    font-family: Helvetica Neue, sans-serif;
+}
+div{
+    font-family: Helvetica Neue, sans-serif;
+
+}
+
+html, body {
+
+    display: grid;
+    min-height: 100vh;
+    min-width: 100vh;
+    margin: 0;
+    overflow: hidden;
+    overflow-y:auto;
+    overflow-x:auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-height: 100%;
+    min-width:100%;
+    height: 100%;
+    width:100%;
+
+}
+Alert {
+    width: 30px;
+    margin-right: 20px;
+    height: 100px;
+}
+
+.option1 {
+    color: #111;
+    font-family: sans-serif,Helvetica Neue;
+    font-size: 45px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    line-height: 1;
+    text-align: center;
+    list-style-type: circle;
+    height: 100px
+}

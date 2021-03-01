@@ -18,6 +18,7 @@ const Main = lazy(() => import('./pages/Main'))
 const Document = lazy(() => import('./pages/Document'))
 const Quotes = lazy(() => import('./pages/Quotes'))
 const Calendar = lazy(() => import('./pages/Calendar'))
+const Votes = lazy(() => import ('./pages/Votes'))
 
 const useStyles = makeStyles({
   root: {
@@ -58,6 +59,7 @@ export default function App() {
                 )} />
                 <Route path="/quotes" component={Quotes} />
                 <Route path="/calendar" component={Calendar} />
+                <Route path="/votes" component={Votes}/>
               </Switch>
             </Suspense>
           </ScrollableView>
