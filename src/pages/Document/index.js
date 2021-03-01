@@ -178,14 +178,16 @@ const Metadata = React.memo(function ({documentID, documentType}) {
         </Typography>
       </CardContent>
       <CardActions>
-        <ButtonGroup size="small" variant="contained">
-        {md?.FilePath
-            && <Button endIcon={<DescriptionIcon style={{paddingRight:'.5em'}}/>} 
-                href={md.FilePath} target="_blank" rel="noreferrer">לפרוטוקול המקורי</Button>}
-        {md?.BroadcastUrl
-            && <Button endIcon={<LiveTvIcon style={{paddingRight:'.5em'}}/>} 
-                href={md.BroadcastUrl} target="_blank" rel="noreferrer">לשידור הישיבה</Button>}
-        </ButtonGroup>
+        <div style={{display: 'flex', width: '100%', justifyContent: 'space-around'}}>
+            {md?.FilePath
+                && <Button endIcon={<DescriptionIcon style={{paddingRight:'1em'}}/>} 
+                    size="small" variant="contained"
+                    href={md.FilePath} target="_blank" rel="noreferrer">לפרוטוקול המקורי</Button>}
+            {md?.BroadcastUrl
+                && <Button endIcon={<LiveTvIcon style={{paddingRight:'1em'}}/>} 
+                    size="small" variant="contained"
+                    href={md.BroadcastUrl} target="_blank" rel="noreferrer">לשידור הישיבה</Button>}
+        </div>
       </CardActions>
     </Card>
     )
