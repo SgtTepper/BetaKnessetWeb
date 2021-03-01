@@ -1,5 +1,5 @@
-import React, { useCallback, useState, useEffect } from 'react'
-import { useHistory, useLocation, useParams } from "react-router-dom"
+import { useCallback, useState, useEffect } from 'react'
+import { useHistory, useLocation } from "react-router-dom"
 
 export const toNiceDate = (d, hours = false) =>  {
     let date = `${d.getDate()}.${d.getMonth() + 1}.${(d.getFullYear() % 100).toString().padStart(2, '0')}`

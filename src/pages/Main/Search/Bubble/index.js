@@ -90,7 +90,7 @@ const Chart = React.memo(function ({query, setLoading}) {
     useEffect(() => {
         (async () => {
         if (!query.length) {
-          setData(makeDefaultBubbles(defaultBubbles, isBigScreen))
+          setData(defaults)
           return
         }
         setLoading(true)
@@ -125,7 +125,7 @@ const Chart = React.memo(function ({query, setLoading}) {
             setLoading(false)
         }
         })()
-    }, [query, setLoading])
+    }, [query, setLoading, defaults])
 
     return (
         <>
@@ -239,14 +239,4 @@ const MoreSuggestionsBubble = React.memo(function () {
           </div>
       </div>
   )
-})
-
-const NoResultsBubble = React.memo(function () {
-  return (
-    <div className='suggestion'>
-        <div style={{textAlign: 'center', width: '100%'}}>
-          אין תוצאות
-        </div>
-    </div>
-)
 })

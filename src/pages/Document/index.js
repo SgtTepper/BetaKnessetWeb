@@ -24,7 +24,7 @@ export default DocumentQuotes
 
 const QuoteView = React.memo(function ({documentID, documentType, setLoading}) {
     const [data, setData] = useState([])
-    const [metadata, setMetadata] = useState([])
+    const [, setMetadata] = useState([])
 
     const personID = usePersonID()
     const query = useQuery()
