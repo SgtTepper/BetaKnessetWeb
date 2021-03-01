@@ -1,41 +1,12 @@
-import React, { useCallback, useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 
-import Alert from '@material-ui/lab/Alert';
-import Button from '@material-ui/core/Button';
-
-import Icon from '@material-ui/core/Icon';
-import ThumbUp from '@material-ui/icons/ThumbUp';
-import ThumbDown from '@material-ui/icons/ThumbDown';
-
-
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Typography from '@material-ui/core/Typography';
-
-import {ScrollIntoView} from 'rrc'
-
-import Particles from 'react-particles-js'
-import particlesConfig from '../../../particles.config.json'
 import "../index.css"
 
 import '../index.css'
-import CircularProgress from "@material-ui/core/CircularProgress";
 import Bubble from "./Bubble";
 import Questions from "./Questions";
-import {useHistory, useLocation} from "react-router-dom";
-import IconLabelTabs from "./IconLabelTabs";
 import Loader from "../../../components/VotesLoader";
-import {AppBar, Tooltip} from "@material-ui/core";
-import IconButton from "@material-ui/core/IconButton";
-import GitHubIcon from "@material-ui/icons/GitHub";
 import {makeStyles} from "@material-ui/core/styles";
-
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-}
-
 
 const useStyles = makeStyles({
     title: {
@@ -82,8 +53,6 @@ export default function HakVotes({subjects, setStarted, allRules}) {
     const [worstParty, setWorstParty] = useState(0)
     const [bestPartyImg, setBestPartyImg] = useState(0)
     const [worstPartyImg, setWorstPartyImg] = useState(0)
-
-    const classes = useStyles()
 
     console.log("HakVotes")
     console.log(subjects);

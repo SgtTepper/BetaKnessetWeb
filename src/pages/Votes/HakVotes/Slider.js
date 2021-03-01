@@ -1,9 +1,6 @@
 import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
-import Tooltip from '@material-ui/core/Tooltip';
-import SliderHelp from "./SliderHelp";
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import GroupAdd from "@material-ui/icons/GroupAdd";
@@ -66,7 +63,7 @@ export default function DiscreteSlider({max, minDifference, setMinDifference}) {
                 marks
                 min={0}
                 max={max}
-                onChangeCommitted={(event, newValue) => {setMinDifference(newValue); setSliderWasChanged(true)}}
+                onChangeCommitted={(event, newValue) => {setSliderWasChanged(true); setMinDifference(newValue)}}
             />
                 </ThemeProvider>
             <div style={{position:'relative'}}>
