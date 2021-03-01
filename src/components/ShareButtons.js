@@ -8,7 +8,7 @@ export default function ShareButtons({Text, Speaker, FilePath}) {
             <FacebookShareButton url={FilePath} quote={`${Speaker}: "${Text}"`}>
                 <FacebookIcon size={size} round />
             </FacebookShareButton>
-            <TwitterShareButton url={FilePath} title={`${Speaker}: "${Text.substring(0, 500)}${Text.length > 500 && "..."}"`}>
+            <TwitterShareButton url={FilePath} title={`${Speaker}: "${Text.substring(0, 500)}${Text.length > 500 ? "..." : ''}"`}>
                 <TwitterIcon size={size} round />
             </TwitterShareButton>
             <WhatsappShareButton url={FilePath} title={`${Speaker}: "${Text}"`} separator=" - ">
