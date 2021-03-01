@@ -7,13 +7,18 @@ export default React.memo(function PersonBillsStats({personID, filter, setFilter
   const [data, setData] = useState([])
   
   useEffect(() => {
+    setFilter(null)
+    if (!personID)
+      return
     (async () => {
       const res = await (await fetch(`${config.server}/PersonBillsStats?personId=${personID}`)).json()
       setData(res)    
     })()
-  }, [personID])
+  }, [personID, setFilter])
 
   const total = data?.map(d => d.Counter).reduce((a, b) => a + b, 0)
+  if (total === 0)
+    return null
 
   const doughnutData = {
     labels: data.map(d => d.Desc),

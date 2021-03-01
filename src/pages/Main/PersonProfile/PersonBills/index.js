@@ -24,13 +24,15 @@ export default React.memo(function PersonBills({personID, filter}) {
   const classes = useStyles();
 
   useEffect(() => {
+    if (!personID)
+      return
     (async () => {
       setLoading(true)
       const res = await (await fetch(`${config.server}/PersonBills?personId=${personID}`)).json()
       setData(res)
       setLoading(false)
     })()
-  }, [setLoading, personID])
+  }, [personID])
 
 
   if (loading) {
@@ -40,7 +42,7 @@ export default React.memo(function PersonBills({personID, filter}) {
   const filteredData = data.filter(d => filter == null || getReducedType(d) === filter).slice(0, 100)
 
   return (
-    <ControlledAccordions data={filteredData} />
+    <ControlledAccordions data={filteredData} isFiltered={filter !== null} />
   );
 })
 
@@ -50,8 +52,12 @@ const useStyles = makeStyles((theme) => ({
       textAlign: 'center',
     },  
     root: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'stretch',
+        justifyItems: 'center',
         padding: '1em',
-        width: '88%',
+        width: '100%',
     },
     heading: {
       fontSize: theme.typography.pxToRem(15),
@@ -74,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-function ControlledAccordions({data}) {
+function ControlledAccordions({data, isFiltered}) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [dialog, setDialog] = React.useState(null);
@@ -83,7 +89,8 @@ function ControlledAccordions({data}) {
   };
 
   return (
-    <div className={classes.root}>
+  <div className={classes.root}>
+    <div>
       <Dialog open={dialog !== null} setOpen={() => setDialog(null)} closeText='סגור'>
         <strong>{dialog?.billName}</strong>
         <p>{dialog?.summaryLaw}</p>
@@ -123,10 +130,12 @@ function ControlledAccordions({data}) {
         </AccordionDetails>          
       </Accordion>
       ) :
-        <Typography style={{color: 'white'}} variant='h3'>
-            לא נמצאו חוקים
-        </Typography>}
+      <Typography style={{color: 'white', width: '100%', textAlign: 'center'}} variant='h5'>
+          לא מצאנו חוקים
+          {!isFiltered && " שהח״כ יזם"}
+      </Typography>}
     </div>
+  </div>
   );
 }
 function ClickableDocs({documents}) {

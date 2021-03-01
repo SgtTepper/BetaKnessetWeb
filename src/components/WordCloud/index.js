@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState, useEffect } from 'react';
+import React, { lazy, Suspense, useState, useEffect, useMemo } from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress'
 
 import config from '../../config'
@@ -11,11 +11,11 @@ const options = {
   rotations: 3,
   rotationAngles: [-5, 5],
   fontSizes: [20, 75],
-  fontFamily: "sans-serif",
+  fontFamily: "'Secular One', sans-serif",
   fontWeight: "600",
   padding: 3,
   enableOptimizations: true,
-  enableTooltip: false
+  enableTooltip: false,
 }
 const minSize = [200, 300]
 
@@ -59,4 +59,3 @@ const CachedWordCloud = React.memo(({personID}) => {
     </Suspense>
   )
 })
-//export default CachedWordCloud

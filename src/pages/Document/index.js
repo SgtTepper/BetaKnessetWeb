@@ -1,30 +1,83 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import { ButtonGroup, makeStyles } from '@material-ui/core'
+import Card from '@material-ui/core/Card'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
+import DescriptionIcon from '@material-ui/icons/Description'
+import LiveTvIcon from '@material-ui/icons/LiveTv'
+import ChatBubbleIcon from '@material-ui/icons/ChatBubble'
 import QuotesLoader from '../../components/QuotesLoader'
 import Chat from '../../components/Chat'
 import config from '../../config'
-import { useQuery, usePersonID } from '../../utils'
+import { useQuery, usePersonID, toNiceDate } from '../../utils'
 import { ScrollPage } from '../../components/ScrollableView'
+import ChatLoader from '../../components/ChatLoader'
 
-const DocumentQuotes = React.memo(React.forwardRef(function ({type}, ref) {
-    const [loading, setLoading] = useState(false)
+const useStyles = makeStyles({
+    root: {
+      position: 'relative',
+      width: '100%',
+      height: '100%',
+      zIndex: 2,
+    },
+    grid: {
+      display: 'grid',
+      height: '100%',
+      gridTemplateColumns: '3fr 1fr',
+      gridTemplateRows: '1fr',
+      gap: '0% 2%',
+      gridTemplateAreas: ". .",
+    },
+    metadata: {
+      minWidth: 275,
+      margin: '1em',
+      alignSelf: 'flex-start',
+    },
+    bullet: {
+      display: 'inline-block',
+      margin: '0 2px',
+      transform: 'scale(0.8)',
+    },
+    title: {
+      fontSize: 14,
+    },
+    pos: {
+      marginBottom: 12,
+    },
+  });
+
+const DocumentQuotes = React.memo(function ({type}) {
+    const classes = useStyles()
     const {id} = useParams()
+    const [loading, setLoading] = useState(true)
 
     return (            
-        <ScrollPage id='document-quotes' parentStyle={{backgroundColor: 'black'}}>
-            <div ref={ref}>
-                {loading && <QuotesLoader />}
-                <QuoteView documentID={id} documentType={type} setLoading={setLoading} />
+        <ScrollPage limit
+            id='document-quotes' 
+            parentStyle={{backgroundColor: 'black'}} 
+        >
+            <div className={classes.root}>
+                <QuotesLoader show={loading} />
+                <div className={classes.grid}>
+                    <QuoteView documentID={id} documentType={type} setLoading={setLoading} />
+                    <Metadata documentID={id} documentType={type} />
+                </div>
             </div>
         </ScrollPage>
     )
-}))
+})
 export default DocumentQuotes
 
 const QuoteView = React.memo(function ({documentID, documentType, setLoading}) {
     const [data, setData] = useState([])
-    const [, setMetadata] = useState([])
 
     const personID = usePersonID()
     const query = useQuery()
@@ -36,9 +89,7 @@ const QuoteView = React.memo(function ({documentID, documentType, setLoading}) {
         setLoading(true)
         try {
             const quotes = await (await fetch(`${config.server}/DocumentQuotes?documentId=${documentID}&documentType=${documentType}`)).json()
-            const enrichment = await (await fetch(`${config.server}/DocumentTopics?documentId=${documentID}&documentType=${documentType}`)).json()
             setData(quotes)            
-            setMetadata(enrichment)
         } catch(e) {
             // TODO handle errors
             console.error(e)
@@ -47,11 +98,11 @@ const QuoteView = React.memo(function ({documentID, documentType, setLoading}) {
             setLoading(false)
         }
         })()
-    }, [documentID, personID, documentType, setLoading])
+    }, [documentID, documentType, setLoading])
 
     let prevSpeaker = null
     return (
-        <>
+        <div style={{width: '100%', overflowY: 'auto', display: 'flex', placeContent: 'center'}}>
             <Chat items={data.map(d => {
                 const ret = {
                     highlight: query,
@@ -63,6 +114,76 @@ const QuoteView = React.memo(function ({documentID, documentType, setLoading}) {
                 prevSpeaker = d.Speaker
                 return ret
             })} />
-        </>
+        </div>
     );
+})
+
+const Metadata = React.memo(function ({documentID, documentType}) {
+    const classes = useStyles()
+    const [metadata, setMetadata] = useState(null)
+
+    useEffect(() => {
+        (async () => {
+        if (!documentID)
+            return
+        try {
+            const enrichment = await (await fetch(`${config.server}/DocumentTopics?documentId=${documentID}&documentType=${documentType}`)).json()
+            setMetadata(enrichment)
+        } catch(e) {
+            // TODO handle errors
+            console.error(e)
+            setMetadata(null)
+        }
+        })()
+    }, [documentID, documentType])
+
+    if (!metadata)
+        return <ChatLoader />
+
+    const md = metadata[0]
+    const bull = <span className={classes.bullet}>•</span>
+
+    return (
+    <Card className={classes.metadata}>
+      <CardContent>
+        <Typography className={classes.title} color="textSecondary" gutterBottom>
+          צפיה בפרוטוקול
+        </Typography>
+        <Typography variant="h6" component="h2">
+            {documentType === 'committee' 
+            && (md.Name?.length ? md.Name : "ועדה (פרטים חלקיים)")}
+            {documentType === 'plenum' 
+            && "ישיבת מליאה"}
+        </Typography>
+        {md.KnessetNum && 
+            <Typography className={classes.pos} color="textSecondary">
+                הכנסת ה-{md.KnessetNum}
+                {bull}
+                {toNiceDate(new Date(md.StartDate))}
+            </Typography>}
+        <Typography variant="body2">
+            <List>
+                {metadata.filter(m => m.ItemName?.length).map(m => (
+                <ListItem key={m.Ordinal}>
+                    <ListItemIcon>
+                        <ChatBubbleIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={m.ItemName}
+                        primaryTypographyProps={{style: {textAlign: 'right'}}} />
+                </ListItem>))}
+            </List>
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <ButtonGroup size="small" variant="contained">
+        {md.FilePath
+            && <Button endIcon={<DescriptionIcon style={{paddingRight:'.5em'}}/>} 
+                href={md.FilePath} target="_blank" rel="noreferrer">לפרוטוקול המקורי</Button>}
+        {md.BroadcastUrl
+            && <Button endIcon={<LiveTvIcon style={{paddingRight:'.5em'}}/>} 
+                href={md.BroadcastUrl} target="_blank" rel="noreferrer">לשידור הישיבה</Button>}
+        </ButtonGroup>
+      </CardActions>
+    </Card>
+    )
 })

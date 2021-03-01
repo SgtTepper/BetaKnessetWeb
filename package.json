@@ -24,6 +24,7 @@
     "react-dom": "^17.0.1",
     "react-google-charts": "^3.0.15",
     "react-highlight-words": "^0.17.0",
+    "react-infinite-scroll-component": "^6.0.0",
     "react-lazyload": "^3.2.0",
     "react-particles-js": "^3.4.1",
     "react-responsive": "^8.2.0",

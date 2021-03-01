@@ -29,6 +29,7 @@ const useStyles = makeStyles({
 
     limitScreen: {
         height: '100%', 
+        overflowX: 'hidden',
     }
   });
 
@@ -43,11 +44,11 @@ const useStyles = makeStyles({
     )
   }
 
-  export function ScrollPage({ children, limit, parentStyle, ...props }) {
+  export function ScrollPage({ children, limit, parentStyle, className, ...props }) {
     const classes = useStyles()
     return (
     <div className={clsx(classes.scrollPage, limit && classes.limitScreen)} style={parentStyle}>
-      <div className={clsx(classes.wrapper, limit && classes.limitScreen)} {...props}>
+      <div className={clsx(classes.wrapper, limit && classes.limitScreen, className)} {...props}>
         {children}
       </div>
     </div>

@@ -14,28 +14,6 @@
   padding-bottom: 7.5%!important;
 }
 
-.loader-quote {
-  margin-top: -25px;
-  margin-right: 2.5em;
-  font-style: italic;
-  min-width: 350px;
-}
-.loader-quote .quote-text {
-  color: #332;
-  font-size: 24px;
-  font-weight: bold;
-}
-.loader-quote .quote-text::first-letter {
-  font-size: 200%;
-  line-height: 60px;
-}
-.loader-quote .quote-name {
-  color: #555;
-  font-size: 18px;
-  font-family: Helvetica, Verdana;
-  padding-right: 20px;
-}
-
 .share-buttons > * {
   text-align: center;
   margin: 0 .15em;

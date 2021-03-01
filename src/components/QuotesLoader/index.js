@@ -4,8 +4,48 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 
 import quotes from './quotes.json'
 import { shuffleArray } from '../../utils'
+import { makeStyles } from '@material-ui/core'
+
+const useStyles = makeStyles({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyItems: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute', 
+    width: '100%', height: '100%', 
+    top: 0, right: 0,
+    background: 'white', 
+    zIndex: 5, 
+    transition: 'opacity .2s ease-in-out',
+    pointerEvents: 'none',
+  },
+  quote: {
+    marginTop: '-25px',
+    marginRight: '2.5em',
+    fontStyle: 'italic',
+    minWidth: '350px',
+  },
+  text: {
+    color: '#332',
+    fontSize: '24px',
+    fontWeight: 'bold',
+    '&::first-letter': {
+      fontSize: '200%',
+      lineHeight: '60px',
+    },
+  },
+  name: {
+    color: '#555',
+    fontSize: '18px',
+    fontFamily: 'Helvetica, Verdana',
+    paddingRight: '20px',
+  }
+})
 
 const Loader = React.memo(function ({show}) {
+    const classes = useStyles()
     const shuffled = useMemo(() => [...quotes], [])
     const [index, setIndex] = useState(0)
     const intervalId = useRef(null)
@@ -23,21 +63,7 @@ const Loader = React.memo(function ({show}) {
     const currentQuote = shuffled[index % shuffled.length]
   
     return (
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyItems: 'center',
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'absolute', 
-        width: '100%', height: '100%', 
-        top: 0, right: 0,
-        background: 'white', 
-        zIndex: 5, 
-        opacity: show ? .9 : 0,
-        transition: 'opacity .2s ease-in-out',
-        pointerEvents: 'none',
-        }}>
+      <div className={classes.root} style={{opacity: show ? .9 : 0,}}>
         <div style={{display: 'inline-flex', flexDirection: 'row', placeContent: 'center', placeItems: 'center', width: '100%',
           paddingLeft: '25%', paddingBottom: '15%'}}>
           <CircularProgress />
@@ -51,10 +77,11 @@ const Loader = React.memo(function ({show}) {
   })
   
   const Quote = React.memo(function ({name, quote}) {
+    const classes = useStyles()
     return (
-      <div className='loader-quote'>
-        <div className='quote-text'>{quote}</div>
-        <div className='quote-name'>- {name}</div>
+      <div className={classes.quote}>
+        <div className={classes.text}>{quote}</div>
+        <div className={classes.name}>- {name}</div>
       </div>
     )
   })
