@@ -41,13 +41,13 @@ export default function DiscreteSlider({max, minDifference, setMinDifference}) {
     const classes = useStyles();
     const [sliderWasChanged, setSliderWasChanged] = useState(false)
 
-    if (max==0) {
+    if (max===0) {
         return (<></>)
     }
     console.log(`minDifference: ${minDifference}`)
     console.log(`log: ${Math.floor(Math.log2(max))}`)
     console.log(`slider changed: ${sliderWasChanged}`)
-    if (!sliderWasChanged && minDifference != Math.floor(Math.log2(max))){
+    if (!sliderWasChanged && minDifference !== Math.floor(Math.log2(max))){
         setMinDifference( Math.floor(Math.log2(max)))
     }
 
@@ -62,7 +62,7 @@ export default function DiscreteSlider({max, minDifference, setMinDifference}) {
                 step={1}
                 marks
                 min={0}
-                max={max}
+                max={Math.floor(max)}
                 onChangeCommitted={(event, newValue) => {setSliderWasChanged(true); setMinDifference(newValue)}}
             />
                 </ThemeProvider>

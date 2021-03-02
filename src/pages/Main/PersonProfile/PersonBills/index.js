@@ -37,7 +37,7 @@ export default React.memo(function PersonBills({personID, filter}) {
     return (<div className={classes.loader}><CircularProgress /></div>)
   }
 
-  const filteredData = data.filter(d => filter == null || getReducedType(d) === filter).slice(0, 100)
+  const filteredData = data.filter(d => filter === null || getReducedType(d) === filter).slice(0, 100)
 
   return (
     <ControlledAccordions data={filteredData} />
