@@ -23,13 +23,14 @@ jobs:
 
     - name: npm install, build, and test
       run: |
-        yarn install
-        yarn build --if-present
+        npm install
+        npm run build --if-present
+        npm run test --if-present
 
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'BetaKnessetWeb'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_11be8c01347d44158cfdd463cdaa5650 }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_a7fc8e27f1c54e8d806da8304279f87f }}
         package: .
