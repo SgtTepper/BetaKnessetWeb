@@ -194,66 +194,6 @@ const PersonAvatar = React.memo(function ({person}) {
     )
 })
 
-
-
-function parseResponse(contents) {
-    if (contents.length === 0)
-      return null
-  
-    // take generic values
-    const general = {}
-    for (const property of [
-      'FirstName',
-      'LastName',
-      'Email',
-      'GenderDesc',
-      'imgPath',
-      'BirthCountry',
-      'BirthDate',
-      'CityName',
-      'FamilyStatus',
-      'ChildrenNumber'
-    ]) {
-      general[property] = contents[0][property]
-    }
-  
-    general['Name'] = `${general.FirstName} ${general.LastName}`
-  
-    const positions = contents.map(p => {
-      const ret = {}
-      for (const property of [
-        'PersonToPositionID',
-        'DutyDesc',
-        'GovMinistryName',
-        'FactionName',
-        'KnessetNum',
-        'DutyDesc',
-        'IsCurrent',
-        'PositionStartDate',
-        'PositionFinishDate'
-      ]) {
-        ret[property] = p[property]
-      }
-      return ret
-    })
-  
-    return {
-      ...general, 
-      positions,
-      positionsByKnesset: getPositionsByKnesset(positions)
-    }
-  }
-  
-  function getPositionsByKnesset(positions) {
-    const res = {}
-    for (const pos of positions) {
-      if (!res[pos.KnessetNum])
-        res[pos.KnessetNum] = []
-      res[pos.KnessetNum].push(pos)
-    }
-    return res 
-  }
-  
   function WordCloudExplainer(props) {
     return (
         <Explainer {...props}>

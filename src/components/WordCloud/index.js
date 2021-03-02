@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState, useEffect, useMemo } from 'react';
+import React, { lazy, Suspense, useState, useEffect } from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress'
 
 import config from '../../config'
