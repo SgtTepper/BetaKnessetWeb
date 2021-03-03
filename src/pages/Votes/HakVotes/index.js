@@ -7,6 +7,7 @@ import Bubble from "./Bubble";
 import Questions from "./Questions";
 import Loader from "../../../components/VotesLoader";
 import {makeStyles} from "@material-ui/core/styles";
+import config from "../../../config.json";
 
 const useStyles = makeStyles({
     title: {
@@ -59,7 +60,7 @@ export default function HakVotes({subjects, setStarted, allRules}) {
     useEffect(() => {
         async function fetchMyAPI() {
             setLoading(true)
-            let response = await fetch('http://localhost:7071/api/Votes/bySubjects?subjectIDs='+ subjects.map(e => (e.key)).join(','))
+            let response = await fetch(`${config.server}/Votes/bySubjects?subjectIDs=`+ subjects.map(e => (e.key)).join(','))
             response = await response.json()
             setCurrRule(response.splice(Math.floor(Math.random()*response.length), 1));
             setRules(response);

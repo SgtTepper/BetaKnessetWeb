@@ -18,6 +18,7 @@ import PlayCircleFilledTwoTone from "@material-ui/icons/PlayCircleFilledTwoTone"
 import ChipsArrayMobile from "./ChipsArrayMobile";
 import logo from './VotingLogo.png'
 import AlertDialogSlide from "./HakVotesMobile/AlertDialogSlide";
+import config from "../../config.json";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -123,8 +124,8 @@ export default function VotesMobile() {
     useEffect(() => {
         async function fetchMyAPI() {
             setLoading(true)
-            let response = await fetch('http://localhost:7071/api/Votes/Subjects')
-            let ruleResponse = await fetch('http://localhost:7071/api/Votes/All')
+            let response = await fetch(`${config.server}/Votes/Subjects`)
+            let ruleResponse = await fetch(`${config.server}/Votes/All`)
             response = await response.json()
             setOptions(response.map(e => ({ label: e.subject, key: e.SubjectID, isChosen:1})))
             ruleResponse = await ruleResponse.json()

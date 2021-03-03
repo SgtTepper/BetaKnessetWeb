@@ -11,6 +11,7 @@ import {useLocation} from "react-router-dom";
 import Loader from "../../../components/VotesMobileLoader";
 import {makeStyles} from "@material-ui/core/styles";
 import SwipeableViews from 'react-swipeable-views';
+import config from '../../../config.json'
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -69,7 +70,7 @@ export default function HakVotes({subjects, setStarted, allRules}) {
     useEffect(() => {
         async function fetchMyAPI() {
             setLoading(true)
-            let response = await fetch('http://localhost:7071/api/Votes/bySubjects?subjectIDs='+ subjects.map(e => (e.key)).join(','))
+            let response = await fetch(`${config.server}/Votes/bySubjects?subjectIDs=`+ subjects.map(e => (e.key)).join(','))
             response = await response.json()
             setCurrRule(response.splice(Math.floor(Math.random()*response.length), 1));
             setRules(response);
