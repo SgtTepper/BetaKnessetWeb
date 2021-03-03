@@ -1,6 +1,6 @@
 {
   "server_debug": "http://localhost:7071/api",
-  "server": "http://localhost:7071/api",
+  "server": "https://040a4d589337.ngrok.io/",
   "defaultBubblesCount": 25,
   "wordcloudCount": 60
 }
