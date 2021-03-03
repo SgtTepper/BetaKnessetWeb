@@ -219,7 +219,7 @@ export default function VotesMobile() {
                         style={{marginBottom:'0.3em', marginLeft: '11px', color: 'rgb(11,19,40)', fontSize: 60, textAlign: 'center'}}/>}
                               onClick={start_questions}/>
                 </div>
-                <p style={{fontSize:'12px', maxWidth: '90vw'}}>
+                <p style={{fontSize:'12px', maxWidth: '90vw', fontFamily: 'arial, sans-serif'}}>
                     * הצעות החוק ונתוני ההצבעות נלקחו מהאתר הרשמי של הכנסת. עם זאת, יתכנו אי דיוקים. למען הסר ספק, נתוני ההצבעות במאגרי הכנסת הם המדוייקים ביותר. הנהלת האתר אינה נושאת באחריות על טעויות כאלו שיתכנו. השימוש באתר ושיתוף המידע בו הינו באחריות המשתמש בלבד.
                     בחירת החוקים נעשתה באופן סובייקטיבי במידה. מוזמנים לקרוא על התהליך ע"י לחיצה על "?" למעלה. </p>
             </div>
