@@ -15,11 +15,16 @@ import defaultBubbles from '../../../../defaultTopics'
 
 const minWidth = 300
 const maxWidth = 750
+const minRatioForImage = .035
+const minRatioForImageSmallScreen = Infinity
+const maxBubblesForSmallScreen = 25
 
 const makeDefaultBubbles = (queries, isBigScreen) => {
   shuffleArray(queries)
   const queriesCopy = queries.slice(0, config.defaultBubblesCount)
-  const sizes = new Array(queriesCopy.length).fill(null).map(_ => 5 + Math.random() * 10)
+  const sizes = new Array(queriesCopy.length)
+    .fill(null)
+    .map(_ => 5 + Math.random() * 10)
   const max = Math.max(...sizes)
 
   const res = queriesCopy.map((s, i) => makeDefaultBubble(s, sizes[i], max, isBigScreen))
@@ -58,8 +63,6 @@ const makeDefaultBubble = (s, size, max, isBigScreen) => {
   }
 }
 
-const MIN_RATIO_FOR_IMAGE = .035
-
 const PersonTooltip = withStyles((theme) => ({
     tooltip: {
       boxShadow: theme.shadows[1],
@@ -96,36 +99,46 @@ const Chart = React.memo(function ({query, setLoading}) {
         setLoading(true)
         setError(null)
         try {
-            // handle hebrew quotes (״)
             const cleanQuery = query.replace('״', '"')
 
-            const res = await (await fetch(`${config.server}/Keywords?keyword=${cleanQuery}`)).json()
+            let res = await (await fetch(`${config.server}/Keywords?keyword=${cleanQuery}`)).json()
             if (!res.length) {
               setError(<div>אין תוצאות :(&nbsp;&nbsp; נסו ללחוץ על אחת הבועות?</div>)
               setData(defaults)
               return
             }
-            const total = res.map(r => r.Counter).reduce((a, b) => a + b, 0)
-            setData(res.filter(r => r.Counter / total > MIN_RATIO_FOR_IMAGE || r.mk_imgPath !== null).map(r => ({
-            result: r,
-            element: <PersonShortName key={r.PersonID} {...r} query={cleanQuery} ratio={r.Counter / total} />,
-            size: r.Counter,
-            color: r.Counter,
-            style: {
-                background: `url(${imageOrDefault(r.mk_imgPath, r.PersonID.toString(), 256)}) no-repeat center center`,
-                backgroundSize: 'cover',
-                color: '#ddd',
-                cursor: 'pointer',
-            }
-            })))
+            
+            const minRatio = isBigScreen ? minRatioForImage : minRatioForImageSmallScreen
+            const total = res
+              .map(r => r.Counter)
+              .reduce((a, b) => a + b, 0)
+
+            const filteredRes = res
+              .filter(r => r.Counter / total > minRatio || r.mk_imgPath !== null)
+              .slice(0, isBigScreen ? -1 : maxBubblesForSmallScreen)
+
+            setData(filteredRes
+              .map(r => ({
+                result: r,
+                element: <PersonShortName key={r.PersonID} {...r} query={cleanQuery} ratio={r.Counter / total} />,
+                size: r.Counter,
+                color: r.Counter,
+                style: {
+                    background: `url(${imageOrDefault(r.mk_imgPath, r.PersonID.toString(), 256)}) no-repeat center center`,
+                    backgroundSize: 'cover',
+                    color: '#ddd',
+                    cursor: 'pointer',
+                }
+              })))
         } catch(e) {
+            console.error(e)
             setError("סורי, לא הצלחנו להביא תוצאות. שווה לנסות שוב")
             setData(defaults)
         } finally {
             setLoading(false)
         }
         })()
-    }, [query, setLoading, defaults])
+    }, [query, setLoading, defaults, isBigScreen])
 
     return (
         <>
@@ -136,7 +149,7 @@ const Chart = React.memo(function ({query, setLoading}) {
           />
           <div style={{zIndex: 2}}>
             <Treemap 
-            padding={40}
+            padding={isBigScreen ? 40 : 15}
             margin={0}
             animation={true}
             data={{
@@ -167,6 +180,9 @@ const Chart = React.memo(function ({query, setLoading}) {
 
 const PersonShortName = React.memo(function ({...props}) {
   const {FirstName, LastName, ratio} = props
+  const windowSize = useWindowSize()
+  const isBigScreen = windowSize.width >= maxWidth
+  const minRatio = isBigScreen ? minRatioForImage : minRatioForImageSmallScreen
 
   return (
     <PersonTooltip 
@@ -184,7 +200,7 @@ const PersonShortName = React.memo(function ({...props}) {
           width: '100%',
         }}
       >
-        {ratio >= MIN_RATIO_FOR_IMAGE &&
+        {ratio >= minRatio &&
         <div className='person-name'>
           <div>{FirstName} {LastName}</div>
         </div>}

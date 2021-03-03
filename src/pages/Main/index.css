@@ -1,4 +1,5 @@
 #top, #quotes, #calendar {
+  place-content: flex-start;
   flex-direction: column;
   place-items: center;
 }

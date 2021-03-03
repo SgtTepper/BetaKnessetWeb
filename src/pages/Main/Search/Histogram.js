@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Bar } from '@reactchartjs/react-chart.js'
+import { Bar } from 'react-chartjs-2'
 import { useQuery } from '../../../utils'
 
 import config from '../../../config'
@@ -34,6 +34,7 @@ const CachedHistogramView = React.memo(function HistogramView({query}) {
         labels: data.map(d => `${d.month}.${(parseInt(d.year) % 100).toString().padStart(2, '0')}`),
         datasets: [
           {
+            label: 'trend',
             type: 'line',
             borderColor: 'rgb(54, 162, 235)',
             borderWidth: 2,
@@ -44,6 +45,7 @@ const CachedHistogramView = React.memo(function HistogramView({query}) {
             backgroundColor: gradient
           },
           {
+            label: 'bar',
             type: 'bar',
             backgroundColor: 'transparent',
             data: data.map(d => d.counter),
@@ -53,6 +55,9 @@ const CachedHistogramView = React.memo(function HistogramView({query}) {
     }
 
     const options = {
+      responsive: true, 
+      maintainAspectRatio: false,
+
       onClick: function(evt, element) {
         if (!element.length)
           return
@@ -113,8 +118,8 @@ const CachedHistogramView = React.memo(function HistogramView({query}) {
     }
 
 return (
-  <div style={{position: 'sticky', bottom: 0, zIndex: 15, width: '100%'}}>
-    <Bar data={dataFn} height={17} options={options} />
+  <div style={{position: 'absolute', bottom: 0, zIndex: 15, width: '100%', height: '15vh'}}>
+    <Bar data={dataFn}  options={options} />
   </div>
   )
 })

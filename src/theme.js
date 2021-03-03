@@ -1,7 +1,19 @@
 import { unstable_createMuiStrictModeTheme as createMuiTheme } from '@material-ui/core';
 
 const theme = createMuiTheme({
+  // rtl fixes
   direction: 'rtl',
+  overrides: {
+    MuiInputAdornment: {
+      positionStart: {
+        marginRight: 0,
+      },
+      positionEnd: {
+        marginLeft: 0,
+      },
+    },
+  },
+
   palette: {
     primary: {
       main: '#0d47a1',

@@ -8,11 +8,10 @@ import QuotesSearch from '../../../components/QuotesSearch'
 const useStyles = makeStyles({
     root: {
         maxWidth: '850px', 
-        height: '100%', 
+        height: '85%',
         display: 'flex',
         flexDirection: 'column',
         position: 'relative', 
-        marginTop: '1em',
         placeContent: 'flex-start',
     },
 })
@@ -24,7 +23,9 @@ const Search = React.memo(function Search() {
     return (
         <ScrollPage limit id='top'>
             <div className={classes.root}>
-                <QuotesSearch placeholder="מה מעניין אותך?" />
+                <div style={{margin: '.5em 1em'}}>
+                    <QuotesSearch placeholder="מה מעניין אותך?" />
+                </div>
                 <Bubble />
             </div>
             <Histogram />

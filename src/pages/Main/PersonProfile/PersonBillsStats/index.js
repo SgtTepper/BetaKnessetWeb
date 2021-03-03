@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Doughnut } from '@reactchartjs/react-chart.js'
+import { Doughnut } from 'react-chartjs-2'
 import 'chartjs-plugin-datalabels';
 import config from '../../../../config'
 
