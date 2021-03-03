@@ -140,7 +140,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                 <h2 style={{  marginBottom: '0.5em',marginTop: '0em',fontSize: '20px'}}>וואלה,
                     <span style={{color:'red',fontSize: '20px'}}>{worstParty} </span>
                     <br/>
-                        קצת פחות מסכימים איתך...
+                        קצת פחות מסכימים איתך
                 </h2>
                 <VotesShareButtons/>
                 <br/>

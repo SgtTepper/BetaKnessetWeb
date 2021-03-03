@@ -194,7 +194,7 @@ const PersonShortName = React.memo(function ({...props}) {
             arrow
             interactive
             enterNextDelay={150}
-            enterTouchDelay = {50}
+            enterTouchDelay = {10}
             leaveTouchDelay= {20000}
 
 

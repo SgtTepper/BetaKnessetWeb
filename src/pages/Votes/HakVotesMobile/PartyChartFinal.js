@@ -133,7 +133,7 @@ const PartyName = React.memo(function ({...props}) {
             arrow
             interactive
             enterNextDelay={200}
-            enterTouchDelay = {100}
+            enterTouchDelay = {10}
             leaveTouchDelay= {20000}
         >
             <div
