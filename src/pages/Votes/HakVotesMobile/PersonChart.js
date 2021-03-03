@@ -193,8 +193,8 @@ const PersonShortName = React.memo(function ({...props}) {
             placement='left'
             arrow
             interactive
-            enterNextDelay={200}
-            enterTouchDelay = {100}
+            enterNextDelay={150}
+            enterTouchDelay = {50}
             leaveTouchDelay= {20000}
 
 
@@ -219,7 +219,7 @@ const PersonCard = React.memo(function({name,agreed_laws, CurrentFaction, PlaceI
         <div style={{width:'55vw', maxHeight: '60vh',textAlign:'center'}}>
             <h1 style={{fontSize: '25px', color: '#eceff1'}}>{name}</h1>
             <h2 style={{fontSize: '15px', color: '#eceff1'}} >{CurrentFaction}</h2>
-            <h2 style={{fontSize:'12px'}}> מקום {PlaceInList} ברשימה </h2>
+            <h2 style={{fontSize:'12px'}}> מקום  {PlaceInList}  ברשימה </h2>
             <div style={{background: 'linear-gradient(45deg, #c5cae9 30%, #e8eaf6 70%)',  overflow:'auto'}}>
 
                 <table style={{ width:'100%', marginBottom:'1em',  maxHeight:'60vh'}}>
