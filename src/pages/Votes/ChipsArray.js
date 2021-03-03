@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
 import Paper from '@material-ui/core/Paper';
-import TagFacesIcon from '@material-ui/icons/TagFaces';
 import CheckCircleOutlineRounded from '@material-ui/icons/CheckCircleOutlineRounded';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 
@@ -57,19 +56,17 @@ export default function ChipsArray(options, setOptions) {
     function handleClick(label){
         console.info('You clicked the Chip.');
         console.info(label)
-        options.setOptions(options.options.map(e => ({ label: e.label, key: e.key, isChosen: e.label == label? e.isChosen ^ 1: e.isChosen})));
+        options.setOptions(options.options.map(e => ({ label: e.label, key: e.key, isChosen: e.label === label? e.isChosen ^ 1: e.isChosen})));
     };
 
-    console.log(options.options.filter(e => e.isChosen ==1));
+    console.log(options.options.filter(e => e.isChosen === 1));
     return (
         <Paper component="ul" className={classes.root}>
             {options.options.map((data) => {
-                let icon;
-
                 return (
                     <li key={data.key} style={{textAlign: 'right'}}>
                         <Chip
-                            icon={data.isChosen == 1? <CheckCircleOutlineRounded className={classes.icon}/> :  <CancelOutlinedIcon className={classes.icon}/>}
+                            icon={data.isChosen === 1? <CheckCircleOutlineRounded className={classes.icon}/> :  <CancelOutlinedIcon className={classes.icon}/>}
                             label={data.label}
                             className={data.isChosen == 1 ? classes.choosenChip : classes.unchoosenChip}
                             onMouseDown={() => handleClick(data.label)}

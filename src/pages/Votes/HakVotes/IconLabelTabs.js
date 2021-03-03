@@ -7,7 +7,6 @@ import DirectionsRun from '@material-ui/icons/DirectionsRun';
 import HourglassFull from '@material-ui/icons/HourglassFull';
 import "../index.css"
 import {Tooltip} from "@material-ui/core";
-import DiscreteSlider from "./Slider";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
 export default function IconLabelTabs({value, setValue}) {
 
     const classes = useStyles();
-    const [expanded, setExpanded] = React.useState(false);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -42,11 +40,11 @@ export default function IconLabelTabs({value, setValue}) {
                 aria-label="icon label tabs example"
             >
                 <Tab   className={classes.tab} style={{fontFamily: "Helvetica Neue, sans-serif"}} label="מפלגות רצות"
-                   icon={ value==0 ?
+                   icon={ value===0 ?
                        <DirectionsRun />
                        :<Tooltip placement="top" title="רוצה לשנות זווית ראיה?" style={{backgroundColor:'transparent', color:'black'}}><DirectionsRun /></Tooltip>}  />
                 <Tab  className={classes.tab} style={{fontFamily: "Helvetica Neue, sans-serif"}}
-                      icon={value==1 ?
+                      icon={value===1 ?
                           <HourglassFull />
                           :
                           <Tooltip placement="top" title="רוצה לשנות זווית ראיה?" style={{backgroundColor:'transparent', color:'black'}}><HourglassFull /></Tooltip>} label="מפלגות בזמן ההצבעה" />

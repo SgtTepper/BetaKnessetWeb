@@ -1,36 +1,14 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import PropTypes from "prop-types";
-import {createMuiTheme, withStyles} from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import { DataGrid } from '@material-ui/data-grid';
+import {withStyles} from "@material-ui/core/styles";
 import "../index.css"
 import HelpOutline from "@material-ui/icons/HelpOutline";
 import {Tooltip} from "@material-ui/core";
-
-
-const selectStyle = {
-    control: () => ({
-        display: "flex",
-        alignItems: "center",
-        border: 0,
-        height: "auto",
-        fontSize: '1.2em',
-        background: "transparent",
-        boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-        listStyleType: 'circle',
-        variant: 'outlined',
-        width:'90vw'
-
-
-    })}
 
 const styleButton = {
     root: {
@@ -95,9 +73,6 @@ export default function AlertDialogSlide({allRules, startScreen}) {
                     TransitionComponent={Transition}
                     keepMounted
                     onClose={handleClose}
-                    aria-labelledby="alert-dialog-slide-title"
-                    aria-describedby="alert-dialog-slide-description"
-                    aria-table="alert-dialog-slide-table"
                     title="Dialog"
                 >
                     <div style={{fontFamily:  'Helvetica Neue, sans-serif',maxHeight: '70vh', overflow:'hidden' }}>

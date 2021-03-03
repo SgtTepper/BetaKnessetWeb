@@ -148,7 +148,7 @@ const PersonChart = React.memo(function ({setLoading, queryString, minDifference
                 setLoading(false)
             }
         })()
-    }, [queryString, setLoading, minDifference])
+    }, [queryString, setLoading, minDifference, setBestParty, setBestPartyImg, setMaxDifference, setWorstParty, setWorstPartyImg])
     const classes = useStyles();
     const a = data.filter(d => d.color <= 0);
     a.push({
