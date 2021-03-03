@@ -6,24 +6,18 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Button from "@material-ui/core/Button";
 import ThumbUp from "@material-ui/icons/ThumbUpAltOutlined";
 import ThumbDown from "@material-ui/icons/ThumbDownAltOutlined";
-import ReplayRounded from "@material-ui/icons/ReplayRounded";
 import React, {useState} from "react";
 import IconLabelTabs from "./IconLabelTabs";
-import AlertDialogSlide from "./AlertDialogSlide.js";
 import PropTypes from "prop-types";
 import {withStyles} from "@material-ui/core/styles";
 import DiscreteSlider from "./Slider";
 import { makeStyles } from '@material-ui/core/styles';
-import PartyHelp from "./PartyHelp";
 import VotesShareButtons from "./VotesShareButtons"
 import Refresh from "@material-ui/icons/Refresh";
-import {imageOrDefault} from "../../../utils";
-import SwipeableViews from "react-swipeable-views";
 import sliderGif from './swipe-helper.gif'
 
 
 import "../index.css"
-import logo from "../title.png";
 
 
 const useStyles = makeStyles((theme) => ({

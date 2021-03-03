@@ -65,7 +65,7 @@ const PersonChart = React.memo(function ({setLoading, queryString, minDifference
                         backgroundSize: 'cover',
                         color: '#ddd',
                         cursor: 'pointer',
-                        border: (r.votes_agreed-r.votes_disagreed-0.35*r.votes_absent>0) ? `${Math.abs(r.votes_agreed-r.votes_disagreed-0.35*r.votes_absent)/1.3}px solid rgba(72,169,61,0.7)`: `${Math.abs(r.votes_agreed-r.votes_disagreed-0.35*r.votes_absent)/1.3}px solid rgba(223,36,36,0.7)`,
+                        border: (r.votes_agreed-r.votes_disagreed-0.35*r.votes_absent>0) ? `${Math.abs(r.votes_agreed-r.votes_disagreed-0.35*r.votes_absent)/1.15}px solid rgba(72,169,61,0.7)`: `${Math.abs(r.votes_agreed-r.votes_disagreed-0.35*r.votes_absent)/1.15}px solid rgba(223,36,36,0.7)`,
                         animation: `pulse ${4 + Math.random() * 10}s ease-in-out infinite`,
                         animationDelay: `-${Math.random() * 10}s`,
                         animationDirection: 'alternate',
@@ -148,7 +148,7 @@ const PersonChart = React.memo(function ({setLoading, queryString, minDifference
                 setLoading(false)
             }
         })()
-    }, [queryString, setLoading, minDifference])
+    }, [queryString, setLoading, minDifference, setBestParty, setBestPartyImg, setMaxDifference, setWorstParty, setWorstPartyImg])
     const classes = useStyles();
     const a = data.filter(d => d.color <= 0);
     a.push({
