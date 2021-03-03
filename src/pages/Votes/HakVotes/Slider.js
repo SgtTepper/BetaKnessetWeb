@@ -5,6 +5,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import GroupAdd from "@material-ui/icons/GroupAdd";
 import Person from "@material-ui/icons/Person";
+import {Tooltip} from "@material-ui/core";
 
 const muiTheme = createMuiTheme({
     overrides:{
@@ -37,24 +38,23 @@ const useStyles = makeStyles({
 });
 
 
-export default function DiscreteSlider({max, minDifference, setMinDifference}) {
+export default function DiscreteSlider({max, minDifference, setMinDifference, queryString}) {
     const classes = useStyles();
-    const [sliderWasChanged, setSliderWasChanged] = useState(false)
+    const [prevRulesLength, setPrevRulesLength] = useState(-1)
 
     if (max===0) {
         return (<></>)
     }
-    console.log(`minDifference: ${minDifference}`)
-    console.log(`log: ${Math.floor(Math.log2(max))}`)
-    console.log(`slider changed: ${sliderWasChanged}`)
-    if (!sliderWasChanged && minDifference !== Math.floor(Math.log2(max))){
-        setMinDifference( Math.floor(Math.log2(max)))
+
+    if (queryString.split(',').length > prevRulesLength) {
+        setPrevRulesLength(queryString.split(',').length);
+        setMinDifference(Math.floor(Math.log2(max)));
     }
 
     return (
             <div className={classes.root}>
                 <ThemeProvider theme={muiTheme}>
-
+                <Tooltip placement="top" title="רוצה לראות יותר\פחות ח''כים?" style={{backgroundColor:'transparent', color:'black'}}>
                 <Slider
                 value={minDifference}
                 aria-labelledby="continuous-slider"
@@ -63,8 +63,9 @@ export default function DiscreteSlider({max, minDifference, setMinDifference}) {
                 marks
                 min={0}
                 max={Math.floor(max)}
-                onChangeCommitted={(event, newValue) => {setSliderWasChanged(true); setMinDifference(newValue)}}
+                onChangeCommitted={(event, newValue) => { setMinDifference(newValue)}}
             />
+                </Tooltip>
                 </ThemeProvider>
             <div style={{position:'relative'}}>
                 <Person style={{color:'white',fontSize:'17px', textAlign:'left', alignContent:"left", justifyContent:"flex-end", left:"290px", position:'absolute'}}/>

@@ -63,7 +63,6 @@ export default function HakVotes({subjects, setStarted, allRules}) {
     const [worstParty, setWorstParty] = useState(0)
     const [bestPartyImg, setBestPartyImg] = useState(0)
     const [worstPartyImg, setWorstPartyImg] = useState(0)
-    const classes = useStyles()
 
     console.log("HakVotes")
     console.log(subjects);
@@ -185,7 +184,9 @@ export default function HakVotes({subjects, setStarted, allRules}) {
                     </div>
                     <div  style={{width:'100vw', overflow:'hidden'}}>
                         <Bubble  minDifference={minDifference} queryString={queryString} partyPerson={partyPerson}
-                                 setMaxDifference={setMaxDifference} setBestParty={setBestParty} setWorstParty={setWorstParty} setBestPartyImg={setBestPartyImg} setWorstPartyImg={setWorstPartyImg}/>
+                                 setMaxDifference={setMaxDifference} setBestParty={setBestParty}
+                                 setWorstParty={setWorstParty} setBestPartyImg={setBestPartyImg}
+                                 setWorstPartyImg={setWorstPartyImg}/>
 
                     </div>
                 </SwipeableViews>

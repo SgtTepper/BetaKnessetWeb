@@ -37,18 +37,17 @@ const useStyles = makeStyles({
 });
 
 
-export default function DiscreteSlider({max, minDifference, setMinDifference}) {
+export default function DiscreteSlider({max, minDifference, setMinDifference, queryString}) {
     const classes = useStyles();
-    const [sliderWasChanged, setSliderWasChanged] = useState(false)
+    const [prevRulesLength, setPrevRulesLength] = useState(-1)
 
     if (max===0) {
         return (<></>)
     }
-    console.log(`minDifference: ${minDifference}`)
-    console.log(`log: ${Math.floor(Math.log2(max))}`)
-    console.log(`slider changed: ${sliderWasChanged}`)
-    if (!sliderWasChanged && minDifference !== Math.floor(Math.log2(max))){
-        setMinDifference( Math.floor(Math.log2(max)))
+
+    if (queryString.split(',').length > prevRulesLength) {
+        setPrevRulesLength(queryString.split(',').length);
+        setMinDifference(Math.floor(max)-1);
     }
 
     return (
@@ -63,7 +62,7 @@ export default function DiscreteSlider({max, minDifference, setMinDifference}) {
                 marks
                 min={0}
                 max={Math.floor(max)}
-                onChangeCommitted={(event, newValue) => {setSliderWasChanged(true); setMinDifference(newValue)}}
+                onChangeCommitted={(event, newValue) => {setMinDifference(newValue)}}
             />
                 </ThemeProvider>
             <div style={{position:'relative'}}>

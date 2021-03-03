@@ -103,7 +103,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
     };
 
 
-    console.log(`rulesLength: ${rulesLength}`)
+    console.log(`rulesLength: ${queryString}`)
 
     if (queryString != '' && (queryString.split(',').length == 1)){
         setTimeout(() => {
@@ -137,10 +137,10 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                 <h2 style={{marginBottom: '0.2em', marginTop: '0em', fontSize: '20px'}}>נראה שהמפלגה בשבילך היא
                     <br/>
                     <span style={{color:'green',fontSize: '20px'}}>{bestParty} </span> </h2>
-                <h2 style={{  marginBottom: '0.5em',marginTop: '0em',fontSize: '20px'}}>וואלה, כדאי לך להתרחק
+                <h2 style={{  marginBottom: '0.5em',marginTop: '0em',fontSize: '20px'}}>וואלה,
+                    <span style={{color:'red',fontSize: '20px'}}>{worstParty} </span>
                     <br/>
-                    מ<span style={{color:'red',fontSize: '20px'}}>{worstParty} </span>
-                     כמו מאש
+                        קצת פחות מסכימים איתך...
                 </h2>
                 <VotesShareButtons/>
                 <br/>
@@ -148,7 +148,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                 <IconLabelTabs  value={partyPerson} setValue={setPartyPerson}/>
                 </div>
                 <br/>
-                {(partyPerson == 0 && queryString != '' )? (<DiscreteSlider max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
+                {(partyPerson == 0 && queryString != '' )? (<DiscreteSlider queryString={queryString} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
                     ( <></>)}
                 <br/>
                 <MyButton style={{ marginBottom: '0.2em',marginTop: '0.2em', borderRadius: '20' }} startIcon={<Refresh style={{ boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)', marginLeft: '11px', color: 'rgb(158,175,231)', fontSize:60, textAlign:'center'}}  />}
@@ -238,7 +238,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                         <IconLabelTabs  value={partyPerson} setValue={setPartyPerson}/>
                     </div>
                     <br/>
-                    {(partyPerson == 0 && queryString != '') ? (<DiscreteSlider max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
+                    {(partyPerson == 0 && queryString != '') ? (<DiscreteSlider queryString={queryString} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
                         ( <></>)}
 
                     <br/>

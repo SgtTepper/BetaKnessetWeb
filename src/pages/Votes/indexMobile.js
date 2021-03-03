@@ -157,46 +157,7 @@ export default function VotesMobile() {
                 minHeight: '60%',
                 zIndex: '1',
             }}>
-                {/*<AppBar position="sticky" classes={{root: classes.appbar}}>*/}
-                {/*    <div className="appbar-grid-container">*/}
-                {/*        <div className="nav">*/}
-                {/*            <Button href="#top">*/}
-                {/*                ראשי*/}
-                {/*            </Button>*/}
-                {/*            <Button href="#person">*/}
-                {/*                ח"כים*/}
-                {/*            </Button>*/}
-                {/*            <Button href="#quotes">*/}
-                {/*                ציטוטים*/}
-                {/*            </Button>*/}
-                {/*            <Button href="#calendar">*/}
-                {/*                לו"ז*/}
-                {/*            </Button>*/}
-                {/*            <div className="spacer" />*/}
-                {/*        </div>*/}
-                {/*        <div className="logo">*/}
-                {/*            <a href="#top">*/}
-                {/*                <Typography color="primary" variant="h2" component="h1" className={classes.title}>*/}
-                {/*                    <span className={classes.bigLetter}>ב</span>טא מחוקקי<span className={classes.bigLetter}>ם</span>*/}
-                {/*                </Typography>*/}
-                {/*            </a>*/}
-                {/*        </div>*/}
-                {/*        <div className="links">*/}
-                {/*            <div className="spacer" />*/}
-                {/*            <Button href="#contact">*/}
-                {/*                צרו קשר*/}
-                {/*            </Button>*/}
-                {/*            <Button href="#about">*/}
-                {/*                אודות*/}
-                {/*            </Button>*/}
-                {/*            <Tooltip title={<h2>מזלגו אותנו ב-GitHub</h2>} arrow>*/}
-                {/*                <IconButton href="https://github.com/SgtTepper/BetaKnesset">*/}
-                {/*                    <GitHubIcon />*/}
-                {/*                </IconButton>*/}
-                {/*            </Tooltip>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*</AppBar>*/}
+
                 <>
                     <h1 style={{letterSpacing: '0.03em', marginBottom:'-135px',  marginTop:'-100px'}}> <img style={{background: 'rgba(255,255,255, 0.9)' , height:'350px', width:'350px'}} src={logo} /></h1>
                     <div style={{
@@ -255,9 +216,12 @@ export default function VotesMobile() {
                 <br/>
                 <div>
                     <MyButton startIcon={<PlayCircleFilledTwoTone
-                        style={{marginBottom:'0.9em', marginLeft: '11px', color: 'rgb(11,19,40)', fontSize: 60, textAlign: 'center'}}/>}
+                        style={{marginBottom:'0.3em', marginLeft: '11px', color: 'rgb(11,19,40)', fontSize: 60, textAlign: 'center'}}/>}
                               onClick={start_questions}/>
                 </div>
+                <p style={{fontSize:'12px', maxWidth: '90vw'}}>
+                    * הצעות החוק ונתוני ההצבעות נלקחו מהאתר הרשמי של הכנסת. עם זאת, יתכנו אי דיוקים. למען הסר ספק, נתוני ההצבעות במאגרי הכנסת הם המדוייקים ביותר. הנהלת האתר אינה נושאת באחריות על טעויות כאלו שיתכנו. השימוש באתר ושיתוף המידע בו הינו באחריות המשתמש בלבד.
+                    בחירת החוקים נעשתה באופן סובייקטיבי במידה. מוזמנים לקרוא על התהליך ע"י לחיצה על "?" למעלה. </p>
             </div>
         )
 

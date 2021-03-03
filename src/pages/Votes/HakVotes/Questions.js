@@ -102,17 +102,17 @@ export default function Questions({rule, remove_random_rule, handle_against, han
             <div style={{ float:'right' ,textAlign:'center', zIndex:'6', backgroundColor: 'rgba(9,16,34, 0.95)', width:"20vw",minWidth:"350px", maxWidth:'450px', padding: '0em 2em', position: 'relative', minHeight: '100vh'}}>
                 <h2 style={{ marginBottom: '-5px',fontSize: '30px'}}> הסתיים השאלון! </h2>
                 <h2 style={{ marginBottom: '-5px',fontSize: '20px'}}>נראה שהמפלגה בשבילך היא  <span style={{color:'green',fontSize: '20px'}}>{bestParty} </span></h2>
-                <h2 style={{ marginBottom: '-5px',fontSize: '20px'}}>וואלה, כדאי לך להתרחק
+                <h2 style={{ marginBottom: '-5px',fontSize: '20px'}}>וואלה,
+                    <span style={{color:'red',fontSize: '20px'}}>{worstParty} </span>
                     <br/>
-                    מ<span style={{color:'red',fontSize: '20px'}}>{worstParty} </span>
-                    כמו מאש
+                    קצת פחות מסכימים איתך...
                 </h2>
                 <br/>
                 <VotesShareButtons/>
                 <br/>
                 <IconLabelTabs  value={partyPerson} setValue={setPartyPerson}/>
                 <br/>
-                {(partyPerson == 0 && queryString != '' )? (<DiscreteSlider style={{marginBottom: '0px'}} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
+                {(partyPerson == 0 && queryString != '' )? (<DiscreteSlider queryString={queryString} style={{marginBottom: '0px'}} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
                     ( <div style={{ marginBottom: '90px'}}/>)}
                 <MyButton style={{ marginTop: '0px',borderRadius: '20' }} startIcon={<Refresh style={{ boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)', marginLeft: '11px', color: 'rgb(158,175,231)', fontSize:60, textAlign:'center'}}  />}
                           onClick={() => {setStarted(false)}} />
@@ -190,7 +190,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
             <IconLabelTabs  value={partyPerson} setValue={setPartyPerson}/>
             <br/>
             <br/>
-            {(partyPerson == 0 && queryString != '') ? (<DiscreteSlider max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
+            {(partyPerson == 0 && queryString != '') ? (<DiscreteSlider queryString={queryString} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
                 ( <></>)}
 
             <br/>

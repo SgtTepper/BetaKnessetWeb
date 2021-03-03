@@ -34,12 +34,14 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
         <Router>
+          <div>
             <CustomParticles />
             <Suspense fallback={<LightweightLoader/>}>
               <Switch>
                   <Route path="/" component={Votes}/>
               </Switch>
             </Suspense>
+          </div>
         </Router>
       </div>
     </ThemeProvider>

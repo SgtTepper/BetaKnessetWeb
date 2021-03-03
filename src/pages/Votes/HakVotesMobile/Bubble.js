@@ -29,7 +29,8 @@ const PersonTooltip = withStyles((theme) => ({
     },
 }))(Tooltip);
 
-const Bubble = React.memo(function ({queryString, partyPerson, minDifference, setMaxDifference, setWorstParty, setBestParty, setBestPartyImg, setWorstPartyImg}) {
+const Bubble = React.memo(function ({queryString, partyPerson, minDifference, setMaxDifference, setWorstParty,
+                                        setBestParty, setBestPartyImg, setWorstPartyImg}) {
     const [loading, setLoading] = useState(false)
 
     if (partyPerson == 0) {
