@@ -144,7 +144,7 @@ export default function VotesMobile() {
     }
 
     if (started) {
-        return <HakVotesMobile subjects={options.filter(e => e.isChosen ==1)} setStarted={setStarted} allRules={rules} ></HakVotesMobile>
+        return <HakVotesMobile subjects={options.filter(e => e.isChosen ===1)} setStarted={setStarted} allRules={rules} ></HakVotesMobile>
     }
 
         return (
@@ -189,7 +189,7 @@ export default function VotesMobile() {
                                     <br/>
                                     במהלך הסימולציה יוצגו בפניכם הצעות חוק שהועלו במליאה בשנים האחרונות ובכל
                                     <br/>
-                                    שלב תוכלו לבחור איך אתם הייתם מצביעים - האם אתם בעד או נגד הצעת החוק.
+                                    שלב תוכלו לבחור איך אתם הייתם מצביעים - האם אתם <span style={{color:'green'}}>בעד<span/> או <span  style={{color:'red'}}>נגד<span/> הצעת החוק.
                                     <br/>
                                     הסימולציה מחשבת בזמן אמת ובהסתמך על כלל ההצבעות שלכם בסימולציה מי
                                     <br/>
