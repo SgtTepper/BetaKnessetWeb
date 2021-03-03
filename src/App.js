@@ -9,7 +9,6 @@ import Particles from 'react-particles-js'
 import { makeStyles } from '@material-ui/core/styles'
 import theme from './theme'
 import particlesConfig from './particles.config.json'
-import ScrollableView from './components/ScrollableView'
 const Votes = lazy(() => import ('./pages/Votes'))
 
 const useStyles = makeStyles({
@@ -35,14 +34,12 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
         <Router>
-          <ScrollableView>
             <CustomParticles />
             <Suspense fallback={<LightweightLoader/>}>
               <Switch>
                   <Route path="/" component={Votes}/>
               </Switch>
             </Suspense>
-          </ScrollableView>
         </Router>
       </div>
     </ThemeProvider>

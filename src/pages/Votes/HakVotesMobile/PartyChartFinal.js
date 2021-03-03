@@ -154,7 +154,7 @@ const PartyCard = React.memo(function({name,agreed_laws, disagreed_laws}) {
     return (
 
         <div style={{maxHeight: '100%', width:'65vw', overflow:'auto'}}>
-            <h1 style={{color: '#eceff1'}}>{name}</h1>
+            <h1 style={{fontSize: '25px', color: '#eceff1'}}>{name}</h1>
             <div style={{background: 'linear-gradient(45deg, #c5cae9 30%, #e8eaf6 70%)'}}>
 
                     <table style={{width:'100%', marginBottom:'1em',  maxHeight:'60vh'}}>
@@ -165,7 +165,7 @@ const PartyCard = React.memo(function({name,agreed_laws, disagreed_laws}) {
                                     <br/>
                                     <p8 style={{fontWeight: 'normal', fontSize: '14px'}}>
                                         אני ואתה לא באותו ראש
-                                        <span aria-label="sad" role="img"> 😕 </span>
+                                        <span style={{fontSize: '15px'}} aria-label="sad" role="img"> 😕 </span>
 
                                     </p8>
                                 < /th>
@@ -193,7 +193,7 @@ const PartyCard = React.memo(function({name,agreed_laws, disagreed_laws}) {
                                 <br/>
                                 <p8 style={{fontWeight: 'normal', fontSize: '14px'}}>
                                 שתי טיפות מים אנחנו
-                                    <span aria-label="blush" role="img"> 😊 </span>
+                                    <span style={{fontSize: '15px'}} aria-label="blush" role="img"> 😊 </span>
                                 </p8>
 
                                 < /th>
@@ -202,8 +202,8 @@ const PartyCard = React.memo(function({name,agreed_laws, disagreed_laws}) {
                                 <th style={{background: 'transparent' ,color: 'rgba(24,24,53,0.8)', fontSize: '14px', }}>
                                      אנחנו לא מסכימים ({disagreed_laws === "" ? 0 : disagreed_laws.split('#').length}):
                                 <th style={{width: '70%'}}>חוק</th>
-                                <th style={{width: '15%', background: 'linear-gradient(45deg,green 20%, #daded8 90%)', color: 'rgba(24,24,53,0.8)'}}>הסכמנו איתך</th>
-                                <th style={{width: '15%',background: 'linear-gradient(45deg, red 20%, #cfb1b9 90%)', color: 'rgba(24,24,53,0.8)'}}>לא הסכמנו איתך</th>
+                                <th style={{width: '10%', background: 'linear-gradient(45deg,green 20%, #daded8 90%)', color: 'rgba(24,24,53,0.8)'}}>הסכמנו איתך</th>
+                                <th style={{width: '10%',background: 'linear-gradient(45deg, red 20%, #cfb1b9 90%)', color: 'rgba(24,24,53,0.8)'}}>לא הסכמנו איתך</th>
 
                             {disagreed_laws.split('#').map((law)=> <React.Fragment><tr style={{fontWeight: 'normal'}}>
                                 {law.split('@').map((law_info)=> <React.Fragment><td style={{padding: '1px 1px', fontSize: '10px'}}>{law_info}</td></React.Fragment>)}
