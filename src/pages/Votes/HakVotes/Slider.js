@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -14,7 +14,7 @@ const muiTheme = createMuiTheme({
                 color: 'rgb(78,97,164)',
             },
             track: {
-                color: 'linear-gradient(45deg, #8C6DD4 30%, #CED1ED 70%)',
+                color: 'rgba(78,97,164, 0.8)',
                 boxShadow: '0 3px 5px 2px rgba(186, 229, 239, .1)',
                 minHeight: '0.4vh'
             },
@@ -41,6 +41,17 @@ const useStyles = makeStyles({
 export default function DiscreteSlider({max, minDifference, setMinDifference, queryString}) {
     const classes = useStyles();
     const [prevRulesLength, setPrevRulesLength] = useState(-1)
+    const [wasUsed, setWasUsed] = useState(false)
+
+
+
+    useEffect(() => {
+        if (wasUsed==false) {
+            <div>asds </div>
+        }
+
+    }, wasUsed)
+
 
     if (max===0) {
         return (<></>)
@@ -58,12 +69,12 @@ export default function DiscreteSlider({max, minDifference, setMinDifference, qu
                 <Slider
                 value={minDifference}
                 aria-labelledby="continuous-slider"
-                valueLabelDisplay="auto"
+                valueLabelDisplay="off"
                 step={1}
                 marks
                 min={0}
                 max={Math.floor(max)}
-                onChangeCommitted={(event, newValue) => { setMinDifference(newValue)}}
+                onChangeCommitted={(event, newValue) => { setMinDifference(newValue); setWasUsed(true)}}
             />
                 </Tooltip>
                 </ThemeProvider>

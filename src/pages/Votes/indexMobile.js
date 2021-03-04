@@ -16,7 +16,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import Loader from "../../components/VotesMobileLoader";
 import PlayCircleFilledTwoTone from "@material-ui/icons/PlayCircleFilledTwoTone";
 import ChipsArrayMobile from "./ChipsArrayMobile";
-import logo from './VotingLogo.png'
+import logo from './VotingLogoCut.png'
 import AlertDialogSlide from "./HakVotesMobile/AlertDialogSlide";
 import config from "../../config.json";
 
@@ -87,8 +87,7 @@ export default function VotesMobile() {
             borderRadius: 3,
             // boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)',
             color: 'white',
-            minHeight: 50,
-            minWeight: 50,
+
             padding: '0 0.5px',
             font: 'sans-serif',
             '&:hover': {
@@ -159,23 +158,25 @@ export default function VotesMobile() {
                 zIndex: '1',
                 width: '100vw',
                 height: '100vh',
+                overflowX: 'hidden',
 
             }}>
 
                 <>
-                    <h1 style={{letterSpacing: '0.03em', marginBottom:'-135px',  marginTop:'180px'}}> <img style={{background: 'rgba(255,255,255, 0.9)' , height:'350px', width:'350px'}} src={logo} /></h1>
+                    <div style={{letterSpacing: '0.03em', marginBottom:'-10px',  marginTop:'280px'}}> <img style={{background: 'rgba(255,255,255, 0.9)' , height:'120px', width:'300px'}} src={logo} /></div>
                     <div style={{
                         display: 'flex',
                         justifyContent: 'center',
                         minWidth: '100vw',
                         opacity: "1",
-                        padding: '0em 0.8em',
+                        padding: '0em 0em',
                         position: 'relative',
                         textAlign: 'center',
                         boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
                         backgroundColor: 'rgba(11,19,40,0.95)'
                     }}>
                         <Alert style={{
+                            maxHeight: '80vh',
                             maxWidth: '80vw',
                             padding: '.5em 0',
                             color: 'white',
@@ -184,19 +185,19 @@ export default function VotesMobile() {
                             <div style={{textAlign: 'right'}}>
                                 <AlertTitle style={{textAlign: 'right', fontSize: '15px'}}> </AlertTitle>
                                 <p1 style={{letterSpacing: '0.03em', textAlign: 'right', fontSize: '14px'}}>
-                                    סימולצית ההצבעות נועדה לעזור לכם לקבל החלטה במי לבחור בבחירות הקרובות.
+                                    סימולצית ההצבעות נועדה לעזור לך לקבל החלטה במי לבחור בבחירות הקרובות.
                                     <br/>
-                                    הסימולציה מאפשרת לכם להבין אילו חברי כנסת <strong> באמת </strong> משקפים את
-                                    עמדותיכם.
+                                    הסימולציה מאפשרת לך להבין אילו חברי כנסת <strong> באמת </strong> משקפים את
+                                    עמדותייך.
                                     <br/>
                                     <br/>
-                                    במהלך הסימולציה יוצגו בפניכם הצעות חוק שהועלו במליאה בשנים האחרונות ובכל
+                                    במהלך הסימולציה יוצגו בפנייך הצעות חוק שהועלו במליאה בשנים האחרונות ובכל
                                     <br/>
-                                    שלב תוכלו לבחור איך אתם הייתם מצביעים - האם אתם <span style={{color:'green'}}>בעד</span> או <span  style={{color:'red'}}>נגד</span> הצעת החוק.
+                                    שלב יהיה ניתן לבחור איך את היית מצביעה - האם  <span style={{color:'green'}}>בעד</span> או <span  style={{color:'red'}}>נגד</span> הצעת החוק.
                                     <br/>
-                                    הסימולציה מחשבת בזמן אמת ובהסתמך על כלל ההצבעות שלכם בסימולציה מי
+                                    הסימולציה מחשבת בזמן אמת ובהסתמך על כלל ההצבעות שלך בסימולציה מי
                                     <br/>
-                                    הח"כים שדעתם הכי קרובה לעמדכם ומי אלו שדעתם השונה ביותר.
+                                    הח"כים שדעתם הכי קרובה לעמדך ומי אלו שדעתם השונה ביותר.
                                     <br/>
                                     <br/>
                                     ישנה אפשרות להסתכל גם בראי ח"כים שרצים בבחירות הקרובות (הכנסת ה-24)

@@ -112,7 +112,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                 <br/>
                 <IconLabelTabs  value={partyPerson} setValue={setPartyPerson}/>
                 <br/>
-                {(partyPerson == 0 && queryString != '' )? (<DiscreteSlider queryString={queryString} style={{marginBottom: '0px'}} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
+                {(partyPerson == 0 && queryString.split(',').length>1 )? (<DiscreteSlider queryString={queryString} style={{marginBottom: '0px'}} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
                     ( <div style={{ marginBottom: '90px'}}/>)}
                 <MyButton style={{ marginTop: '0px',borderRadius: '20' }} startIcon={<Refresh style={{ boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)', marginLeft: '11px', color: 'rgb(158,175,231)', fontSize:60, textAlign:'center'}}  />}
                           onClick={() => {setStarted(false)}} />
@@ -151,7 +151,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                     >
                         <Typography className={classes.heading} style={{fontFamily: 'Helvetica Neue, sans-serif', textAlign: 'center', fontSize: "15px"}}>
 
-                            פירוט הצעת החוק
+                            מה הצעת החוק אומרת?
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails  style={{textAlign: 'center'}}>
@@ -183,14 +183,14 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                 style={{float:'left', fontFamily: 'Helvetica Neue, sans-serif', color:'black', minHeight: '40px', maxWidth: '45px ', padding: '0 0.5em', margin: 8,boxShadow: '0 2px 2px 2px rgb(222, 216, 217)'}}
                 onClick={remove_random_rule}
             >
-                דלג
+                לדלג
             </Button>
             </div>
             <br/>
             <IconLabelTabs  value={partyPerson} setValue={setPartyPerson}/>
             <br/>
             <br/>
-            {(partyPerson == 0 && queryString != '') ? (<DiscreteSlider queryString={queryString} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
+            {(partyPerson == 0 && queryString.split(',').length>1) ? (<DiscreteSlider queryString={queryString} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
                 ( <></>)}
 
             <br/>

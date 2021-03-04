@@ -13,7 +13,7 @@ const muiTheme = createMuiTheme({
                 color: 'rgb(78,97,164)',
             },
             track: {
-                color: 'linear-gradient(45deg, #8C6DD4 30%, #CED1ED 70%)',
+                color: 'rgba(78,97,164, 0.8)',
                 boxShadow: '0 3px 5px 2px rgba(186, 229, 239, .1)',
                 minHeight: '0.4vh'
             },
@@ -57,7 +57,7 @@ export default function DiscreteSlider({max, minDifference, setMinDifference, qu
                 <Slider
                 value={minDifference}
                 aria-labelledby="continuous-slider"
-                valueLabelDisplay="auto"
+                valueLabelDisplay="off"
                 step={1}
                 marks
                 min={0}

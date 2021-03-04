@@ -15,7 +15,7 @@ import Loader from "../../components/VotesLoader";
 import ChipsArray from "./ChipsArray";
 import PlayCircleFilledTwoTone from "@material-ui/icons/PlayCircleFilledTwoTone";
 import AlertDialogSlide from "./HakVotes/AlertDialogSlide";
-import logo from './VotingLogo.png'
+import logo from './VotingLogoCut.png'
 import config from "../../config.json";
 
 function useQuery() {
@@ -158,7 +158,7 @@ export default function VotesRegular() {
                 zIndex: '1'
             }}>
                 <>
-                    <h1 style={{marginBottom:'-160px',  marginTop:'-130px'}}> <img style={{background: 'rgba(255,255,255, 0.9)' , height:'400px', width:'400px'}} src={logo} /></h1>
+                    <h1 style={{marginBottom:'-20px',  marginTop:'0px'}}> <img style={{background: 'rgba(255,255,255, 0.9)' , height:'160px', width:'400px'}} src={logo} /></h1>
                     <div style={{
                         display: 'flex',
                         justifyContent: 'center',
@@ -181,19 +181,19 @@ export default function VotesRegular() {
                             <div style={{textAlign: 'right'}}>
                                 <AlertTitle style={{textAlign: 'right', fontSize: '20px'}}> </AlertTitle>
                                 <p1 style={{letterSpacing: '0.03em', textAlign: 'right', fontSize: '17px'}}>
-                                    סימולצית ההצבעות נועדה לעזור לכם לקבל החלטה במי לבחור בבחירות הקרובות.
+                                    סימולצית ההצבעות נועדה לעזור לך לקבל החלטה במי לבחור בבחירות הקרובות.
                                     <br/>
-                                    הסימולציה מאפשרת לכם להבין אילו חברי כנסת <strong> באמת </strong> משקפים את
-                                    עמדותיכם.
+                                    הסימולציה מאפשרת לך להבין אילו חברי כנסת <strong> באמת </strong> משקפים את
+                                    עמדותיך.
                                     <br/>
                                     <br/>
-                                    במהלך הסימולציה יוצגו בפניכם הצעות חוק שהועלו במליאה בשנים האחרונות ובכל
+                                    במהלך הסימולציה יוצגו בפניך הצעות חוק שהועלו במליאה בשנים האחרונות ובכל
                                     <br/>
-                                    שלב תוכלו לבחור איך אתם הייתם מצביעים - האם אתם <span style={{color:'green'}}>בעד</span> או <span style={{color:'red'}}>נגד</span> הצעת החוק.
+                                    שלב יהיה ניתן לבחור איך את היית מצביעה - האם  <span style={{color:'green'}}>בעד</span> או <span style={{color:'red'}}>נגד</span> הצעת החוק.
                                     <br/>
-                                    הסימולציה מחשבת בזמן אמת ובהסתמך על כלל ההצבעות שלכם בסימולציה מי
+                                    הסימולציה מחשבת בזמן אמת ובהסתמך על כלל ההצבעות שלך בסימולציה מי
                                     <br/>
-                                    הח"כים שדעתם הכי קרובה לעמדכם ומי אלו שדעתם השונה ביותר.
+                                    הח"כים שדעתם הכי קרובה לעמדך ומי אלו שדעתם השונה ביותר.
                                     <br/>
                                     <br/>
                                     ישנה אפשרות להסתכל גם בראי ח"כים שרצים בבחירות הקרובות (הכנסת ה-24)

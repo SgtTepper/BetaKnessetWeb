@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
         listStyle: 'none',
         padding: theme.spacing(1),
         margin: 0,
-        maxWidth: '100vw',
+        maxWidth: '90vw',
         textAlign: 'right'
     },
     choosenChip: {

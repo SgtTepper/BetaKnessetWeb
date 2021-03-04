@@ -35,19 +35,19 @@ export default function IconLabelTabs({value, setValue}) {
                 value={value}
                 onChange={handleChange}
                 variant="fullWidth"
-                indicatorColor="secondary"
-                textColor="secondary"
+                indicatorColor="primary"
+                textColor="primary"
                 aria-label="icon label tabs example"
             >
                 <Tab   className={classes.tab} style={{fontFamily: "Helvetica Neue, sans-serif"}} label="מפלגות רצות"
                    icon={ value===0 ?
                        <DirectionsRun />
-                       :<Tooltip placement="top" title="רוצה לשנות זווית ראיה?" style={{backgroundColor:'transparent', color:'black'}}><DirectionsRun /></Tooltip>}  />
+                       :<Tooltip placement="top" title="רוצה לשנות זווית ראיה?" style={{backgroundColor:'transparent', color:'gray'}}><DirectionsRun /></Tooltip>}  />
                 <Tab  className={classes.tab} style={{fontFamily: "Helvetica Neue, sans-serif"}}
                       icon={value===1 ?
                           <HourglassFull />
                           :
-                          <Tooltip placement="top" title="רוצה לשנות זווית ראיה?" style={{backgroundColor:'transparent', color:'black'}}><HourglassFull /></Tooltip>} label="מפלגות בזמן ההצבעה" />
+                          <Tooltip placement="top" title="רוצה לשנות זווית ראיה?" style={{backgroundColor:'transparent', color:'gray'}}><HourglassFull /></Tooltip>} label="מפלגות בזמן ההצבעה" />
             </Tabs>
         </Paper>
     );

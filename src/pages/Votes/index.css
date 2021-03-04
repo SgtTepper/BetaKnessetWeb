@@ -124,7 +124,7 @@ html, body {
 }
 Alert {
     width: 30px;
-    margin-right: 20px;
+    margin-right: 0px;
     height: 100px;
 }
 

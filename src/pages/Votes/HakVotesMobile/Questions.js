@@ -148,7 +148,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                 <IconLabelTabs  value={partyPerson} setValue={setPartyPerson}/>
                 </div>
                 <br/>
-                {(partyPerson == 0 && queryString != '' )? (<DiscreteSlider queryString={queryString} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
+                {(partyPerson == 0 && queryString.split(',').length > 1 )? (<DiscreteSlider queryString={queryString} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
                     ( <></>)}
                 <br/>
                 <MyButton style={{ marginBottom: '0.2em',marginTop: '0.2em', borderRadius: '20' }} startIcon={<Refresh style={{ boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)', marginLeft: '11px', color: 'rgb(158,175,231)', fontSize:60, textAlign:'center'}}  />}
@@ -177,8 +177,8 @@ export default function Questions({rule, remove_random_rule, handle_against, han
     return (
 
             <div style={{textAlign: 'center', zIndex:'6', backgroundColor: 'rgba(9,16,34, 0.95)', width:"100vw", position: 'relative', minHeight: '100vh'}}>
-                {displaySlideGif && queryString != '' ? <div  style={{zIndex:'8', left: '35%', top:'40%', position: 'absolute'}}><img src={sliderGif} style={{height:'120px', width:'120'}} /></div>: <></>}
-                {displaySlideGifSecondTime && (queryString.split(',').length ==2) ? <div  style={{zIndex:'8', left: '35%', top:'40%', position: 'absolute'}}><img src={sliderGif} style={{height:'120px', width:'120'}} /></div>: <></>}
+                {displaySlideGif && queryString != '' ? <div  style={{zIndex:'8', left: '35%', top:'60%', position: 'absolute', backgroundColor:'rgba(208,218,239,0.6)', borderRadius:'50%'}}><img src={sliderGif} style={{height:'120px', width:'120'}} /></div>: <></>}
+                {displaySlideGifSecondTime && (queryString.split(',').length ==2) ? <div  style={{zIndex:'8', left: '35%', top:'60%', position: 'absolute', backgroundColor:'rgba(208,218,239,0.6)', borderRadius:'50%'}}>><img src={sliderGif} style={{height:'120px', width:'120'}} /></div>: <></>}
 
                 <div style={{textAlign: 'center',zIndex:'7',  position: 'absolute'}}>
                     <p style={{textAlign: 'center', color: 'white', fontFamily: 'Helvetica Neue, sans-serif', fontSize:'15px'}}>{queryString==''? 1 : (queryString.split(',').length+1)}/{Math.min(rulesLength,10)}</p>
@@ -197,7 +197,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                             >
                                 <Typography className={classes.heading} style={{fontFamily: 'Helvetica Neue, sans-serif', textAlign: 'center', fontSize: "13px"}}>
 
-                                    פירוט הצעת החוק
+                                    מה הצעת החוק אומרת?
                                 </Typography>
                             </AccordionSummary>
                             <AccordionDetails  style={{textAlign: 'center'}}>
@@ -230,7 +230,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                             style={{float:'left', fontFamily: 'Helvetica Neue, sans-serif', color:'black', minHeight: '40px', maxWidth: '45px ', padding: '0 0.5em', margin: 8,boxShadow: '0 2px 2px 2px rgb(222, 216, 217)'}}
                             onClick={remove_random_rule}
                         >
-                            דלג
+                            לדלג
                         </Button>
                     </div>
                     <br/>
@@ -238,7 +238,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                         <IconLabelTabs  value={partyPerson} setValue={setPartyPerson}/>
                     </div>
                     <br/>
-                    {(partyPerson == 0 && queryString != '') ? (<DiscreteSlider queryString={queryString} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
+                    {(partyPerson == 0 && queryString.split(',').length>1) ? (<DiscreteSlider queryString={queryString} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
                         ( <></>)}
 
                     <br/>
