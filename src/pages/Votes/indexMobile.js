@@ -163,7 +163,7 @@ export default function VotesMobile() {
             }}>
 
                 <>
-                    <h1 style={{letterSpacing: '0.03em', marginBottom:'-135px',  marginTop:'130px'}}> <img style={{background: 'rgba(255,255,255, 0.9)' , height:'350px', width:'350px'}} src={logo} /></h1>
+                    <h1 style={{letterSpacing: '0.03em', marginBottom:'-135px',  marginTop:'180px'}}> <img style={{background: 'rgba(255,255,255, 0.9)' , height:'350px', width:'350px'}} src={logo} /></h1>
                     <div style={{
                         display: 'flex',
                         justifyContent: 'center',
