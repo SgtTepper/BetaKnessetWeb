@@ -125,6 +125,7 @@ const PartyChartFinal = React.memo(function ({setLoading, queryString}) {
 export default PartyChartFinal
 
 const PartyName = React.memo(function ({...props}) {
+    const {agreed_laws, disagreed_laws } = props
 
     return (
         <PartyTooltip
@@ -137,6 +138,7 @@ const PartyName = React.memo(function ({...props}) {
             leaveTouchDelay= {20000}
         >
             <div
+                className={((agreed_laws === "" || agreed_laws=== null ? 0 : agreed_laws.split('#').length) - (disagreed_laws === "" || disagreed_laws=== null ? 0 : disagreed_laws.split('#').length)>0)? 'green-bubble':'red-bubble'}
                 style={{
                     display: 'flex',
                     justifyItems: 'stretch',

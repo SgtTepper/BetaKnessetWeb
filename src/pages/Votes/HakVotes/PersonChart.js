@@ -57,7 +57,7 @@ const PersonChart = React.memo(function ({setLoading, queryString, minDifference
                                               PlaceInList={r.PlaceInList}  votes_disagreed={r.votes_disagreed}
                                               absent_laws={r.absent_laws} votes_absent={r.votes_absent}/>,
                     size: Math.abs(r.votes_agreed-r.votes_disagreed-0.35*r.votes_absent),
-                    color: r.votes_agreed-r.votes_disagreed,
+                    color: r.votes_agreed-r.votes_disagreed-0.35*r.votes_absent,
                     faction: r.CurrentFaction,
                     faction_picture: r.faction_picture,
                     style: {
@@ -189,7 +189,7 @@ const PersonChart = React.memo(function ({setLoading, queryString, minDifference
 export default PersonChart;
 
 const PersonShortName = React.memo(function ({...props}) {
-
+    const {votes_agreed, votes_disagreed, votes_absent } = props
     return (
         <PersonTooltip
             title={ <PersonCard {...props} />}
@@ -197,11 +197,11 @@ const PersonShortName = React.memo(function ({...props}) {
             arrow
             interactive
             enterNextDelay={400}
-
             leaveDelay= {400}
 
         >
             <div
+                className={(votes_agreed- votes_disagreed-0.35*votes_absent)>0? 'green-bubble':'red-bubble'}
                 style={{
                     display: 'flex',
                     justifyItems: 'stretch',

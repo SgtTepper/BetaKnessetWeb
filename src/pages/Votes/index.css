@@ -1,4 +1,12 @@
 
+
+.red-bubble:hover {
+    background-color: rgba(244, 33, 33, 0.2);
+}
+.green-bubble:hover {
+    background-color: rgba(28, 221, 47, 0.2);
+}
+
 h1 {
     color: #111;
     font-family: Helvetica Neue, sans-serif;

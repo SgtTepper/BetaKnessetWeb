@@ -186,6 +186,7 @@ const PersonChart = React.memo(function ({setLoading, queryString, minDifference
 export default PersonChart;
 
 const PersonShortName = React.memo(function ({...props}) {
+    const {votes_agreed, votes_disagreed, votes_absent } = props
 
     return (
         <PersonTooltip
@@ -200,6 +201,7 @@ const PersonShortName = React.memo(function ({...props}) {
 
         >
             <div
+                className={(votes_agreed- votes_disagreed-0.35*votes_absent)>0? 'green-bubble':'red-bubble'}
                 style={{
                     display: 'flex',
                     justifyItems: 'stretch',

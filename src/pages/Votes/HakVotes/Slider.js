@@ -6,6 +6,8 @@ import { ThemeProvider } from '@material-ui/styles';
 import GroupAdd from "@material-ui/icons/GroupAdd";
 import Person from "@material-ui/icons/Person";
 import {Tooltip} from "@material-ui/core";
+import Dialog from "@material-ui/core/Dialog";
+import { Typography } from '@material-ui/core'
 
 const muiTheme = createMuiTheme({
     overrides:{
@@ -42,15 +44,9 @@ export default function DiscreteSlider({max, minDifference, setMinDifference, qu
     const classes = useStyles();
     const [prevRulesLength, setPrevRulesLength] = useState(-1)
     const [wasUsed, setWasUsed] = useState(false)
+    const [firstTimeUsed, setFirstTimeUsed] = useState(true)
+    const [disclaimerOpen, setDisclaimerOpen] = useState(true)
 
-
-
-    useEffect(() => {
-        if (wasUsed==false) {
-            <div>asds </div>
-        }
-
-    }, wasUsed)
 
 
     if (max===0) {
@@ -64,6 +60,8 @@ export default function DiscreteSlider({max, minDifference, setMinDifference, qu
 
     return (
             <div className={classes.root}>
+                {(wasUsed && firstTimeUsed)?(<DisclaimerDialog open={disclaimerOpen} setOpen={setDisclaimerOpen} />, setFirstTimeUsed(false)):<></>   }
+
                 <ThemeProvider theme={muiTheme}>
                 <Tooltip placement="top" title="רוצה לראות יותר\פחות ח''כים?" style={{backgroundColor:'transparent', color:'black'}}>
                 <Slider
@@ -84,4 +82,29 @@ export default function DiscreteSlider({max, minDifference, setMinDifference, qu
             </div>
             </div>
     );
+}
+
+function DisclaimerDialog({open, setOpen}) {
+    return (
+        <Dialog open={open} setOpen={setOpen} closeText={'אישור'}>
+            <Typography color="primary" variant="h4" component="h4">
+                גילוי נאות
+            </Typography>
+            <p>
+                <b>לתשומת לב הגולשים</b>
+            </p>
+            <p>
+                האתר מתבסס על  <a href="https://main.knesset.gov.il/Activity/Info/pages/databases.aspx" rel="noreferrer" target="_blank"><u>מאגרי המידע הפתוחים של הכנסת</u></a> וזאת בהתאם לתקנות המתירות פיתוח יישומים ומערכות על בסיס מידע זה.
+            </p>
+            <p>
+                באתר זה מוצגים פריטים שהינם תוצאה של אלגוריתמים לעיבוד מידע אשר אינם חפים מטעויות, כך יתכן למשל שהתוכנה שלנו תבצע טעות בזיהוי דובר, בפירוש הטקסט שלו, או במדידת ערכים הקשורים בו.
+            </p>
+            <p>
+                למען הסר ספק המידע האמין והמדויק ביותר הינו זה שמקורו במאגרי המידע של הכנסת ובמסמכי הפרוטוקולים שמפורסמים באתר הכנסת והם מקור האמת המכריע.
+            </p>
+            <p>
+                הנהלת האתר אינה נושאת באחריות על טעויות כאלו שיתכנו, השימוש באתר ושיתוף המידע שבאתר הינו באחריות המשתמש בלבד.
+            </p>
+        </Dialog>
+    )
 }
