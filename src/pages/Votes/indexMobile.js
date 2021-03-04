@@ -157,6 +157,9 @@ export default function VotesMobile() {
                 position: 'relative',
                 minHeight: '60%',
                 zIndex: '1',
+                width: '100vw',
+                height: '100vh',
+
             }}>
 
                 <>
