@@ -201,7 +201,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                                 </Typography>
                             </AccordionSummary>
                             <AccordionDetails  style={{textAlign: 'center'}}>
-                                <Typography className={classes.content} style={{fontWeight: 'normal', fontFamily: 'Helvetica Neue, sans-serif', textAlign: 'center', fontSize: "13px", maxHeight:'20vh', overflow:'auto'}}>
+                                <Typography className={classes.content} style={{fontWeight: 'normal', fontFamily: 'Helvetica Neue, sans-serif', textAlign: 'center', fontSize: "15px", maxHeight:'20vh', overflow:'auto'}}>
                                     {rule.Description}
                                 </Typography>
                             </AccordionDetails>
