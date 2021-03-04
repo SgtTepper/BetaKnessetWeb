@@ -12,6 +12,11 @@ const theme = createMuiTheme({
         marginLeft: 0,
       },
     },
+    MuiListItem: {
+      root: {
+        textAlign: 'right',
+      },
+    },
   },
 
   palette: {
@@ -21,12 +26,15 @@ const theme = createMuiTheme({
     secondary: {
       main: '#90756d',
     },
+    pronounced: {
+      main: "white",
+    },
   },
   typography: {
     fontFamily: [
       '"Secular One"', 
       "sans-serif",
     ],
-  }
+  },
 });
 export default theme

@@ -25,6 +25,7 @@ const useStyles = makeStyles({
       position: 'relative',
       width: '100%',
       minHeight: '100%',
+      overflowY: 'hidden',
     },
 
     limitScreen: {

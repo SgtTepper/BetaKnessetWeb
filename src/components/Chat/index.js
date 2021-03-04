@@ -37,7 +37,7 @@ function ChatItem(props) {
             <div className="avatar">
                 <div className="img" style={{backgroundImage: `url(${imageOrDefault(imgPath, Speaker)})`}}/>
             </div>
-            <div className="msg" onClick={() => !isInProtocol && setExpanded(!expanded)}>
+            <div className="msg">
                 {Speaker &&
                     <p className="speaker" style={isSpeaker ? {} : {color: colorHash.hex(Speaker)}}>{Speaker}</p>}
                 <p className={clsx(expanded && "expanded")}>
@@ -47,7 +47,7 @@ function ChatItem(props) {
                     }}
                     searchWords={highlight ? highlight.split("^") : []} 
                     autoEscape={true}
-                    textToHighlight={expanded ? Text : trimText(Text, highlight)} 
+                    textToHighlight={Text} 
                 />
                 </p>
                 <time><QuoteFooter {...props} /></time>

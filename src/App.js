@@ -8,7 +8,7 @@ import { CircularProgress, ThemeProvider } from '@material-ui/core'
 import Particles from 'react-particles-js'
 import { makeStyles } from '@material-ui/core/styles'
 import theme from './theme'
-import TopBar from "./components/TopBar"
+import NavigationBar from "./components/NavigationBar"
 import particlesConfig from './particles.config.json'
 import ScrollableView from './components/ScrollableView'
 import Dialog from './components/Dialog'
@@ -44,7 +44,7 @@ export default function App() {
       <DisclaimerDialog open={disclaimerOpen} setOpen={setDisclaimerOpen} />
       <div className={classes.root}>
         <Router>
-          <TopBar />
+          <NavigationBar />
           <ScrollableView>
             <CustomParticles />
             <Suspense fallback={<LightweightLoader/>}>

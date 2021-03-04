@@ -129,12 +129,11 @@ const PersonSelectionView = React.memo(function ({persons}) {
   const classes = useStyles()
   const navigate = useNavigate()
 
-  const rands = []
+  const rands = new Set()
   const ids = Object.keys(persons)
-  while (rands.length < 5 && rands.length < ids.length) {
+  while (rands.size < 5 && rands.size < ids.length) {
     const index = parseInt(Math.random() * ids.length)
-    if (rands.indexOf(index) === -1)
-      rands.push(ids[index])
+    rands.add(ids[index])
   }
 
   return (
@@ -145,7 +144,7 @@ const PersonSelectionView = React.memo(function ({persons}) {
           persons={persons}
         />
         <div className={classes.people}>
-          {rands.map(id => (
+          {[...rands].map(id => (
             <Button key={id} onClick={() => navigate({personID: id, q: null})} style={{maxWidth: 350}}>
               <PersonAvatar person={persons[id]} />
             </Button>

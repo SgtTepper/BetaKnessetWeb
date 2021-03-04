@@ -8,7 +8,7 @@ export default function Explainer({children, style}) {
     const [open, setOpen] = useState(false)
     return (
         <>
-            <IconButton href onClick={() => setOpen(true)} style={{position: 'absolute', top: 0, left: 0, ...style}}>
+            <IconButton onClick={() => setOpen(true)} style={{position: 'absolute', top: 0, left: 0, ...style}}>
             <InfoRoundedIcon style={{fill: 'white'}} />
             </IconButton>
             <Dialog open={open} setOpen={setOpen} closeText={'בסדר'}>
