@@ -232,7 +232,7 @@ function BillExplainer(props) {
 }
 
 function parseResponse(contents) {
-  if (contents.length == 0)
+  if (contents.length === 0)
     return null
 
   // take generic values
