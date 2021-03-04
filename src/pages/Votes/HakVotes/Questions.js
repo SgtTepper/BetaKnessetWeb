@@ -136,8 +136,8 @@ export default function Questions({rule, remove_random_rule, handle_against, han
 
     return (
         <div style={{ float:'right' , zIndex:'6', backgroundColor: 'rgba(9,16,34, 0.95)', width:"20vw",minWidth:"350px", maxWidth:'450px', padding: '0em 2em', position: 'relative', minHeight: '100vh'}}>
-            <p style={{color: 'white', fontFamily: 'Helvetica Neue, sans-serif', fontSize:'15px'}}>{queryString==''? 1 : (queryString.split(',').length+1)}/{Math.min(rulesLength,10)}</p>
-            <h2 style={{display: 'flex', justifyContent:'center', fontSize: "20px", flexDirection: 'column', letterSpacing: '0.7px', top:'50%', minHeight:'100px', boxShadow: '5px 5px 5px 5px rgba(40,150,169,0.2)'}}> {rule.LawName} </h2>
+            <p style={{marginBottom: '0px', color: 'white', fontFamily: 'Helvetica Neue, sans-serif', fontSize:'15px'}}>{queryString==''? 1 : (queryString.split(',').length+1)}/{Math.min(rulesLength,10)}</p>
+            <h2 style={{marginBottom: '0px', display: 'flex', justifyContent:'center', fontSize: "20px", flexDirection: 'column', letterSpacing: '0.7px', top:'50%', minHeight:'100px', boxShadow: '5px 5px 5px 5px rgba(40,150,169,0.2)'}}> {rule.LawName} </h2>
             <br/>
             <paper square={false}>
                 <Accordion className={classes.root} >

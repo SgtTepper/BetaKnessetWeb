@@ -55,7 +55,7 @@ const PartyChartFinal = React.memo(function ({setLoading, queryString}) {
                 // handle hebrew quotes (״)
                 const res = await (await fetch(`${config.server}/Votes/PartyVotes?votesHistory=${queryString}`)).json()
                 const total = queryString.split(',').length  // TODO: Change number
-                setData(res.filter(r => Math.abs((r.agreed_laws === "" || r.agreed_laws=== null ? 0 : r.agreed_laws.split('#').length) - (r.disagreed_laws === "" || r.disagreed_laws=== null ? 0 : r.disagreed_laws.split('#').length)) / total > MIN_RATIO_FOR_IMAGE && r.party_logo_link !== null).map(r => ({
+                setData(res.filter(r => Math.abs((r.agreed_laws === "" || r.agreed_laws=== null ? 0 : r.agreed_laws.split('#').length) - (r.disagreed_laws === "" || r.disagreed_laws=== null ? 0 : r.disagreed_laws.split('#').length)) / total >= MIN_RATIO_FOR_IMAGE && r.party_logo_link !== null).map(r => ({
                     result: r,
                     element: <PartyName key={r.final_party} name={r.final_party} query={queryString} ratio={r.count_agreed / total}
                                               agreed_laws={r.agreed_laws} disagreed_laws={r.disagreed_laws} diff={r.agreed_laws === "" || r.agreed_laws=== null ? 0 : r.agreed_laws.split('#').length - r.disagreed_laws === "" || r.disagreed_laws=== null ? 0 : r.disagreed_laws.split('#').length}/>,
