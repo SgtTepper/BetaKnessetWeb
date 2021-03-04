@@ -112,12 +112,12 @@ const PersonView = React.memo(function ({persons, person}) {
       </div>
       <div className="side-content-top">
         <PersonBillsStats personID={person?.PersonID} filter={billsFilter} setFilter={setBillsFilter} />        
+        <BillExplainer />
       </div>
       <div className="side-content">
         <div className="content-wrapper">
           <div className="content-rtl">
             <PersonBills personID={person?.PersonID} filter={billsFilter} />
-            <BillExplainer />
           </div>
         </div>
       </div>

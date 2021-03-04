@@ -210,18 +210,6 @@
     word-spacing: nowrap;
 }
 
-.not-in-protocol .msg p {
-    min-height: 10px;
-    max-height: 30px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
- .not-in-protocol.expanded .msg p {
-    min-height: 30px;
-    max-height: 1000px;
-}
-
 .msg .go-suffix {
     font-weight: bold;
     transition: color .2s ease-in;

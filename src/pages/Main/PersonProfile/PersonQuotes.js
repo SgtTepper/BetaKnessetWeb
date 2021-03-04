@@ -11,7 +11,7 @@ const PersonQuotes = React.memo(function ({personID}) {
 
     return (
         <>
-            <div style={{padding: '0 50px 0 .5em', width: '100%'}}>
+            <div className='person-quotes-search'>
                 <WhiteQuotesSearch placeholder="מה מעניין אותם?" showReset={false} />
             </div>
             <Loader show={loading} />
