@@ -41,7 +41,7 @@ const styleButton = {
         maxHeight: 50,
         maxWeight: 50,
         padding: '0 0.5px',
-        fontFamily: 'Helvetica Neue, sans-serif',
+        fontFamily: 'Helvetica Neue, Varela Round, sans-serif',
     },
 };
 function MyButtonRaw(props) {
@@ -97,11 +97,11 @@ export default function AlertDialogSlide({allRules, startScreen}) {
                     title="Dialog"
                     style={{width:'100vw'}}
                 >
-                    <div style={{fontFamily:  'Helvetica Neue, sans-serif',width:'80vw', maxHeight: '70vh', overflow:'hidden' }}>
+                    <div style={{fontFamily:  'Helvetica Neue, Varela Round, sans-serif',width:'80vw', maxHeight: '70vh', overflow:'hidden' }}>
 
                         <h1 style={{fontSize:'20px'}}>
                         מאגר הצעות החוק </h1>
-                    <DialogContent style={{  fontFamily: 'Helvetica Neue, sans-serif',maxWidth: '80vw', maxHeight: '60vh', marginBottom: '0px'}} >
+                    <DialogContent style={{  fontFamily: 'Helvetica Neue, Varela Round, sans-serif',maxWidth: '80vw', maxHeight: '60vh', marginBottom: '0px'}} >
                         <div  style={{ tableLayout: 'fixed',textAlign: 'center'}}>
                             <DialogContentText id="alert-dialog-slide-description" style={{ tableLayout: 'fixed',textAlign: 'center', position:'relative', marginTop: '0px', fontSize:'14px',fontFamily: "'Helvetica Neue', sans-serif"}}>
                             מאגר החוקים מכיל הצעות חוק שהועלו להצבעה החל משנת 2011. למרבית הצעות החוק במאגר הצביעו מעל 90 ח"כים או שהועברו\נפסלו ברוב קטן. הצעות החוק עברו גם סינון (סובייקטיבי) שבמהלכו ניסינו לבחור את מה שיעניין את רוב הציבור. יש לכם רעיון לחוק מעניין שלא נמצא במאגר? נשמח לשמוע עליו!

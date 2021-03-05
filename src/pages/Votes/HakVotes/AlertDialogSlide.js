@@ -20,7 +20,7 @@ const styleButton = {
         maxHeight: 50,
         maxWeight: 50,
         padding: '0 0.5px',
-        fontFamily: 'Helvetica Neue, sans-serif',
+        fontFamily: 'Helvetica Neue, Varela Round, sans-serif',
     },
 };
 function MyButtonRaw(props) {
@@ -75,11 +75,11 @@ export default function AlertDialogSlide({allRules, startScreen}) {
                     onClose={handleClose}
                     title="Dialog"
                 >
-                    <div style={{fontFamily:  'Helvetica Neue, sans-serif',maxHeight: '70vh', overflow:'hidden' }}>
+                    <div style={{fontFamily:  'Helvetica Neue, Varela Round, sans-serif',maxHeight: '70vh', overflow:'hidden' }}>
 
                         <h1 style={{fontSize:'30px'}}>
                         מאגר הצעות החוק </h1>
-                    <DialogContent style={{fontSize:'10px', fontFamily: 'Helvetica Neue, sans-serif',maxWidth: '60vw', maxHeight: '60vh'}} >
+                    <DialogContent style={{fontSize:'10px', fontFamily: 'Helvetica Neue, Varela Round, sans-serif',maxWidth: '60vw', maxHeight: '60vh'}} >
                         <DialogContentText id="alert-dialog-slide-description" style={{fontFamily: "'Helvetica Neue', sans-serif"}}>
                             מאגר החוקים מכיל הצעות חוק שהועלו להצבעה החל משנת 2011. למרבית הצעות החוק במאגר הצביעו מעל 90 ח"כים או שהועברו\נפסלו ברוב קטן. הצעות החוק עברו גם סינון (סובייקטיבי) שבמהלכו ניסינו לבחור את מה שיעניין את רוב הציבור. יש לכם רעיון לחוק מעניין שלא נמצא במאגר? נשמח לשמוע עליו!
                         </DialogContentText>

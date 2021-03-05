@@ -48,7 +48,7 @@ const selectStyle = {
         listStyleType: 'circle',
         variant: 'outlined',
         width:'90vw',
-        fontFamily: 'Helvetica Neue, sans-serif',
+        fontFamily: 'Helvetica Neue, Varela Round, sans-serif',
 
 
     })}
@@ -152,7 +152,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                 :
                 <></>
             }
-            <p style={{marginBottom: '-5px', color: 'white', fontFamily: 'Helvetica Neue, sans-serif', fontSize:'12px'}}>{queryString==''? 1 : (queryString.split(',').length+1)}/{Math.min(rulesLength,10)}</p>
+            <p style={{marginBottom: '-5px', color: 'white', fontFamily: 'Helvetica Neue, Varela Round, sans-serif', fontSize:'12px'}}>{queryString==''? 1 : (queryString.split(',').length+1)}/{Math.min(rulesLength,10)}</p>
             <h2 style={{marginBottom: '-5px', display: 'flex', justifyContent:'center', fontSize: "20px", flexDirection: 'column', letterSpacing: '0.7px', top:'50%', minHeight:'100px', boxShadow: '5px 5px 5px 5px rgba(40,150,169,0.2)'}}> {rule.LawName} </h2>
             <br/>
             <paper square={false}>
@@ -162,16 +162,16 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                         aria-controls="panel1a-content"
                         id="panel1a-header"
                         justifyContent= 'flex-end'
-                        style={{fontFamily: 'Helvetica Neue, sans-serif', textAlign: 'center', fontSize: "15px", paddingRight: '1.5vw'}}
+                        style={{fontFamily: 'Helvetica Neue, Varela Round, sans-serif', textAlign: 'center', fontSize: "15px", paddingRight: '1.5vw'}}
 
                     >
-                        <Typography className={classes.heading} style={{fontFamily: 'Helvetica Neue, sans-serif', textAlign: 'center', fontSize: "15px"}}>
+                        <Typography className={classes.heading} style={{fontFamily: 'Helvetica Neue, Varela Round, sans-serif', textAlign: 'center', fontSize: "15px"}}>
 
                             מה הצעת החוק אומרת?
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails  style={{textAlign: 'center'}}>
-                        <Typography className={classes.content} style={{fontWeight: 'normal', fontFamily: 'Helvetica Neue, sans-serif', textAlign: 'center', fontSize: "15px", maxHeight:'20vh', overflow:'auto'}}>
+                        <Typography className={classes.content} style={{fontWeight: 'normal', fontFamily: 'Helvetica Neue, Varela Round, sans-serif', textAlign: 'center', fontSize: "15px", maxHeight:'20vh', overflow:'auto'}}>
                             {rule.Description}
                         </Typography>
                     </AccordionDetails>
@@ -196,7 +196,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
             </Button>
             <Button
                 variant="contained"
-                style={{float:'left', fontFamily: 'Helvetica Neue, sans-serif', color:'black', minHeight: '40px', maxWidth: '45px ', padding: '0 0.5em', margin: 8,boxShadow: '0 2px 2px 2px rgb(222, 216, 217)'}}
+                style={{float:'left', fontFamily: 'Helvetica Neue, Varela Round, sans-serif', color:'black', minHeight: '40px', maxWidth: '45px ', padding: '0 0.5em', margin: 8,boxShadow: '0 2px 2px 2px rgb(222, 216, 217)'}}
                 onClick={remove_random_rule}
             >
                 לדלג

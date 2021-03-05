@@ -30,7 +30,7 @@ const useStyles = makeStyles({
         fontSize: '2em',
         color: 'white',
         letterSpacing: '-2px',
-        fontFamily: 'Helvetica Neue, sans-serif',
+        fontFamily: 'Helvetica Neue, Varela Round, sans-serif',
         transition: 'all .2s ease-in',
         transform: 'scale(1)',
         '& $bigLetter': {
@@ -155,7 +155,7 @@ export default function VotesMobile() {
                 placeItems: 'center',
                 scrollSnapAlign: 'start',
                 position: 'relative',
-                minHeight: '60%',
+                // minHeight: '60%',
                 zIndex: '1',
                 width: '100vw',
                 height: '100vh',

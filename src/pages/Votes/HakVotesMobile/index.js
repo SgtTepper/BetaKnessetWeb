@@ -24,7 +24,7 @@ const useStyles = makeStyles({
         fontSize: '2em',
         color: 'white',
         letterSpacing: '-2px',
-        fontFamily: 'Helvetica Neue, sans-serif',
+        fontFamily: 'Helvetica Neue, Varela Round, sans-serif',
         transition: 'all .2s ease-in',
         transform: 'scale(1)',
         '& $bigLetter': {

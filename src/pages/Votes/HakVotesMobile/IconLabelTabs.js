@@ -43,11 +43,11 @@ export default function IconLabelTabs({value, setValue}) {
                 textColor="primary"
                 aria-label="icon label tabs example"
             >
-                <Tab   className={classes.tab} style={{fontFamily: "Helvetica Neue, sans-serif"}} label="ח''כים רצים"
+                <Tab   className={classes.tab} style={{fontFamily: "Helvetica Neue, Varela Round, sans-serif"}} label="ח''כים רצים"
                    icon={ value==0 ?
                        <DirectionsRun style={{fontSize: '20px'}}/>
                        :<Tooltip placement="top" title="רוצה לשנות זווית ראיה?" style={{backgroundColor:'transparent', color:'gray'}}><DirectionsRun style={{fontSize: '20px'}}/></Tooltip>}  />
-                <Tab  className={classes.tab} style={{fontFamily: "Helvetica Neue, sans-serif"}}
+                <Tab  className={classes.tab} style={{fontFamily: "Helvetica Neue, Varela Round, sans-serif"}}
                       icon={value==1 ?
                           <HourglassFull style={{fontSize: '15px'}}/>
                           :

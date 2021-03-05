@@ -15,7 +15,7 @@ const theme = createMuiTheme();
 
 theme.typography.h3 = {
     fontSize: '15px',
-    fontFamily:'Helvetica Neue, sans-serif',
+    fontFamily:'Helvetica Neue, Varela Round, sans-serif',
     align: 'center'
 
 };
