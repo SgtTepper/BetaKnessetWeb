@@ -183,8 +183,7 @@ const PersonChart = React.memo(function ({setLoading, queryString, setWorstParty
     return (
         <>
             <div  style={{ marginLeft: "auto !important",  marginRight: "auto !important", width:'100vw', maxHeight: '100vh', placeItems: 'center', float:'left', textAlign:'center'}} className={classes.root}>
-                {/*<DiscreteSlider max={total} minDifference={minDifference} setMinDifference={setMinDifference} />*/}
-                <div style={{position:"relative", left:'12vw', top:'10vh', zIndex:'5'}}>
+                <div style={{position:"relative", left:'12vw', top:'5vh', zIndex:'5'}}>
                             <Treemap
                         padding={2}
                         animation={true}
