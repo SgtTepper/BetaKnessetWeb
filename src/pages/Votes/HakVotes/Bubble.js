@@ -27,7 +27,9 @@ const Bubble = React.memo(function ({queryString, partyPerson, minDifference, se
                 <>
                     <PartyChartFinal setLoading={setLoading} queryString={queryString}/>
                     <QuotesLoader show={loading}/>
+
                 < />
+
 
 
 

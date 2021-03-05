@@ -236,7 +236,7 @@ const PersonCard = React.memo(function({name,agreed_laws, CurrentFaction, PlaceI
                     </td></tr> : disagreed_laws.split('#').map((item)=> <React.Fragment><tr><td>{item} </td></tr></React.Fragment>) }</table>
 
                 <table style={{width:'100%', maxHeight:'60vh', marginBottom:'1em'}}>
-                    <th style={{ maxWidth: '50vw' , background: 'linear-gradient(45deg, orange 20%, #cfb1b9 90%)', color: 'rgba(24,24,53,0.8)'}}>  לא היה לי מספיק חשוב להצביע ({absent_laws === "" || absent_laws=== null ? 0 : absent_laws.split('#').length}): </th>
+                    <th style={{ maxWidth: '50vw' , background: 'linear-gradient(45deg, orange 20%, #cfb1b9 90%)', color: 'rgba(24,24,53,0.8)'}}>  לא הצבעתי למרות שהייתי ח"כ ({absent_laws === "" || absent_laws=== null ? 0 : absent_laws.split('#').length}): </th>
                     {absent_laws === "" || absent_laws=== null ? <tr><td>חשוב לי להצביע ולהשפיע                                     <span style={{fontSize: '15px'}} aria-label="blush" role="img"> ✌️ </span>
                     </td></tr> : absent_laws.split('#').map((item)=> <React.Fragment><tr><td>{item} </td></tr></React.Fragment>) }</table>
             </div>

@@ -15,7 +15,7 @@ import Loader from "../../components/VotesLoader";
 import ChipsArray from "./ChipsArray";
 import PlayCircleFilledTwoTone from "@material-ui/icons/PlayCircleFilledTwoTone";
 import AlertDialogSlide from "./HakVotes/AlertDialogSlide";
-import logo from './VotingLogoCut.png'
+import logo from './VotingLogo.png'
 import config from "../../config.json";
 
 function useQuery() {
@@ -81,17 +81,17 @@ export default function VotesRegular() {
 
     const styleButton = {
         root: {
-            background: 'transparent',
+            background: 'rgb(114,137,246)',
+            padding: '0em 0.5em',
+            fontSize: '20px',
             border: 0,
             borderRadius: 3,
             // boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)',
             color: 'white',
-            minHeight: 50,
-            minWeight: 50,
-            padding: '0 0.5px',
-            font: 'sans-serif',
+
+            fontFamily: "'Helvetica Neue', sans-serif",
             '&:hover': {
-                boxShadow: '0 3px 5px 2px rgba(11, 19, 40, .3)'
+                background:  ' rgb(116,83,177)'
 
             }
 
@@ -158,7 +158,8 @@ export default function VotesRegular() {
                 zIndex: '1'
             }}>
                 <>
-                    <h1 style={{marginBottom:'-20px',  marginTop:'0px'}}> <img style={{background: 'rgba(255,255,255, 0.9)' , height:'160px', width:'400px'}} src={logo} /></h1>
+
+                    <h1 style={{marginBottom:'-160px',  marginTop:'-130px'}}> <img style={{background: 'rgba(255,255,255, 0.9)' , height:'400px', width:'400px'}} src={logo} /></h1>
                     <div style={{
                         display: 'flex',
                         justifyContent: 'center',
@@ -215,14 +216,24 @@ export default function VotesRegular() {
                     <ChipsArray  style={{marginBottom:'1px'}} options={options} setOptions={setOptions}/>
                 </>
                 <br/>
-                <div style={{marginTop:'-18px'}}>
-                    <MyButton style={{marginTop:'1px'}} startIcon={<PlayCircleFilledTwoTone
-                        style={{marginTop:'1px',marginLeft: '11px', color: 'rgb(11,19,40)', fontSize: 60, textAlign: 'center'}}/>}
-                              onClick={start_questions}/>
+                <div style={{marginTop:'-10px'}}>
+                    <MyButton onClick={start_questions}>
+
+                        התחל
+                    </MyButton>
                 </div>
                 <p style={{fontSize:'13px', maxWidth: '55vw', fontFamily: 'arial, sans-serif'}}>
                     * הצעות החוק ונתוני ההצבעות נלקחו מהאתר הרשמי של הכנסת. עם זאת, יתכנו אי דיוקים. למען הסר ספק, נתוני ההצבעות במאגרי הכנסת הם המדוייקים ביותר. הנהלת האתר אינה נושאת באחריות על טעויות כאלו שיתכנו. השימוש באתר ושיתוף המידע בו הינו באחריות המשתמש בלבד.
                      בחירת החוקים נעשתה באופן סובייקטיבי במידה. מוזמנים לקרוא על התהליך ע"י לחיצה על "?" למעלה. </p>
+                <Particles
+                    params={particlesConfig}
+                    style={{
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        zIndex: 0,
+                    }}
+                />
             </div>
         )
 }

@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import ThumbUp from "@material-ui/icons/ThumbUpAltOutlined";
 import ThumbDown from "@material-ui/icons/ThumbDownAltOutlined";
 
-import React from "react";
+import React, {useState} from "react";
 import "../index.css"
 import IconLabelTabs from "./IconLabelTabs";
 import PropTypes from "prop-types";
@@ -16,6 +16,9 @@ import DiscreteSlider from "./Slider";
 import { makeStyles } from '@material-ui/core/styles';
 import VotesShareButtons from "./VotesShareButtons"
 import Refresh from "@material-ui/icons/Refresh";
+import VotesDialog from "./votesDialog";
+import Particles from "react-particles-js";
+import particlesConfig from "../../../particles.config.json";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -92,17 +95,23 @@ export default function Questions({rule, remove_random_rule, handle_against, han
 
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
+    const [openDialog, setOpenDialog] = React.useState(true)
 
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
 
+    console.log(`openDialog: ${openDialog}`)
+    console.log(`openDialog: ${queryString}`)
+    console.log(`isempty check: ${queryString != "" }`)
+
+    console.log(`querystring if: ${queryString.split(',').length == 1}`)
     if (finished) {
         return (
             <div style={{ float:'right' ,textAlign:'center', zIndex:'6', backgroundColor: 'rgba(9,16,34, 0.95)', width:"20vw",minWidth:"350px", maxWidth:'450px', padding: '0em 2em', position: 'relative', minHeight: '100vh'}}>
                 <h2 style={{ marginBottom: '-5px',fontSize: '30px'}}> הסתיים השאלון! </h2>
                 <h2 style={{ marginBottom: '-5px',fontSize: '20px'}}>נראה שהמפלגה בשבילך היא  <span style={{color:'green',fontSize: '20px'}}>{bestParty} </span></h2>
-                <h2 style={{ marginBottom: '-5px',fontSize: '20px'}}>וואלה,
+                <h2 style={{ marginBottom: '-5px',fontSize: '20px'}}>
                     <span style={{color:'red',fontSize: '20px'}}>{worstParty} </span>
                     <br/>
                     קצת פחות מסכימים איתך
@@ -136,6 +145,13 @@ export default function Questions({rule, remove_random_rule, handle_against, han
 
     return (
         <div style={{ float:'right' , zIndex:'6', backgroundColor: 'rgba(9,16,34, 0.95)', width:"20vw",minWidth:"350px", maxWidth:'450px', padding: '0em 2em', position: 'relative', minHeight: '100vh'}}>
+            {(queryString != "" && queryString.split(',').length == 1 && openDialog) ?(
+                    console.log("HERE"),
+                        <VotesDialog open={openDialog} setOpen={setOpenDialog}/>
+                )
+                :
+                <></>
+            }
             <p style={{marginBottom: '-5px', color: 'white', fontFamily: 'Helvetica Neue, sans-serif', fontSize:'12px'}}>{queryString==''? 1 : (queryString.split(',').length+1)}/{Math.min(rulesLength,10)}</p>
             <h2 style={{marginBottom: '-5px', display: 'flex', justifyContent:'center', fontSize: "20px", flexDirection: 'column', letterSpacing: '0.7px', top:'50%', minHeight:'100px', boxShadow: '5px 5px 5px 5px rgba(40,150,169,0.2)'}}> {rule.LawName} </h2>
             <br/>
@@ -207,7 +223,15 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                     * צדדי המסך מחולקים לפי דעת רוב המפלגה הרצה, גם אם לא כל החברים בה מופיעים במסך (בהתאם לסליידר מעל)
                 </span>
             </h2>
-
+            <Particles
+                params={particlesConfig}
+                style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    zIndex: 0,
+                }}
+            />
 
         </div>
     )

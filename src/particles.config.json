@@ -1,64 +1,72 @@
 {
-    "particles": {
-      "number": {
-        "value": 20,
-        "density": {
-          "enable": true,
-          "value_area": 1000
-        }
-      },
-      "color": {
-        "value": "#5294c8"
-      },
-      "shape": {
-        "type": ["circle"],
-        "stroke": {
-          "width": 0,
-          "color": "#000000"
-        },
-        "polygon": {
-          "nb_sides": 5
-        }
-      },
-      "opacity": {
-        "value": 0.4,
-        "anim": {
-          "enable": false
-        }
-      },
-      "size": {
-        "value": 5,
-        "random": true,
-        "anim": {
-          "enable": false
-        }
-      },
-      "line_linked": {
+  "particles": {
+    "number": {
+      "value": 20,
+      "density": {
         "enable": true,
-        "distance": 200,
-        "color": "#72a4e8",
-        "opacity": 0.2,
-        "width": 1
-      },
-      "move": {
-        "enable": true,
-        "speed": 1,
-        "random": true,
-        "straight": false,
-        "out_mode": "bounce",
-        "bounce": false,
-        "attract": {
-          "enable": false
-        }
+        "value_area": 1000
       }
     },
-    "interactivity": {
-      "detect_on": "canvas",
-        "onresize": {
-          "enable": false,
-          "density_auto": true,
-          "density_area": 40000000
-        }
+    "color": {
+      "value": "#5294c8"
+    },
+    "shape": {
+      "type": ["circle"],
+      "stroke": {
+        "width": 0,
+        "color": "#000000"
+      },
+      "polygon": {
+        "nb_sides": 5
+      }
+    },
+    "opacity": {
+      "value": 0.4,
+      "anim": {
+        "enable": false
+      }
+    },
+    "size": {
+      "value": 5,
+      "random": true,
+      "anim": {
+        "enable": false
+      }
+    },
+    "line_linked": {
+      "enable": true,
+      "distance": 200,
+      "color": "#72a4e8",
+      "opacity": 0.2,
+      "width": 1
+    },
+    "move": {
+      "enable": true,
+      "speed": 1,
+      "random": true,
+      "straight": false,
+      "out_mode": "bounce",
+      "bounce": false,
+      "attract": {
+        "enable": false
+      }
+    }
+  },
+  "interactivity": {
+    "detect_on": "window",
+    "events": {
+      "onhover": {
+        "enable": false,
+        "mode": "bubble"
+      },
+      "onclick": {
+        "enable": false
+      },
+      "onresize": {
+        "enable": true,
+        "density_auto": true,
+        "density_area": 40000000
+      }
     },
     "modes": {
       "bubble": {
@@ -68,6 +76,7 @@
         "opacity": 0.8,
         "speed": 1
       }
-    },
-    "retina_detect": true
-  }
+    }
+  },
+  "retina_detect": true
+}

@@ -18,6 +18,9 @@ import sliderGif from './swipe-helper.gif'
 
 
 import "../index.css"
+import VotesDialog from "./votesDialog";
+import Particles from "react-particles-js";
+import particlesConfig from "../../../particles.config.json";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -96,6 +99,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
     const [expanded, setExpanded] = React.useState(false);
     const [displaySlideGif, setDisplaySlideGif] = useState(true)
     const [displaySlideGifSecondTime, setDisplaySlideGifSecondTime] = useState(false)
+    const [openDialog, setOpenDialog] = useState(true)
 
 
     const handleChange = (panel) => (event, isExpanded) => {
@@ -119,39 +123,30 @@ export default function Questions({rule, remove_random_rule, handle_against, han
 
     if (finished) {
         return (
-            <div style={{
-                width:'100vw',
-                display: 'flex',
-                flexDirection: 'column',
-                placeContent: 'center',
-                placeItems: 'center',
-                scrollSnapAlign: 'start',
-                position: 'relative',
-                minHeight: '100vh',
-                zIndex:'5',
-                backgroundColor: 'rgba(9,16,34, 0.95)',
-                padding: '0em 0.2em',
-                height: '100vh',
-                marginTop: '-45px'}}>
-                <h2 style={{ marginBottom: '0.2em', marginTop: '0em',fontSize: '4vh'}}> הסתיים השאלון! </h2>
+            <div style={{textAlign: 'center', zIndex:'6', backgroundColor: 'rgba(9,16,34, 0.95)', width:"100vw", position: 'relative', minHeight: '100vh'}}>
+
+                <h2 style={{ marginBottom: '0.2em', marginTop: '0.5em',fontSize: '4vh'}}> הסתיים השאלון! </h2>
+                <br/>
+
                 <h2 style={{marginBottom: '0.2em', marginTop: '0em', fontSize: '20px'}}>נראה שהמפלגה בשבילך היא
                     <br/>
                     <span style={{color:'green',fontSize: '20px'}}>{bestParty} </span> </h2>
-                <h2 style={{  marginBottom: '0.5em',marginTop: '0em',fontSize: '20px'}}>וואלה,
+                <br/>
+                <h2 style={{  marginBottom: '0.5em',marginTop: '0em',fontSize: '20px'}}>
                     <span style={{color:'red',fontSize: '20px'}}>{worstParty} </span>
                     <br/>
                         קצת פחות מסכימים איתך
                 </h2>
                 <VotesShareButtons/>
                 <br/>
-                <div style={{marginBottom: '0.2em',padding: '0em 0.1em' , position: 'relative', textAlign: 'center',  marginRight: '0px'}}>
+                <div style={{marginRight:'2.5vw' ,padding: '0em 0.1em' , position: 'relative', textAlign: 'center'}}>
                 <IconLabelTabs  value={partyPerson} setValue={setPartyPerson}/>
                 </div>
                 <br/>
                 {(partyPerson == 0 && queryString.split(',').length > 1 )? (<DiscreteSlider queryString={queryString} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
                     ( <></>)}
                 <br/>
-                <MyButton style={{ marginBottom: '0.2em',marginTop: '0.2em', borderRadius: '20' }} startIcon={<Refresh style={{ boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)', marginLeft: '11px', color: 'rgb(158,175,231)', fontSize:60, textAlign:'center'}}  />}
+                <MyButton style={{ marginBottom: '0.5em',marginTop: '0.2em', borderRadius: '20' }} startIcon={<Refresh style={{ boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)', marginLeft: '11px', color: 'rgb(158,175,231)', fontSize:60, textAlign:'center'}}  />}
                           onClick={() => {setStarted(false)}} />
                 <h2 style={{letterSpacing: '0.5px', textAlign: 'right', minHeight:'15vh', fontSize:'12px', fontWeight:'normal', paddingRight:'15px'}}>
                     <span style={{color:'green'}}>שוליים ירוקים</span> - מסכים איתך
@@ -177,9 +172,14 @@ export default function Questions({rule, remove_random_rule, handle_against, han
     return (
 
             <div style={{textAlign: 'center', zIndex:'6', backgroundColor: 'rgba(9,16,34, 0.95)', width:"100vw", position: 'relative', minHeight: '100vh'}}>
-                {displaySlideGif && queryString != '' ? <div  style={{zIndex:'8', left: '35%', top:'60%', position: 'absolute', backgroundColor:'rgba(208,218,239,0.6)', borderRadius:'50%'}}><img src={sliderGif} style={{height:'120px', width:'120'}} /></div>: <></>}
-                {displaySlideGifSecondTime && (queryString.split(',').length ==2) ? <div  style={{zIndex:'8', left: '35%', top:'60%', position: 'absolute', backgroundColor:'rgba(208,218,239,0.6)', borderRadius:'50%'}}>><img src={sliderGif} style={{height:'120px', width:'120'}} /></div>: <></>}
-
+                {displaySlideGifSecondTime && (queryString.split(',').length ==2) ? <div  style={{zIndex:'8', left: '35%', top:'70%', position: 'absolute', backgroundColor:'rgba(208,218,239,0.6)', borderRadius:'50%'}}>><img src={sliderGif} style={{height:'120px', width:'120'}} /></div>: <></>}
+                {(queryString != "" && queryString.split(',').length == 1 && openDialog) ?(
+                        console.log("HERE"),
+                            <VotesDialog open={openDialog} setOpen={setOpenDialog}/>
+                    )
+                    :
+                    <></>
+                }
                 <div style={{textAlign: 'center',zIndex:'7',  position: 'absolute'}}>
                     <p style={{textAlign: 'center', color: 'white', fontFamily: 'Helvetica Neue, sans-serif', fontSize:'15px'}}>{queryString==''? 1 : (queryString.split(',').length+1)}/{Math.min(rulesLength,10)}</p>
                     <h2 style={{textAlign: 'center', display: 'flex', justifyContent:'center', fontSize: "16px", flexDirection: 'column', letterSpacing: '0.7px', top:'50%', maxWidth:'100vw' ,minHeight:'13vh', boxShadow: '5px 5px 5px 5px rgba(40,150,169,0.2)'}}> {rule.LawName} </h2>
@@ -258,6 +258,15 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                     </span>
                     </h2>
                 </div>
+                <Particles
+                    params={particlesConfig}
+                    style={{
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        zIndex: 0,
+                    }}
+                />
         </div>
 
     )

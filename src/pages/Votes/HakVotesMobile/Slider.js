@@ -96,13 +96,20 @@ function DisclaimerDialog({open, setOpen}) {
         setOpen(false)
     }
     return (
-        <Dialog open={open} onClose={handleClose} >
-            <DialogTitle id="alert-dialog-title">{"גילית את הסליידר!"}</DialogTitle>
-            <DialogContentText>
-                וואי וואי איזה כיף! שני שני שני
+        <Dialog open={open} onClose={handleClose}  >
+            <DialogTitle id="alert-dialog-title" style={{color: 'black', marginBottom:'-10px'}}>
+                <h1 style={{fontSize:'20px', color: 'black'}}>
+                    גילית את הסליידר!</h1> </DialogTitle>
+            <DialogContentText style={{fontSize:'15px', fontFamily: "'Helvetica Neue', sans-serif", padding: '0em 0.5em'}}>
+                הסליידר מאפשר לך לשחק עם כמות הבועות שאת\ה רואה במסך.
+                <br/>
+                אם תבחר להזיז את הסליידר לימין יוצגו רק הח"כים הקיצוניים ביותר בדעתם ביחס אלייך -
+                <br/>
+                אלו שמסכימים או לא מסכימים איתך באופן קיצוני.
+                <br/>
             </DialogContentText>
             <DialogActions>
-                <Button onClick={handleClose}>הבנתי הבנתי יאללה תן לי להמשיך!</Button>
+                <Button style= {{backgroundColor:'blue', color:'white'}} onClick={handleClose}> הבנתי</Button>
             </DialogActions>
         </Dialog>
     )

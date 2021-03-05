@@ -16,7 +16,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import Loader from "../../components/VotesMobileLoader";
 import PlayCircleFilledTwoTone from "@material-ui/icons/PlayCircleFilledTwoTone";
 import ChipsArrayMobile from "./ChipsArrayMobile";
-import logo from './VotingLogoCut.png'
+import logo from './VotingLogo.png'
 import AlertDialogSlide from "./HakVotesMobile/AlertDialogSlide";
 import config from "../../config.json";
 
@@ -82,16 +82,17 @@ export default function VotesMobile() {
 
     const styleButton = {
         root: {
-            background: 'transparent',
+            background: 'rgb(114,137,246)',
+            fontSize: '18px',
             border: 0,
             borderRadius: 3,
             // boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)',
             color: 'white',
 
             padding: '0 0.5px',
-            font: 'sans-serif',
+            fontFamily: "'Helvetica Neue', sans-serif",
             '&:hover': {
-                boxShadow: '0 3px 5px 2px rgba(11, 19, 40, .3)'
+                background:  ' rgb(116,83,177)'
 
             }
 
@@ -163,7 +164,7 @@ export default function VotesMobile() {
             }}>
 
                 <>
-                    <div style={{letterSpacing: '0.03em', marginBottom:'-10px',  marginTop:'280px'}}> <img style={{background: 'rgba(255,255,255, 0.9)' , height:'120px', width:'300px'}} src={logo} /></div>
+                    <h1 style={{letterSpacing: '0.03em', marginBottom:'-135px',  marginTop:'140px'}}> <img style={{background: 'rgba(255,255,255, 0.9)' , height:'350px', width:'350px'}} src={logo} /></h1>
                     <div style={{
                         display: 'flex',
                         justifyContent: 'center',
@@ -220,13 +221,24 @@ export default function VotesMobile() {
                 </>
                 <br/>
                 <div>
-                    <MyButton startIcon={<PlayCircleFilledTwoTone
-                        style={{marginBottom:'0.3em', marginLeft: '11px', color: 'rgb(11,19,40)', fontSize: 60, textAlign: 'center'}}/>}
-                              onClick={start_questions}/>
+                    <MyButton onClick={start_questions}>
+
+                        התחל
+                    </MyButton>
+
                 </div>
                 <p style={{fontSize:'12px', maxWidth: '90vw', fontFamily: 'arial, sans-serif'}}>
                     * הצעות החוק ונתוני ההצבעות נלקחו מהאתר הרשמי של הכנסת. עם זאת, יתכנו אי דיוקים. למען הסר ספק, נתוני ההצבעות במאגרי הכנסת הם המדוייקים ביותר. הנהלת האתר אינה נושאת באחריות על טעויות כאלו שיתכנו. השימוש באתר ושיתוף המידע בו הינו באחריות המשתמש בלבד.
                     בחירת החוקים נעשתה באופן סובייקטיבי במידה. מוזמנים לקרוא על התהליך ע"י לחיצה על "?" למעלה. </p>
+                <Particles
+                    params={particlesConfig}
+                    style={{
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        zIndex: 1,
+                    }}
+                />
             </div>
         )
 

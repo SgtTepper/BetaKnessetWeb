@@ -13,13 +13,13 @@ const useStyles = makeStyles((theme) => ({
     root: {
         background: 'rgb(199,197,221)',
         textAlign:'center',
-        maxHeight: '10vh'
+        maxHeight: '11vh'
     },
     tab: {
         background: 'rgb(199,197,221)',
         color: 'black',
         fontSize: '12px',
-        maxHeight: '10vh'
+        maxHeight: '11vh',
     },
 
 }));
@@ -34,8 +34,8 @@ export default function IconLabelTabs({value, setValue}) {
 
     return (
 
-        <Paper className={classes.root} style={{ width:'90vw', padding: '0 0.5em'}} square={false} >
-            <Tabs className={classes.tab} style={{ color:'white', placeContent: 'center'}}
+        <Paper className={classes.root} style={{width:'90vw', padding: '0 0.5em'}} square={false} >
+            <Tabs className={classes.tab} style={{color:'white', placeContent: 'center'}}
                 value={value}
                 onChange={handleChange}
                 variant="fullWidth"
