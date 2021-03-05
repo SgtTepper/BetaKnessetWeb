@@ -203,6 +203,8 @@ const PersonChart = React.memo(function ({setLoading, queryString, setWorstParty
                         getLabel={x => x.element}
                         // onLeafClick={n => n.data.result && viewPersonQuotes(n.data.result.PersonID)}
                     />
+                </div>
+                <div style={{ position:"relative", left:'12vw', marginTop:'-7px', zIndex:'6'}}>
                     {(queryString.split(',').length>1) ? (<DiscreteSlider setFirstTimeUsed={setFirstTimeUsed} firstTimeUsed={firstTimeUsed} queryString={queryString} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
                         ( <></>)}
                 </div>
