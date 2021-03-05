@@ -26,7 +26,7 @@ const muiTheme = createMuiTheme({
                 minHeight: '0.4vh'
             },
             rail: {
-                color: 'rgba(230,243,241, 0.95)',
+                color: 'rgb(138,145,142)',
                 minHeight: '0.4vh'
             }
         }
@@ -35,12 +35,12 @@ const muiTheme = createMuiTheme({
 
 const useStyles = makeStyles({
     root: {
-        width: 300,
+        width: '80vw',
         minHeight:'15px',
         marginRight: "auto !important",
-        marginLeft: "auto !important",
         trackColor: "yellow",
-        selectionColor: "red"
+        selectionColor: "red",
+        marginLeft:"15vw",
     },
 });
 
@@ -81,8 +81,8 @@ export default function DiscreteSlider({max, minDifference, setMinDifference, qu
                 </Tooltip>
             </ThemeProvider>
             <div style={{position:'relative'}}>
-                <Person style={{color:'white',fontSize:'17px', textAlign:'left', alignContent:"left", justifyContent:"flex-end", left:"290px", position:'absolute'}}/>
-                <GroupAdd style={{color:'white', fontSize:'20px', textAlign:'left', alignContent:"left", justifyContent:"flex-end", left:"-8px", position:'absolute'}} />
+                <Person style={{color:'black',fontSize:'23px', textAlign:'left', alignContent:"left", justifyContent:"flex-end", left:"290px", position:'absolute'}}/>
+                <GroupAdd style={{color:'black', fontSize:'26px', textAlign:'left', alignContent:"left", justifyContent:"flex-end", left:"-8px", position:'absolute'}} />
             </div>
         </div>
     );

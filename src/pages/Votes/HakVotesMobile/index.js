@@ -60,7 +60,6 @@ export default function HakVotes({subjects, setStarted, allRules}) {
     const [finished, setFinished] = useState(false)
     const [lawsCounter, setLawsCounter] = useState(0)
     const [partyPerson, setPartyPerson] = useState(0)
-    const [maxDifference, setMaxDifference] = useState(0);
     const [numOfRules, setNumOfRules] = useState(0)
     const [bestParty, setBestParty] = useState(0)
     const [worstParty, setWorstParty] = useState(0)
@@ -172,7 +171,7 @@ export default function HakVotes({subjects, setStarted, allRules}) {
                 zIndex: '1',
 
             }}>
-                <AppBar position="static" color="default" dir='ltr' >
+                <AppBar position="static" color="default" dir='ltr'  >
                     <Tabs
                         value={value}
                         onChange={handleChange}
@@ -180,6 +179,7 @@ export default function HakVotes({subjects, setStarted, allRules}) {
                         textColor="primary"
                         variant="fullWidth"
                         aria-label="full width tabs example"
+                        style={{fontFamily: 'Helvetica Neue, Varela Round, sans-serif'}}
                     >
                         <Tab label="הצעות חוק" />
                         <Tab label="ח''כים רצים"  />
@@ -206,21 +206,21 @@ export default function HakVotes({subjects, setStarted, allRules}) {
                                    partyPerson={partyPerson}
                                    setPartyPerson={setPartyPerson} queryString={queryString}
 
-                                   setStarted={setStarted} maxDifference={maxDifference} rulesLength={numOfRules}
+                                   setStarted={setStarted} rulesLength={numOfRules}
                                    bestParty={bestParty} worstParty={worstParty} bestPartyImg={bestPartyImg}
                                    worstPartyImg={worstPartyImg}/>
 
                     </div>
                     <div  style={{width:'100vw', overflow:'hidden'}}>
                         <Bubble  queryString={queryString} partyPerson={0}
-                                 setMaxDifference={setMaxDifference} setBestParty={setBestParty}
+                                  setBestParty={setBestParty}
                                  setWorstParty={setWorstParty} setBestPartyImg={setBestPartyImg}
                                  setWorstPartyImg={setWorstPartyImg}/>
 
                     </div>
                     <div  style={{width:'100vw', overflow:'hidden'}}>
                         <Bubble  queryString={queryString} partyPerson={1}
-                                 setMaxDifference={setMaxDifference} setBestParty={setBestParty}
+                                  setBestParty={setBestParty}
                                  setWorstParty={setWorstParty} setBestPartyImg={setBestPartyImg}
                                  setWorstPartyImg={setWorstPartyImg}/>
 

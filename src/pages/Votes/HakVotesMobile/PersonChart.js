@@ -36,9 +36,11 @@ const PersonTooltip = withStyles((theme) => ({
 
 
 
-const PersonChart = React.memo(function ({setLoading, queryString, setMaxDifference, setWorstParty, setBestParty, setBestPartyImg, setWorstPartyImg}) {
+const PersonChart = React.memo(function ({setLoading, queryString, setWorstParty, setBestParty, setBestPartyImg, setWorstPartyImg}) {
     const [data, setData] = useState([])
     const [minDifference, setMinDifference] = useState(0);
+    const [firstTimeUsed, setFirstTimeUsed] = useState(true)
+    const [maxDifference, setMaxDifference] = useState(0);
 
     console.log(minDifference)
     useEffect(() => {
@@ -158,9 +160,9 @@ const PersonChart = React.memo(function ({setLoading, queryString, setMaxDiffere
     })
     return (
         <>
-            <div  style={{width:'100vw', maxHeight: '100vh', placeItems: 'center', float:'left', textAlign:'center'}} className={classes.root}>
+            <div  style={{ marginLeft: "auto !important",  marginRight: "auto !important", width:'100vw', maxHeight: '100vh', placeItems: 'center', float:'left', textAlign:'center'}} className={classes.root}>
                 {/*<DiscreteSlider max={total} minDifference={minDifference} setMinDifference={setMinDifference} />*/}
-                <div style={{position:"relative", left:'15vw', top:'-8vh', zIndex:'5'}}>
+                <div style={{position:"relative", left:'12vw', top:'10vh', zIndex:'5'}}>
                             <Treemap
                         padding={2}
                         animation={true}
@@ -174,15 +176,16 @@ const PersonChart = React.memo(function ({setLoading, queryString, setMaxDiffere
                             children: a
                         }}
                         mode="circlePack"
-                        height={700}
+                        height={450}
                         width={450}
                         sca
                         getLabel={x => x.element}
                         // onLeafClick={n => n.data.result && viewPersonQuotes(n.data.result.PersonID)}
                     />
+                    {(queryString.split(',').length>1) ? (<DiscreteSlider setFirstTimeUsed={setFirstTimeUsed} firstTimeUsed={firstTimeUsed} queryString={queryString} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
+                        ( <></>)}
                 </div>
-                {/*{(queryString.split(',').length>1) ? (<DiscreteSlider setFirstTimeUsed={setFirstTimeUsed} firstTimeUsed={firstTimeUsed} queryString={queryString} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :*/}
-                    ( <></>)}
+
             </div>
         </>
     );

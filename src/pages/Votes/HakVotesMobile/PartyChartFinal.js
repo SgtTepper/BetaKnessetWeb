@@ -105,7 +105,7 @@ const PartyChartFinal = React.memo(function ({setLoading, queryString}) {
                 {/*<DiscreteSlider max={total} minDifference={minDifference} setMinDifference={setMinDifference} />*/}
                 <div style={{position:"relative", left:'28vw', top:'-10vh', zIndex:'5'}}>
                     <Treemap
-                        padding={2}
+                        padding={9}
                         animation={true}
                         data={{
                             title: '',

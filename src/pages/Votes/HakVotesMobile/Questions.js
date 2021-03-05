@@ -92,7 +92,7 @@ const MyButton = withStyles(styleButton)(MyButtonRaw);
 
 export default function Questions({rule, remove_random_rule, handle_against, handle_for, finished, back_to_subjects,
                                       keep_going, partyPerson, setPartyPerson, allRules, queryString,
-                                    setStarted, maxDifference, rulesLength, bestParty, worstParty, worstPartyImg, bestPartyImg}) {
+                                    setStarted,  rulesLength, bestParty, worstParty, worstPartyImg, bestPartyImg}) {
 
 
     const classes = useStyles();
@@ -101,7 +101,6 @@ export default function Questions({rule, remove_random_rule, handle_against, han
     const [openDialog, setOpenDialog] = useState(true)
     const [firstTimeParty, setFirstTimeParty] = useState(true)
     const [displaySlideGifParty, setDisplaySlideGifParty] = useState(true )
-    const [firstTimeUsed, setFirstTimeUsed] = useState(true)
 
 
 
@@ -133,10 +132,9 @@ export default function Questions({rule, remove_random_rule, handle_against, han
     if (finished) {
         return (
             <div style={{textAlign: 'center', zIndex:'6', backgroundColor: 'rgba(9,16,34, 0.95)', width:"100vw", position: 'relative', minHeight: '100vh'}}>
-
+                <br/>
                 <h2 style={{ marginBottom: '0.2em', marginTop: '0.5em',fontSize: '4vh'}}> הסתיים השאלון! </h2>
                 <br/>
-
                 <h2 style={{marginBottom: '0.2em', marginTop: '0em', fontSize: '20px'}}>נראה שהמפלגה בשבילך היא
                     <br/>
                     <span style={{color:'green',fontSize: '20px'}}>{bestParty} </span> </h2>
@@ -145,12 +143,14 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                     <span style={{color:'red',fontSize: '20px'}}>{worstParty} </span>
                         הכי פחות מסכימים איתך
                 </h2>
-                <VotesShareButtons/>
                 <br/>
+                <VotesShareButtons/>
                 <br/>
                 <br/>
                 <MyButton style={{ marginBottom: '0.5em',marginTop: '0.2em', borderRadius: '20' }} startIcon={<Refresh style={{ boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)', marginLeft: '11px', color: 'rgb(158,175,231)', fontSize:60, textAlign:'center'}}  />}
                           onClick={() => {setStarted(false)}} />
+                <br/>
+                <br/>
                 <h2 style={{letterSpacing: '0.5px', textAlign: 'right', minHeight:'15vh', fontSize:'12px', fontWeight:'normal', paddingRight:'15px'}}>
                     <span style={{color:'green'}}>ירוקים</span> - מסכים איתך
                     <br/>
@@ -186,7 +186,9 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                 }
 
                 <div style={{textAlign: 'center',zIndex:'7',  position: 'absolute'}}>
+                    <br/>
                     <p style={{textAlign: 'center', color: 'white', fontFamily: 'Helvetica Neue, Varela Round, sans-serif', fontSize:'15px'}}>{queryString==''? 1 : (queryString.split(',').length+1)}/{Math.min(rulesLength,10)}</p>
+                    <br/>
                     <h2 style={{textAlign: 'center', display: 'flex', justifyContent:'center', fontSize: "16px", flexDirection: 'column', letterSpacing: '0.7px', top:'50%', maxWidth:'100vw' ,minHeight:'13vh', boxShadow: '5px 5px 5px 5px rgba(40,150,169,0.2)'}}> {rule.LawName} </h2>
                     <br/>
                     <div style={{ marginRight:'2.5vw' }}>
