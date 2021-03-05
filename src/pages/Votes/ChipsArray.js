@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     },
     choosenChip: {
         margin: theme.spacing(0.5),
-        background: 'rgba(70,138,15,0.6)',
+        background: 'rgb(111,186,82)',
         color: 'black',
         fontFamily:"'Helvetica Neue', sans-serif",
         padding: '0 0.2em',
