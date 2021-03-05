@@ -103,7 +103,7 @@ function DisclaimerDialog({open, setOpen, setFirstTimeUsed}) {
             <DialogContentText style={{fontSize:'15px', fontFamily: "'Helvetica Neue', sans-serif", padding: '0em 0.5em'}}>
                 הסליידר מאפשר לך לשחק עם כמות הבועות שאת\ה רואה במסך.
                 <br/>
-                 אם תבחר להזיז את הסליידר לימין יוצגו רק הח"כים הקיצוניים ביותר
+                 אם תבחר\י להזיז את הסליידר לימין יוצגו רק הח"כים הקיצוניים ביותר
                 <br/>
                 בדעתם ביחס אלייך - אלו שמסכימים או לא מסכימים איתך באופן קיצוני.
                 <br/>
