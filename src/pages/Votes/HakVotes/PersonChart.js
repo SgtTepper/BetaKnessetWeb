@@ -176,7 +176,7 @@ const PersonChart = React.memo(function ({setLoading, queryString, minDifference
                             children: a
                         }}
                         mode="circlePack"
-                        height={650}
+                        height={620}
                         width={1000}
                         getLabel={x => x.element}
                         // onLeafClick={n => n.data.result && viewPersonQuotes(n.data.result.PersonID)}

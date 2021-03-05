@@ -143,8 +143,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                 <br/>
                 <h2 style={{  marginBottom: '0.5em',marginTop: '0em',fontSize: '20px'}}>
                     <span style={{color:'red',fontSize: '20px'}}>{worstParty} </span>
-                    <br/>
-                        קצת פחות מסכימים איתך
+                        הכי פחות מסכימים איתך
                 </h2>
                 <VotesShareButtons/>
                 <br/>
@@ -167,9 +166,9 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                     <span style={{fontSize: '10px'}}>קטן</span> - לפעמים מסכים איתך ולפעמים לא
                     <br/>
                     <span style={{fontSize: '10px'}}>
-                        * צדדי המסך מחולקים לפי דעת רוב המפלגה הרצה, גם אם
+                    * בצד אחד של המסך המפלגות שברובן ירוקות
                         <br/>
-                        לא כל החברים בה מופיעים במסך (בהתאם לסליידר מעל)
+                    ובצד השני אלו שברובן אדומות.
                     </span>
                 </h2>
 
@@ -263,9 +262,9 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                     <span style={{fontSize: '10px'}}>קטן</span> - לפעמים מסכים איתך ולפעמים לא
                     <br/>
                     <span style={{fontSize: '10px'}}>
-                        * צדדי המסך מחולקים לפי דעת רוב המפלגה הרצה, גם אם
+                    * בצד אחד של המסך המפלגות שברובן ירוקות
                         <br/>
-                        לא כל החברים בה מופיעים במסך (בהתאם לסליידר מעל)
+                    ובצד השני אלו שברובן אדומות.
                     </span>
                     </h2>
                 </div>

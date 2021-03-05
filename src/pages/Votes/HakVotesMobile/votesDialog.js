@@ -18,7 +18,7 @@ export default function VotesDialog({open, setOpen}) {
                 ברוך הבא לכנסת                <br/>
                 כעת נוכל לראות איך הח״כים הרצים הצביעו ביחס להצבעתך.
                 <br/>
-                <span style={{color:'green'}}>הירוקים</span> - הצביעו כמוך.  <span style={{color:'red'}}>האדומים,</span> פחות.
+                <span style={{color:'green'}}>הירוקים</span> - הצביעו כמוך.  <span style={{color:'red'}}>האדומים,</span> לא.
                 <br/>
                 .גודל הבועות מחושב באופן מצטבר בהתאם למה שהצבעת עד כה
                 <br/>

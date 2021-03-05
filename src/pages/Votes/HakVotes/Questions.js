@@ -114,8 +114,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                 <h2 style={{ marginBottom: '-5px',fontSize: '20px'}}>נראה שהמפלגה בשבילך היא  <span style={{color:'green',fontSize: '20px'}}>{bestParty} </span></h2>
                 <h2 style={{ marginBottom: '-5px',fontSize: '20px'}}>
                     <span style={{color:'red',fontSize: '20px'}}>{worstParty} </span>
-                    <br/>
-                    קצת פחות מסכימים איתך
+                    הכי פחות מסכימים איתך
                 </h2>
                 <br/>
                 <VotesShareButtons/>
@@ -137,7 +136,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                     <span style={{fontSize: '13px'}}>קטן</span> - לפעמים מסכים איתך ולפעמים לא
                     <br/>
                     <span style={{fontSize: '13px'}}>
-                    * צדדי המסך מחולקים לפי דעת רוב המפלגה הרצה, גם אם לא כל החברים בה מופיעים במסך (בהתאם לסליידר מעל)
+                    * בצד אחד של המסך המפלגות שברובן ירוקות ובצד השני אלו שברובן אדומות.
                 </span>
                 </h2>
             </div>
@@ -221,7 +220,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                 <span style={{fontSize: '13px'}}>קטן</span> - לפעמים מסכים איתך ולפעמים לא
                 <br/>
                 <span style={{fontSize: '13px'}}>
-                    * צדדי המסך מחולקים לפי דעת רוב המפלגה הרצה, גם אם לא כל החברים בה מופיעים במסך (בהתאם לסליידר מעל)
+                    * בצד אחד של המסך המפלגות שברובן ירוקות ובצד השני אלו שברובן אדומות.
                 </span>
             </h2>
             <Particles
