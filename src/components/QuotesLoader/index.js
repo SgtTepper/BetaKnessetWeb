@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react'
 import TextTransition, { presets } from "react-text-transition"
 import CircularProgress from '@material-ui/core/CircularProgress'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 import quotes from './quotes.json'
 import { shuffleArray } from '../../utils'
 import { makeStyles } from '@material-ui/core'
+
+// initial shuffle to avoid seeding first render
+shuffleArray(quotes)
 
 const useStyles = makeStyles({
   root: {
@@ -23,10 +27,15 @@ const useStyles = makeStyles({
     pointerEvents: 'none',
   },
   quote: {
-    marginTop: '-25px',
-    marginRight: '2.5em',
     fontStyle: 'italic',
-    minWidth: '350px',
+    minWidth: '240px',
+    "$bigLoader &": {
+      marginTop: '-25px',
+      marginRight: '2.5em',
+    },
+    "$smallLoader &": {
+      width: '100%',
+    },
   },
   text: {
     color: '#332',
@@ -36,20 +45,52 @@ const useStyles = makeStyles({
       fontSize: '200%',
       lineHeight: '60px',
     },
+    "$smallLoader &": {
+      fontSize: "20px",
+    },
   },
   name: {
     color: '#555',
     fontSize: '18px',
     fontFamily: 'Helvetica, Verdana',
     paddingRight: '20px',
-  }
+    "$smallLoader &": {
+      fontSize: "15px",
+    },
+  },
+
+  smallLoader: {
+    display: 'flex', 
+    flexDirection: 'column', 
+    alignContent: 'center', 
+    justifyContent: 'flex-start', 
+    alignItems: 'stretch', 
+    justifyItems: 'center', 
+    width: '100%', 
+    height: '30%',
+    // XXX hacky, but the transition library sucks, so whaterver - OP
+    "& .text-transition_inner > div": {
+      width: "100%",
+    }
+  },
+  bigLoader: {
+    display: 'inline-flex', 
+    flexDirection: 'row', 
+    placeContent: 'center', 
+    placeItems: 'center', 
+    width: '100%',
+    paddingLeft: '25%', 
+    paddingBottom: '15%',
+  },
 })
 
 const Loader = React.memo(function ({show}) {
     const classes = useStyles()
+    const isBigScreen = useMediaQuery('(min-width:600px)')
     const shuffled = useMemo(() => [...quotes], [])
     const [index, setIndex] = useState(0)
     const intervalId = useRef(null)
+
     useEffect(() => {
       if (show) {
         shuffleArray(shuffled)
@@ -60,18 +101,33 @@ const Loader = React.memo(function ({show}) {
       }
     }, [show, shuffled])
   
-  
     const currentQuote = shuffled[index % shuffled.length]
+
+    const contents = isBigScreen
+    ? <>
+      <CircularProgress />
+      <TextTransition
+        text={<Quote {...currentQuote} />}
+        springConfig={ presets.wobbly }
+      />
+    </>
+    : <>
+      <div style={{placeSelf: 'center', flex: 1.5}}>
+        <CircularProgress />
+      </div>
+      <div style={{flex: 1, textAlign: 'center'}}>
+        <TextTransition
+          text={<Quote {...currentQuote} />}
+          springConfig={ presets.wobbly }
+        />
+      </div>
+      <div style={{flex: 2}} />
+    </>
   
     return (
       <div className={classes.root} style={{opacity: show ? .9 : 0,}}>
-        <div style={{display: 'inline-flex', flexDirection: 'row', placeContent: 'center', placeItems: 'center', width: '100%',
-          paddingLeft: '25%', paddingBottom: '15%'}}>
-          <CircularProgress />
-          <TextTransition
-            text={<Quote {...currentQuote} />}
-            springConfig={ presets.wobbly }
-          />
+        <div className={isBigScreen ? classes.bigLoader : classes.smallLoader}>
+            {contents}
         </div>
       </div>
     )

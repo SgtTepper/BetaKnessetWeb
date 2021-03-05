@@ -13,8 +13,9 @@ import config from '../../../../config'
 
 import defaultBubbles from '../../../../defaultTopics'
 
-const minWidth = 300
+const minSize = 250
 const maxWidth = 750
+const maxHeightRatio = .75
 const minRatioForImage = .035
 const minRatioForImageSmallScreen = Infinity
 const maxBubblesForSmallScreen = 25
@@ -147,7 +148,7 @@ const Chart = React.memo(function ({query, setLoading}) {
             open={!!error} 
             style={{zIndex: 25}}
           />
-          <div style={{zIndex: 2}}>
+          <div style={{zIndex: 2, display: 'flex', placeContent: 'center'}}>
             <Treemap 
             padding={isBigScreen ? 40 : 15}
             margin={0}
@@ -161,8 +162,8 @@ const Chart = React.memo(function ({query, setLoading}) {
                 children: data,
             }}
             mode="circlePack"
-            height={Math.max(minWidth, Math.min(maxWidth, windowSize.width))}
-            width={Math.max(minWidth, Math.min(maxWidth, windowSize.width))}
+            height={getDimensions(windowSize)}
+            width={getDimensions(windowSize)}
             getLabel={x => x.element}
             onLeafClick={n => {
               if (n.data.result)
@@ -256,3 +257,8 @@ const MoreSuggestionsBubble = React.memo(function () {
       </div>
   )
 })
+
+function getDimensions(windowSize) {
+  const size = Math.min(maxWidth, windowSize.width)
+  return Math.max(minSize, Math.min(size, windowSize.height * maxHeightRatio))
+}

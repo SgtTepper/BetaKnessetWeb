@@ -57,7 +57,7 @@ const PersonProfile = React.memo(function () {
   }, [])
 
   useEffect(() => {
-    if (person)
+    if (person || !personID)
       return
 
     (async () => {

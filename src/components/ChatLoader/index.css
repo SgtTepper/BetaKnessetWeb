@@ -9,11 +9,16 @@ body {
   
   .wrapper {
     width: 100%;
+  }
+
+  .chat-container {
     margin: 30px;
     padding: 30px;
     background: #fff;
     display: flex;
     flex-direction: column;
+    max-height: 60vh;
+    overflow: hidden;
   }
   
   .wrapper-cell {

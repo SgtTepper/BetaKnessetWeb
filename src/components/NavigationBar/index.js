@@ -84,7 +84,11 @@ const useStyles = makeStyles({
       display: 'flex',
       flexDirection: 'row',
       placeContent: 'space-between',
+      placeItems: 'center',
       padding:' 0 1em 0 0',
+      "& $logo": {
+        fontSize: "85%",
+      },
     },
 
     bigLetter: {},

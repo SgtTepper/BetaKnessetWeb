@@ -6,12 +6,14 @@ export default function ChatLoader({show}) {
     return null
   return (
     <div className="wrapper">
-      <ChatItem />
-      <ChatItem />
-      <ChatItem />
-      <ChatItem />
-      <ChatItem />
-      <ChatItem />
+      <div className="chat-container">
+        <ChatItem />
+        <ChatItem />
+        <ChatItem />
+        <ChatItem />
+        <ChatItem />
+        <ChatItem />
+      </div>
     </div>
     )
 }

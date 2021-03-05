@@ -70,9 +70,15 @@ const QuotesSearch = React.memo(function ({style, variant, placeholder, showRese
             }}
         />
         {showReset && 
-            <IconButton color="primary" onClick={() => queryInput !== query ? search() : navigate({q: null})}
-            disabled={!queryInput.length}>
-                {(queryInput.length && queryInput === query) ? <ClearIcon /> : <SearchIcon />}
+            <IconButton 
+                color="primary" 
+                onClick={() => queryInput !== query ? search() : navigate({q: null})}
+                disabled={!queryInput.length}
+                style={{paddingTop: '6px'}}
+            >
+                {(queryInput.length && queryInput === query) 
+                    ? <ClearIcon style={style?.color && {fill: style?.color}} /> 
+                    : <SearchIcon style={style?.color && {fill: style?.color}} />}
             </IconButton>
         }
         </form>

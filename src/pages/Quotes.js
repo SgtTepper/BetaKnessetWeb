@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 import { ScrollPage } from '../components/ScrollableView'
 import Loader from '../components/ChatLoader'
@@ -11,13 +12,27 @@ import defaultTopics from '../defaultTopics'
 const Quotes = React.memo(function () {
     const [loading, setLoading] = useState(false)
     const randomTopic = defaultTopics[Math.floor(Math.random() * defaultTopics.length)]
+    const isBigScreen = useMediaQuery('(min-width:600px)')
+    const prefix = isBigScreen ? "כל נושא שהוא, " : ""
 
     return (
         <ScrollPage limit id='quotes' parentStyle={{backgroundColor: '#223388'}}>
-            <div style={{position: 'relative', width: '100%', maxWidth: '850px', height: '100%', overflowY: 'auto', zIndex: 2, paddingTop: '1em'}}>
-                <WhiteQuotesSearch placeholder={`כל נושא שהוא, לדוגמא "${randomTopic}"`} showReset={false} />
-                <Loader show={loading} />
-                <QuoteView setLoading={setLoading} />
+            <div style={{
+                position: 'relative', 
+                height: '100%', 
+                width: '100%', 
+                overflowY: 'auto', 
+                zIndex: 2, 
+                display: 'flex', 
+                placeContent: 'center'
+            }}>
+                <div style={{maxWidth: '850px', width: '100%'}}>
+                    <div style={{padding: '.5em'}}>
+                        <WhiteQuotesSearch placeholder={`${prefix}לדוגמא "${randomTopic}"`} />
+                        <Loader show={loading} />
+                        <QuoteView setLoading={setLoading} />
+                    </div>
+                </div>
             </div>
         </ScrollPage>
     )
@@ -31,20 +46,20 @@ const QuoteView = React.memo(function ({setLoading}) {
 
     useEffect(() => {
         (async () => {
-        if (!query.length)
-            return
-        setLoading(true)
-        setData([])
-        try {
-            const res = await (await fetch(`${config.server}/Quotes?keyword=${query}`)).json()
-            setData(res)
-        } catch(e) {
-            // TODO handle errors - (ex: when multi term search is empty)
-            console.error(e)
             setData([])
-        } finally {
-            setLoading(false)
-        }
+            if (!query.length)
+                return
+            setLoading(true)
+            try {
+                const res = await (await fetch(`${config.server}/Quotes?keyword=${query}`)).json()
+                setData(res)
+            } catch(e) {
+                // TODO handle errors - (ex: when multi term search is empty)
+                console.error(e)
+                setData([])
+            } finally {
+                setLoading(false)
+            }
         })()
     }, [query, setLoading])
 

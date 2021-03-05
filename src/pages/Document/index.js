@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
+import clsx from 'clsx'
 import { useParams } from 'react-router-dom'
-
+import Drawer from '@material-ui/core/Drawer'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import { makeStyles } from '@material-ui/core'
-import Card from '@material-ui/core/Card'
+import Container from '@material-ui/core/Container'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
@@ -14,6 +15,8 @@ import Typography from '@material-ui/core/Typography'
 import DescriptionIcon from '@material-ui/icons/Description'
 import LiveTvIcon from '@material-ui/icons/LiveTv'
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
+import Fab from '@material-ui/core/Fab'
 import QuotesLoader from '../../components/QuotesLoader'
 import Chat from '../../components/Chat'
 import config from '../../config'
@@ -35,12 +38,18 @@ const useStyles = makeStyles({
       gridTemplateRows: '1fr',
       gap: '0% 2%',
       gridTemplateAreas: ". .",
+      "& $metadata": {
+        minWidth: 275,
+        margin: '1em',
+        alignSelf: 'flex-start',
+      },
     },
-    metadata: {
-      minWidth: 275,
-      margin: '1em',
-      alignSelf: 'flex-start',
+
+    flex: {
+      overflowY: 'auto',
+      height: '100%',
     },
+
     bullet: {
       display: 'inline-block',
       margin: '0 2px',
@@ -52,12 +61,37 @@ const useStyles = makeStyles({
     pos: {
       marginBottom: 12,
     },
+
+    bigScreen: {
+        "& $drawerPaper": {
+            maxWidth: '35vw',
+        },
+    },
+    smallScreen: {
+        "& $drawerPaper": {
+            maxHeight: '50vh',
+        },
+    },
+    drawer: {
+    },
+
+    metadata: {},
+    drawerPaper: {},
   });
 
 const DocumentQuotes = React.memo(function ({type}) {
     const classes = useStyles()
     const {id} = useParams()
     const [loading, setLoading] = useState(true)
+    const isBigScreen = useMediaQuery('(min-width:600px)')
+    const [drawerOpen, setDrawerOpen] = useState(true)
+    const createToggleDrawer = (open) => (event) => {
+        if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+          return
+        }
+    
+        setDrawerOpen(open)
+    }
 
     return (            
         <ScrollPage limit
@@ -66,9 +100,21 @@ const DocumentQuotes = React.memo(function ({type}) {
         >
             <div className={classes.root}>
                 <QuotesLoader show={loading} />
-                <div className={classes.grid}>
+                <div className={classes.flex}>
                     <QuoteView documentID={id} documentType={type} setLoading={setLoading} />
-                    <Metadata documentID={id} documentType={type} />
+                    <Drawer 
+                        anchor={isBigScreen ? "right" : "bottom"}
+                        open={drawerOpen}
+                        onClose={createToggleDrawer(false)}
+                        onOpen={createToggleDrawer(true)}
+                        className={clsx(classes.drawer, isBigScreen ? classes.bigScreen : classes.smallScreen)}
+                        classes={{paper: classes.drawerPaper}}
+                    >
+                        <Metadata documentID={id} documentType={type} />
+                    </Drawer>
+                    <Fab color="primary" style={{position: 'absolute', left: '2em', bottom: '2em'}} onClick={createToggleDrawer(true)}>
+                        <DescriptionIcon />
+                    </Fab>
                 </div>
             </div>
         </ScrollPage>
@@ -147,7 +193,7 @@ const Metadata = React.memo(function ({documentID, documentType}) {
     const bull = <span className={classes.bullet}>•</span>
 
     return (
-    <Card className={classes.metadata}>
+    <Container>
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
           צפיה בפרוטוקול
@@ -189,6 +235,6 @@ const Metadata = React.memo(function ({documentID, documentType}) {
                     href={md.BroadcastUrl} target="_blank" rel="noreferrer">לשידור הישיבה</Button>}
         </div>
       </CardActions>
-    </Card>
+    </Container>
     )
 })
