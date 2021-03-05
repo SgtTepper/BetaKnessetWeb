@@ -8,6 +8,11 @@ import Person from "@material-ui/icons/Person";
 import {Tooltip} from "@material-ui/core";
 import Dialog from "@material-ui/core/Dialog";
 import { Typography } from '@material-ui/core'
+import Button from '@material-ui/core/Button'
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
 
 const muiTheme = createMuiTheme({
     overrides:{
@@ -57,10 +62,10 @@ export default function DiscreteSlider({max, minDifference, setMinDifference, qu
         setPrevRulesLength(queryString.split(',').length);
         setMinDifference(Math.floor(Math.log2(max)));
     }
-
+    console.log(`wasused: ${wasUsed}, firstTimeUsed: ${firstTimeUsed}`)
     return (
             <div className={classes.root}>
-                {(wasUsed && firstTimeUsed)?(<DisclaimerDialog open={disclaimerOpen} setOpen={setDisclaimerOpen} />, setFirstTimeUsed(false)):<></>   }
+                {(wasUsed && firstTimeUsed)?(<DisclaimerDialog open={disclaimerOpen} setOpen={setDisclaimerOpen} />):<></>   }
 
                 <ThemeProvider theme={muiTheme}>
                 <Tooltip placement="top" title="רוצה לראות יותר\פחות ח''כים?" style={{backgroundColor:'transparent', color:'black'}}>
@@ -84,27 +89,21 @@ export default function DiscreteSlider({max, minDifference, setMinDifference, qu
     );
 }
 
+
+
 function DisclaimerDialog({open, setOpen}) {
+    const handleClose= ()=>{
+        setOpen(false)
+    }
     return (
-        <Dialog open={open} setOpen={setOpen} closeText={'אישור'}>
-            <Typography color="primary" variant="h4" component="h4">
-                גילוי נאות
-            </Typography>
-            <p>
-                <b>לתשומת לב הגולשים</b>
-            </p>
-            <p>
-                האתר מתבסס על  <a href="https://main.knesset.gov.il/Activity/Info/pages/databases.aspx" rel="noreferrer" target="_blank"><u>מאגרי המידע הפתוחים של הכנסת</u></a> וזאת בהתאם לתקנות המתירות פיתוח יישומים ומערכות על בסיס מידע זה.
-            </p>
-            <p>
-                באתר זה מוצגים פריטים שהינם תוצאה של אלגוריתמים לעיבוד מידע אשר אינם חפים מטעויות, כך יתכן למשל שהתוכנה שלנו תבצע טעות בזיהוי דובר, בפירוש הטקסט שלו, או במדידת ערכים הקשורים בו.
-            </p>
-            <p>
-                למען הסר ספק המידע האמין והמדויק ביותר הינו זה שמקורו במאגרי המידע של הכנסת ובמסמכי הפרוטוקולים שמפורסמים באתר הכנסת והם מקור האמת המכריע.
-            </p>
-            <p>
-                הנהלת האתר אינה נושאת באחריות על טעויות כאלו שיתכנו, השימוש באתר ושיתוף המידע שבאתר הינו באחריות המשתמש בלבד.
-            </p>
+        <Dialog open={open} onClose={handleClose} >
+            <DialogTitle id="alert-dialog-title">{"גילית את הסליידר!"}</DialogTitle>
+            <DialogContentText>
+                        וואי וואי איזה כיף! שני שני שני
+            </DialogContentText>
+            <DialogActions>
+            <Button onClick={handleClose}>הבנתי הבנתי יאללה תן לי להמשיך!</Button>
+            </DialogActions>
         </Dialog>
     )
 }

@@ -6,6 +6,24 @@
 .green-bubble:hover {
     background-color: rgba(28, 221, 47, 0.2);
 }
+.red-bubble {
+    background-color: rgba(244, 33, 33, 0.13);
+}
+.green-bubble {
+    background-color: rgba(28, 221, 47, 0.13);
+}
+.red-bubble-party:hover {
+    background-color: rgba(244, 33, 33, 0.2);
+}
+.green-bubble-party:hover {
+    background-color: rgba(28, 221, 47, 0.2);
+}
+.red-bubble-party {
+    background-color: rgba(244, 33, 33, 0.05);
+}
+.green-bubble-party {
+    background-color: rgba(28, 221, 47, 0.05);
+}
 
 h1 {
     color: #111;

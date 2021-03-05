@@ -55,11 +55,11 @@ const PartyChartFinal = React.memo(function ({setLoading, queryString}) {
                 // handle hebrew quotes (״)
                 const res = await (await fetch(`${config.server}/Votes/PartyVotes?votesHistory=${queryString}`)).json()
                 const total = queryString.split(',').length  // TODO: Change number
-                setData(res.filter(r => Math.abs((r.agreed_laws === "" || r.agreed_laws=== null ? 0 : r.agreed_laws.split('#').length) - (r.disagreed_laws === "" || r.disagreed_laws=== null ? 0 : r.disagreed_laws.split('#').length)) / total >= MIN_RATIO_FOR_IMAGE && r.party_logo_link !== null).map(r => ({
+                setData(res.filter(r => r.party_logo_link !== null).map(r => ({
                     result: r,
                     element: <PartyName key={r.final_party} name={r.final_party} query={queryString} ratio={r.count_agreed / total}
                                               agreed_laws={r.agreed_laws} disagreed_laws={r.disagreed_laws} diff={r.agreed_laws === "" || r.agreed_laws=== null ? 0 : r.agreed_laws.split('#').length - r.disagreed_laws === "" || r.disagreed_laws=== null ? 0 : r.disagreed_laws.split('#').length}/>,
-                    size: Math.abs((r.agreed_laws === "" || r.agreed_laws=== null ? 0 : r.agreed_laws.split('#').length) - (r.disagreed_laws === "" || r.disagreed_laws=== null ? 0 : r.disagreed_laws.split('#').length)),
+                    size: Math.max(Math.abs((r.agreed_laws === "" || r.agreed_laws=== null ? 0 : r.agreed_laws.split('#').length) - (r.disagreed_laws === "" || r.disagreed_laws=== null ? 0 : r.disagreed_laws.split('#').length)), 0.5),
                     color: (r.count_agreed-r.count_disagreed),
                     style: {
                         background: `url(${imageOrDefault(r.party_logo_link, r.final_party.toString(), 256)}) no-repeat center center`,
@@ -86,10 +86,16 @@ const PartyChartFinal = React.memo(function ({setLoading, queryString}) {
     }, [queryString, setLoading])
     const classes = useStyles();
 
-    const a = data.filter(d => d.color <= 0);
+    const a = data.filter(d => d.color < 0);
     a.push({
         title: 'against',
         children: data.filter(d => d.color > 0),
+        style: {backgroundColor: 'transparent',},
+
+    })
+    a.push({
+        title: 'neutral',
+        children: data.filter(d => d.color == 0),
         style: {backgroundColor: 'transparent',},
 
     })
@@ -126,6 +132,7 @@ export default PartyChartFinal
 
 const PartyName = React.memo(function ({...props}) {
     const {agreed_laws, disagreed_laws } = props
+    var diff = ((agreed_laws === "" || agreed_laws=== null ? 0 : agreed_laws.split('#').length) - (disagreed_laws === "" || disagreed_laws=== null ? 0 : disagreed_laws.split('#').length) )
 
     return (
         <PartyTooltip
@@ -138,7 +145,7 @@ const PartyName = React.memo(function ({...props}) {
             leaveTouchDelay= {20000}
         >
             <div
-                className={((agreed_laws === "" || agreed_laws=== null ? 0 : agreed_laws.split('#').length) - (disagreed_laws === "" || disagreed_laws=== null ? 0 : disagreed_laws.split('#').length)>0)? 'green-bubble':'red-bubble'}
+                className={(diff > 0) ? 'green-bubble-party':(diff < 0)?'red-bubble-party':''}
                 style={{
                     display: 'flex',
                     justifyItems: 'stretch',
