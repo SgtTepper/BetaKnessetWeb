@@ -73,22 +73,33 @@ const useStyles = makeStyles({
       },
     },
 
-    spacer: {
+    flexSpacer: {
       flexGrow: 12,
     },
-
     drawerPaper: {
       minWidth: 150,
     },
+
+    appBar: {
+      height: "3.5em",
+    },
+    spacer: {
+      marginBottom: "3.5em",
+    },
+
     mobileAppBar: {
       display: 'flex',
       flexDirection: 'row',
       placeContent: 'space-between',
       placeItems: 'center',
       padding:' 0 1em 0 0',
+      height: "3em",
       "& $logo": {
         fontSize: "85%",
       },
+    },
+    mobileSpacer: {
+      marginBottom: "3em",
     },
 
     bigLetter: {},
@@ -166,38 +177,41 @@ const NavBar = React.memo(function ({nav, links}) {
   const classes = useStyles()
   const navigateFn = useNavigate()
   return (
-    <AppBar position="sticky">
-      <div className={classes.gridContainer}>
-        <div className={classes.nav}>
-          {nav.map(({contents, navigate, callback}) => {
-            const cb = navigate ? () => navigateFn(navigate) : callback
-            return (
-              <Button onClick={cb} key={contents}>
-                {contents}
-              </Button>
-            )
-          })}
-          <div className={classes.spacer} />
+    <>
+      <AppBar position="fixed" className={classes.appBar}>
+        <div className={classes.gridContainer}>
+          <div className={classes.nav}>
+            {nav.map(({contents, navigate, callback}) => {
+              const cb = navigate ? () => navigateFn(navigate) : callback
+              return (
+                <Button onClick={cb} key={contents}>
+                  {contents}
+                </Button>
+              )
+            })}
+            <div className={classes.flexSpacer} />
+          </div>
+          <Logo />
+          <div className={classes.links}>
+            <div className={classes.flexSpacer} />
+            {links.map(({contents, navigate, callback}) => {
+              const cb = navigate ? () => navigateFn(navigate) : callback
+              return (
+                <Button onClick={cb} key={contents}>
+                  {contents}
+                </Button>
+              )
+            })}
+            <Tooltip title={<h2>מזלגו אותנו ב-GitHub</h2>} arrow>
+              <IconButton href="https://github.com/SgtTepper/BetaKnessetWeb">
+                <GitHubIcon />
+              </IconButton>
+            </Tooltip>
+          </div>
         </div>
-        <Logo />
-        <div className={classes.links}>
-          <div className={classes.spacer} />
-          {links.map(({contents, navigate, callback}) => {
-            const cb = navigate ? () => navigateFn(navigate) : callback
-            return (
-              <Button onClick={cb} key={contents}>
-                {contents}
-              </Button>
-            )
-          })}
-          <Tooltip title={<h2>מזלגו אותנו ב-GitHub</h2>} arrow>
-            <IconButton href="https://github.com/SgtTepper/BetaKnessetWeb">
-              <GitHubIcon />
-            </IconButton>
-          </Tooltip>
-        </div>
-      </div>
-  </AppBar>
+    </AppBar>
+    <div className={classes.spacer} />
+  </>
   )
 })
 
@@ -215,47 +229,50 @@ const NavDrawer = React.memo(function ({nav, links}) {
   }
 
   return (
-    <AppBar position="sticky" classes={{root: classes.mobileAppBar}}>
-      <Logo />
-      <IconButton onClick={createToggleDrawer(true)}>
-        <MenuIcon style={{fill: 'white'}} />
-      </IconButton>
-      <Drawer 
-        anchor='right' 
-        open={drawerOpen} 
-        onClose={createToggleDrawer(false)}        
-        classes={{
-          paper: classes.drawerPaper,
-      }}>
-        <List>
-          {nav.map(({contents, navigate, callback}) => {
-            const cb = () => {
-              if (navigate)
-                navigateFn(navigate)
-              else
-                callback()
-              setDrawerOpen(false)
-            }
-            return (
-              <ListItem button onClick={cb} key={contents}>
-                <ListItemText primary={contents} />
-              </ListItem>
-            )
-          })}
-          <Divider />
-          {links.map(({contents, navigate, callback}) => {
-            const cb = navigate ? () => navigateFn(navigate) : callback
-            return (
-              <ListItem button onClick={cb} key={contents}>
-                <ListItemText primary={contents} />
-              </ListItem>
-            )
-          })}
-          <ListItem button href="https://github.com/SgtTepper/BetaKnessetWeb">
-            <ListItemText primary={<GitHubIcon />} />
-          </ListItem>
-        </List>
-      </Drawer>
-    </AppBar>
+    <>
+      <AppBar position="fixed" classes={{root: classes.mobileAppBar}}>
+        <Logo />
+        <IconButton onClick={createToggleDrawer(true)}>
+          <MenuIcon style={{fill: 'white'}} />
+        </IconButton>
+        <Drawer 
+          anchor='right' 
+          open={drawerOpen} 
+          onClose={createToggleDrawer(false)}        
+          classes={{
+            paper: classes.drawerPaper,
+        }}>
+          <List>
+            {nav.map(({contents, navigate, callback}) => {
+              const cb = () => {
+                if (navigate)
+                  navigateFn(navigate)
+                else
+                  callback()
+                setDrawerOpen(false)
+              }
+              return (
+                <ListItem button onClick={cb} key={contents}>
+                  <ListItemText primary={contents} />
+                </ListItem>
+              )
+            })}
+            <Divider />
+            {links.map(({contents, navigate, callback}) => {
+              const cb = navigate ? () => navigateFn(navigate) : callback
+              return (
+                <ListItem button onClick={cb} key={contents}>
+                  <ListItemText primary={contents} />
+                </ListItem>
+              )
+            })}
+            <ListItem button href="https://github.com/SgtTepper/BetaKnessetWeb">
+              <ListItemText primary={<GitHubIcon />} />
+            </ListItem>
+          </List>
+        </Drawer>
+      </AppBar>
+      <div className={classes.mobileSpacer} />
+    </>
   )
 })
