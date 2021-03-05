@@ -181,9 +181,9 @@ export default function HakVotes({subjects, setStarted, allRules}) {
                         aria-label="full width tabs example"
                         style={{fontFamily: 'Helvetica Neue, Varela Round, sans-serif'}}
                     >
-                        <Tab label="הצעות חוק" />
-                        <Tab label="ח''כים רצים"  />
-                        <Tab label="מפלגות עבר" />
+                        <Tab label="📜 הצעות חוק" />
+                        <Tab label="🏃‍♀️ ח''כים רצים"  />
+                        <Tab label="⏳ מפלגות עבר" />
                     </Tabs>
                 </AppBar>
                 <SwipeableViews style={{direction: 'rtl'}}
