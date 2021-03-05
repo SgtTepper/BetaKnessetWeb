@@ -11,6 +11,7 @@ import PartyChartFinal from "./PartyChartFinal"
 const Bubble = React.memo(function ({queryString, partyPerson, minDifference, setMaxDifference, setWorstParty, setBestParty, setBestPartyImg, setWorstPartyImg}) {
     const [loading, setLoading] = useState(false)
 
+
     if (partyPerson === 0) {
         return (
                 < >

@@ -101,6 +101,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
     const [openDialog, setOpenDialog] = useState(true)
     const [firstTimeParty, setFirstTimeParty] = useState(true)
     const [displaySlideGifParty, setDisplaySlideGifParty] = useState(true )
+    const [firstTimeUsed, setFirstTimeUsed] = useState(true)
 
 
 
@@ -151,7 +152,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                 <IconLabelTabs  value={partyPerson} setValue={setPartyPerson}/>
                 </div>
                 <br/>
-                {(partyPerson == 0 && queryString.split(',').length > 1 )? (<DiscreteSlider queryString={queryString} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
+                {(partyPerson == 0 && queryString.split(',').length > 1 )? (<DiscreteSlider setFirstTimeUsed={setFirstTimeUsed} firstTimeUsed={firstTimeUsed} queryString={queryString} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
                     ( <></>)}
                 <br/>
                 <MyButton style={{ marginBottom: '0.5em',marginTop: '0.2em', borderRadius: '20' }} startIcon={<Refresh style={{ boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)', marginLeft: '11px', color: 'rgb(158,175,231)', fontSize:60, textAlign:'center'}}  />}
@@ -248,7 +249,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                         <IconLabelTabs  value={partyPerson} setValue={setPartyPerson}/>
                     </div>
                     <br/>
-                    {(partyPerson == 0 && queryString.split(',').length>1) ? (<DiscreteSlider queryString={queryString} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
+                    {(partyPerson == 0 && queryString.split(',').length>1) ? (<DiscreteSlider setFirstTimeUsed={setFirstTimeUsed} firstTimeUsed={firstTimeUsed} queryString={queryString} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
                         ( <></>)}
 
                     <br/>

@@ -96,6 +96,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
     const [openDialog, setOpenDialog] = React.useState(true)
+    const [firstTimeUsed, setFirstTimeUsed] = useState(true)
 
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
@@ -121,7 +122,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                 <br/>
                 <IconLabelTabs  value={partyPerson} setValue={setPartyPerson}/>
                 <br/>
-                {(partyPerson == 0 && queryString.split(',').length>1 )? (<DiscreteSlider queryString={queryString} style={{marginBottom: '0px'}} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
+                {(partyPerson == 0 && queryString.split(',').length>1 )? (<DiscreteSlider setFirstTimeUsed={setFirstTimeUsed} firstTimeUsed={firstTimeUsed} queryString={queryString} style={{marginBottom: '0px'}} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
                     ( <div style={{ marginBottom: '90px'}}/>)}
                 <MyButton style={{ marginTop: '0px',borderRadius: '20' }} startIcon={<Refresh style={{ boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)', marginLeft: '11px', color: 'rgb(158,175,231)', fontSize:60, textAlign:'center'}}  />}
                           onClick={() => {setStarted(false)}} />
@@ -206,7 +207,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
             <IconLabelTabs  value={partyPerson} setValue={setPartyPerson}/>
             <br/>
             <br/>
-            {(partyPerson == 0 && queryString.split(',').length>1) ? (<DiscreteSlider queryString={queryString} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
+            {(partyPerson == 0 && queryString.split(',').length>1) ? (<DiscreteSlider setFirstTimeUsed={setFirstTimeUsed} firstTimeUsed={firstTimeUsed} queryString={queryString} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
                 ( <></>)}
 
             <br/>

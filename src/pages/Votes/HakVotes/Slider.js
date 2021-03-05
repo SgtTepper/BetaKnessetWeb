@@ -45,11 +45,10 @@ const useStyles = makeStyles({
 });
 
 
-export default function DiscreteSlider({max, minDifference, setMinDifference, queryString}) {
+export default function DiscreteSlider({max, minDifference, setMinDifference, queryString, setFirstTimeUsed, firstTimeUsed}) {
     const classes = useStyles();
     const [prevRulesLength, setPrevRulesLength] = useState(-1)
     const [wasUsed, setWasUsed] = useState(false)
-    const [firstTimeUsed, setFirstTimeUsed] = useState(true)
     const [disclaimerOpen, setDisclaimerOpen] = useState(true)
 
 
@@ -61,13 +60,11 @@ export default function DiscreteSlider({max, minDifference, setMinDifference, qu
     if (queryString.split(',').length > prevRulesLength) {
         setPrevRulesLength(queryString.split(',').length);
         setMinDifference(Math.max(Math.floor(max)-2, 1));
-
-
     }
     console.log(`Math.floor(max)-2: ${Math.floor(max)-2}, firstTimeUsed: ${firstTimeUsed}`)
     return (
             <div className={classes.root}>
-                {(wasUsed && firstTimeUsed)?(<DisclaimerDialog open={disclaimerOpen} setOpen={setDisclaimerOpen} />):<></>   }
+                {(wasUsed && firstTimeUsed)?(<DisclaimerDialog open={disclaimerOpen} setOpen={setDisclaimerOpen} setFirstTimeUsed={setFirstTimeUsed}/>):<></>   }
 
                 <ThemeProvider theme={muiTheme}>
                 <Tooltip placement="top" title="רוצה לראות יותר\פחות ח''כים?" style={{backgroundColor:'transparent', color:'black'}}>
@@ -93,9 +90,10 @@ export default function DiscreteSlider({max, minDifference, setMinDifference, qu
 
 
 
-function DisclaimerDialog({open, setOpen}) {
+function DisclaimerDialog({open, setOpen, setFirstTimeUsed}) {
     const handleClose= ()=>{
         setOpen(false)
+        setFirstTimeUsed(false)
     }
     return (
         <Dialog open={open} onClose={handleClose}  >
