@@ -80,13 +80,6 @@ const useStyles = makeStyles({
       minWidth: 150,
     },
 
-    appBar: {
-      height: "3.5em",
-    },
-    spacer: {
-      marginBottom: "3.5em",
-    },
-
     mobileAppBar: {
       display: 'flex',
       flexDirection: 'row',
@@ -98,10 +91,6 @@ const useStyles = makeStyles({
         fontSize: "85%",
       },
     },
-    mobileSpacer: {
-      marginBottom: "3em",
-    },
-
     bigLetter: {},
   });  
 
@@ -178,7 +167,7 @@ const NavBar = React.memo(function ({nav, links}) {
   const navigateFn = useNavigate()
   return (
     <>
-      <AppBar position="fixed" className={classes.appBar}>
+      <AppBar position="static" className={classes.appBar}>
         <div className={classes.gridContainer}>
           <div className={classes.nav}>
             {nav.map(({contents, navigate, callback}) => {
@@ -230,7 +219,7 @@ const NavDrawer = React.memo(function ({nav, links}) {
 
   return (
     <>
-      <AppBar position="fixed" classes={{root: classes.mobileAppBar}}>
+      <AppBar position="static" classes={{root: classes.mobileAppBar}}>
         <Logo />
         <IconButton onClick={createToggleDrawer(true)}>
           <MenuIcon style={{fill: 'white'}} />
@@ -272,7 +261,6 @@ const NavDrawer = React.memo(function ({nav, links}) {
           </List>
         </Drawer>
       </AppBar>
-      <div className={classes.mobileSpacer} />
     </>
   )
 })
