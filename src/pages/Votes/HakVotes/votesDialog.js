@@ -16,11 +16,11 @@ export default function VotesDialog({open, setOpen}) {
                     הצבעת בהצבעה הראשונה שלך!</h1> </DialogTitle>
             <DialogContentText style={{fontSize:'15px', fontFamily: "'Helvetica Neue', sans-serif", padding: '0em 0.5em'}}>
 ברוך הבא לכנסת                <br/>
-                כעת נוכל לראות איך הח״כים הרצים הצביעו ביחס להצבעתך.
+                כעת תוכל\י לראות איך הח״כים הרצים הצביעו ביחס להצבעתך.
                 <br/>
                     <span style={{color:'green'}}>הירוקים</span> הצביעו כמוך.  <span style={{color:'red'}}>האדומים,</span> לא.
                 <br/>
-                .גודל הבועות מחושב באופן מצטבר בהתאם למה שהצבעת עד כה
+                גודל הבועות מחושב באופן מצטבר בהתאם למה שהצבעת עד כה.
             </DialogContentText>
             <DialogActions>
                 <Button style= {{backgroundColor:'blue', color:'white'}} onClick={handleClose}> הבנתי</Button>
