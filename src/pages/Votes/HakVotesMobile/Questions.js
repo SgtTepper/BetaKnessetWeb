@@ -97,21 +97,29 @@ export default function Questions({rule, remove_random_rule, handle_against, han
 
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
-    const [displaySlideGif, setDisplaySlideGif] = useState(true)
     const [displaySlideGifSecondTime, setDisplaySlideGifSecondTime] = useState(false)
     const [openDialog, setOpenDialog] = useState(true)
+    const [firstTimeParty, setFirstTimeParty] = useState(true)
+    const [displaySlideGifParty, setDisplaySlideGifParty] = useState(true )
+
+
 
 
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
 
-
-    console.log(`rulesLength: ${queryString}`)
+    console.log(`partyPerson: ${partyPerson}, ${firstTimeParty}, ${displaySlideGifParty}`)
+    if (queryString != '' && partyPerson ==1 && firstTimeParty)
+    {
+        setTimeout(() => {
+            setDisplaySlideGifParty(false)
+            setFirstTimeParty(false)
+        }, 4700);
+    }
 
     if (queryString != '' && (queryString.split(',').length == 1)){
         setTimeout(() => {
-            setDisplaySlideGif(false)
             setDisplaySlideGifSecondTime(true)
         }, 4700);
     }
@@ -173,6 +181,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
 
             <div style={{textAlign: 'center', zIndex:'6', backgroundColor: 'rgba(9,16,34, 0.95)', width:"100vw", position: 'relative', minHeight: '100vh'}}>
                 {displaySlideGifSecondTime && (queryString.split(',').length ==2) ? <div  style={{zIndex:'8', left: '35%', top:'70%', position: 'absolute', backgroundColor:'rgba(208,218,239,0.6)', borderRadius:'50%'}}>><img src={sliderGif} style={{height:'120px', width:'120'}} /></div>: <></>}
+                {displaySlideGifParty && firstTimeParty && queryString != "" && partyPerson ==1 ? <div  style={{zIndex:'8', left: '35%', top:'70%', position: 'absolute', backgroundColor:'rgba(208,218,239,0.6)', borderRadius:'50%'}}>><img src={sliderGif} style={{height:'120px', width:'120'}} /></div>: <></>}
                 {(queryString != "" && queryString.split(',').length == 1 && openDialog) ?(
                         console.log("HERE"),
                             <VotesDialog open={openDialog} setOpen={setOpenDialog}/>
@@ -180,6 +189,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                     :
                     <></>
                 }
+
                 <div style={{textAlign: 'center',zIndex:'7',  position: 'absolute'}}>
                     <p style={{textAlign: 'center', color: 'white', fontFamily: 'Helvetica Neue, sans-serif', fontSize:'15px'}}>{queryString==''? 1 : (queryString.split(',').length+1)}/{Math.min(rulesLength,10)}</p>
                     <h2 style={{textAlign: 'center', display: 'flex', justifyContent:'center', fontSize: "16px", flexDirection: 'column', letterSpacing: '0.7px', top:'50%', maxWidth:'100vw' ,minHeight:'13vh', boxShadow: '5px 5px 5px 5px rgba(40,150,169,0.2)'}}> {rule.LawName} </h2>
