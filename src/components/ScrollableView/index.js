@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles'
 import clsx from 'clsx'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     scrollView: {
       scrollSnapType: 'y mandatory',
       flexGrow: 1,
@@ -9,6 +9,9 @@ const useStyles = makeStyles({
       overflowX: 'hidden',
       position: 'relative',
       scrollBehavior: 'smooth',
+      [theme.breakpoints.down('sm')]: {
+        scrollBehavior: 'auto',
+      },
     },
 
     scrollPage: {
@@ -32,7 +35,7 @@ const useStyles = makeStyles({
         height: '100%', 
         overflowX: 'hidden',
     }
-  });
+  }))
 
 
   export default function ScrollableView(props) {

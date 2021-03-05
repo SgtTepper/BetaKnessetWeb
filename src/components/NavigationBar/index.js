@@ -117,6 +117,10 @@ export default function NavigationBar() {
         navigate: {location: '/calendar'},
         contents: 'לו״ז',
       },
+      {
+        navigate: {location: '/apps/votes'},
+        contents: "הצבעות",
+      },
     ]
 
     const links = [

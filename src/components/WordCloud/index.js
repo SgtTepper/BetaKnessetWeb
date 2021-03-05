@@ -17,6 +17,7 @@ const options = {
   padding: 3,
   enableOptimizations: true,
   enableTooltip: false,
+  deterministic: true,
 }
 const minSize = [200, 300]
 
@@ -49,6 +50,8 @@ const CachedWordCloud = React.memo(({personID}) => {
   }
   if (!data)
     return null
+
+  options.transitionDuration = isBigScreen ? .4 : 0
 
   return (
     <Suspense fallback={<CircularProgress />}>

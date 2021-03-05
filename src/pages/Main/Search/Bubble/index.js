@@ -22,7 +22,7 @@ const maxBubblesForSmallScreen = 25
 
 const makeDefaultBubbles = (queries, isBigScreen) => {
   shuffleArray(queries)
-  const queriesCopy = queries.slice(0, config.defaultBubblesCount)
+  const queriesCopy = queries.slice(0, isBigScreen ? config.defaultBubblesCount : config.defaultBubblesCountMobile)
   const sizes = new Array(queriesCopy.length)
     .fill(null)
     .map(_ => 5 + Math.random() * 10)

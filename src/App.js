@@ -7,17 +7,20 @@ import {
 import { CircularProgress, ThemeProvider } from '@material-ui/core'
 import Particles from 'react-particles-js'
 import { makeStyles } from '@material-ui/core/styles'
+import { Typography } from '@material-ui/core'
+
+import config from './config'
 import theme from './theme'
-import NavigationBar from "./components/NavigationBar"
 import particlesConfig from './particles.config.json'
+import NavigationBar from "./components/NavigationBar"
 import ScrollableView from './components/ScrollableView'
 import Dialog from './components/Dialog'
-import { Typography } from '@material-ui/core'
 
 const Main = lazy(() => import('./pages/Main'))
 const Document = lazy(() => import('./pages/Document'))
 const Quotes = lazy(() => import('./pages/Quotes'))
 const Calendar = lazy(() => import('./pages/Calendar'))
+const FrameApp = lazy(() => import('./pages/FrameApp'))
 
 const useStyles = makeStyles({
   root: {
@@ -56,8 +59,18 @@ export default function App() {
                 <Route path="/document/committee/:id" render={(props) => (
                   <Document type='committee' {...props} />
                 )} />
-                <Route path="/quotes" component={Quotes} />
-                <Route path="/calendar" component={Calendar} />
+                <Route path="/quotes" render={(props) => (
+                  <Quotes {...props} />
+                )} />
+                <Route path="/calendar" render={(props) => (
+                  <Calendar {...props} />
+                )} />
+
+                {config.apps.map(app => (
+                  <Route key={app.name} path={`/apps/${app.name}`} render={(props) => (
+                    <FrameApp {...props} url={app.url} />
+                  )} />
+                ))}
               </Switch>
             </Suspense>
           </ScrollableView>
