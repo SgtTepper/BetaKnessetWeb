@@ -97,6 +97,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
 
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
+    const [displaySlideGifFirstTime, setDisplaySlideGifFirstTime] = useState(true)
     const [displaySlideGifSecondTime, setDisplaySlideGifSecondTime] = useState(false)
     const [openDialog, setOpenDialog] = useState(true)
     const [firstTimeParty, setFirstTimeParty] = useState(true)
@@ -118,12 +119,13 @@ export default function Questions({rule, remove_random_rule, handle_against, han
         }, 4700);
     }
 
-    if (queryString != '' && (queryString.split(',').length == 1)){
+    if ((queryString.split(',').length == 2)){
         setTimeout(() => {
+            setDisplaySlideGifFirstTime(false)
             setDisplaySlideGifSecondTime(true)
         }, 4700);
     }
-    if (displaySlideGifSecondTime && (queryString.split(',').length ==2)){
+    if (displaySlideGifSecondTime && (queryString.split(',').length ==3)){
         setTimeout(() => {
             setDisplaySlideGifSecondTime(false)
         }, 4700);
@@ -175,7 +177,8 @@ export default function Questions({rule, remove_random_rule, handle_against, han
     return (
 
             <div style={{textAlign: 'center', zIndex:'6', backgroundColor: 'rgba(9,16,34, 0.95)', width:"100vw", position: 'relative', minHeight: '100vh'}}>
-                {displaySlideGifSecondTime && (queryString.split(',').length ==2) ? <div  style={{zIndex:'8', left: '35%', top:'2%', position: 'absolute', backgroundColor:'rgba(208,218,239,0.6)', borderRadius:'50%'}}>><img src={sliderGif} style={{height:'120px', width:'120'}} /></div>: <></>}
+                {(displaySlideGifFirstTime  && queryString.split(',').length ==2) || (displaySlideGifSecondTime && queryString.split(',').length ==3) ? <div  style={{zIndex:'8', left: '35%', top:'2%', position: 'absolute', backgroundColor:'rgba(208,218,239,0.6)', borderRadius:'50%'}}>><img src={sliderGif} style={{height:'120px', width:'120'}} /></div>: <></>}
+
                 {(queryString != "" && queryString.split(',').length == 1 && openDialog) ?(
                         console.log("HERE"),
                             <VotesDialog open={openDialog} setOpen={setOpenDialog}/>

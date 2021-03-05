@@ -121,7 +121,7 @@ const PartyChartFinal = React.memo(function ({setLoading, queryString}) {
         <>
             <div  style={{width:'100vw', maxHeight: '100vh', placeItems: 'center', float:'left', textAlign:'center'}} className={classes.root}>
                 {/*<DiscreteSlider max={total} minDifference={minDifference} setMinDifference={setMinDifference} />*/}
-                <div style={{position:"relative", left:'28vw', top:'-10vh', zIndex:'5'}}>
+                <div style={{position:"relative", left:'30vw', top:'5vh', zIndex:'5'}}>
                     <Treemap
                         padding={9}
                         animation={true}
@@ -135,7 +135,7 @@ const PartyChartFinal = React.memo(function ({setLoading, queryString}) {
                             children: a
                         }}
                         mode="circlePack"
-                        height={700}
+                        height={450}
                         width={400}
                         sca
                         getLabel={x => x.element}
