@@ -60,7 +60,7 @@ export default function DiscreteSlider({max, minDifference, setMinDifference, qu
 
     if (queryString.split(',').length > prevRulesLength) {
         setPrevRulesLength(queryString.split(',').length);
-        setMinDifference(Math.floor(Math.log2(max)));
+        setMinDifference(Math.max(Math.floor(max)-2, 1));
     }
     console.log(`wasused: ${wasUsed}, firstTimeUsed: ${firstTimeUsed}`)
     return (
