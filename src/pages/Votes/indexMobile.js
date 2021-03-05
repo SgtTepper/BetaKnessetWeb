@@ -148,13 +148,14 @@ export default function VotesMobile() {
     }
 
         return (
+
             <div style={{
                 display: 'flex',
                 flexDirection: 'column',
-                placeContent: 'center',
+                // placeContent: 'center',
                 placeItems: 'center',
                 scrollSnapAlign: 'start',
-                position: 'relative',
+                // position: 'relative',
                 // minHeight: '60%',
                 zIndex: '1',
                 width: '100vw',
@@ -162,9 +163,9 @@ export default function VotesMobile() {
                 overflowX: 'hidden',
 
             }}>
+                <img style={{background: 'rgba(255,255,255, 0.9)' , height:'350px', width:'350px', marginBottom:'-135px', marginTop:'-110px'}} src={logo} />
 
                 <>
-                    <h1 style={{letterSpacing: '0.03em', marginBottom:'-135px',  marginTop:'140px'}}> <img style={{background: 'rgba(255,255,255, 0.9)' , height:'350px', width:'350px'}} src={logo} /></h1>
                     <div style={{
                         display: 'flex',
                         justifyContent: 'center',

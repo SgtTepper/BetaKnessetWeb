@@ -225,12 +225,12 @@ const PersonCard = React.memo(function({name,agreed_laws, CurrentFaction, PlaceI
             <div style={{background: 'linear-gradient(45deg, #c5cae9 30%, #e8eaf6 70%)'}}>
 
                 <table style={{minWidth: '100%'}}>
-                    <th style={{ background: 'linear-gradient(45deg,green 20%, #daded8 90%)', color: 'rgba(24,24,53,0.8)'}}> אנחנו מסכימים ({agreed_laws === "" || agreed_laws=== null ? 0 : agreed_laws.split('#').length}):</th>
+                    <th style={{ background: 'linear-gradient(45deg,green 20%, #daded8 90%)', color: 'rgba(24,24,53,0.8)'}}> אנחנו מסכימים על ({agreed_laws === "" || agreed_laws=== null ? 0 : agreed_laws.split('#').length}):</th>
                     { agreed_laws === "" || agreed_laws === null ? <tr><td>אני ואתה לא באותו ראש                                         <span style={{fontSize: '20px'}} aria-label="sad" role="img"> 😕 </span>
                     </td></tr> :agreed_laws.split('#').map((item)=> <React.Fragment><tr><td>{item} </td></tr></React.Fragment>) }</table>
 
                 <table style={{minWidth: '100%'}}>
-                    <th style={{minWidth: '100%' , background: 'linear-gradient(45deg, red 20%, #cfb1b9 90%)', color: 'rgba(24,24,53,0.8)'}}>  אנחנו לא מסכימים ({disagreed_laws === "" || disagreed_laws === null ? 0 : disagreed_laws.split('#').length}): </th>
+                    <th style={{minWidth: '100%' , background: 'linear-gradient(45deg, red 20%, #cfb1b9 90%)', color: 'rgba(24,24,53,0.8)'}}>  אנחנו לא מסכימים על ({disagreed_laws === "" || disagreed_laws === null ? 0 : disagreed_laws.split('#').length}): </th>
                     {disagreed_laws === "" || disagreed_laws === null ? <tr><td>שתי טיפות מים אנחנו                                      <span style={{fontSize: '20px'}} aria-label="blush" role="img"> 😊 </span>
                     </td></tr> : disagreed_laws.split('#').map((item)=> <React.Fragment><tr><td>{item} </td></tr></React.Fragment>) }</table>
 

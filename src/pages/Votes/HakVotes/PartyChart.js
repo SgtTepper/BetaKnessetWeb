@@ -145,7 +145,7 @@ const PartyCard = React.memo(function({name,agreed_laws, disagreed_laws}) {
     return (
 
         <div style={{maxHeight: '100%'}}>
-            <h1 style={{color: '#eceff1'}}>{name}</h1>
+            <h1 style={{color: '#eceff1', }}>{name}</h1>
             <div style={{background: 'linear-gradient(45deg, #c5cae9 30%, #e8eaf6 70%)'}}>
 
                     <table style={{minWidth: '100%'}}>

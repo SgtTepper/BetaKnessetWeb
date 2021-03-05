@@ -163,14 +163,14 @@ const PartyCard = React.memo(function({name,agreed_laws, disagreed_laws}) {
     return (
 
         <div style={{maxHeight: '100%'}}>
-            <h1 style={{color: '#eceff1'}}>{name}</h1>
+            <h1 style={{color: '#eceff1', fontSize: '34px'}}>{name}</h1>
             <div style={{background: 'linear-gradient(45deg, #c5cae9 30%, #e8eaf6 70%)'}}>
 
                     <table style={{minWidth: '100%'}}>
                         <tr>
                             { agreed_laws === "" || agreed_laws === null ?
                                 <th  style={{background: 'transparent' ,color: 'rgba(24,24,53,0.8)', fontSize: '14px', padding: '9px 12px'}}>
-                                     אנחנו מסכימים (0):
+                                     אנחנו מסכימים על (0):
                                     <br/>
                                     <p8 style={{fontWeight: 'normal', fontSize: '14px'}}>
                                         אני ואתה לא באותו ראש
@@ -181,7 +181,7 @@ const PartyCard = React.memo(function({name,agreed_laws, disagreed_laws}) {
 
                                     :
                             <th  style={{background: 'transparent' ,color: 'rgba(24,24,53,0.8)', fontSize: '14px', padding: '9px 12px'}}>
-                                     אנחנו מסכימים ({agreed_laws === "" ? 0 : agreed_laws.split('#').length}):
+                                     אנחנו מסכימים על ({agreed_laws === "" ? 0 : agreed_laws.split('#').length}):
                                 <th style={{width: '70%'}}>חוק</th>
                                 <th style={{width: '15%',background: 'linear-gradient(45deg,green 20%, #daded8 90%)', color: 'rgba(24,24,53,0.8)'}}>הסכמנו איתך</th>
                                 <th style={{width: '15%',background: 'linear-gradient(45deg, red 20%, #cfb1b9 90%)', color: 'rgba(24,24,53,0.8)'}}>לא הסכמנו איתך</th>
@@ -198,7 +198,7 @@ const PartyCard = React.memo(function({name,agreed_laws, disagreed_laws}) {
                     <table style={{minWidth: '100%', textAlign: 'center'}}>
                             { disagreed_laws === "" || disagreed_laws=== null ?
                                 <th  style={{minWidth: '100%',textAlign: 'center', background: 'transparent' ,color: 'rgba(24,24,53,0.8)', fontSize: '14px', padding: '9px 12px'}}>
-                                     אנחנו לא מסכימים (0):
+                                     אנחנו לא מסכימים על (0):
                                 <br/>
                                 <p8 style={{fontWeight: 'normal', fontSize: '14px'}}>
                                 שתי טיפות מים אנחנו
@@ -209,7 +209,7 @@ const PartyCard = React.memo(function({name,agreed_laws, disagreed_laws}) {
 
                                 :
                                 <th style={{background: 'transparent' ,color: 'rgba(24,24,53,0.8)', fontSize: '14px', padding: '9px 12px'}}>
-                                     אנחנו לא מסכימים ({disagreed_laws === "" ? 0 : disagreed_laws.split('#').length}):
+                                     אנחנו לא מסכימים על ({disagreed_laws === "" ? 0 : disagreed_laws.split('#').length}):
                                 <th style={{width: '70%'}}>חוק</th>
                                 <th style={{width: '15%', background: 'linear-gradient(45deg,green 20%, #daded8 90%)', color: 'rgba(24,24,53,0.8)'}}>הסכמנו איתך</th>
                                 <th style={{width: '15%',background: 'linear-gradient(45deg, red 20%, #cfb1b9 90%)', color: 'rgba(24,24,53,0.8)'}}>לא הסכמנו איתך</th>
