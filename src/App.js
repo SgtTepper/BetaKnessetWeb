@@ -27,6 +27,7 @@ const useStyles = makeStyles({
     display: 'flex', 
     flexDirection: 'column', 
     height: '100vh', 
+    minHeight: "stretch",
     width: '100%',
   },
   particles: {

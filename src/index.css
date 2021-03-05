@@ -2,6 +2,8 @@ html {
   scroll-behavior: smooth;
   overflow: hidden;
   height: -webkit-fill-available;
+  height: -moz-available;
+  height: stretch;
 }
 
 body {
@@ -15,6 +17,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
   min-height: -webkit-fill-available;
+  min-height: -moz-available;
+  min-height: stretch;
 }
 
 code {
