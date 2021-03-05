@@ -39,7 +39,7 @@ export default function IconLabelTabs({value, setValue}) {
                 textColor="primary"
                 aria-label="icon label tabs example"
             >
-                <Tab   className={classes.tab} style={{fontFamily: "Helvetica Neue, sans-serif"}} label="מפלגות רצות"
+                <Tab   className={classes.tab} style={{fontFamily: "Helvetica Neue, sans-serif"}} label="ח''כים רצים"
                    icon={ value===0 ?
                        <DirectionsRun />
                        :<Tooltip placement="top" title="רוצה לשנות זווית ראיה?" style={{backgroundColor:'transparent', color:'gray'}}><DirectionsRun /></Tooltip>}  />
@@ -47,7 +47,7 @@ export default function IconLabelTabs({value, setValue}) {
                       icon={value===1 ?
                           <HourglassFull />
                           :
-                          <Tooltip placement="top" title="רוצה לשנות זווית ראיה?" style={{backgroundColor:'transparent', color:'gray'}}><HourglassFull /></Tooltip>} label="מפלגות בזמן ההצבעה" />
+                          <Tooltip placement="top" title="רוצה לשנות זווית ראיה?" style={{backgroundColor:'transparent', color:'gray'}}><HourglassFull /></Tooltip>} label="מפלגות עבר" />
             </Tabs>
         </Paper>
     );

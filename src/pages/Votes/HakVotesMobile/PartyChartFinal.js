@@ -145,7 +145,7 @@ const PartyName = React.memo(function ({...props}) {
             leaveTouchDelay= {20000}
         >
             <div
-                className={(diff > 0) ? 'green-bubble-party':(diff < 0)?'red-bubble-party':''}
+                className={(diff > 0) ? 'green-bubble-party':(diff < 0)?'red-bubble-party':'gray-bubble-party'}
                 style={{
                     display: 'flex',
                     justifyItems: 'stretch',

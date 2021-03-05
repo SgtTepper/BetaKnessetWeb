@@ -24,6 +24,12 @@
 .green-bubble-party {
     background-color: rgba(28, 221, 47, 0.05);
 }
+.gray-bubble-party:hover {
+    background-color: rgba(71, 69, 69, 0.2);
+}
+.gray-bubble-party {
+    background-color: rgba(59, 58, 58, 0.1);
+}
 
 h1 {
     color: #111;

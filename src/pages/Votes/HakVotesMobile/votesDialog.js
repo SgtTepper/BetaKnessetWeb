@@ -22,7 +22,7 @@ export default function VotesDialog({open, setOpen}) {
                 <br/>
                 .גודל הבועות מחושב באופן מצטבר בהתאם למה שהצבעת עד כה
                 <br/>
-                כדי לראות את הבועות <strong  >החלק ימינה</strong>
+                כדי לראות את הבועות <strong  >החליקו שמאלה</strong>
             </DialogContentText>
             <DialogActions>
                 <Button style= {{backgroundColor:'blue', color:'white'}} onClick={handleClose}> הבנתי</Button>

@@ -195,7 +195,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                                 style={{fontFamily: 'Helvetica Neue, sans-serif', textAlign: 'center', fontSize: "15px", paddingRight: '1.5vw', }}
 
                             >
-                                <Typography className={classes.heading} style={{fontFamily: 'Helvetica Neue, sans-serif', textAlign: 'center', fontSize: "13px"}}>
+                                <Typography className={classes.heading} style={{fontFamily: 'Helvetica Neue, sans-serif', textAlign: 'center', fontSize: "15px"}}>
 
                                     מה הצעת החוק אומרת?
                                 </Typography>
