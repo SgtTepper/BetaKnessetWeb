@@ -15,10 +15,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-  min-height: -moz-available;
-  min-height: stretch;
+  height: 100vh;
+  height: -webkit-fill-available;
+
+  display: flex;
+  flex-direction: column;
 }
 
 code {

@@ -8,6 +8,7 @@ import { CircularProgress, ThemeProvider } from '@material-ui/core'
 import Particles from 'react-particles-js'
 import { makeStyles } from '@material-ui/core/styles'
 import { Typography } from '@material-ui/core'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 import config from './config'
 import theme from './theme'
@@ -24,9 +25,10 @@ const FrameApp = lazy(() => import('./pages/FrameApp'))
 
 const useStyles = makeStyles({
   root: {
+    flex: 1,
     display: 'flex', 
     flexDirection: 'column', 
-    height: '100vh', 
+    height: '100%', 
     minHeight: "stretch",
     width: '100%',
   },
@@ -90,7 +92,11 @@ function LightweightLoader() {
 }
 
 function CustomParticles() {
+  const isBigScreen = useMediaQuery('(min-width:600px)')
   const classes = useStyles()
+  
+  if (!isBigScreen)
+    return null
   return <Particles params={particlesConfig} className={classes.particles} />
 }
 

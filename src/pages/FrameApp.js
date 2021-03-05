@@ -14,7 +14,7 @@ const FrameApp = React.memo(function ({url, title}) {
                 display: 'flex', 
                 placeContent: 'center'
             }}>
-                <iframe title={title} src={url} style={{width: '100%', height: '100%'}} />
+                <iframe title={title} src={url} style={{width: '100%'}} />
             </div>
         </ScrollPage>
     )

@@ -86,7 +86,6 @@ const useStyles = makeStyles({
       placeContent: 'space-between',
       placeItems: 'center',
       padding:' 0 1em 0 0',
-      height: "3em",
       "& $logo": {
         fontSize: "85%",
       },
