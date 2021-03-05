@@ -127,9 +127,9 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                           onClick={() => {setStarted(false)}} />
                 <br/>
                 <h2 style={{letterSpacing: '0.7px', textAlign: 'right', minHeight:'60px', fontSize:'15px', fontWeight:'normal', paddingRight:'15px'}}>
-                    <span style={{color:'green'}}>שוליים ירוקים</span> - מסכים איתך
+                    <span style={{color:'green'}}>ירוקים</span> - מסכים איתך
                     <br/>
-                    <span style={{color:'red'}}>שוליים אדומים </span> - לא מסכים איתך
+                    <span style={{color:'red'}}>אדומים </span> - לא מסכים איתך
                     <br/>
                     <span style={{fontSize:'17px'}}>גדול</span> - קיצוני בהסכמה\חוסר הסכמה
                     <br/>
@@ -211,9 +211,9 @@ export default function Questions({rule, remove_random_rule, handle_against, han
 
             <br/>
             <h2 style={{letterSpacing: '0.7px', textAlign: 'right', minHeight:'60px', fontSize:'15px', fontWeight:'normal', paddingRight:'15px'}}>
-                <span style={{color:'green'}}>שוליים ירוקים</span> - מסכים איתך
+                <span style={{color:'green'}}>ירוקים</span> - מסכים איתך
                     <br/>
-                <span style={{color:'red'}}>שוליים אדומים </span> - לא מסכים איתך
+                <span style={{color:'red'}}>אדומים </span> - לא מסכים איתך
                     <br/>
                 <span style={{fontSize:'17px'}}>גדול</span> - קיצוני בהסכמה\חוסר הסכמה
                 <br/>

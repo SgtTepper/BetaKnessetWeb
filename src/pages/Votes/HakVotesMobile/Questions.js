@@ -157,9 +157,9 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                 <MyButton style={{ marginBottom: '0.5em',marginTop: '0.2em', borderRadius: '20' }} startIcon={<Refresh style={{ boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)', marginLeft: '11px', color: 'rgb(158,175,231)', fontSize:60, textAlign:'center'}}  />}
                           onClick={() => {setStarted(false)}} />
                 <h2 style={{letterSpacing: '0.5px', textAlign: 'right', minHeight:'15vh', fontSize:'12px', fontWeight:'normal', paddingRight:'15px'}}>
-                    <span style={{color:'green'}}>שוליים ירוקים</span> - מסכים איתך
+                    <span style={{color:'green'}}>ירוקים</span> - מסכים איתך
                     <br/>
-                    <span style={{color:'red'}}>שוליים אדומים </span> - לא מסכים איתך
+                    <span style={{color:'red'}}>אדומים </span> - לא מסכים איתך
                     <br/>
                     <span style={{fontSize:'14px'}}>גדול</span> - קיצוני בהסכמה\חוסר הסכמה
                     <br/>
@@ -253,9 +253,9 @@ export default function Questions({rule, remove_random_rule, handle_against, han
 
                     <br/>
                     <h2 style={{letterSpacing: '0.5px', textAlign: 'right', minHeight:'15vh', fontSize:'12px', fontWeight:'normal', paddingRight:'15px'}}>
-                    <span style={{color:'green'}}>שוליים ירוקים</span> - מסכים איתך
+                    <span style={{color:'green'}}>ירוקים</span> - מסכים איתך
                         <br/>
-                    <span style={{color:'red'}}>שוליים אדומים </span> - לא מסכים איתך
+                    <span style={{color:'red'}}>אדומים </span> - לא מסכים איתך
                         <br/>
                     <span style={{fontSize:'14px'}}>גדול</span> - קיצוני בהסכמה\חוסר הסכמה
                     <br/>
