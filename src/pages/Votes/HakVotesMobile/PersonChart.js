@@ -9,6 +9,8 @@ import "../index.css"
 import { imageOrDefault } from '../../../utils'
 import config from '../../../config'
 import DiscreteSlider from "./Slider";
+import Particles from "react-particles-js";
+import particlesConfig from "../../../particles.config.json";
 
 
 const useStyles = makeStyles({
@@ -158,6 +160,26 @@ const PersonChart = React.memo(function ({setLoading, queryString, setWorstParty
         style: {backgroundColor: 'transparent',},
 
     })
+    if (queryString == "") {
+        return(
+            <div  style={{ marginLeft: "auto !important",  marginRight: "auto !important", width:'100vw', maxHeight: '100vh', placeItems: 'center', float:'left', textAlign:'center'}} >
+            <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+            <h1 style={{fontSize:'30px'}}>עוד לא הצבעת... אחרי שתצביעי תחזרי</h1>
+                <h1>🙋‍♀️</h1>
+
+            </div>
+
+        )
+
+        } else {
     return (
         <>
             <div  style={{ marginLeft: "auto !important",  marginRight: "auto !important", width:'100vw', maxHeight: '100vh', placeItems: 'center', float:'left', textAlign:'center'}} className={classes.root}>
@@ -187,8 +209,9 @@ const PersonChart = React.memo(function ({setLoading, queryString, setWorstParty
                 </div>
 
             </div>
+
         </>
-    );
+    );}
 })
 export default PersonChart;
 

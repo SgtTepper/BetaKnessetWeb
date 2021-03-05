@@ -217,6 +217,7 @@ export default function HakVotes({subjects, setStarted, allRules}) {
                                  setWorstParty={setWorstParty} setBestPartyImg={setBestPartyImg}
                                  setWorstPartyImg={setWorstPartyImg}/>
 
+
                     </div>
                     <div  style={{width:'100vw', overflow:'hidden'}}>
                         <Bubble  queryString={queryString} partyPerson={1}

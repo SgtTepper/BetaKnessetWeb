@@ -190,12 +190,12 @@ export default function VotesMobile() {
                                     סימולצית ההצבעות נועדה לעזור לך לקבל החלטה במי לבחור בבחירות הקרובות.
                                     <br/>
                                     הסימולציה מאפשרת לך להבין אילו חברי כנסת <strong> באמת </strong> משקפים את
-                                    עמדותייך.
+                                    עמדותיך.
                                     <br/>
                                     <br/>
-                                    במהלך הסימולציה יוצגו בפנייך הצעות חוק שהועלו במליאה בשנים האחרונות ובכל
+                                    במהלך הסימולציה יוצגו בפניך הצעות חוק שהועלו במליאה בשנים האחרונות ובכל
                                     <br/>
-                                    שלב יהיה ניתן לבחור איך את היית מצביעה - האם  <span style={{color:'green'}}>בעד</span> או <span  style={{color:'red'}}>נגד</span> הצעת החוק.
+                                    שלב יהיה ניתן לבחור איך את\ה היית מצביע\ה - האם  <span style={{color:'green'}}>בעד</span> או <span  style={{color:'red'}}>נגד</span> הצעת החוק.
                                     <br/>
                                     הסימולציה מחשבת בזמן אמת ובהסתמך על כלל ההצבעות שלך בסימולציה מי
                                     <br/>
@@ -213,7 +213,7 @@ export default function VotesMobile() {
                 </>
                 <>
                     <div>
-                        <p style={{float: 'right', fontSize: '20px',  marginBottom:'0em'}}> מה מעניין אתכם </p>
+                        <p style={{float: 'right', fontSize: '20px',  marginBottom:'0em'}}> מה מעניין אותך </p>
                         <div style={{float: 'left'}}>
                             <AlertDialogSlide startScreen={true} allRules={rules}/>
                         </div>
