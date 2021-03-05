@@ -91,8 +91,8 @@ const MyButton = withStyles(styleButton)(MyButtonRaw);
 
 
 export default function Questions({rule, remove_random_rule, handle_against, handle_for, finished, back_to_subjects,
-                                      keep_going, partyPerson, setPartyPerson, allRules, queryString, minDifference,
-                                      setMinDifference, setStarted, maxDifference, rulesLength, bestParty, worstParty, worstPartyImg, bestPartyImg}) {
+                                      keep_going, partyPerson, setPartyPerson, allRules, queryString,
+                                    setStarted, maxDifference, rulesLength, bestParty, worstParty, worstPartyImg, bestPartyImg}) {
 
 
     const classes = useStyles();
@@ -147,12 +147,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                 </h2>
                 <VotesShareButtons/>
                 <br/>
-                <div style={{marginRight:'2.5vw' ,padding: '0em 0.1em' , position: 'relative', textAlign: 'center'}}>
-                <IconLabelTabs  value={partyPerson} setValue={setPartyPerson}/>
-                </div>
                 <br/>
-                {(partyPerson == 0 && queryString.split(',').length > 1 )? (<DiscreteSlider setFirstTimeUsed={setFirstTimeUsed} firstTimeUsed={firstTimeUsed} queryString={queryString} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
-                    ( <></>)}
                 <br/>
                 <MyButton style={{ marginBottom: '0.5em',marginTop: '0.2em', borderRadius: '20' }} startIcon={<Refresh style={{ boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)', marginLeft: '11px', color: 'rgb(158,175,231)', fontSize:60, textAlign:'center'}}  />}
                           onClick={() => {setStarted(false)}} />
@@ -243,13 +238,9 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                             לדלג
                         </Button>
                     </div>
+
                     <br/>
-                    <div style={{marginRight:'2.5vw' ,padding: '0em 0.1em' , position: 'relative', textAlign: 'center'}}>
-                        <IconLabelTabs  value={partyPerson} setValue={setPartyPerson}/>
-                    </div>
-                    <br/>
-                    {(partyPerson == 0 && queryString.split(',').length>1) ? (<DiscreteSlider setFirstTimeUsed={setFirstTimeUsed} firstTimeUsed={firstTimeUsed} queryString={queryString} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
-                        ( <></>)}
+
 
                     <br/>
                     <h2 style={{letterSpacing: '0.5px', textAlign: 'right', minHeight:'15vh', fontSize:'12px', fontWeight:'normal', paddingRight:'15px'}}>

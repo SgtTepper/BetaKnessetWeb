@@ -5,7 +5,7 @@ import AlertTitle from '@material-ui/lab/AlertTitle';
 import { useLocation, useHistory, useParams } from "react-router-dom"
 import '../Main/index.css'
 import './index.css'
-import HakVotesMobile from "./HakVotesMobile";
+import HakVotesMobile from "./HakVotesMobile/index";
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';

@@ -13,22 +13,6 @@ import PartyChart from "./PartyChart";
 import PartyChartFinal from "./PartyChartFinal"
 
 
-const useStyles = makeStyles({
-    root: {
-        flexGrow: 1,
-        maxWidth: 600,
-        position: 'absolute',
-        right: '25%'
-    },
-});
-
-
-const PersonTooltip = withStyles((theme) => ({
-    tooltip: {
-        boxShadow: theme.shadows[1],
-    },
-}))(Tooltip);
-
 const Bubble = React.memo(function ({queryString, partyPerson, minDifference, setMaxDifference, setWorstParty,
                                         setBestParty, setBestPartyImg, setWorstPartyImg}) {
     const [loading, setLoading] = useState(false)

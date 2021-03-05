@@ -12,6 +12,9 @@ import Loader from "../../../components/VotesMobileLoader";
 import {makeStyles} from "@material-ui/core/styles";
 import SwipeableViews from 'react-swipeable-views';
 import config from '../../../config.json'
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs"
+import Tab from "@material-ui/core/Tab"
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -57,13 +60,22 @@ export default function HakVotes({subjects, setStarted, allRules}) {
     const [finished, setFinished] = useState(false)
     const [lawsCounter, setLawsCounter] = useState(0)
     const [partyPerson, setPartyPerson] = useState(0)
-    const [minDifference, setMinDifference] = useState(0);
     const [maxDifference, setMaxDifference] = useState(0);
     const [numOfRules, setNumOfRules] = useState(0)
     const [bestParty, setBestParty] = useState(0)
     const [worstParty, setWorstParty] = useState(0)
     const [bestPartyImg, setBestPartyImg] = useState(0)
     const [worstPartyImg, setWorstPartyImg] = useState(0)
+    const [value, setValue] = React.useState(0);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
+    const handleChangeIndex = (index) => {
+        setValue(index);
+    };
+
 
     console.log("HakVotes")
     console.log(subjects);
@@ -160,8 +172,24 @@ export default function HakVotes({subjects, setStarted, allRules}) {
                 zIndex: '1',
 
             }}>
-                <SwipeableViews style={{direction: 'rtl'}}>
-
+                <AppBar position="static" color="default" dir='ltr' >
+                    <Tabs
+                        value={value}
+                        onChange={handleChange}
+                        indicatorColor="primary"
+                        textColor="primary"
+                        variant="fullWidth"
+                        aria-label="full width tabs example"
+                    >
+                        <Tab label="הצעות חוק" />
+                        <Tab label="ח''כים רצים"  />
+                        <Tab label="מפלגות עבר" />
+                    </Tabs>
+                </AppBar>
+                <SwipeableViews style={{direction: 'rtl'}}
+                                index={value}
+                                // axis={'x-reverse'}
+                                onChangeIndex={handleChangeIndex}>
 
                     <div  style={{width:'100vw', display: 'flex',
                         flexDirection: 'column',
@@ -177,14 +205,21 @@ export default function HakVotes({subjects, setStarted, allRules}) {
                                    back_to_subjects={back_to_subjects} keep_going={keep_going}
                                    partyPerson={partyPerson}
                                    setPartyPerson={setPartyPerson} queryString={queryString}
-                                   minDifference={minDifference} setMinDifference={setMinDifference}
+
                                    setStarted={setStarted} maxDifference={maxDifference} rulesLength={numOfRules}
                                    bestParty={bestParty} worstParty={worstParty} bestPartyImg={bestPartyImg}
                                    worstPartyImg={worstPartyImg}/>
 
                     </div>
                     <div  style={{width:'100vw', overflow:'hidden'}}>
-                        <Bubble  minDifference={minDifference} queryString={queryString} partyPerson={partyPerson}
+                        <Bubble  queryString={queryString} partyPerson={0}
+                                 setMaxDifference={setMaxDifference} setBestParty={setBestParty}
+                                 setWorstParty={setWorstParty} setBestPartyImg={setBestPartyImg}
+                                 setWorstPartyImg={setWorstPartyImg}/>
+
+                    </div>
+                    <div  style={{width:'100vw', overflow:'hidden'}}>
+                        <Bubble  queryString={queryString} partyPerson={1}
                                  setMaxDifference={setMaxDifference} setBestParty={setBestParty}
                                  setWorstParty={setWorstParty} setBestPartyImg={setBestPartyImg}
                                  setWorstPartyImg={setWorstPartyImg}/>

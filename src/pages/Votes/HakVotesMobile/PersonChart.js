@@ -8,6 +8,7 @@ import "../index.css"
 
 import { imageOrDefault } from '../../../utils'
 import config from '../../../config'
+import DiscreteSlider from "./Slider";
 
 
 const useStyles = makeStyles({
@@ -35,8 +36,9 @@ const PersonTooltip = withStyles((theme) => ({
 
 
 
-const PersonChart = React.memo(function ({setLoading, queryString, minDifference, setMaxDifference, setWorstParty, setBestParty, setBestPartyImg, setWorstPartyImg}) {
+const PersonChart = React.memo(function ({setLoading, queryString, setMaxDifference, setWorstParty, setBestParty, setBestPartyImg, setWorstPartyImg}) {
     const [data, setData] = useState([])
+    const [minDifference, setMinDifference] = useState(0);
 
     console.log(minDifference)
     useEffect(() => {
@@ -179,6 +181,8 @@ const PersonChart = React.memo(function ({setLoading, queryString, minDifference
                         // onLeafClick={n => n.data.result && viewPersonQuotes(n.data.result.PersonID)}
                     />
                 </div>
+                {/*{(queryString.split(',').length>1) ? (<DiscreteSlider setFirstTimeUsed={setFirstTimeUsed} firstTimeUsed={firstTimeUsed} queryString={queryString} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :*/}
+                    ( <></>)}
             </div>
         </>
     );

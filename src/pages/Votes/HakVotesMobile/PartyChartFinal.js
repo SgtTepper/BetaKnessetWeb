@@ -24,7 +24,7 @@ const useStyles = makeStyles({
         flexGrow: 1,
         maxWidth: 600,
         position: 'absolute',
-        left:'75%'
+        left:'170%'
     },
 });
 
