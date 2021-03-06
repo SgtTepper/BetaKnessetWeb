@@ -134,7 +134,7 @@ const QuoteView = React.memo(function ({documentID, documentType, setLoading}) {
         setLoading(true)
         try {
             const quotes = await (await fetch(`${config.server}/DocumentQuotes?documentId=${documentID}&documentType=${documentType}&index=${index}`)).json()
-            setData(quotes.quotes)            
+            setData(quotes)            
         } catch(e) {
             // TODO handle errors
             console.error(e)
