@@ -77,7 +77,6 @@ export default function HakVotes({subjects, setStarted, allRules}) {
 
 
     console.log("HakVotes")
-    console.log(`curr_rule: ${curr_rule[0].description}`);
     useEffect(() => {
         async function fetchMyAPI() {
             setLoading(true)
@@ -154,7 +153,7 @@ export default function HakVotes({subjects, setStarted, allRules}) {
                 direction:'rtl',
                 zIndex: '1',
             }}>
-                    {/*<Loader style={{width:'100vw'}}show={loading}/>*/}
+                    <Loader style={{width:'100vw'}}show={loading}/>
 
             </div>
         )
