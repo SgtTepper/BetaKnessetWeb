@@ -14,5 +14,5 @@
       "url": "https://beta-knesset-votes-simulator.vercel.app/"
     }
   ],
-  "showOverloadedScreen": false
+  "showOverloadedScreen": true
 }
