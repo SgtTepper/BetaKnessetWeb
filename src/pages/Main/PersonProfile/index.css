@@ -11,7 +11,8 @@
 	"gap-bottom gap-bottom mid-content side-content";
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 600px),
+	   screen and (max-height: 400px) {
 	.person-grid-container {
 		display: flex;
 		flex-direction: column;
@@ -121,7 +122,8 @@
 	width: 100%;
  }
 
- @media screen and (max-width: 600px) {
+ @media screen and (max-width: 600px),
+        screen and (max-height: 400px) {
 	.person-quotes-search {
 		padding: 1em .5em 0;
 	}

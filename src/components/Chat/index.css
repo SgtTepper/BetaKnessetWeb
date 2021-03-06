@@ -378,7 +378,8 @@ input.textarea {
     transform: scale(1); 
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 600px),
+	   screen and (max-height: 400px) {
     .chat li .share-buttons { 
         opacity: 1;
         transform: scale(1); 

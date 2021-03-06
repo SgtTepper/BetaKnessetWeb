@@ -129,7 +129,7 @@ export function useWindowSize() {
 }
 
 export function useBigScreen() {
-  return useMediaQuery('(min-width:600px)')
+  return useMediaQuery('(min-width:600px) and (min-height:400px)')
 }
 
 // from https://usehooks.com/useLocalStorage/

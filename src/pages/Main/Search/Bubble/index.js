@@ -13,7 +13,7 @@ import config from '../../../../config'
 
 import defaultBubbles from '../../../../defaultTopics'
 
-const minSize = 250
+const minSize = 50
 const maxWidth = 750
 const maxHeightRatio = .75
 const minRatioForImage = .035
