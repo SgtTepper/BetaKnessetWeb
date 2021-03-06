@@ -77,6 +77,9 @@ export default function App() {
   const [safariApproved, setSafariApproved] = useSessionStorage('safariApproved', false)
   const showSafari = isSafari && !safariApproved
 
+  if (config.showOverloadedScreen)
+    return <ThemeProvider theme={theme}><OverloadScreen /></ThemeProvider>
+
   return (
     <ThemeProvider theme={theme}>
       <SafariDisclaimer open={showSafari} setOpen={b => setSafariApproved(!b)} />
@@ -190,6 +193,40 @@ function SafariDisclaimer({open, setOpen}) {
           <Button color="textSecondary" variant="contained" size="large" onClick={() => setOpen(false)}>
             המשך בכל זאת
           </Button>
+        </Container>
+      </Fade>
+  </Modal>
+  )
+}
+
+function OverloadScreen() { 
+  const classes = useStyles()
+  return (
+    <Modal
+      className={classes.modal}
+      open={true}
+      onClose={() => void(0)}
+      closeAfterTransition
+      BackdropComponent={Backdrop}
+      BackdropProps={{
+        timeout: 500,
+        className: classes.backdrop,
+      }}
+    >
+      <Fade in={true}>
+        <Container className={classes.container}>
+          <div>
+            <Typography variant="h3">איזה עומס!</Typography>
+          </div>
+
+          <div>
+            <Typography variant="h5">
+              לא ציפינו לכזו כמות של תעבורה,
+            </Typography>
+            <Typography variant="h5">
+              נחזור במהרה יותר מוכנים לכמות המשתמשים 😋
+            </Typography>
+          </div>
         </Container>
       </Fade>
   </Modal>

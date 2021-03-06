@@ -13,5 +13,6 @@
       "title": "הצבעות",
       "url": "https://beta-knesset-votes-simulator.vercel.app/"
     }
-  ]
+  ],
+  "showOverloadedScreen": true
 }
