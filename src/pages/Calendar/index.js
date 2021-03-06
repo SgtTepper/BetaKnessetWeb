@@ -5,97 +5,71 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import listPlugin from '@fullcalendar/list'
 import interactionPlugin from '@fullcalendar/interaction'
+import Typography from '@material-ui/core/Typography'
 
 import { ScrollPage } from '../../components/ScrollableView'
 import './index.css'
 import config from '../../config'
+import { useBigScreen } from '../../utils'
 
-class CalendarView extends React.Component {
+const CalendarComponent = React.memo(function ({loading, ...props}) {
+  return (
+    <div className='calendar demo-app'>
+      <div className='demo-app-main' style={{position: 'relative'}}>        
+        <FullCalendar
+          initialView='listWeek'
+          locale={heLocale}
+          editable={false}
+          selectable={true}
+          selectMirror={true}
+          dayMaxEvents={true}
+          weekends={true}
+          eventContent={Event} // custom render function
+          {...props}
+        />
+      </div>
+      <Typography style={{
+        position: 'absolute', 
+        textAlign: 'center', 
+        fontSize: '20pt',
+        width: '100%', 
+        backgroundColor: '#0048dd', 
+        color: 'white', 
+        padding: '.3em 0',
+        opacity: loading > 0 ? 1 : 0,
+        zIndex: 10,
+        bottom: 0,
+        transition: 'opacity .4s ease-in-out',
+      }}>טוען...</Typography>
+    </div>
+  )
+})
 
+class CalendarView extends React.PureComponent {
   state = {
-    weekendsVisible: true,
-    currentEvents: [],
+    currentEvents: {},
     loading: 0,
   }
 
   render() {
     return (
-      <div className='calendar demo-app'>
-        {/*this.renderSidebar()*/}
-        <div className='demo-app-main' style={{position: 'relative'}}>        
-          <FullCalendar
-            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
-            headerToolbar={{
-              left: 'prev,next today',
-              center: 'title',
-              right: 'listWeek,dayGridMonth,timeGridWeek,timeGridDay'
-            }}
-            initialView='listWeek'
-            theme='litera'
-            locale={heLocale}
-            editable={false}
-            selectable={true}
-            selectMirror={true}
-            dayMaxEvents={true}
-            weekends={true}
-            events={Object.values(this.state.currentEvents)}
-            datesSet={this.handleDates.bind(this)}
-            eventContent={Event} // custom render function
-            eventClick={this.handleEventClick}
-            select={console.log}
-          />
-        </div>
-        <div style={{
-          position: 'absolute', 
-          textAlign: 'center', 
-          fontSize: '20pt',
-          width: '100%', 
-          backgroundColor: '#0011aa', 
-          color: 'white', 
-          padding: '.1em 0',
-          opacity: this.state.loading > 0 ? .3 : 0,
-          zIndex: 10,
-          bottom: 0,
-          transition: 'opacity .1s ease-in-out',
-        }}>טוען...</div>
-      </div>
-    )
-  }
-            //eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
-
-  renderSidebar() {
-    return (
-      <div className='demo-app-sidebar'>
-        <div className='demo-app-sidebar-section'>
-          <h2>Instructions</h2>
-          <ul>
-            <li>Select dates and you will be prompted to create a new event</li>
-            <li>Drag, drop, and resize events</li>
-            <li>Click an event to delete it</li>
-          </ul>
-        </div>
-        <div className='demo-app-sidebar-section'>
-          <label>
-            <input
-              type='checkbox'
-              checked={this.state.weekendsVisible}
-              onChange={this.handleWeekendsToggle}
-            ></input>
-            toggle weekends
-          </label>
-        </div>
-        <div className='demo-app-sidebar-section'>
-          <h2>All Events ({this.state.currentEvents.length})</h2>
-          <ul>
-            {this.state.currentEvents.map(renderSidebarEvent)}
-          </ul>
-        </div>
-      </div>
+      <CalendarComponent 
+        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
+        headerToolbar={{
+          left: 'prev,next today',
+          center: 'title',
+          right: 'listWeek,dayGridMonth,timeGridWeek,timeGridDay'
+        }}
+        events={Object.values(this.state.currentEvents)}
+        datesSet={this.handleDates.bind(this)}
+        eventClick={this.handleEventClick}
+        loading={this.state.loading}
+      />
     )
   }
 
   handleEventClick = (selectInfo) => {
-		console.log(selectInfo)
+    console.debug(selectInfo)
   }
 
   handleEvents = (events) => {
@@ -109,8 +83,6 @@ class CalendarView extends React.Component {
     fetch(`${config.server}/KnessetSchedule?StartDate=${fetchInfo.start.toISOString()}&FinishDate=${fetchInfo.end.toISOString()}`, fetchInfo)
     .then(res => res.json())
     .then(data => {
-      console.log("Rows:", data.length)
-
       const events = {}
       for (const r of data) {
         events[r.result.sessionID] = {
@@ -173,20 +145,28 @@ function PlenumEvent({event, items, filePath}) {
   )
 }
 
-function renderSidebarEvent(event) {
-  return null
-  /*
-  return (
-    <li key={event.id}>
-      <b>{formatDate(event.start, {year: 'numeric', month: 'short', day: 'numeric'})}</b>
-      <ul>
-        {event.items.map(i => 
-          <li key={i.itemID}>{truncateName(i.itemName, 24)}</li>
-        )}
-      </ul>
-    </li>
-  )
-  */
+class MobileCalendarView extends CalendarView {
+  render() {
+    return (
+      <CalendarComponent 
+      plugins={[listPlugin]}
+      headerToolbar={{
+        left: '',
+        center: 'title',
+        right: ''
+      }}
+      footerToolbar={{
+        left: 'prev,next',
+        center: '',
+        right: 'today'
+      }}
+      events={Object.values(this.state.currentEvents)}
+      datesSet={this.handleDates.bind(this)}
+      eventClick={this.handleEventClick}
+      loading={this.state.loading}
+      />
+    )
+  }
 }
 
 function truncateName(n, l) {
@@ -195,15 +175,19 @@ function truncateName(n, l) {
   return n.substring(0, l) + "..."
 }
 
-//const formatMonth = (s,e) => `${s.getYear()}-${s.getMonth()}/${s.getYear()}-${s.getMonth()}`
-
-
-
 export default React.memo(function Calendar() {
+  const isBigScreen = useBigScreen()
   return (
     <ScrollPage id='calendar' limit>
       <div style={{position: 'relative', width: '100%'}}>
-        <CalendarView />
+        <Typography variant="h4" component="h2"
+          style={{textAlign: 'center', margin: '.3em 0'}}>
+          לו״ז הכנסת
+        </Typography>
+        {isBigScreen
+          ? <CalendarView />
+          : <MobileCalendarView />
+        }
       </div>
     </ScrollPage>
   )

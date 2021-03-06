@@ -9,12 +9,11 @@ import Button from '@material-ui/core/Button'
 import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
 import Drawer from '@material-ui/core/Drawer'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 
-import { useNavigate } from '../../utils'
+import { useNavigate, useBigScreen } from '../../utils'
 import config from '../../config.json'
 import AboutDialog from './About'
 import ContactUsDialog from './ContactUs'
@@ -98,7 +97,7 @@ const useStyles = makeStyles({
 export default function NavigationBar() {
     const [ aboutOpen, setAboutOpen ] = useState(false)
     const [ contactUsOpen, setContactUsOpen ] = useState(false)
-    const isBigScreen = useMediaQuery('(min-width:600px)')
+    const isBigScreen = useBigScreen()
 
     const nav = [
       {

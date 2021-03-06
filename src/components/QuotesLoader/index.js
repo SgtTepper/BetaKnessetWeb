@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react'
 import TextTransition, { presets } from "react-text-transition"
 import CircularProgress from '@material-ui/core/CircularProgress'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 import quotes from './quotes.json'
-import { shuffleArray } from '../../utils'
+import { useBigScreen, shuffleArray } from '../../utils'
 import { makeStyles } from '@material-ui/core'
 
 // initial shuffle to avoid seeding first render
@@ -89,7 +88,7 @@ const useStyles = makeStyles({
 
 const Loader = React.memo(function ({show}) {
     const classes = useStyles()
-    const isBigScreen = useMediaQuery('(min-width:600px)')
+    const isBigScreen = useBigScreen()
     const shuffled = useMemo(() => [...quotes], [])
     const [index, setIndex] = useState(0)
     const intervalId = useRef(null)

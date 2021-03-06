@@ -8,7 +8,7 @@ import Tooltip from '@material-ui/core/Tooltip'
 import Snackbar from '@material-ui/core/Snackbar'
 
 import QuotesLoader from '../../../../components/QuotesLoader'
-import { useQuery, useWindowSize, toNiceDate, imageOrDefault, shuffleArray, useNavigate } from '../../../../utils'
+import { useBigScreen, useQuery, useWindowSize, toNiceDate, imageOrDefault, shuffleArray, useNavigate } from '../../../../utils'
 import config from '../../../../config'
 
 import defaultBubbles from '../../../../defaultTopics'
@@ -85,7 +85,7 @@ export default Bubble
 
 const Chart = React.memo(function ({query, setLoading}) {
     const windowSize = useWindowSize()
-    const isBigScreen = windowSize.width >= maxWidth
+    const isBigScreen = useBigScreen()
     const defaults = useMemo(() => makeDefaultBubbles(defaultBubbles, isBigScreen), [isBigScreen])
     const [data, setData] = useState(defaults)
     const [error, setError] = useState(null)

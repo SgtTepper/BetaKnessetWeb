@@ -1,10 +1,9 @@
 import React, { lazy, Suspense, useState, useEffect } from 'react'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 import Explainer from '../Explainer'
 import config from '../../config'
-import { usePersonID } from '../../utils';
+import { useBigScreen, usePersonID } from '../../utils';
 
 const ReactWordcloud = lazy(() => import('react-wordcloud'))
 
@@ -28,7 +27,7 @@ export default React.memo(function WordCloud() {
 })
 
 const CachedWordCloud = React.memo(({personID}) => {
-  const isBigScreen = useMediaQuery('(min-width:600px)')
+  const isBigScreen = useBigScreen()
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState(null)
   

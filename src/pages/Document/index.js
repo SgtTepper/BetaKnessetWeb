@@ -15,12 +15,11 @@ import Typography from '@material-ui/core/Typography'
 import DescriptionIcon from '@material-ui/icons/Description'
 import LiveTvIcon from '@material-ui/icons/LiveTv'
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
 import Fab from '@material-ui/core/Fab'
 import QuotesLoader from '../../components/QuotesLoader'
 import Chat from '../../components/Chat'
 import config from '../../config'
-import { useQuery, usePersonID, toNiceDate } from '../../utils'
+import { useBigScreen,useQuery, usePersonID, toNiceDate } from '../../utils'
 import { ScrollPage } from '../../components/ScrollableView'
 import ChatLoader from '../../components/ChatLoader'
 
@@ -83,7 +82,7 @@ const DocumentQuotes = React.memo(function ({type}) {
     const classes = useStyles()
     const {id} = useParams()
     const [loading, setLoading] = useState(true)
-    const isBigScreen = useMediaQuery('(min-width:600px)')
+    const isBigScreen = useBigScreen()
     const [drawerOpen, setDrawerOpen] = useState(true)
     const createToggleDrawer = (open) => (event) => {
         if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {

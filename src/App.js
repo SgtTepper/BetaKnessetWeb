@@ -8,11 +8,10 @@ import { CircularProgress, ThemeProvider } from '@material-ui/core'
 import Particles from 'react-particles-js'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 import config from './config'
 import theme from './theme'
-import { useSessionStorage } from './utils'
+import { useSessionStorage, useBigScreen } from './utils'
 import particlesConfig from './particles.config.json'
 import NavigationBar from "./components/NavigationBar"
 import ScrollableView from './components/ScrollableView'
@@ -93,7 +92,7 @@ function LightweightLoader() {
 }
 
 function CustomParticles() {
-  const isBigScreen = useMediaQuery('(min-width:600px)')
+  const isBigScreen = useBigScreen()
   const classes = useStyles()
   
   if (!isBigScreen)

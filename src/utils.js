@@ -1,5 +1,6 @@
 import { useCallback, useState, useEffect } from 'react'
 import { useHistory, useLocation } from "react-router-dom"
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 /** helpers **/
 export const toNiceDate = (d, hours = false) =>  {
@@ -117,6 +118,10 @@ export function useWindowSize() {
   }, []); // Empty array ensures that effect is only run on mount
 
   return windowSize;
+}
+
+export function useBigScreen() {
+  return useMediaQuery('(min-width:600px)')
 }
 
 // from https://usehooks.com/useLocalStorage/

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
 import Typography from '@material-ui/core/Typography'
 
 import { ScrollPage } from '../components/ScrollableView'
@@ -7,13 +6,13 @@ import Loader from '../components/ChatLoader'
 import Chat from '../components/Chat'
 import { WhiteQuotesSearch } from '../components/QuotesSearch'
 import config from '../config'
-import { useQuery } from '../utils'
+import { useBigScreen, useQuery } from '../utils'
 import defaultTopics from '../defaultTopics'
 
 const Quotes = React.memo(function () {
     const [loading, setLoading] = useState(false)
     const randomTopic = defaultTopics[Math.floor(Math.random() * defaultTopics.length)]
-    const isBigScreen = useMediaQuery('(min-width:600px)')
+    const isBigScreen = useBigScreen()
     const prefix = isBigScreen ? "כל נושא שהוא, " : ""
 
     return (
