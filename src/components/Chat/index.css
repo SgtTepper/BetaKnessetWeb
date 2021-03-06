@@ -374,9 +374,15 @@ input.textarea {
     transition: opacity .05s ease-in-out, transform .15s cubic-bezier(1,.32,.82,1.6);
 }
 .chat li:hover .share-buttons {
-    text-align: center;
     opacity: 1;
     transform: scale(1); 
+}
+
+@media screen and (max-width: 600px) {
+    .chat li .share-buttons { 
+        opacity: 1;
+        transform: scale(1); 
+    }
 }
 
 .click-for-more {
