@@ -9,7 +9,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 const DialogContent = withStyles((theme) => ({
   root: {
     padding: theme.spacing(2),
-    fontFamily: "'Secular One', sans-serif",
+    fontFamily: "'Varela Round', sans-serif",
   },
 }))(MuiDialogContent);
 
