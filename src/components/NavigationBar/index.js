@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import IconButton from '@material-ui/core/IconButton'
 import GitHubIcon from '@material-ui/icons/GitHub'
@@ -150,17 +151,16 @@ export default function NavigationBar() {
   
   function Logo() {
     const classes = useStyles()
-    const navigate = useNavigate()
     return (
       <div className={classes.logo}>
-        <a href="#top" onClick={() => navigate({location: '/', hash: '#top'})} style={{
+        <Link to="/#top" style={{
           userSelect: "none",
           WebkitTapHighlightColor: "transparent",
         }}>
           <Typography color="primary" variant="h2" component="h1" className={classes.title}>
               <span className={classes.bigLetter}>ב</span>טא מחוקקי<span className={classes.bigLetter}>ם</span>
           </Typography>
-        </a>
+        </Link>
       </div>
     )
   }
