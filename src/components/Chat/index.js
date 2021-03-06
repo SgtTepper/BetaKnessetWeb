@@ -3,7 +3,7 @@ import Highlighter from "react-highlight-words"
 import clsx from 'clsx'
 import './index.css'
 import {ScrollIntoView} from 'rrc'
-import { useSearchParams, imageOrDefault } from "../../utils"
+import { imageOrDefault, useIndex } from "../../utils"
 import QuoteFooter from "../QuoteFooter"
 
 const ColorHash = require('color-hash')
@@ -51,12 +51,4 @@ function ChatItem(props) {
             </div>
         </li>
     )
-}
-
-export function useIndex() {
-    const urlQuery = useSearchParams()
-    const raw = urlQuery.get("index")
-    if (!raw)
-        return undefined
-    return parseInt(raw)
 }

@@ -19,7 +19,7 @@ import Fab from '@material-ui/core/Fab'
 import QuotesLoader from '../../components/QuotesLoader'
 import Chat from '../../components/Chat'
 import config from '../../config'
-import { useBigScreen,useQuery, usePersonID, toNiceDate } from '../../utils'
+import { useBigScreen,useQuery, useIndex, usePersonID, toNiceDate } from '../../utils'
 import { ScrollPage } from '../../components/ScrollableView'
 import ChatLoader from '../../components/ChatLoader'
 
@@ -125,6 +125,7 @@ const QuoteView = React.memo(function ({documentID, documentType, setLoading}) {
 
     const personID = usePersonID()
     const query = useQuery()
+    const index = useIndex()
 
     useEffect(() => {
         (async () => {
@@ -132,8 +133,8 @@ const QuoteView = React.memo(function ({documentID, documentType, setLoading}) {
             return
         setLoading(true)
         try {
-            const quotes = await (await fetch(`${config.server}/DocumentQuotes?documentId=${documentID}&documentType=${documentType}`)).json()
-            setData(quotes)            
+            const quotes = await (await fetch(`${config.server}/DocumentQuotes?documentId=${documentID}&documentType=${documentType}&index=${index}`)).json()
+            setData(quotes.quotes)            
         } catch(e) {
             // TODO handle errors
             console.error(e)
@@ -142,7 +143,7 @@ const QuoteView = React.memo(function ({documentID, documentType, setLoading}) {
             setLoading(false)
         }
         })()
-    }, [documentID, documentType, setLoading])
+    }, [documentID, documentType, index, setLoading])
 
     let prevSpeaker = null
     return (

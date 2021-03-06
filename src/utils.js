@@ -69,6 +69,14 @@ export function usePersonID() {
   return parseInt(raw)
 }
 
+export function useIndex() {
+  const urlQuery = useSearchParams()
+  const raw = urlQuery.get("index")
+  if (!raw)
+      return undefined
+  return parseInt(raw)
+}
+
 export function useNavigate() {
   const currentQuery = useQuery()
   const currentPersonID = usePersonID()
