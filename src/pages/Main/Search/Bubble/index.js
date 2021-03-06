@@ -135,8 +135,8 @@ const Chart = React.memo(function ({query, setLoading}) {
               .reduce((a, b) => a + b, 0)
 
             const filteredRes = res
-              .filter(r => r.Counter / total > minRatio || r.mk_imgPath !== null)
-              .slice(0, isBigScreen ? -1 : maxBubblesForSmallScreen)
+              .filter(r => r.Counter / total >= minRatio || r.mk_imgPath !== null)
+              .slice(0, isBigScreen ? undefined : maxBubblesForSmallScreen)
 
             setData(filteredRes
               .map(r => ({
