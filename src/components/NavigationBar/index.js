@@ -15,6 +15,7 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 
 import { useNavigate } from '../../utils'
+import config from '../../config.json'
 import AboutDialog from './About'
 import ContactUsDialog from './ContactUs'
 
@@ -191,7 +192,7 @@ const NavBar = React.memo(function ({nav, links}) {
               )
             })}
             <Tooltip title={<h2>מזלגו אותנו ב-GitHub</h2>} arrow>
-              <IconButton href="https://github.com/SgtTepper/BetaKnessetWeb">
+              <IconButton onClick={() => window.open(config.gitUrl, "_blank")}>
                 <GitHubIcon />
               </IconButton>
             </Tooltip>
@@ -254,7 +255,7 @@ const NavDrawer = React.memo(function ({nav, links}) {
                 </ListItem>
               )
             })}
-            <ListItem button href="https://github.com/SgtTepper/BetaKnessetWeb">
+            <ListItem button  onClick={() => window.open(config.gitUrl, "_blank")}>
               <ListItemText primary={<GitHubIcon />} />
             </ListItem>
           </List>
