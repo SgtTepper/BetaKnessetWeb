@@ -125,7 +125,7 @@ function BillExplainer(props) {
       <Explainer {...props}>
           <p>ח"כים יכולים גם ליזום הצעות חוק וגם להצטרף להצעות חוק.</p>
           <p>ברשימה לפניכם אנו מציגים עבור כל ח"כ את רשימת החוקים אותם יזם באופן ישיר בתור "יוזם ראשון".</p>
-          <p>פרטים נוספים על אודות שלבי החקיקה והליך החקיקה <a href="https://main.knesset.gov.il/Activity/Legislation/Documents/Explanation2.pdf" target="_blank" rel="noreferrer">תוכלו למצוא בקישור זה</a></p>
+          <p>פרטים נוספים על אודות שלבי החקיקה והליך החקיקה <u><a href="https://main.knesset.gov.il/Activity/Legislation/Documents/Explanation2.pdf" target="_blank" rel="noreferrer">תוכלו למצוא בקישור זה</a></u></p>
       </Explainer>
     )
 }
