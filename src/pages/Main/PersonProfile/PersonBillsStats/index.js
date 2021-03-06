@@ -69,8 +69,21 @@ export default React.memo(function PersonBillsStats({personID, filter, setFilter
   return (
     <>
       <BillExplainer />
-      <div style={{position: 'absolute', width: '100%', height: '100%', display: 'flex', placeItems: 'center', placeContent: 'center', color: 'white', fontFamily: "'Secular One', sans-serif", pointerEvents: 'none'}}>
-        {total} חוקים
+      <div style={{
+        position: 'absolute', 
+        width: '100%', 
+        height: '100%', 
+        fontSize: '110%',
+        display: 'flex', 
+        placeItems: 'center', 
+        flexDirection: 'column', 
+        placeContent: 'center', 
+        color: 'white', 
+        fontFamily: "'Secular One', sans-serif", 
+        pointerEvents: 'none'}}
+      >
+        <div style={{fontSize: '155%'}}>{total}</div>
+        <div>חוקים</div>
       </div>
       <Doughnut
         data={doughnutData} 
