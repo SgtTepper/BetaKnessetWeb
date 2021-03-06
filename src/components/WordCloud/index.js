@@ -51,7 +51,7 @@ const CachedWordCloud = React.memo(({personID}) => {
   if (!data)
     return null
 
-  options.transitionDuration = isBigScreen ? .4 : 0
+  options.transitionDuration = isBigScreen ? 400 : 0
 
   return (
     <Suspense fallback={<CircularProgress />}>
