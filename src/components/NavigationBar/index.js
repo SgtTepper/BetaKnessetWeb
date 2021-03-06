@@ -155,7 +155,7 @@ export default function NavigationBar() {
       <div className={classes.logo}>
         <a href="#top" onClick={() => navigate({location: '/', hash: '#top'})} style={{
           userSelect: "none",
-          "-webkit-tap-highlight-color": "transparent",
+          WebkitTapHighlightColor: "transparent",
         }}>
           <Typography color="primary" variant="h2" component="h1" className={classes.title}>
               <span className={classes.bigLetter}>ב</span>טא מחוקקי<span className={classes.bigLetter}>ם</span>

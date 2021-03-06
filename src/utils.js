@@ -75,17 +75,17 @@ export function useNavigate() {
   const currentLocation = useLocation()
   const history = useHistory()
 
-  return useCallback(({location, hash, q, personID}) => {
-    const params = new URLSearchParams()
+  return useCallback(({location, hash, q, personID, ...params}) => {
+    const urlParams = new URLSearchParams(params)
 
     q = q !== undefined ? q : currentQuery
     if (q)
-      params.append('q', q)
+      urlParams.append('q', q)
     personID = personID !== undefined ? personID : currentPersonID
     if (personID)
-      params.append('personID', personID)
+      urlParams.append('personID', personID)
     
-    history.push(`${location || currentLocation.pathname}?${params}${hash || ""}`)
+    history.push(`${location || currentLocation.pathname}?${urlParams}${hash || ""}`)
   }, [currentQuery, currentPersonID, currentLocation, history])
 }
 

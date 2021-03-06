@@ -19,8 +19,10 @@ export function getDocumentLink({SessionType, DocumentID, Index, PersonID, query
         urlParams.set('personID', PersonID)
     if (query?.length)
         urlParams.set('q', query)
+    if (Index !== undefined)
+        urlParams.set('index', Index)
 
-    const urlExtension = `${DocumentID}?${urlParams.toString()}${Index !== undefined ? `#q${Index}` : ``}`
+    const urlExtension = `${DocumentID}?${urlParams.toString()}`
 
     switch (SessionType) {
         case "Committee":
