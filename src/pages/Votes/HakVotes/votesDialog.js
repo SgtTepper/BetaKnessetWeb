@@ -14,7 +14,7 @@ export default function VotesDialog({open, setOpen}) {
             <DialogTitle id="alert-dialog-title" style={{color: 'black', marginBottom:'-10px'}}>
                 <h1 style={{fontSize:'20px', color: 'black'}}>
                     הצבעת בהצבעה הראשונה שלך!</h1> </DialogTitle>
-            <DialogContentText style={{fontSize:'15px', fontFamily: "'Helvetica Neue', sans-serif", padding: '0em 0.5em'}}>
+            <DialogContentText style={{fontSize:'15px', fontFamily: "Helvetica Neue, Varela Round, sans-serif", padding: '0em 0.5em'}}>
                 ברוכ\ה הבא\ה לכנסת
                 <br/>
                 <span style={{fontSize:'18px'}}>גודל</span><span style={{fontSize:'16px', color:'green'}}> וצ</span><span style={{fontSize:'16px',color:'red'}}>בע</span> הבועות מחושב באופן  <span style={{fontSize:'16px',fontStyle:'italic', textDecorationLine:'underline'}}> מצטבר</span> בהתאם למה שהצבעת עד כה.

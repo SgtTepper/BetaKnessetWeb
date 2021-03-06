@@ -171,7 +171,7 @@ export default function HakVotes({subjects, setStarted, allRules}) {
                 zIndex: '1',
 
             }}>
-                <AppBar position="static" color="default" dir='ltr'  >
+                <AppBar position="fixed" color="default" dir='ltr'  >
                     <Tabs
                         value={value}
                         onChange={handleChange}

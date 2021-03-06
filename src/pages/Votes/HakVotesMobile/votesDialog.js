@@ -14,7 +14,7 @@ export default function VotesDialog({open, setOpen}) {
             <DialogTitle id="alert-dialog-title" style={{color: 'black', marginBottom:'-10px'}}>
                 <h1 style={{fontSize:'20px', color: 'black'}}>
                     הצבעת בהצבעה הראשונה שלך!</h1> </DialogTitle>
-            <DialogContentText style={{fontSize:'15px', fontFamily: "'Helvetica Neue', sans-serif", padding: '0em 0.5em'}}>
+            <DialogContentText style={{fontSize:'15px', fontFamily: "Helvetica Neue, Varela Round, sans-serif", padding: '0em 0.5em'}}>
                 ברוכ\ה הבא\ה לכנסת
                 <br/>
                 כדי לראות את הבועות <strong style={{fontSize:'17px'}}  >החליק\י שמאלה.</strong>

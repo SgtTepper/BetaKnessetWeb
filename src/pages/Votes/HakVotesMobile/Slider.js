@@ -101,11 +101,11 @@ function DisclaimerDialog({open, setOpen, setFirstTimeUsed}) {
                 <h1 style={{fontSize:'20px', color: 'black'}}>
                     גילית את הסליידר!</h1> </DialogTitle>
             <DialogContentText style={{fontSize:'15px', fontFamily: "'Helvetica Neue', sans-serif", padding: '0em 0.5em'}}>
-                הסליידר מאפשר לך לשחק עם כמות הבועות שאת\ה רואה במסך.
+                הסליידר מאפשר לך לשחק עם כמות הבועות על המסך.
                 <br/>
-                אם תבחר\י להזיז את הסליידר לימין יוצגו רק הח"כים הקיצוניים ביותר
+                הזזת הסליידר לימין תגרור הצגה של הח"כים הקיצוניים ביותר
                 <br/>
-                בדעתם ביחס אלייך - אלו שמסכימים או לא מסכימים איתך באופן קיצוני.
+                בדעתם ביחס אליך - אלו שמסכימים או לא מסכימים איתך באופן קיצוני.
                 <br/>
             </DialogContentText>
             <DialogActions>
