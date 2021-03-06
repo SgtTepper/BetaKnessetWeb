@@ -40,6 +40,7 @@ const CalendarComponent = React.memo(function ({loading, ...props}) {
         zIndex: 10,
         bottom: 0,
         transition: 'opacity .4s ease-in-out',
+        pointerEvents: 'none',
       }}>טוען...</Typography>
     </div>
   )
