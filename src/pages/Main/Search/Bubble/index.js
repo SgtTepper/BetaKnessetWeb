@@ -1,17 +1,24 @@
 import React, { useMemo, useState, useEffect } from 'react'
-
 import "react-vis/dist/style.css"
 import Highlighter from "react-highlight-words"
 import {Treemap} from 'react-vis'
-import { withStyles } from '@material-ui/core/styles'
+import { makeStyles, withStyles } from '@material-ui/core/styles'
 import Tooltip from '@material-ui/core/Tooltip'
+import Link from '@material-ui/core/Link'
 import Snackbar from '@material-ui/core/Snackbar'
+import Drawer from '@material-ui/core/Drawer'
+import Container from '@material-ui/core/Container'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+import PersonIcon from '@material-ui/icons/Person'
+import Button from '@material-ui/core/Button'
 
 import QuotesLoader from '../../../../components/QuotesLoader'
 import { useBigScreen, useQuery, useWindowSize, toNiceDate, imageOrDefault, shuffleArray, useNavigate } from '../../../../utils'
 import config from '../../../../config'
 
 import defaultBubbles from '../../../../defaultTopics'
+import { Typography } from '@material-ui/core'
 
 const minSize = 50
 const maxWidth = 750
@@ -19,6 +26,18 @@ const maxHeightRatio = .75
 const minRatioForImage = .035
 const minRatioForImageSmallScreen = Infinity
 const maxBubblesForSmallScreen = 25
+
+
+const useStyles = makeStyles({
+  drawerPaper: {
+    maxHeight: '65vh',
+  },
+  personCardFlex: {
+    maxHeight: '65vh',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+})
 
 const makeDefaultBubbles = (queries, isBigScreen) => {
   shuffleArray(queries)
@@ -87,21 +106,22 @@ const Chart = React.memo(function ({query, setLoading}) {
     const windowSize = useWindowSize()
     const isBigScreen = useBigScreen()
     const defaults = useMemo(() => makeDefaultBubbles(defaultBubbles, isBigScreen), [isBigScreen])
+    const [personPreview, setPersonPreview] = useState(null)
     const [data, setData] = useState(defaults)
     const [error, setError] = useState(null)
     const navigate = useNavigate()
 
+    const cleanQuery = query.replace('״', '"')
+
     useEffect(() => {
         (async () => {
-        if (!query.length) {
+        if (!cleanQuery.length) {
           setData(defaults)
           return
         }
         setLoading(true)
         setError(null)
         try {
-            const cleanQuery = query.replace('״', '"')
-
             let res = await (await fetch(`${config.server}/Keywords?keyword=${cleanQuery}`)).json()
             if (!res.length) {
               setError(<div>אין תוצאות :(&nbsp;&nbsp; נסו ללחוץ על אחת הבועות?</div>)
@@ -139,7 +159,7 @@ const Chart = React.memo(function ({query, setLoading}) {
             setLoading(false)
         }
         })()
-    }, [query, setLoading, defaults, isBigScreen])
+    }, [cleanQuery, setLoading, defaults, isBigScreen])
 
     return (
         <>
@@ -166,8 +186,12 @@ const Chart = React.memo(function ({query, setLoading}) {
             width={getDimensions(windowSize)}
             getLabel={x => x.element}
             onLeafClick={n => {
-              if (n.data.result)
-                navigate({personID: n.data.result.PersonID, hash: '#person'})
+              if (n.data.result) {
+                if (isBigScreen)
+                  navigate({personID: n.data.result.PersonID, hash: '#person'})
+                else
+                  setPersonPreview(n.data.result)
+              }
               else if (n.data.query)
                 navigate({q: n.data.query})
               else if (n.data.query !== undefined)
@@ -175,8 +199,29 @@ const Chart = React.memo(function ({query, setLoading}) {
             }}
             />
         </div>
+        {!isBigScreen && 
+          <PersonPreview 
+            details={personPreview} 
+            query={cleanQuery}
+            onClose={() => setPersonPreview(null)} 
+          />
+        }
         </>
     );
+})
+
+const PersonPreview = React.memo(function ({onClose, details, query}) {
+  const classes = useStyles()
+  return (
+    <Drawer 
+        anchor="bottom"
+        open={!!details}
+        onClose={onClose}
+        classes={{paper: classes.drawerPaper}}
+    >
+        <MobilePersonCard {...details} query={query} onClose={onClose} />
+    </Drawer>
+  )
 })
 
 const PersonShortName = React.memo(function ({...props}) {
@@ -210,18 +255,112 @@ const PersonShortName = React.memo(function ({...props}) {
   )
 })
 
-const PersonCard = React.memo(function({FirstName, LastName, Text, FactionName, KnessetNum, StartDate, Counter, query}) {
+const MobilePersonCard = React.memo(function({PersonID, FirstName, LastName, Text, FactionName, KnessetNum, 
+  StartDate, Counter, mk_imgPath, query, onClose}) {
+  const classes = useStyles()
+  const navigate = useNavigate()
+  const gotoPerson = () => { 
+    navigate({personID: PersonID, hash: '#person'})
+    onClose()
+  }
 
+  return (
+    <Container className={classes.personCardFlex}>
+      <CardContent>
+        <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', placeItems: 'center', width: '100%'}}>
+          <div 
+            style={{paddingLeft: '.5em', cursor: 'pointer'}} 
+            onClick={gotoPerson}
+          >
+            <div style={{
+                width: 50, height: 50, borderRadius: '100%',
+                background: `url(${imageOrDefault(mk_imgPath, `${FirstName} ${LastName}`, 64)}) center center / cover no-repeat`,
+            }} />
+          </div>
+          <div style={{flex: 1}}>
+            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', placeItems: 'center'}}>
+              <Link component="button" variant="h6" onClick={gotoPerson}>
+                {FirstName} {LastName}
+              </Link>
+              <Typography className={classes.title} color="textSecondary">
+                {Counter} תוצאות
+              </Typography>
+            </div>
+            {(FactionName || KnessetNum) && 
+              <Typography className={classes.pos} color="textSecondary">
+                {FactionName && `${FactionName}, `}הכנסת ה-{KnessetNum}
+              </Typography>
+            }
+          </div>
+        </div>
+      </CardContent>
+      <CardContent style={{overflowY: 'auto'}}>
+        <Typography variant="body2" component="div"><i>
+          ״<Highlighter 
+            highlightStyle={{
+              backgroundColor: '#f0c351'
+            }}
+            searchWords={query.split("^")}
+            autoEscape={true}
+            textToHighlight={Text} 
+          />״
+          <div style={{textAlign: 'left'}}>
+            {StartDate && toNiceDate(new Date(StartDate))}
+          </div>
+        </i></Typography>
+      </CardContent>
+      <CardActions>
+        <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', placeItems: 'center', width: '100%'}}>
+          <Button 
+            size="small" 
+            variant="contained" 
+            color="primary"
+            startIcon={<PersonIcon style={{paddingLeft: '.5em', marginRight: '-.5em'}}/>}
+            onClick={gotoPerson}
+          >
+            לפרופיל
+          </Button>
+        </div>
+      </CardActions>
+    </Container>
+    )
+})
+
+const PersonCard = React.memo(function({FirstName, LastName, Text, FactionName, KnessetNum, StartDate, Counter, query}) {
   return (
     <div style={{padding: '0 .5em', cursor: 'pointer'}}>
       <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', placeItems: 'center'}}>
-        <h1>{FirstName} {LastName}</h1>
-        <h2>{Counter} תוצאות</h2>
+        <Typography variant="h5">{FirstName} {LastName}</Typography>
+        <Typography 
+          style={{
+            fontWeight: 'bold',
+            fontSize: '160%',
+          }}
+        >
+          {Counter} תוצאות
+        </Typography>
       </div>
       {(FactionName || KnessetNum) && 
-        <h2>{FactionName && `${FactionName}, `}הכנסת ה-{KnessetNum}</h2>
+        <Typography 
+          style={{
+            fontSize: "170%", 
+            fontWeight: 'bold'
+          }}
+        >
+          {FactionName && `${FactionName}, `}הכנסת ה-{KnessetNum}
+        </Typography>
       }
-      <h3 style={{fontSize: '140%', letterSpacing: '.25px', wordSpacing: '.5px', fontWeight: 'normal', padding: '0 .25em', lineHeight: '130%'}}><i>
+      <Typography 
+        style={{
+          fontSize: '140%', 
+          letterSpacing: '.25px', 
+          wordSpacing: '.5px', 
+          fontWeight: 'normal', 
+          padding: '0 .25em', 
+          lineHeight: '130%',
+          fontStyle: 'italic',
+        }}
+      >
         ״<Highlighter 
           highlightStyle={{
             backgroundColor: '#f0c351'
@@ -230,8 +369,16 @@ const PersonCard = React.memo(function({FirstName, LastName, Text, FactionName, 
           autoEscape={true}
           textToHighlight={Text} 
         />״
-      </i></h3>
-      <h3 style={{textAlign: 'left'}}><i>{toNiceDate(new Date(StartDate))}</i></h3>
+      </Typography>
+      <Typography 
+        style={{
+          textAlign: 'left', 
+          fontSize: '150%',
+          fontStyle: 'italic',
+        }}
+      >
+        {toNiceDate(new Date(StartDate))}
+      </Typography>
     </div>
   )
 })
