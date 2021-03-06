@@ -147,7 +147,8 @@ const QuoteView = React.memo(function ({documentID, documentType, setLoading}) {
 
     let prevSpeaker = null
     return (
-        <div style={{width: '100%', overflowY: 'auto', display: 'flex', placeContent: 'center'}}>
+        <div style={{width: '100%', overflowY: 'auto', display: 'flex', flexDirection: 'column', placeItems: 'center', placeContent: 'center'}}>
+            <FullProtocolButton url={data[0]?.FilePath} />
             <Chat items={data.map(d => {
                 const ret = {
                     highlight: query,
@@ -159,6 +160,7 @@ const QuoteView = React.memo(function ({documentID, documentType, setLoading}) {
                 prevSpeaker = d.Speaker
                 return ret
             })} />
+            <FullProtocolButton url={data[0]?.FilePath} />
         </div>
     );
 })
@@ -235,5 +237,19 @@ const Metadata = React.memo(function ({documentID, documentType}) {
         </div>
       </CardActions>
     </Container>
+    )
+})
+
+const FullProtocolButton = React.memo(function ({url}) {
+    if (!url)
+        return null
+    return (
+        <div style={{display: 'flex', width: '100%', flexDirection: 'row', placeItems: 'center', placeContent: 'center'}}>
+            <Button color="textSecondary" variant="contained" size="large" style={{margin: '1em'}}
+                href={url} target="_blank" rel="noreferrer"
+                startIcon={<DescriptionIcon style={{paddingLeft:'1em', marginRight: '-.5em'}}/>} >
+                לפרוטוקול המלא...
+            </Button>
+        </div>
     )
 })
