@@ -154,7 +154,7 @@ export default function HakVotes({subjects, setStarted, allRules}) {
                 direction:'rtl',
                 zIndex: '1',
             }}>
-                    <Loader style={{width:'100vw'}}show={loading}/>
+                    {/*<Loader style={{width:'100vw'}}show={loading}/>*/}
 
             </div>
         )
@@ -227,6 +227,15 @@ export default function HakVotes({subjects, setStarted, allRules}) {
 
                     </div>
                 </SwipeableViews>
+                <Particles
+                    params={particlesConfig}
+                    style={{
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        zIndex: 1,
+                    }}
+                />
             </div>
         )
     }

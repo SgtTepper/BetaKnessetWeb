@@ -22,8 +22,8 @@ const Bubble = React.memo(function ({queryString, partyPerson, setWorstParty,
                 < >
                     <PersonChart setLoading={setLoading} queryString={queryString}
                                  setWorstParty={setWorstParty} setBestParty={setBestParty}  setBestPartyImg={setBestPartyImg} setWorstPartyImg={setWorstPartyImg}/>
-                    <div style={{position:'absolute', right:'0vw', marginTop:'0vh', width:'100vw', height:'100vh'}}>
-                        <QuotesLoader show={loading}/></div>
+                    {/*<div style={{position:'absolute', right:'0vw', marginTop:'0vh', width:'100vw', height:'100vh'}}>*/}
+                        {/*<QuotesLoader show={loading}/></div>*/}
                 </>
 
 

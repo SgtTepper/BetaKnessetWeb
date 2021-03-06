@@ -17,13 +17,9 @@ export default function VotesDialog({open, setOpen}) {
             <DialogContentText style={{fontSize:'15px', fontFamily: "'Helvetica Neue', sans-serif", padding: '0em 0.5em'}}>
                 ברוכ\ה הבא\ה לכנסת
                 <br/>
-                כדי לראות את הבועות <strong style={{fontSize:'17px'}}  >החליקו שמאלה.</strong>
+                כדי לראות את הבועות <strong style={{fontSize:'17px'}}  >החליק\י שמאלה.</strong>
                 <br/>
-                כעת תוכל\י לראות איך הח״כים הרצים הצביעו ביחס להצבעתך.
-                <br/>
-                <span style={{color:'green'}}>הירוקים</span> - הצביעו כמוך.  <span style={{color:'red'}}>האדומים</span>    - לא.
-                <br/>
-                גודל הבועות מחושב באופן מצטבר בהתאם למה שהצבעת עד כה.
+                <span style={{fontSize:'18px'}}>גודל</span><span style={{fontSize:'16px', color:'green'}}> וצ</span><span style={{fontSize:'16px',color:'red'}}>בע</span> הבועות מחושב באופן  <span style={{fontSize:'17px',fontStyle:'italic', textDecorationLine:'underline'}}> מצטבר</span> בהתאם למה שהצבעת עד כה.
             </DialogContentText>
             <DialogActions>
                 <Button style= {{backgroundColor:'blue', color:'white'}} onClick={handleClose}> הבנתי</Button>
