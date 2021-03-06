@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react'
+import React, { Suspense, lazy, useEffect } from 'react'
 import clsx from 'clsx'
 import {
   BrowserRouter as Router,
@@ -201,6 +201,12 @@ function SafariDisclaimer({open, setOpen}) {
 
 function OverloadScreen() { 
   const classes = useStyles()
+
+  // refresh automatically
+  useEffect(() => {
+    setTimeout(() => window.location.href = window.location, 30000)
+  }, [])
+
   return (
     <Modal
       className={classes.modal}
