@@ -6,7 +6,7 @@ import Loader from '../components/ChatLoader'
 import Chat from '../components/Chat'
 import { WhiteQuotesSearch } from '../components/QuotesSearch'
 import config from '../config'
-import { useBigScreen, useQuery } from '../utils'
+import { useBigScreen, useCancellableFetch, useQuery } from '../utils'
 import defaultTopics from '../defaultTopics'
 
 const Quotes = React.memo(function () {
@@ -14,7 +14,7 @@ const Quotes = React.memo(function () {
     const randomTopic = defaultTopics[Math.floor(Math.random() * defaultTopics.length)]
     const isBigScreen = useBigScreen()
     const prefix = isBigScreen ? "כל נושא שהוא, " : ""
-
+    const serverFetch = useCancellableFetch()
     const [data, setData] = useState({})
     const query = useQuery()
 
@@ -25,7 +25,7 @@ const Quotes = React.memo(function () {
                 return
             setLoading(true)
             try {
-                const res = await (await fetch(`${config.server}/Quotes?keyword=${query}`)).json()
+                const res = await serverFetch(`${config.server}/Quotes?keyword=${query}`)
                 setData(res)
             } catch(e) {
                 // TODO handle errors - (ex: when multi term search is empty)
@@ -35,9 +35,7 @@ const Quotes = React.memo(function () {
                 setLoading(false)
             }
         })()
-    }, [query])
-
-    console.log(query, data)
+    }, [query, serverFetch])
 
     return (
         <ScrollPage limit id='quotes' parentStyle={{backgroundColor: '#223388'}}>

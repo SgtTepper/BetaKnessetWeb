@@ -17,22 +17,24 @@ import DescriptionRoundedIcon from '@material-ui/icons/DescriptionRounded';
 import HelpOutlineRoundedIcon from '@material-ui/icons/HelpOutlineRounded';
 
 import Dialog from '../../../../components/Dialog'
+import { useCancellableFetch } from '../../../../utils'
 
 export default React.memo(function PersonBills({personID, filter}) {
   const [loading, setLoading] = useState(true)
   const [data, setData] = useState([])
-  const classes = useStyles();
+  const classes = useStyles()
+  const serverFetch = useCancellableFetch()
 
   useEffect(() => {
     if (!personID)
       return
     (async () => {
       setLoading(true)
-      const res = await (await fetch(`${config.server}/PersonBills?personId=${personID}`)).json()
+      const res = await serverFetch(`${config.server}/PersonBills?personId=${personID}`)
       setData(res)
       setLoading(false)
     })()
-  }, [personID])
+  }, [personID, serverFetch])
 
 
   if (loading) {

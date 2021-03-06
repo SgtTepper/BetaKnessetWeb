@@ -3,7 +3,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 
 import Explainer from '../Explainer'
 import config from '../../config'
-import { useBigScreen, usePersonID } from '../../utils';
+import { useBigScreen, useCancellableFetch, usePersonID } from '../../utils';
 
 const ReactWordcloud = lazy(() => import('react-wordcloud'))
 
@@ -30,12 +30,13 @@ const CachedWordCloud = React.memo(({personID}) => {
   const isBigScreen = useBigScreen()
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState(null)
+  const serverFetch = useCancellableFetch()
   
   useEffect(() => {
     (async () => {
       if (!personID) return
       setLoading(true)
-      const res = await (await fetch(`${config.server}/WordCloud?personId=${personID}`)).json()
+      const res = await serverFetch(`${config.server}/WordCloud?personId=${personID}`)
       if (res.length) {
         setData(JSON.parse(res[0].WordCloud))
       } else {
@@ -43,7 +44,7 @@ const CachedWordCloud = React.memo(({personID}) => {
       }
       setLoading(false)
     })()
-  }, [personID])
+  }, [personID, serverFetch])
 
   if (loading) {
     return (<CircularProgress />)

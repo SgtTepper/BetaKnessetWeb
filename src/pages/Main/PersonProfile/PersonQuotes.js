@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography'
 import Loader from '../../../components/ChatLoader'
 import Chat from '../../../components/Chat'
 import config from '../../../config'
-import { useQuery } from '../../../utils'
+import { useQuery, useCancellableFetch } from '../../../utils'
 import { WhiteQuotesSearch } from '../../../components/QuotesSearch'
 
 const PersonQuotes = React.memo(function ({personID}) {
@@ -25,6 +25,7 @@ export default PersonQuotes
 const QuoteView = React.memo(function ({personID, loading, setLoading}) {
     const [data, setData] = useState([])
     const query = useQuery()
+    const serverFetch = useCancellableFetch()
 
     useEffect(() => {
         (async () => {
@@ -33,7 +34,7 @@ const QuoteView = React.memo(function ({personID, loading, setLoading}) {
         setLoading(true)
         setData([])
         try {
-            const res = await (await fetch(`${config.server}/PersonQuotes?keyword=${query}&PersonID=${personID}`)).json()
+            const res = await serverFetch(`${config.server}/PersonQuotes?keyword=${query}&PersonID=${personID}`)
             setData(res)
         } catch(e) {
             // TODO handle errors
@@ -43,7 +44,7 @@ const QuoteView = React.memo(function ({personID, loading, setLoading}) {
             setLoading(false)
         }
         })()
-    }, [query, personID, setLoading])
+    }, [query, personID, setLoading, serverFetch])
 
     if (!personID || loading)
         return null

@@ -9,7 +9,7 @@ import WordCloud from '../../../components/WordCloud'
 import PersonBills from './PersonBills'
 import PersonBillsStats from './PersonBillsStats'
 import config from '../../../config'
-import { useNavigate, imageOrDefault, usePersonID, getFullName } from '../../../utils'
+import { useCancellableFetch, useNavigate, imageOrDefault, usePersonID, getFullName } from '../../../utils'
 import { ScrollPage } from '../../../components/ScrollableView'
 import PersonSearch from '../../../components/PersonSearch'
 import './index.css'
@@ -40,20 +40,20 @@ const PersonProfile = React.memo(function () {
   const personID = usePersonID()
   const [persons, setPersons] = useState({})
   const [fallbackPerson, setFallbackPerson] = useState(null)
-
+  const serverFetch = useCancellableFetch()
   const person = useMemo(() => persons[personID]
   , [persons, personID])
 
   useEffect(() => {
     (async () => {
-      const res = await (await fetch(`${config.server}/PersonGetAll`)).json()
+      const res = await serverFetch(`${config.server}/PersonGetAll`)
       const mapping = {}
       for (const p of res) {
         mapping[parseInt(p.PersonID)] = p
       }
       setPersons(mapping)
     })()
-  }, [])
+  }, [serverFetch])
 
   useEffect(() => {
     if (person || !personID)
@@ -61,10 +61,10 @@ const PersonProfile = React.memo(function () {
 
     (async () => {
       setFallbackPerson(null)
-      const res = await (await fetch(`${config.server}/PersonEnrichment?personID=${personID}`)).json()
+      const res = await serverFetch(`${config.server}/PersonEnrichment?personID=${personID}`)
       setFallbackPerson(parseResponse(res))
       })()
-  }, [personID, person])
+  }, [personID, person, serverFetch])
 
   const chosenPerson = person || fallbackPerson
 
