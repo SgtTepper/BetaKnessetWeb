@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles'
 import clsx from 'clsx'
-import { isChrome, isChromium } from "react-device-detect"
+import { isSafari } from "react-device-detect"
 import { useBigScreen, useWindowSize } from '../../utils'
 
 const useStyles = makeStyles(theme => ({
@@ -61,7 +61,7 @@ const useStyles = makeStyles(theme => ({
     // FIXME this is a (VERY) ugly hack to make safari work (OP)
     const windowSize = useWindowSize()
     const isBigScreen = useBigScreen()
-    const height = isChrome || isChromium ? "initial" : windowSize.height - (isBigScreen ? 60 : 50)
+    const height = isSafari ? windowSize.height - (isBigScreen ? 60 : 50) : 'initial'
 
     return (
     <div className={clsx(classes.scrollPage, limit && classes.limitScreen)} style={parentStyle}>
