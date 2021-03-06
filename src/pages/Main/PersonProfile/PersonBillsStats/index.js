@@ -3,19 +3,21 @@ import { Doughnut } from 'react-chartjs-2'
 import 'chartjs-plugin-datalabels'
 import Explainer from '../../../../components/Explainer'
 import config from '../../../../config'
+import { useCancellableFetch } from '../../../../utils'
 
 export default React.memo(function PersonBillsStats({personID, filter, setFilter}) {
   const [data, setData] = useState([])
+  const serverFetch = useCancellableFetch()
   
   useEffect(() => {
     setFilter(null)
     if (!personID)
       return
     (async () => {
-      const res = await (await fetch(`${config.server}/PersonBillsStats?personId=${personID}`)).json()
+      const res = await serverFetch(`${config.server}/PersonBillsStats?personId=${personID}`)
       setData(res)    
     })()
-  }, [personID, setFilter])
+  }, [personID, setFilter, serverFetch])
 
   const total = data?.map(d => d.Counter).reduce((a, b) => a + b, 0)
   if (total === 0)

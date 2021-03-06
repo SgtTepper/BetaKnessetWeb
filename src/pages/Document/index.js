@@ -19,7 +19,7 @@ import Fab from '@material-ui/core/Fab'
 import QuotesLoader from '../../components/QuotesLoader'
 import Chat from '../../components/Chat'
 import config from '../../config'
-import { useBigScreen,useQuery, useIndex, usePersonID, toNiceDate } from '../../utils'
+import { useCancellableFetch, useBigScreen, useQuery, useIndex, usePersonID, toNiceDate } from '../../utils'
 import { ScrollPage } from '../../components/ScrollableView'
 import ChatLoader from '../../components/ChatLoader'
 
@@ -126,6 +126,7 @@ const QuoteView = React.memo(function ({documentID, documentType, setLoading}) {
     const personID = usePersonID()
     const query = useQuery()
     const index = useIndex()
+    const serverFetch = useCancellableFetch()
 
     useEffect(() => {
         (async () => {
@@ -133,7 +134,7 @@ const QuoteView = React.memo(function ({documentID, documentType, setLoading}) {
             return
         setLoading(true)
         try {
-            const quotes = await (await fetch(`${config.server}/DocumentQuotes?documentId=${documentID}&documentType=${documentType}&index=${index}`)).json()
+            const quotes = await serverFetch(`${config.server}/DocumentQuotes?documentId=${documentID}&documentType=${documentType}&index=${index}`)
             setData(quotes)            
         } catch(e) {
             // TODO handle errors
@@ -143,7 +144,7 @@ const QuoteView = React.memo(function ({documentID, documentType, setLoading}) {
             setLoading(false)
         }
         })()
-    }, [documentID, documentType, index, setLoading])
+    }, [documentID, documentType, index, setLoading, serverFetch])
 
     let prevSpeaker = null
     return (
@@ -168,13 +169,14 @@ const QuoteView = React.memo(function ({documentID, documentType, setLoading}) {
 const Metadata = React.memo(function ({documentID, documentType}) {
     const classes = useStyles()
     const [metadata, setMetadata] = useState(null)
+    const serverFetch = useCancellableFetch()
 
     useEffect(() => {
         (async () => {
         if (!documentID)
             return
         try {
-            const enrichment = await (await fetch(`${config.server}/DocumentTopics?documentId=${documentID}&documentType=${documentType}`)).json()
+            const enrichment = await serverFetch(`${config.server}/DocumentTopics?documentId=${documentID}&documentType=${documentType}`)
             if (!enrichment.length) {
                 console.error("No metadata found, this is a server error")
             }
@@ -185,7 +187,7 @@ const Metadata = React.memo(function ({documentID, documentType}) {
             setMetadata(null)
         }
         })()
-    }, [documentID, documentType])
+    }, [documentID, documentType, serverFetch])
 
     if (!metadata)
         return <ChatLoader />

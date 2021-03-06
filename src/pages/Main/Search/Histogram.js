@@ -1,21 +1,28 @@
 import React, { useState, useEffect } from 'react'
 import { Bar } from 'react-chartjs-2'
-import { useQuery } from '../../../utils'
+import { useQuery, useCancellableFetch } from '../../../utils'
 
 import config from '../../../config'
  
 const CachedHistogramView = React.memo(function HistogramView({query}) {
     const [loading, setLoading] = useState(false)
     const [data, setData] = useState([])
+    const serverFetch = useCancellableFetch()
 
     useEffect(() => {
       (async () => {
         setLoading(true)
-        const res = await (await fetch(`${config.server}/KeywordTrend?keyword=${query}`)).json()
-        setData(res)
-        setLoading(false)
+        setData([])
+        try {
+          const res = await serverFetch(`${config.server}/KeywordTrend?keyword=${query}`)
+          setData(res)
+        } catch (e) {
+          console.error(e)
+        } finally {
+          setLoading(false)
+        }
       })()
-    }, [setLoading, query])
+    }, [setLoading, query, serverFetch])
   
     if (loading) {
       return null

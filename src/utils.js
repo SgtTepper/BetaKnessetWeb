@@ -1,6 +1,10 @@
-import { useCallback, useState, useEffect } from 'react'
+import { useCallback, useState, useEffect, useRef } from 'react'
 import { useHistory, useLocation } from "react-router-dom"
 import useMediaQuery from '@material-ui/core/useMediaQuery'
+import axiosRetry from 'axios-retry'
+import axios from 'axios'
+
+axiosRetry(axios, { retries: 3 })
 
 /** helpers **/
 export const toNiceDate = (d, hours = false) =>  {
@@ -97,6 +101,13 @@ export function useNavigate() {
   }, [currentQuery, currentPersonID, currentLocation, history])
 }
 
+async function serverFetch({url, params}) {
+  return (await axios.get(url, {
+    params,
+    timeout: 10000,
+  })).data
+}
+
 export function useWindowSize() {
   // Initialize state with undefined width/height so server and client renders match
   // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
@@ -166,5 +177,26 @@ export function useSessionStorage(key, initialValue) {
     }
   };
 
-  return [storedValue, setValue];
+  return [storedValue, setValue]
+}
+
+export function useCancellableFetch() {
+  const cancelSource = useRef(null)
+  return useCallback(async (url) => {
+    if (cancelSource.current) {
+      cancelSource.current.cancel('Cancelled by hook')
+
+    }
+    const cancelToken = axios.CancelToken
+    cancelSource.current = cancelToken.source()
+    try {
+      return await serverFetch({url, cancelToken: cancelSource.current.token})
+    } catch (thrown) {
+      if (axios.isCancel(thrown)) {
+        console.debug('Request canceled', thrown.message)
+      } else {
+        throw thrown
+      }
+    }
+  }, [])
 }

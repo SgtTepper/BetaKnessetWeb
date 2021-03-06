@@ -14,7 +14,7 @@ import PersonIcon from '@material-ui/icons/Person'
 import Button from '@material-ui/core/Button'
 
 import QuotesLoader from '../../../../components/QuotesLoader'
-import { useBigScreen, useQuery, useWindowSize, toNiceDate, imageOrDefault, shuffleArray, useNavigate } from '../../../../utils'
+import { useCancellableFetch, useBigScreen, useQuery, useWindowSize, toNiceDate, imageOrDefault, shuffleArray, useNavigate } from '../../../../utils'
 import config from '../../../../config'
 
 import defaultBubbles from '../../../../defaultTopics'
@@ -110,6 +110,7 @@ const Chart = React.memo(function ({query, setLoading}) {
     const [data, setData] = useState(defaults)
     const [error, setError] = useState(null)
     const navigate = useNavigate()
+    const serverFetch = useCancellableFetch()
 
     const cleanQuery = query.replace('״', '"')
 
@@ -122,7 +123,7 @@ const Chart = React.memo(function ({query, setLoading}) {
         setLoading(true)
         setError(null)
         try {
-            let res = await (await fetch(`${config.server}/Keywords?keyword=${cleanQuery}`)).json()
+            let res = await serverFetch(`${config.server}/Keywords?keyword=${cleanQuery}`)
             if (!res.length) {
               setError(<div>אין תוצאות :(&nbsp;&nbsp; נסו ללחוץ על אחת הבועות?</div>)
               setData(defaults)
@@ -159,7 +160,7 @@ const Chart = React.memo(function ({query, setLoading}) {
             setLoading(false)
         }
         })()
-    }, [cleanQuery, setLoading, defaults, isBigScreen])
+    }, [cleanQuery, setLoading, defaults, isBigScreen, serverFetch])
 
     return (
         <>
