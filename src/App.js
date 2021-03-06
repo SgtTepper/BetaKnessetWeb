@@ -180,7 +180,7 @@ function SafariDisclaimer({open, setOpen}) {
               האתר עוד לא עובד חלק על ספארי.
             </Typography>
             <Typography>
-              בשביל חוויה מעולה, נסו לעבוד עם כרום
+              בשביל חוויה מעולה, מוזמנים לגלוש דרך כרום
             </Typography>
           </div>
           <Button color="textSecondary" variant="contained" size="large" onClick={() => setOpen(false)}>
