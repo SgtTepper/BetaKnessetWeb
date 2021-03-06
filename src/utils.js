@@ -1,6 +1,7 @@
 import { useCallback, useState, useEffect } from 'react'
 import { useHistory, useLocation } from "react-router-dom"
 
+/** helpers **/
 export const toNiceDate = (d, hours = false) =>  {
     let date = `${d.getDate()}.${d.getMonth() + 1}.${(d.getFullYear() % 100).toString().padStart(2, '0')}`
     if (hours)
@@ -26,6 +27,30 @@ export function shuffleArray(array) {
     }
 }
 
+export function imageOrDefault(url, identifier, size = 32) {
+  if (url) return url
+  
+  return `https://www.gravatar.com/avatar/${hashCode(identifier)}?s=${size}&d=identicon&r=PG`
+}
+
+function hashCode(str) {
+  var hash = 0, i, chr;
+  for (i = 0; i < str.length; i++) {
+    chr   = str.charCodeAt(i);
+    hash  = ((hash << 5) - hash) + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
+}
+
+export const getFullName = (p) => {
+  if (!p) return ''
+  const {FirstName, LastName} = p
+  return `${FirstName} ${LastName}`
+}
+
+
+/** hooks **/
 export function useSearchParams() {
   return new URLSearchParams(useLocation().search)
 }
@@ -63,22 +88,6 @@ export function useNavigate() {
   }, [currentQuery, currentPersonID, currentLocation, history])
 }
 
-export function imageOrDefault(url, identifier, size = 32) {
-  if (url) return url
-  
-  return `https://www.gravatar.com/avatar/${hashCode(identifier)}?s=${size}&d=identicon&r=PG`
-}
-
-function hashCode(str) {
-  var hash = 0, i, chr;
-  for (i = 0; i < str.length; i++) {
-    chr   = str.charCodeAt(i);
-    hash  = ((hash << 5) - hash) + chr;
-    hash |= 0; // Convert to 32bit integer
-  }
-  return hash;
-}
-
 export function useWindowSize() {
   // Initialize state with undefined width/height so server and client renders match
   // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
@@ -110,8 +119,39 @@ export function useWindowSize() {
   return windowSize;
 }
 
-export const getFullName = (p) => {
-  if (!p) return ''
-  const {FirstName, LastName} = p
-  return `${FirstName} ${LastName}`
+// from https://usehooks.com/useLocalStorage/
+export function useSessionStorage(key, initialValue) {
+  // State to store our value
+  // Pass initial state function to useState so logic is only executed once
+  const [storedValue, setStoredValue] = useState(() => {
+    try {
+      // Get from session storage by key
+      const item = window.sessionStorage.getItem(key);
+      // Parse stored json or if none return initialValue
+      return item ? JSON.parse(item) : initialValue;
+    } catch (error) {
+      // If error also return initialValue
+      console.log(error);
+      return initialValue;
+    }
+  });
+
+  // Return a wrapped version of useState's setter function that ...
+  // ... persists the new value to sessionStorage.
+  const setValue = value => {
+    try {
+      // Allow value to be a function so we have same API as useState
+      const valueToStore =
+        value instanceof Function ? value(storedValue) : value;
+      // Save state
+      setStoredValue(valueToStore);
+      // Save to session storage
+      window.sessionStorage.setItem(key, JSON.stringify(valueToStore));
+    } catch (error) {
+      // A more advanced implementation would handle the error case
+      console.log(error);
+    }
+  };
+
+  return [storedValue, setValue];
 }

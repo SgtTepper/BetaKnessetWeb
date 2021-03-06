@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useState } from 'react'
+import React, { Suspense, lazy } from 'react'
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,6 +12,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 import config from './config'
 import theme from './theme'
+import { useSessionStorage } from './utils'
 import particlesConfig from './particles.config.json'
 import NavigationBar from "./components/NavigationBar"
 import ScrollableView from './components/ScrollableView'
@@ -42,12 +43,12 @@ const useStyles = makeStyles({
 });
 
 export default function App() {
-  const [disclaimerOpen, setDisclaimerOpen] = useState(true)
+  const [disclaimerApproved, setDisclaimerApproved] = useSessionStorage('disclaimerApproved', false)
   const classes = useStyles()
 
   return (
     <ThemeProvider theme={theme}>
-      <DisclaimerDialog open={disclaimerOpen} setOpen={setDisclaimerOpen} />
+      <DisclaimerDialog open={!disclaimerApproved} setOpen={b => setDisclaimerApproved(!b)} />
       <div className={classes.root}>
         <Router>
           <NavigationBar />
@@ -110,16 +111,16 @@ function DisclaimerDialog(props) {
               <b>לתשומת לב הגולשים</b>              
             </p>
             <p>
-              האתר מתבסס על  <a href="https://main.knesset.gov.il/Activity/Info/pages/databases.aspx" rel="noreferrer" target="_blank"><u>מאגרי המידע הפתוחים של הכנסת</u></a> וזאת בהתאם לתקנות המתירות פיתוח יישומים ומערכות על בסיס מידע זה.
+              האתר מתבסס על <a href="https://main.knesset.gov.il/Activity/Info/pages/databases.aspx" rel="noreferrer" target="_blank"><u>מאגרי המידע הפתוחים של הכנסת</u></a>, וזאת בהתאם לתקנות המתירות פיתוח יישומים ומערכות על בסיס מידע זה.
             </p>
             <p>
-              באתר זה מוצגים פריטים שהינם תוצאה של אלגוריתמים לעיבוד מידע אשר אינם חפים מטעויות, כך יתכן למשל שהתוכנה שלנו תבצע טעות בזיהוי דובר, בפירוש הטקסט שלו, או במדידת ערכים הקשורים בו.
+              באתר זה מוצגים פריטים שהינם תוצאה של אלגוריתמים לעיבוד מידע אשר אינם חפים מטעויות. יתכן למשל שהתוכנה שלנו תבצע טעות בזיהוי דובר, בפירוש הטקסט שלו, או במדידת ערכים הקשורים בו.
             </p>
             <p>
-              למען הסר ספק המידע האמין והמדויק ביותר הינו זה שמקורו במאגרי המידע של הכנסת ובמסמכי הפרוטוקולים שמפורסמים באתר הכנסת והם מקור האמת המכריע.
+              למען הסר ספק, המידע האמין והמדויק ביותר הינו זה שמקורו במאגרי המידע של הכנסת ובמסמכי הפרוטוקולים שמפורסמים באתר הכנסת והם מקור האמת המכריע.
             </p>
             <p>
-              הנהלת האתר אינה נושאת באחריות על טעויות כאלו שיתכנו, השימוש באתר ושיתוף המידע שבאתר הינו באחריות המשתמש בלבד.
+              הנהלת האתר אינה נושאת באחריות על טעויות כאלו שייתכנו. השימוש באתר ושיתוף המידע שבאתר הינו באחריות המשתמש בלבד.
             </p>
         </Dialog>
     )
