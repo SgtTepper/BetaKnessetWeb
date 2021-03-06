@@ -27,7 +27,7 @@ export function shuffleArray(array) {
 }
 
 export function useSearchParams() {
-  return new URLSearchParams(useLocation().search);
+  return new URLSearchParams(useLocation().search)
 }
 
 export function useQuery() {

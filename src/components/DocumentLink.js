@@ -12,12 +12,21 @@ export default function DocumentLink({children, SessionType, DocumentID, Index, 
     return <Link to={link}>{children}</Link>
 }
 
-export function getDocumentLink({SessionType, DocumentID, Index, query, PersonID}) {
+export function getDocumentLink({SessionType, DocumentID, Index, PersonID, query}) {
+    const urlParams = new URLSearchParams()
+
+    if (PersonID)
+        urlParams.set('personID', PersonID)
+    if (query?.length)
+        urlParams.set('q', query)
+
+    const urlExtension = `${DocumentID}?${urlParams.toString()}${Index !== undefined ? `#q${Index}` : ``}`
+
     switch (SessionType) {
         case "Committee":
-            return `/document/committee/${DocumentID}${PersonID ? `?personID=${PersonID}&q=${query}` : ''}#q${Index}`
+            return `/document/committee/${urlExtension}`
         case "Plenum":
-            return `/document/plenum/${DocumentID}${PersonID ? `?personID=${PersonID}&q=${query}` : ''}#q${Index}`
+            return `/document/plenum/${urlExtension}`
         default:
             return null
     }

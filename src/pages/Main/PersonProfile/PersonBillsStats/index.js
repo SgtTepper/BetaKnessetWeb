@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import { Doughnut } from 'react-chartjs-2'
-import 'chartjs-plugin-datalabels';
+import 'chartjs-plugin-datalabels'
+import Explainer from '../../../../components/Explainer'
 import config from '../../../../config'
 
 export default React.memo(function PersonBillsStats({personID, filter, setFilter}) {
@@ -67,6 +68,7 @@ export default React.memo(function PersonBillsStats({personID, filter, setFilter
 
   return (
     <>
+      <BillExplainer />
       <div style={{position: 'absolute', width: '100%', height: '100%', display: 'flex', placeItems: 'center', placeContent: 'center', color: 'white', fontFamily: "'Secular One', sans-serif", pointerEvents: 'none'}}>
         {total} חוקים
       </div>
@@ -103,4 +105,14 @@ function getStatusColorHover(status) {
       default:
           return '#5386eC'           
     }
+}
+
+function BillExplainer(props) {
+  return (
+      <Explainer {...props}>
+          <p>ח"כים יכולים גם ליזום הצעות חוק וגם להצטרף להצעות חוק.</p>
+          <p>ברשימה לפניכם אנו מציגים עבור כל ח"כ את רשימת החוקים אותם יזם באופן ישיר בתור "יוזם ראשון".</p>
+          <p>פרטים נוספים על אודות שלבי החקיקה והליך החקיקה <a href="https://main.knesset.gov.il/Activity/Legislation/Documents/Explanation2.pdf" target="_blank" rel="noreferrer">תוכלו למצוא בקישור זה</a></p>
+      </Explainer>
+    )
 }

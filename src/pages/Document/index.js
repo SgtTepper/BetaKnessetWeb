@@ -106,7 +106,6 @@ const DocumentQuotes = React.memo(function ({type}) {
                         anchor={isBigScreen ? "right" : "bottom"}
                         open={drawerOpen}
                         onClose={createToggleDrawer(false)}
-                        onOpen={createToggleDrawer(true)}
                         className={clsx(classes.drawer, isBigScreen ? classes.bigScreen : classes.smallScreen)}
                         classes={{paper: classes.drawerPaper}}
                     >

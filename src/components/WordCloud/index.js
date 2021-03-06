@@ -2,6 +2,7 @@ import React, { lazy, Suspense, useState, useEffect } from 'react'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 
+import Explainer from '../Explainer'
 import config from '../../config'
 import { usePersonID } from '../../utils';
 
@@ -55,12 +56,28 @@ const CachedWordCloud = React.memo(({personID}) => {
 
   return (
     <Suspense fallback={<CircularProgress />}>
-      {data && <ReactWordcloud
-        options={options}
-        words={data}
-        maxWords={isBigScreen ? config.wordcloudCount : config.wordcloudCountMobile}
-        minSize={minSize}
-      />}
+      {data && <>
+        <WordCloudExplainer style={{top: '-1em'}} />
+        <ReactWordcloud
+          options={options}
+          words={data}
+          maxWords={isBigScreen ? config.wordcloudCount : config.wordcloudCountMobile}
+          minSize={minSize}
+        />
+      </>}
     </Suspense>
   )
 })
+
+
+function WordCloudExplainer(props) {
+  return (
+      <Explainer {...props}>
+          <p>ענן מילים זה מבוסס על אוסף כל הציטוטים של הח"כ כפי שזיהינו אותם במערכת שלנו.</p>
+          <p>בעזרת מערכת בינה מלאכותית לעיבוד שפה טבעית <a href="https://hebrew-nlp.co.il" target="_blank" rel="noreferrer">https://hebrew-nlp.co.il</a></p>
+          <p>ביצענו "נורמליזציה" לאוצר המילים של הח"כ, כך מילים בעלות משמעות זהה התקבלו בכתיב אחיד, למשל "בטחון", "הבטחון", "לבטחון", "בבטחון" כולן עברו נורמליזציה למילה "בטחון".</p>
+          <p>כמו כן מענן מילים זה מחקנו מונחים רבים כגון מילות קישור או מילים חסרות הקשר.</p>
+          <p>לאחר עיבוד זה ספרנו את שכיחות השימוש במונחים, ככל שהח"כ משתמש\ת יותר במילה - כך המילה תופיע גדולה יותר בענן המילים.</p>
+      </Explainer>
+  )
+}

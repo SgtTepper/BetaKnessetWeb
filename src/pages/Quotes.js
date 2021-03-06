@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
+import Typography from '@material-ui/core/Typography'
 
 import { ScrollPage } from '../components/ScrollableView'
 import Loader from '../components/ChatLoader'
@@ -30,7 +31,7 @@ const Quotes = React.memo(function () {
                     <div style={{padding: '.5em'}}>
                         <WhiteQuotesSearch placeholder={`${prefix}לדוגמא "${randomTopic}"`} />
                         <Loader show={loading} />
-                        <QuoteView setLoading={setLoading} />
+                        <QuoteView loading={loading} setLoading={setLoading} />
                     </div>
                 </div>
             </div>
@@ -39,8 +40,7 @@ const Quotes = React.memo(function () {
 })
 export default Quotes
 
-const QuoteView = React.memo(function ({setLoading}) {
-    const scrollRef = useRef(null)
+const QuoteView = React.memo(function ({loading, setLoading}) {
     const [data, setData] = useState([])
     const query = useQuery()
 
@@ -63,12 +63,23 @@ const QuoteView = React.memo(function ({setLoading}) {
         })()
     }, [query, setLoading])
 
+    if (loading)
+        return null
+
+    if (!data.length) 
+        return (
+            <Typography 
+                variant="h6" 
+                style={{fontStyle: 'italic', color: 'white', paddingTop: '1em', textAlign: 'center'}}
+            >
+                לא נמצאו ציטוטים בנושא {query}
+            </Typography>
+        )
+
     return (
-        <div ref={scrollRef}>
-            <Chat items={data.map(d => ({
-                highlight: query,
-                ...d,
-            }))} />
-        </div>
+        <Chat items={data.map(d => ({
+            highlight: query,
+            ...d,
+        }))} />
     );
 })

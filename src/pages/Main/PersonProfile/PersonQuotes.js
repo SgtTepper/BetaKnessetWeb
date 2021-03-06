@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
+import Typography from '@material-ui/core/Typography'
 
 import Loader from '../../../components/ChatLoader'
 import Chat from '../../../components/Chat'
@@ -15,14 +16,13 @@ const PersonQuotes = React.memo(function ({personID}) {
                 <WhiteQuotesSearch placeholder="מה מעניין אותם?" showReset={false} />
             </div>
             <Loader show={loading} />
-            <QuoteView personID={personID} setLoading={setLoading} />
+            <QuoteView personID={personID} loading={loading} setLoading={setLoading} />
         </>
     )
 })
 export default PersonQuotes
 
-const QuoteView = React.memo(function ({personID, setLoading}) {
-    const scrollRef = useRef(null)
+const QuoteView = React.memo(function ({personID, loading, setLoading}) {
     const [data, setData] = useState([])
     const query = useQuery()
 
@@ -45,15 +45,23 @@ const QuoteView = React.memo(function ({personID, setLoading}) {
         })()
     }, [query, personID, setLoading])
 
-    if (!personID)
-        return <div ref={scrollRef} />
+    if (!personID || loading)
+        return null
+
+    if (!data.length) 
+        return (
+            <Typography 
+                variant="h6" 
+                style={{fontStyle: 'italic', color: 'white', paddingTop: '1em', textAlign: 'center'}}
+            >
+                לא נמצאו ציטוטים שלי{query?.length ? ` על ${query}` : ''}
+            </Typography>
+        )
 
     return (
-        <div ref={scrollRef}>
-            <Chat items={data.map(d => ({
-                highlight: query,
-                ...d,
-            }))} />
-        </div>
-    );
+        <Chat items={data.map(d => ({
+            highlight: query,
+            ...d,
+        }))} />
+    )
 })
