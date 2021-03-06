@@ -6,7 +6,7 @@ import {makeStyles, withStyles} from '@material-ui/core/styles'
 import Tooltip from '@material-ui/core/Tooltip'
 import "../index.css"
 
-import { imageOrDefault } from '../../../utils'
+import {sleep, imageOrDefault } from '../../../utils'
 import config from '../../../config'
 
 
@@ -19,6 +19,7 @@ const useStyles = makeStyles({
         right: '25%'
     },
 });
+
 
 
 const PersonTooltip = withStyles((theme) => ({
@@ -145,6 +146,7 @@ const PersonChart = React.memo(function ({setLoading, queryString, minDifference
                 console.error(e)
                 setData([])
             } finally {
+                await sleep();
                 setLoading(false)
             }
         })()

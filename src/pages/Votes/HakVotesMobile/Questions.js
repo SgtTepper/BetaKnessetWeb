@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     content: {
         background: 'transparent',
         color:'black',
-        padding: '0em 1.5em'
+        padding: '0em 1em'
     },
 }));
 
@@ -173,7 +173,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
             </div>
         )
     };
-
+    console.log(`rules: ${rule.KeySentence}`)
     return (
 
             <div style={{textAlign: 'center', zIndex:'6', backgroundColor: 'rgba(9,16,34, 0.95)', width:"100vw", position: 'relative', minHeight: '100vh'}}>
@@ -210,7 +210,15 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                                 </Typography>
                             </AccordionSummary>
                             <AccordionDetails  style={{textAlign: 'center'}}>
-                                <Typography className={classes.content} style={{fontWeight: 'normal', fontFamily: 'Helvetica Neue, Varela Round, sans-serif', textAlign: 'center', fontSize: "15px", maxHeight:'20vh', overflow:'auto'}}>
+                                <Typography className={classes.content} style={{fontWeight: 'normal', fontFamily: 'Helvetica Neue, Varela Round, sans-serif', textAlign: 'center', fontSize: "15px", maxHeight:'30vh', overflow:'auto'}}>
+                                    {rule.KeySentence != undefined? <React.Fragment>
+                                    <strong> משפט מפתח: </strong>
+                                    {rule.KeySentence}
+                                    <br/>
+                                    <strong> דברי הסבר: </strong>
+                                    </React.Fragment>
+                                        :
+                                        <></>}
                                     {rule.Description}
                                 </Typography>
                             </AccordionDetails>

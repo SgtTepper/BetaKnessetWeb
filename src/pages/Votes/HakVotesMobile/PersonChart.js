@@ -6,7 +6,7 @@ import {makeStyles, withStyles} from '@material-ui/core/styles'
 import Tooltip from '@material-ui/core/Tooltip'
 import "../index.css"
 
-import { imageOrDefault } from '../../../utils'
+import { imageOrDefault, sleep} from '../../../utils'
 import config from '../../../config'
 import DiscreteSlider from "./Slider";
 import Particles from "react-particles-js";
@@ -148,6 +148,7 @@ const PersonChart = React.memo(function ({setLoading, queryString, setWorstParty
                 console.error(e)
                 setData([])
             } finally {
+                await sleep();
                 setLoading(false)
             }
         })()

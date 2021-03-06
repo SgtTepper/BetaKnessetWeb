@@ -32,7 +32,8 @@ const useStyles = makeStyles((theme) => ({
     content: {
         background: 'transparent',
         color:'black',
-        padding: '0em 1.5em'
+        padding: '0em 1em',
+        direction: 'ltr'
     },
 }));
 
@@ -172,6 +173,14 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                     </AccordionSummary>
                     <AccordionDetails  style={{textAlign: 'center'}}>
                         <Typography className={classes.content} style={{fontWeight: 'normal', fontFamily: 'Helvetica Neue, Varela Round, sans-serif', textAlign: 'center', fontSize: "15px", maxHeight:'20vh', overflow:'auto'}}>
+                            {rule.KeySentence != undefined? <React.Fragment>
+                                    <strong> משפט מפתח: </strong>
+                                    {rule.KeySentence}
+                                    <br/>
+                                    <strong> דברי הסבר: </strong>
+                                </React.Fragment>
+                                :
+                                <></>}
                             {rule.Description}
                         </Typography>
                     </AccordionDetails>

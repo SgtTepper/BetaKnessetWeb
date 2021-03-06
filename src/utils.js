@@ -7,7 +7,10 @@ export const toNiceDate = (d, hours = false) =>  {
         date = `${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')}, ${date}`    
     return date
 }
-  
+export function sleep() {
+  return new Promise(resolve => setTimeout(resolve, 1000));
+}
+
 export function cleanTextFromDB(text) {
   if (text[0] === '״' || text[0] === '"') {
     text = text.substring(1)
