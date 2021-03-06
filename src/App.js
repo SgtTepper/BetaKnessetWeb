@@ -81,7 +81,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <SafariDisclaimer open={showSafari} setOpen={b => setSafariApproved(!b)} />
       <DisclaimerDialog open={!showSafari && !disclaimerApproved} setOpen={b => setDisclaimerApproved(!b)} />
-      <div className={clsx(classes.root, isSafari && classes.safari)}>
+      <div className={clsx(classes.root, isSafari && classes.safari, isSafari && "safari")}>
         <Router>
           <NavigationBar />
           <ScrollableView>

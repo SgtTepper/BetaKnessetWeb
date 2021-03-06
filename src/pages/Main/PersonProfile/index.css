@@ -132,4 +132,8 @@
 		max-height: 70vh;
 		padding-bottom: 2em;
 	}
+	.safari .mid-content {
+		height: 70vh;
+		padding-bottom: 2em;
+	}
 }
