@@ -86,10 +86,11 @@ export default function VotesRegular() {
             fontSize: '20px',
             border: 0,
             borderRadius: 3,
+
             // boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)',
             color: 'white',
 
-            fontFamily: "'Helvetica Neue', sans-serif",
+            fontFamily:'Helvetica Neue, Varela Round, sans-serif',
             '&:hover': {
                 background:  ' rgb(116,83,177)'
 

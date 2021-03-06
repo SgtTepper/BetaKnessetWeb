@@ -90,7 +90,7 @@ export default function VotesMobile() {
             color: 'white',
 
             padding: '0 0.5px',
-            fontFamily: "'Helvetica Neue', sans-serif",
+            fontFamily: 'Helvetica Neue, Varela Round, sans-serif',
             '&:hover': {
                 background:  ' rgb(116,83,177)'
 
