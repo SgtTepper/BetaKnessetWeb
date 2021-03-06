@@ -5,7 +5,7 @@ import { useBigScreen, useWindowSize } from '../../utils'
 
 const useStyles = makeStyles(theme => ({
     scrollView: {
-      scrollSnapType: 'y mandatory',
+      scrollSnapType: !isSafari ? 'y mandatory' : 'none',
       WebkitOverflowScrolling: 'touch',
       flexGrow: 1,
       display: 'flex',

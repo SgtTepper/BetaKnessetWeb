@@ -1,4 +1,5 @@
 import React, { Suspense, lazy } from 'react'
+import clsx from 'clsx'
 import {
   BrowserRouter as Router,
   Switch,
@@ -44,6 +45,9 @@ const useStyles = makeStyles(theme => ({
     zIndex: 1,
   },
 
+  safari: {
+    height: '100vh',
+  },
   modal: {
     display: 'flex',
     alignItems: 'center',
@@ -77,7 +81,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <SafariDisclaimer open={showSafari} setOpen={b => setSafariApproved(!b)} />
       <DisclaimerDialog open={!showSafari && !disclaimerApproved} setOpen={b => setDisclaimerApproved(!b)} />
-      <div className={classes.root}>
+      <div className={clsx(classes.root, isSafari && classes.safari)}>
         <Router>
           <NavigationBar />
           <ScrollableView>
