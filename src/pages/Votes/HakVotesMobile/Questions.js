@@ -110,7 +110,6 @@ export default function Questions({rule, remove_random_rule, handle_against, han
         setExpanded(isExpanded ? panel : false);
     };
 
-    console.log(`partyPerson: ${partyPerson}, ${firstTimeParty}, ${displaySlideGifParty}`)
     if (queryString != '' && partyPerson ==1 && firstTimeParty)
     {
         setTimeout(() => {
@@ -173,14 +172,12 @@ export default function Questions({rule, remove_random_rule, handle_against, han
             </div>
         )
     };
-    console.log(`rules: ${rule.KeySentence}`)
     return (
 
             <div style={{textAlign: 'center', zIndex:'6', backgroundColor: 'rgba(9,16,34, 0.95)', width:"100vw", position: 'relative', minHeight: '100vh'}}>
                 {(displaySlideGifFirstTime  && queryString.split(',').length ==2) || (displaySlideGifSecondTime && queryString.split(',').length ==3) ? <div  style={{zIndex:'8', left: '35%', top:'2%', position: 'absolute', backgroundColor:'rgba(208,218,239,0.6)', borderRadius:'50%'}}>><img src={sliderGif} style={{height:'120px', width:'120'}} /></div>: <></>}
 
                 {(queryString != "" && queryString.split(',').length == 1 && openDialog) ?(
-                        console.log("HERE"),
                             <VotesDialog open={openDialog} setOpen={setOpenDialog}/>
                     )
                     :

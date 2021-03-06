@@ -55,8 +55,6 @@ export default function HakVotes({subjects, setStarted, allRules}) {
     const [bestPartyImg, setBestPartyImg] = useState(0)
     const [worstPartyImg, setWorstPartyImg] = useState(0)
 
-    console.log("HakVotes")
-    console.log(subjects);
     useEffect(() => {
         async function fetchMyAPI() {
             setLoading(true)

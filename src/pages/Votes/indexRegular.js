@@ -45,7 +45,6 @@ const useStyles = makeStyles({
 });
 
 export default function VotesRegular() {
-    console.log("Regular")
 
     const textRef = useRef()
     const personQuotesRef = useRef(null)

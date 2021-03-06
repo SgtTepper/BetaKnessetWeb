@@ -103,12 +103,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
         setExpanded(isExpanded ? panel : false);
     };
 
-    console.log(`openDialog: ${openDialog}`)
-    console.log(`openDialog: ${queryString}`)
-    console.log(`isempty check: ${queryString != "" }`)
-
-    console.log(`querystring if: ${queryString.split(',').length == 1}`)
-    if (finished) {
+      if (finished) {
         return (
             <div style={{ float:'right' ,textAlign:'center', zIndex:'6', backgroundColor: 'rgba(9,16,34, 0.95)', width:"20vw",minWidth:"350px", maxWidth:'450px', padding: '0em 2em', position: 'relative', minHeight: '100vh'}}>
                 <h2 style={{ marginBottom: '-5px',fontSize: '30px'}}> הסתיים השאלון! </h2>
@@ -147,7 +142,6 @@ export default function Questions({rule, remove_random_rule, handle_against, han
     return (
         <div style={{ float:'right' , zIndex:'6', backgroundColor: 'rgba(9,16,34, 0.95)', width:"20vw",minWidth:"350px", maxWidth:'450px', padding: '0em 2em', position: 'relative', minHeight: '100vh'}}>
             {(queryString != "" && queryString.split(',').length == 1 && openDialog) ?(
-                    console.log("HERE"),
                         <VotesDialog open={openDialog} setOpen={setOpenDialog}/>
                 )
                 :

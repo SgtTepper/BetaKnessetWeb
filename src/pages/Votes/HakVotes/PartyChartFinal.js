@@ -90,7 +90,6 @@ const PartyChartFinal = React.memo(function ({setLoading, queryString}) {
     }, [queryString, setLoading])
     const classes = useStyles();
 
-    console.log(`party_data: ${ data.filter(d => d.color <= 0)}`)
 
     const a = data.filter(d => d.color < 0);
     a.push({

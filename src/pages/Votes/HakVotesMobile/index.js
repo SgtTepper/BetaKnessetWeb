@@ -76,7 +76,6 @@ export default function HakVotes({subjects, setStarted, allRules}) {
     };
 
 
-    console.log("HakVotes")
     useEffect(() => {
         async function fetchMyAPI() {
             setLoading(true)

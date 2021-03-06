@@ -41,7 +41,6 @@ const PersonTooltip = withStyles((theme) => ({
 const PersonChart = React.memo(function ({setLoading, queryString, minDifference, setMaxDifference, setWorstParty, setBestParty, setBestPartyImg, setWorstPartyImg}) {
     const [data, setData] = useState([])
 
-    console.log(minDifference)
     useEffect(() => {
         (async () => {
             if (!queryString.length)
@@ -97,8 +96,6 @@ const PersonChart = React.memo(function ({setLoading, queryString, minDifference
                 var best_party_img = ''
                 var worst_party_img = ''
                 for (const key in parties){
-                    console.log(`Key: ${key}`)
-                    console.log(`Value: ${parties[key]}`)
                     var color = 0
                     counter = 0
                     for (var faction of parties[key]){
@@ -133,7 +130,6 @@ const PersonChart = React.memo(function ({setLoading, queryString, minDifference
                         color:mean_score,
                     })
                 }
-                console.log(worst_party_img)
                 setWorstParty(worst_party)
                 setBestParty(best_party)
                 setMaxDifference(max_difference);

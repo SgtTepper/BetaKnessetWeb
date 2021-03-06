@@ -61,7 +61,6 @@ export default function DiscreteSlider({max, minDifference, setMinDifference, qu
         setMinDifference(Math.max(Math.floor(max)-1, 1));
         setPrevRulesLength(queryString.split(',').length);
     }
-    console.log(`wasused: ${wasUsed}, firstTimeUsed: ${firstTimeUsed}`)
     return (
         <div className={classes.root}>
             {(wasUsed && firstTimeUsed)?(<DisclaimerDialog open={disclaimerOpen} setOpen={setDisclaimerOpen} setFirstTimeUsed={setFirstTimeUsed}/>):<></>   }

@@ -59,7 +59,6 @@ export default function ChipsArray(options, setOptions) {
         options.setOptions(options.options.map(e => ({ label: e.label, key: e.key, isChosen: e.label === label? e.isChosen ^ 1: e.isChosen})));
     };
 
-    console.log(options.options.filter(e => e.isChosen === 1));
     return (
         <Paper component="ul" className={classes.root}>
             {options.options.map((data) => {

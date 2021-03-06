@@ -47,7 +47,6 @@ const useStyles = makeStyles({
 });
 
 export default function VotesMobile() {
-    console.log("Mobile")
     const textRef = useRef()
     const personQuotesRef = useRef(null)
 

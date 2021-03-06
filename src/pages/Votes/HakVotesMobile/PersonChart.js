@@ -44,7 +44,6 @@ const PersonChart = React.memo(function ({setLoading, queryString, setWorstParty
     const [firstTimeUsed, setFirstTimeUsed] = useState(true)
     const [maxDifference, setMaxDifference] = useState(0);
 
-    console.log(minDifference)
     useEffect(() => {
         (async () => {
             if (!queryString.length)
@@ -100,8 +99,6 @@ const PersonChart = React.memo(function ({setLoading, queryString, setWorstParty
                 var best_party_img = ''
                 var worst_party_img = ''
                 for (const key in parties){
-                    console.log(`Key: ${key}`)
-                    console.log(`Value: ${parties[key]}`)
                     var color = 0
                     counter = 0
                     for (var faction of parties[key]){
@@ -135,7 +132,6 @@ const PersonChart = React.memo(function ({setLoading, queryString, setWorstParty
                         color:mean_score,
                     })
                 }
-                console.log(worst_party_img)
                 setWorstParty(worst_party)
                 setBestParty(best_party)
                 setMaxDifference(max_difference);
@@ -248,7 +244,6 @@ const PersonShortName = React.memo(function ({...props}) {
 })
 
 const PersonCard = React.memo(function({name,agreed_laws, CurrentFaction, PlaceInList, disagreed_laws, absent_laws}) {
-    console.log(`agreed laws: ${agreed_laws}    type: ${typeof(agreed_laws)}`)
     return (
         <div style={{width:'55vw', maxHeight: '60vh',textAlign:'center'}}>
             <h1 style={{fontSize: '25px', color: '#eceff1'}}>{name}</h1>
