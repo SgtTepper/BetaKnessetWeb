@@ -29,7 +29,7 @@ const CalendarComponent = React.memo(function ({loading, ...props}) {
         />
       </div>
       <Typography style={{
-        position: 'absolute', 
+        position: 'fixed', 
         textAlign: 'center', 
         fontSize: '20pt',
         width: '100%', 
@@ -150,11 +150,11 @@ class MobileCalendarView extends CalendarView {
   render() {
     return (
       <CalendarComponent 
-      plugins={[listPlugin]}
+      plugins={[timeGridPlugin, listPlugin]}
       headerToolbar={{
         left: '',
         center: 'title',
-        right: ''
+        right: 'listWeek,timeGridDay'
       }}
       footerToolbar={{
         left: 'prev,next',

@@ -19,7 +19,7 @@
 
 .demo-app {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
   font-size: 14px;
@@ -51,4 +51,8 @@
   font-family: 'Secular One', sans-serif;
   color: #555;
   font-weight: normal;
+}
+
+.fc-timegrid-event-harness {
+  overflow: hidden;
 }
