@@ -9,12 +9,13 @@ const FrameApp = React.memo(function ({url, title}) {
                 position: 'relative', 
                 height: '100%', 
                 width: '100%', 
-                overflowY: 'auto', 
+                overflow: 'hidden',
                 zIndex: 2, 
                 display: 'flex', 
-                placeContent: 'center'
+                flexDirection: 'column',
+                placeContent: 'stretch',
             }}>
-                <iframe title={title} src={url} style={{width: '100%'}} />
+                <iframe title={title} src={url} style={{flexGrow: 1, border: 0}} />
             </div>
         </ScrollPage>
     )

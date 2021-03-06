@@ -25,12 +25,10 @@ const FrameApp = lazy(() => import('./pages/FrameApp'))
 
 const useStyles = makeStyles({
   root: {
-    flex: 1,
     display: 'flex', 
     flexDirection: 'column', 
-    height: '100%', 
-    minHeight: "stretch",
-    width: '100%',
+    placeItems: 'stretch',
+    height: '100%',
   },
   particles: {
     position: 'fixed',
