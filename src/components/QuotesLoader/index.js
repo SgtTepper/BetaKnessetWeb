@@ -57,6 +57,7 @@ const useStyles = makeStyles({
     paddingRight: '20px',
     "$smallLoader &": {
       fontSize: "15px",
+      paddingRight: 0,
     },
   },
 
@@ -71,7 +72,8 @@ const useStyles = makeStyles({
     height: '30%',
     // XXX hacky, but the transition library sucks, so whaterver - OP
     "& .text-transition_inner > div": {
-      width: "100%",
+      margin: "0 7.5%",
+      width: "85%",
     }
   },
   bigLoader: {
@@ -139,7 +141,7 @@ const Loader = React.memo(function ({show}) {
     return (
       <div className={classes.quote}>
         <div className={classes.text}>{quote}</div>
-        <div className={classes.name}>- {name}</div>
+        <div className={classes.name}>{name}</div>
       </div>
     )
   })
