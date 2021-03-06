@@ -56,3 +56,7 @@
 .fc-timegrid-event-harness {
   overflow: hidden;
 }
+
+.fc-daygrid-event-harness {
+  overflow: hidden;
+}
