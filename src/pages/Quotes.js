@@ -51,7 +51,7 @@ const QuoteView = React.memo(function ({loading, setLoading}) {
             setLoading(true)
             try {
                 const res = await (await fetch(`${config.server}/Quotes?keyword=${query}`)).json()
-                setData(res)
+                setData(res.quotes)
             } catch(e) {
                 // TODO handle errors - (ex: when multi term search is empty)
                 console.error(e)
