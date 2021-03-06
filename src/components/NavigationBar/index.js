@@ -29,7 +29,7 @@ const useStyles = makeStyles({
       '& $bigLetter': {
         fontSize: '120%',
       },
-      '&:hover': {
+      '&:hover, & a:active': {
         transform: 'scale(1.03)',
       },
     },
@@ -56,7 +56,9 @@ const useStyles = makeStyles({
         borderRadius: 0,       
       },
     },
-    logo: { gridArea: 'logo' },
+    logo: { 
+      gridArea: 'logo',
+    },
     links: { 
       gridArea: 'links',
       justifyItems: 'flex-end',
@@ -151,7 +153,10 @@ export default function NavigationBar() {
     const navigate = useNavigate()
     return (
       <div className={classes.logo}>
-        <a href="#top" onClick={() => navigate({location: '/', hash: '#top'})}>
+        <a href="#top" onClick={() => navigate({location: '/', hash: '#top'})} style={{
+          userSelect: "none",
+          "-webkit-tap-highlight-color": "transparent",
+        }}>
           <Typography color="primary" variant="h2" component="h1" className={classes.title}>
               <span className={classes.bigLetter}>ב</span>טא מחוקקי<span className={classes.bigLetter}>ם</span>
           </Typography>
