@@ -9,8 +9,6 @@ import config from '../config'
 import { useBigScreen, useQuery } from '../utils'
 import defaultTopics from '../defaultTopics'
 
-const maxResults = 20
-
 const Quotes = React.memo(function () {
     const [loading, setLoading] = useState(false)
     const randomTopic = defaultTopics[Math.floor(Math.random() * defaultTopics.length)]
@@ -65,7 +63,7 @@ const Quotes = React.memo(function () {
                                         ? "תוצאה אחת"
                                         : `${numberWithCommas(data.count)} תוצאות`
                                     }
-                                    {data.count > maxResults && ` (מציג ${maxResults} אחרונות)`}
+                                    {data.count > data.quotes.length && ` (מציג ${data.quotes.length} אחרונות)`}
                                 </Typography>
                             }
                         </div>
