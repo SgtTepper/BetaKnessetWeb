@@ -66,6 +66,8 @@ export default function HakVotes({subjects, setStarted, allRules}) {
     const [bestPartyImg, setBestPartyImg] = useState(0)
     const [worstPartyImg, setWorstPartyImg] = useState(0)
     const [value, setValue] = React.useState(0);
+    const [maxRules, setMaxRules] = useState(9)
+
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -121,7 +123,7 @@ export default function HakVotes({subjects, setStarted, allRules}) {
             setQueryString(queryString +","+curr_rule[0].ID + "b");
         }
         setLawsCounter(lawsCounter +1)
-        if (lawsCounter == MAX_RULES) {
+        if (lawsCounter == maxRules) {
             setFinished(true)
         }
         remove_random_rule();
@@ -135,7 +137,7 @@ export default function HakVotes({subjects, setStarted, allRules}) {
             setQueryString(queryString +","+curr_rule[0].ID + "n");
         }
         setLawsCounter(lawsCounter +1)
-        if (lawsCounter == MAX_RULES) {
+        if (lawsCounter == maxRules) {
             setFinished(true)
         }
 
@@ -206,7 +208,8 @@ export default function HakVotes({subjects, setStarted, allRules}) {
 
                                    setStarted={setStarted} rulesLength={numOfRules}
                                    bestParty={bestParty} worstParty={worstParty} bestPartyImg={bestPartyImg}
-                                   worstPartyImg={worstPartyImg}/>
+                                   worstPartyImg={worstPartyImg}
+                                   setMaxRules={setMaxRules} maxRules={maxRules} setFinished={setFinished}/>
 
                     </div>
                     <div  style={{width:'100vw', overflow:'hidden'}}>

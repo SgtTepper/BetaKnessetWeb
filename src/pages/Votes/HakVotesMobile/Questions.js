@@ -92,7 +92,8 @@ const MyButton = withStyles(styleButton)(MyButtonRaw);
 
 export default function Questions({rule, remove_random_rule, handle_against, handle_for, finished, back_to_subjects,
                                       keep_going, partyPerson, setPartyPerson, allRules, queryString,
-                                    setStarted,  rulesLength, bestParty, worstParty, worstPartyImg, bestPartyImg}) {
+                                    setStarted,  rulesLength, bestParty, worstParty, worstPartyImg, bestPartyImg,
+                                      maxRules, setMaxRules, setFinished}) {
 
 
     const classes = useStyles();
@@ -104,6 +105,10 @@ export default function Questions({rule, remove_random_rule, handle_against, han
     const [displaySlideGifParty, setDisplaySlideGifParty] = useState(true )
 
 
+    function click_for_more() {
+        setMaxRules(maxRules+5);
+        setFinished(false)
+    }
 
 
     const handleChange = (panel) => (event, isExpanded) => {
@@ -148,8 +153,21 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                 <VotesShareButtons/>
                 <br/>
                 <br/>
-                <MyButton style={{ marginBottom: '0.5em',marginTop: '0.2em', borderRadius: '20' }} startIcon={<Refresh style={{ boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)', marginLeft: '11px', color: 'rgb(158,175,231)', fontSize:60, textAlign:'center'}}  />}
-                          onClick={() => {setStarted(false)}} />
+                <br/>
+                {(rulesLength>maxRules+1) ?
+                    <Button
+                        variant="contained"
+                        style={{background: 'linear-gradient(45deg,#9E7DDF 5%, #daded8 90%)',fontSize:'15px', fontFamily: 'Helvetica Neue, Varela Round, sans-serif', color:'black', minHeight: '40px', margin: 8}}
+                        onClick={click_for_more}>
+                        בא לי להמשיך
+                    </Button>
+                    :
+                    <></>}
+                <Button  style={{background: 'linear-gradient(45deg,#daded8 5%, #9E7DDF 90%)', fontSize:'15px', fontFamily: 'Helvetica Neue, Varela Round, sans-serif', color:'black', minHeight: '40px', margin: 8}}
+                         startIcon={<Refresh style={{marginBottom:'-5px',marginTop:'-5px', marginRight: '-5px', marginLeft: '9px', color: 'black', fontSize:15, textAlign:'center'}}  />}
+                         onClick={() => {setStarted(false)}} >
+                    התחל מחדש
+                </Button>
                 <br/>
                 <br/>
                 <h2 style={{letterSpacing: '0.5px', textAlign: 'right', minHeight:'15vh', fontSize:'12px', fontWeight:'normal', paddingRight:'15px'}}>
@@ -186,7 +204,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
 
                 <div style={{textAlign: 'center',zIndex:'7',  position: 'absolute'}}>
                     <br/>
-                    <p style={{textAlign: 'center', color: 'white', fontFamily: 'Helvetica Neue, Varela Round, sans-serif', fontSize:'15px'}}>{queryString==''? 1 : (queryString.split(',').length+1)}/{Math.min(rulesLength,10)}</p>
+                    <p style={{textAlign: 'center', color: 'white', fontFamily: 'Helvetica Neue, Varela Round, sans-serif', fontSize:'15px'}}>{queryString==''? 1 : (queryString.split(',').length+1)}/{Math.min(rulesLength,maxRules+1)}</p>
                     <br/>
                     <h2 style={{textAlign: 'center', display: 'flex', justifyContent:'center', fontSize: "16px", flexDirection: 'column', letterSpacing: '0.7px', top:'50%', maxWidth:'100vw' ,minHeight:'13vh', boxShadow: '5px 5px 5px 5px rgba(40,150,169,0.2)'}}> {rule.LawName} </h2>
                     <br/>

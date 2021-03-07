@@ -31,7 +31,6 @@ const useStyles = makeStyles({
     },
 });
 
-const MAX_RULES = 9
 
 
 export default function HakVotes({subjects, setStarted, allRules}) {
@@ -54,6 +53,8 @@ export default function HakVotes({subjects, setStarted, allRules}) {
     const [worstParty, setWorstParty] = useState(0)
     const [bestPartyImg, setBestPartyImg] = useState(0)
     const [worstPartyImg, setWorstPartyImg] = useState(0)
+    const [maxRules, setMaxRules] = useState(9)
+
 
     useEffect(() => {
         async function fetchMyAPI() {
@@ -100,7 +101,7 @@ export default function HakVotes({subjects, setStarted, allRules}) {
             setQueryString(queryString +","+curr_rule[0].ID + "b");
         }
         setLawsCounter(lawsCounter +1)
-        if (lawsCounter == MAX_RULES) {
+        if (lawsCounter == maxRules) {
             setFinished(true)
         }
         remove_random_rule();
@@ -114,7 +115,7 @@ export default function HakVotes({subjects, setStarted, allRules}) {
             setQueryString(queryString +","+curr_rule[0].ID + "n");
         }
         setLawsCounter(lawsCounter +1)
-        if (lawsCounter == MAX_RULES) {
+        if (lawsCounter == maxRules) {
             setFinished(true)
         }
 
@@ -141,7 +142,9 @@ export default function HakVotes({subjects, setStarted, allRules}) {
                                setPartyPerson={setPartyPerson} queryString={queryString}
                                minDifference={minDifference} setMinDifference={setMinDifference}
                                setStarted={setStarted} maxDifference={maxDifference} rulesLength={numOfRules}
-                            bestParty={bestParty} worstParty={worstParty} bestPartyImg={bestPartyImg} worstPartyImg={worstPartyImg}/>
+                            bestParty={bestParty} worstParty={worstParty} bestPartyImg={bestPartyImg} worstPartyImg={worstPartyImg}
+                               setMaxRules={setMaxRules} maxRules={maxRules} setFinished={setFinished}
+                    />
 
                     <Bubble minDifference={minDifference} queryString={queryString} partyPerson={partyPerson}
                             setMaxDifference={setMaxDifference} setBestParty={setBestParty} setWorstParty={setWorstParty} setBestPartyImg={setBestPartyImg} setWorstPartyImg={setWorstPartyImg}/>

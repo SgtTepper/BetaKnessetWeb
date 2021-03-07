@@ -91,9 +91,13 @@ const MyButton = withStyles(styleButton)(MyButtonRaw);
 
 export default function Questions({rule, remove_random_rule, handle_against, handle_for, finished, back_to_subjects,
                                       keep_going, partyPerson, setPartyPerson, allRules, queryString, minDifference,
-                                      setMinDifference, setStarted, maxDifference, rulesLength, bestParty, worstParty, worstPartyImg, bestPartyImg}) {
+                                      setMinDifference, setStarted, maxDifference, rulesLength, bestParty, worstParty,
+                                      worstPartyImg, bestPartyImg, maxRules, setMaxRules, setFinished}) {
 
-
+    function click_for_more() {
+        setMaxRules(maxRules+5);
+        setFinished(false)
+    }
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
     const [openDialog, setOpenDialog] = React.useState(true)
@@ -119,8 +123,21 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                 <br/>
                 {(partyPerson == 0 && queryString.split(',').length>1 )? (<DiscreteSlider setFirstTimeUsed={setFirstTimeUsed} firstTimeUsed={firstTimeUsed} queryString={queryString} style={{marginBottom: '0px'}} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
                     ( <div style={{ marginBottom: '90px'}}/>)}
-                <MyButton style={{ marginTop: '0px',borderRadius: '20' }} startIcon={<Refresh style={{ boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)', marginLeft: '11px', color: 'rgb(158,175,231)', fontSize:60, textAlign:'center'}}  />}
-                          onClick={() => {setStarted(false)}} />
+                <br/>
+                {(rulesLength>maxRules+1) ?
+                    <Button
+                        variant="contained"
+                        style={{background: 'linear-gradient(45deg,#9E7DDF 5%, #daded8 90%)',fontSize:'15px', fontFamily: 'Helvetica Neue, Varela Round, sans-serif', color:'black', minHeight: '40px', margin: 8}}
+                        onClick={click_for_more}>
+                        בא לי להמשיך
+                    </Button>
+                    :
+                    <></>}
+                <Button  style={{background: 'linear-gradient(45deg,#daded8 5%, #9E7DDF 90%)', fontSize:'15px', fontFamily: 'Helvetica Neue, Varela Round, sans-serif', color:'black', minHeight: '40px', margin: 8}}
+                        startIcon={<Refresh style={{marginBottom:'-5px',marginTop:'-5px', marginRight: '-5px', marginLeft: '9px', color: 'black', fontSize:15, textAlign:'center'}}  />}
+                      onClick={() => {setStarted(false)}} >
+                    התחל מחדש
+                </Button>
                 <br/>
                 <h2 style={{letterSpacing: '0.7px', textAlign: 'right', minHeight:'60px', fontSize:'15px', fontWeight:'normal', paddingRight:'15px'}}>
                     <span style={{color:'green'}}>ירוקים</span> - מסכים איתך
@@ -137,7 +154,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                 </h2>
             </div>
         )
-    }
+    };
 
     return (
         <div style={{ float:'right' , zIndex:'6', backgroundColor: 'rgba(9,16,34, 0.95)', width:"20vw",minWidth:"350px", maxWidth:'450px', padding: '0em 2em', position: 'relative', minHeight: '100vh'}}>
@@ -147,7 +164,7 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                 :
                 <></>
             }
-            <p style={{marginBottom: '-5px', color: 'white', fontFamily: 'Helvetica Neue, Varela Round, sans-serif', fontSize:'12px'}}>{queryString==''? 1 : (queryString.split(',').length+1)}/{Math.min(rulesLength,10)}</p>
+            <p style={{marginBottom: '-5px', color: 'white', fontFamily: 'Helvetica Neue, Varela Round, sans-serif', fontSize:'12px'}}>{queryString==''? 1 : (queryString.split(',').length+1)}/{Math.min(rulesLength,maxRules+1)}</p>
             <h2 style={{marginBottom: '-5px', display: 'flex', justifyContent:'center', fontSize: "20px", flexDirection: 'column', letterSpacing: '0.7px', top:'50%', minHeight:'100px', boxShadow: '5px 5px 5px 5px rgba(40,150,169,0.2)'}}> {rule.LawName} </h2>
             <br/>
             <paper square={false}>
