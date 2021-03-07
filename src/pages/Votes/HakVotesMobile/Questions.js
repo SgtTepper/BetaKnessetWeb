@@ -153,7 +153,6 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                 <VotesShareButtons/>
                 <br/>
                 <br/>
-                <br/>
                 {(rulesLength>maxRules+1) ?
                     <Button
                         variant="contained"
