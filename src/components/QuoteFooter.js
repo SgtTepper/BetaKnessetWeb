@@ -17,7 +17,7 @@ export default function QuoteFooter(props) {
                         alignItems: 'center',
                         flexWrap: 'wrap',
                     }}>
-                            <span style={{padding: '0 .5em'}}>{TopicName}</span>
+                            <span style={{padding: '0 .5em'}}><b>לחצו לפרוטוקול המלא</b> - {TopicName}</span>
                             <span className='go-suffix' style={{paddingLeft: '.5em'}}>❯❯❯</span>
                     </div>
                 </DocumentLink>}
