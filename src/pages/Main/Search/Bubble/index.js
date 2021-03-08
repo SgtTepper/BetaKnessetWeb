@@ -319,7 +319,7 @@ const MobilePersonCard = React.memo(function({PersonID, FirstName, LastName, Tex
             startIcon={<PersonIcon style={{paddingLeft: '.5em', marginRight: '-.5em'}}/>}
             onClick={gotoPerson}
           >
-            לפרופיל
+           לחץ להקשר מלא ופרופיל ח"כ
           </Button>
         </div>
       </CardActions>
