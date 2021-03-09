@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField'
 import SearchIcon from '@material-ui/icons/Search'
 import ClearIcon from '@material-ui/icons/Clear'
 import InputAdornment from '@material-ui/core/InputAdornment'
-import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import { FormatQuote } from '@material-ui/icons'
 import IconButton from '@material-ui/core/IconButton'
 import { useQuery, useNavigate } from '../utils'
@@ -53,7 +53,7 @@ const QuotesSearch = React.memo(function ({style, variant, placeholder, showRese
                     <IconButton 
                         onClick={() => setGuideOpen(true)}
                     >
-                        <SettingsOutlinedIcon style={style?.color && {fill: style?.color}} />
+                        <HelpOutlineIcon style={style?.color && {fill: style?.color}} />
                     </IconButton>
                     </InputAdornment>
                 ),
@@ -86,7 +86,7 @@ const QuotesSearch = React.memo(function ({style, variant, placeholder, showRese
     )
 })
 
-function SearchDialog(props) {
+export function SearchDialog(props) {
     const {setOpen} = props
     const navigate = useNavigate()
 
@@ -117,6 +117,7 @@ function SearchDialog(props) {
             <p style={{color: '#062350', textAlign: 'center'}}>
                 <b><i><a href="/" onClick={e => showQuotes(e, 'בעד^הקהילה הגאה')}>בעד^הקהילה הגאה</a></i></b>
             </p>
+            <p>אם עדין אין לכם רעיון מה לחפש, מוזמנים לבחור באחת מבועות הנושאים שלנו.</p>
         </Dialog>
     )
 }

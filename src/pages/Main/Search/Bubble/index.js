@@ -17,6 +17,9 @@ import QuotesLoader from '../../../../components/QuotesLoader'
 import { useCancellableFetch, useBigScreen, useQuery, useWindowSize, toNiceDate, imageOrDefault, shuffleArray, useNavigate } from '../../../../utils'
 import config from '../../../../config'
 
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+import {SearchDialog} from '../../../../components/QuotesSearch'
+
 import defaultBubbles from '../../../../defaultTopics'
 import { Typography } from '@material-ui/core'
 
@@ -109,6 +112,7 @@ const Chart = React.memo(function ({query, setLoading}) {
     const [personPreview, setPersonPreview] = useState(null)
     const [data, setData] = useState(defaults)
     const [error, setError] = useState(null)
+    const [guideOpen, setGuideOpen ] = useState(false)
     const navigate = useNavigate()
     const serverFetch = useCancellableFetch()
 
@@ -164,6 +168,7 @@ const Chart = React.memo(function ({query, setLoading}) {
 
     return (
         <>
+          <SearchDialog open={guideOpen} setOpen={setGuideOpen} />
           <Snackbar 
             message={error}
             open={!!error} 
@@ -195,8 +200,10 @@ const Chart = React.memo(function ({query, setLoading}) {
               }
               else if (n.data.query)
                 navigate({q: n.data.query})
-              else if (n.data.query !== undefined)
-                setData(makeDefaultBubbles(defaultBubbles))
+              else if (n.data.query !== undefined) {
+                setData(makeDefaultBubbles(defaultBubbles))    
+                setGuideOpen(true)                          
+              }
             }}
             />
         </div>
@@ -400,7 +407,7 @@ const MoreSuggestionsBubble = React.memo(function () {
   return (
       <div className='suggestion'>
           <div style={{textAlign: 'center', width: '100%'}}>
-            ...
+            <HelpOutlineIcon style={{color: '#4c4c4c', paddingTop: '8px', fontSize: '1.7em'}}/>
           </div>
       </div>
   )
