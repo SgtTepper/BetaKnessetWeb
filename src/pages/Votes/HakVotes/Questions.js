@@ -117,10 +117,15 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                     הכי פחות מסכימים איתך
                 </h2>
                 <br/>
+                <h2 style={{letterSpacing: '0.7px', textAlign: 'right', minHeight:'60px', fontSize:'12px', fontWeight:'normal', paddingRight:'15px'}}>
+                    *מחושב לפי ממוצע מפלגתי של ח"כים רצים
+                </h2>
                 <VotesShareButtons/>
                 <br/>
+
                 <IconLabelTabs  value={partyPerson} setValue={setPartyPerson}/>
                 <br/>
+
                 {(partyPerson == 0 && queryString.split(',').length>1 )? (<DiscreteSlider setFirstTimeUsed={setFirstTimeUsed} firstTimeUsed={firstTimeUsed} queryString={queryString} style={{marginBottom: '0px'}} max={maxDifference} minDifference={minDifference} setMinDifference={setMinDifference}/>) :
                     ( <div style={{ marginBottom: '90px'}}/>)}
                 <br/>

@@ -150,6 +150,9 @@ export default function Questions({rule, remove_random_rule, handle_against, han
                         הכי פחות מסכימים איתך
                 </h2>
                 <br/>
+                <h2 style={{letterSpacing: '0.7px', textAlign: 'right', minHeight:'60px', fontSize:'10px', fontWeight:'normal', paddingRight:'15px'}}>
+                    *מחושב לפי ממוצע מפלגתי של ח"כים רצים
+                </h2>
                 <VotesShareButtons/>
                 <br/>
                 <br/>
