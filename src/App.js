@@ -9,9 +9,7 @@ import { CircularProgress, ThemeProvider } from '@material-ui/core'
 import Particles from 'react-particles-js'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import { isSafari } from "react-device-detect"
 import Modal from '@material-ui/core/Modal'
-import Button from '@material-ui/core/Button'
 import Fade from '@material-ui/core/Fade'
 import Backdrop from '@material-ui/core/Backdrop'
 import Container from '@material-ui/core/Container'
@@ -35,7 +33,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex', 
     flexDirection: 'column', 
     placeItems: 'stretch',
-    height: '100%',
+    overflowY: 'auto',
   },
   particles: {
     position: 'fixed',
@@ -43,10 +41,6 @@ const useStyles = makeStyles(theme => ({
     top: 0,
     left: 0,
     zIndex: 1,
-  },
-
-  safari: {
-    height: '100vh',
   },
   modal: {
     display: 'flex',
@@ -74,17 +68,13 @@ export default function App() {
   const [disclaimerApproved, setDisclaimerApproved] = useSessionStorage('disclaimerApproved', false)
   const classes = useStyles()
 
-  const [safariApproved, setSafariApproved] = useSessionStorage('safariApproved', false)
-  const showSafari = isSafari && !safariApproved
-
   if (config.showOverloadedScreen)
     return <ThemeProvider theme={theme}><OverloadScreen /></ThemeProvider>
 
   return (
     <ThemeProvider theme={theme}>
-      <SafariDisclaimer open={showSafari} setOpen={b => setSafariApproved(!b)} />
-      <DisclaimerDialog open={!showSafari && !disclaimerApproved} setOpen={b => setDisclaimerApproved(!b)} />
-      <div className={clsx(classes.root, isSafari && classes.safari, isSafari && "safari")}>
+      <DisclaimerDialog open={!disclaimerApproved} setOpen={b => setDisclaimerApproved(!b)} />
+      <div className={clsx(classes.root)}>
         <Router>
           <NavigationBar />
           <ScrollableView>
@@ -159,44 +149,6 @@ function DisclaimerDialog(props) {
             </p>
         </Dialog>
     )
-}
-
-function SafariDisclaimer({open, setOpen}) { 
-  const classes = useStyles()
-  return (
-    <Modal
-      className={classes.modal}
-      open={open}
-      onClose={() => setOpen(false)}
-      closeAfterTransition
-      BackdropComponent={Backdrop}
-      BackdropProps={{
-        timeout: 500,
-        className: classes.backdrop,
-      }}
-    >
-      <Fade in={open}>
-        <Container className={classes.container}>
-          <div>
-            <Typography variant="h4">״אי-אפשר להסתובב בתוך ספארי״</Typography>
-            <Typography variant="h5">-יוראי להב הרצנו</Typography>
-          </div>
-
-          <div>
-            <Typography>
-              האתר עוד לא עובד חלק על ספארי.
-            </Typography>
-            <Typography>
-              בשביל חוויה מעולה, מוזמנים לגלוש דרך כרום
-            </Typography>
-          </div>
-          <Button color="textSecondary" variant="contained" size="large" onClick={() => setOpen(false)}>
-            המשך בכל זאת
-          </Button>
-        </Container>
-      </Fade>
-  </Modal>
-  )
 }
 
 function OverloadScreen() { 

@@ -1,18 +1,16 @@
 import { makeStyles } from '@material-ui/core/styles'
 import clsx from 'clsx'
-import { isSafari } from "react-device-detect"
+import { isMobile } from "react-device-detect"
 import { useBigScreen, useWindowSize } from '../../utils'
 
 const useStyles = makeStyles(theme => ({
     scrollView: {
-      scrollSnapType: !isSafari ? 'y mandatory' : 'none',
+      scrollSnapType: isMobile ? 'y proximity' : 'y mandatory',
       WebkitOverflowScrolling: 'touch',
-      flexGrow: 1,
-      display: 'flex',
-      flexDirection: 'column',
       overflowY: 'auto',
       overflowX: 'hidden',
       position: 'relative',
+      height: '100%',
       scrollBehavior: 'smooth',
       [theme.breakpoints.down('sm')]: {
         scrollBehavior: 'auto',
@@ -25,7 +23,7 @@ const useStyles = makeStyles(theme => ({
         placeContent: 'stretch',
         position: 'relative',
         scrollSnapAlign: 'start',
-        overflowY: 'hidden', 
+        overflowY: 'hidden',
     },
 
     wrapper: {
@@ -38,8 +36,8 @@ const useStyles = makeStyles(theme => ({
     },
 
     limitScreen: {
-        flex: "1 0 100%",
-        placeSelf: 'stretch',
+        height: '100%',
+        boxSizing: 'border-box',
         overflowX: 'hidden',
     }
   }))
@@ -58,15 +56,15 @@ const useStyles = makeStyles(theme => ({
   export function ScrollPage({ children, limit, parentStyle, style, className, ...props }) {
     const classes = useStyles()
 
-    // FIXME this is a (VERY) ugly hack to make safari work (OP)
+    // XXX hack for 100% screen scrollable size (flex 100% doesnt work well for all browsers)
     const windowSize = useWindowSize()
     const isBigScreen = useBigScreen()
-    const height = isSafari ? windowSize.height - (isBigScreen ? 60 : 50) : 'initial'
+    const minHeight = limit ? windowSize.height - (isBigScreen ? 55 : 48) : 'initial'
 
     return (
     <div className={clsx(classes.scrollPage, limit && classes.limitScreen)} style={parentStyle}>
       <div className={clsx(classes.wrapper, limit && classes.limitScreen, className)} 
-        style={{...style, height}} {...props}>
+          style={{...style, minHeight}} {...props}>
         {children}
       </div>
     </div>
