@@ -37,7 +37,6 @@ const CachedWordCloud = React.memo(({personID}) => {
       if (!personID) return
       setLoading(true)
       const res = await serverFetch(`${config.server}/WordCloud?personId=${personID}`)
-      console.log(res)
       if (res.length) {
         setData(JSON.parse(res[0].WordCloud))
       } else {
