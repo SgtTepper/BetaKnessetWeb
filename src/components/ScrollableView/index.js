@@ -50,7 +50,6 @@ const useStyles = makeStyles(theme => ({
   export default function ScrollableView(props) {
     const { children } = props
     const classes = useStyles()
-    const isBigScreen = useBigScreen()
     return (
     <div className={classes.scrollView} {...props}>
         {children}
