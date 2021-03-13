@@ -12,6 +12,7 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import PersonIcon from '@material-ui/icons/Person'
 import Button from '@material-ui/core/Button'
+import { useHistory } from "react-router-dom"
 
 import QuotesLoader from '../../../../components/QuotesLoader'
 import { useCancellableFetch, useBigScreen, useQuery, useWindowSize, toNiceDate, imageOrDefault, shuffleArray, useNavigate } from '../../../../utils'
@@ -22,6 +23,7 @@ import {SearchDialog} from '../../../../components/QuotesSearch'
 
 import defaultBubbles from '../../../../defaultTopics'
 import { Typography } from '@material-ui/core'
+import { getDocumentLink } from '../../../../components/DocumentLink'
 
 const minSize = 50
 const maxWidth = 750
@@ -195,7 +197,7 @@ const Chart = React.memo(function ({query, setLoading}) {
             onLeafClick={n => {
               if (n.data.result) {
                 if (isBigScreen)
-                  navigate({personID: n.data.result.PersonID, hash: '#person'})
+                  return
                 else
                   setPersonPreview(n.data.result)
               }
@@ -234,8 +236,9 @@ const PersonPreview = React.memo(function ({onClose, details, query}) {
 })
 
 const PersonShortName = React.memo(function ({...props}) {
-  const {FirstName, LastName, ratio} = props
+  const {PersonID, FirstName, LastName, ratio} = props
   const isBigScreen = useBigScreen()
+  const navigate = useNavigate()
   const minRatio = isBigScreen ? minRatioForImage : minRatioForImageSmallScreen
 
   return (
@@ -246,8 +249,9 @@ const PersonShortName = React.memo(function ({...props}) {
       interactive
       enterNextDelay={200}
     >
-      <div className='person-bubble'
+      <div className='person-bubble' onClick={() => isBigScreen ? navigate({personID: PersonID, hash: '#person'}) : void(0)}
         style={{
+          cursor: 'pointer',
           display: 'flex',
           justifyItems: 'stretch',
           alignItems: 'flex-end',
@@ -264,9 +268,10 @@ const PersonShortName = React.memo(function ({...props}) {
 })
 
 const MobilePersonCard = React.memo(function({PersonID, FirstName, LastName, Text, FactionName, KnessetNum, 
-  StartDate, Counter, mk_imgPath, query, onClose}) {
+  StartDate, Counter, Type, DocumentID, Index, mk_imgPath, query, onClose}) {
   const classes = useStyles()
   const navigate = useNavigate()
+  const history = useHistory()
   const gotoPerson = () => { 
     navigate({personID: PersonID, hash: '#person'})
     onClose()
@@ -320,13 +325,26 @@ const MobilePersonCard = React.memo(function({PersonID, FirstName, LastName, Tex
       <CardActions>
         <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', placeItems: 'center', width: '100%'}}>
           <Button 
+                size="small" 
+                variant="contained" 
+                color="primary"
+                startIcon={<PersonIcon style={{paddingLeft: '.5em', marginRight: '-.5em'}}/>}
+                style={{marginLeft: '1em'}}
+                onClick={e => {
+                  history.push(getDocumentLink({SessionType: Type, DocumentID, Index, PersonID}))
+                  e.preventDefault()
+                }}
+              >
+            לפרוטוקול המלא
+          </Button>
+          <Button 
             size="small" 
             variant="contained" 
             color="primary"
             startIcon={<PersonIcon style={{paddingLeft: '.5em', marginRight: '-.5em'}}/>}
             onClick={gotoPerson}
           >
-           להקשר מלא ופרופיל ח"כ
+           לפרופיל ח"כ
           </Button>
         </div>
       </CardActions>
@@ -334,7 +352,14 @@ const MobilePersonCard = React.memo(function({PersonID, FirstName, LastName, Tex
     )
 })
 
-const PersonCard = React.memo(function({FirstName, LastName, Text, FactionName, KnessetNum, StartDate, Counter, query}) {
+const PersonCard = React.memo(function({PersonID, FirstName, LastName, Text, FactionName, KnessetNum, StartDate, Counter, 
+  DocumentID, Index, Type, query}) {
+  const navigate = useNavigate()
+  const history = useHistory()
+  const gotoPerson = () => { 
+    navigate({personID: PersonID, hash: '#person'})
+  }
+
   return (
     <div style={{padding: '0 .5em', cursor: 'pointer'}}>
       <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', placeItems: 'center'}}>
@@ -387,6 +412,29 @@ const PersonCard = React.memo(function({FirstName, LastName, Text, FactionName, 
       >
         {toNiceDate(new Date(StartDate))}
       </Typography>
+      <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around', placeItems: 'center', width: '100%'}}>
+        <Button 
+              size="small" 
+              variant="contained" 
+              color="default"
+              startIcon={<PersonIcon style={{paddingLeft: '.5em', marginRight: '-.5em'}}/>}
+              onClick={e => {
+                history.push(getDocumentLink({SessionType: Type, DocumentID, Index, PersonID}))
+                e.preventDefault()
+              }}
+            >
+          לפרוטוקול המלא
+        </Button>
+        <Button 
+              size="small" 
+              variant="contained" 
+              color="default"
+              startIcon={<PersonIcon style={{paddingLeft: '.5em', marginRight: '-.5em'}}/>}
+              onClick={gotoPerson}
+            >
+          לפרופיל ח"כ
+        </Button>
+      </div>
     </div>
   )
 })
