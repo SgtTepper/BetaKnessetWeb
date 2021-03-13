@@ -18,14 +18,16 @@ const Quotes = React.memo(function () {
     const [data, setData] = useState({})
     const query = useQuery()
 
+    const cleanQuery = query.replace('״', '"').replace('׳', "'")
+
     useEffect(() => {
         (async () => {
             setData({})
-            if (!query.length)
+            if (!cleanQuery.length)
                 return
             setLoading(true)
             try {
-                const res = await serverFetch(`${config.server}/Quotes?keyword=${query}`)
+                const res = await serverFetch(`${config.server}/Quotes?keyword=${cleanQuery}`)
                 setData(res)
             } catch(e) {
                 // TODO handle errors - (ex: when multi term search is empty)
@@ -35,7 +37,7 @@ const Quotes = React.memo(function () {
                 setLoading(false)
             }
         })()
-    }, [query, serverFetch])
+    }, [cleanQuery, serverFetch])
 
     return (
         <ScrollPage limit id='quotes' parentStyle={{backgroundColor: '#223388'}}>

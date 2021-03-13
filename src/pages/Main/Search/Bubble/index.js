@@ -116,7 +116,7 @@ const Chart = React.memo(function ({query, setLoading}) {
     const navigate = useNavigate()
     const serverFetch = useCancellableFetch()
 
-    const cleanQuery = query.replace('״', '"')
+    const cleanQuery = query.replace('״', '"').replace('׳', "'")
 
     useEffect(() => {
         (async () => {
