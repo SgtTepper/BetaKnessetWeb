@@ -33,9 +33,11 @@ const CachedWordCloud = React.memo(({personID}) => {
   const serverFetch = useCancellableFetch()
   
   useEffect(() => {
-    (async () => {
-      if (!personID) return
-      setLoading(true)
+    if (!personID) return
+    setLoading(true)
+    // FIXME this is a hack to allow the page to finish scrolling before loading the word cloud.
+    //. the moment it loads, the smooth scroll effect stops - which causes the page to stop in the middle
+    setTimeout(async () => {
       const res = await serverFetch(`${config.server}/WordCloud?personId=${personID}`)
       if (res.length) {
         setData(JSON.parse(res[0].WordCloud))
@@ -43,8 +45,8 @@ const CachedWordCloud = React.memo(({personID}) => {
         setData(null)
       }
       setLoading(false)
-    })()
-  }, [personID, serverFetch])
+    }, isBigScreen ? 200 : 0)
+  }, [personID, serverFetch, isBigScreen])
 
   if (loading) {
     return (<CircularProgress />)
