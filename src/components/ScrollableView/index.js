@@ -1,11 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles'
 import clsx from 'clsx'
-import { isMobile } from "react-device-detect"
 import { useBigScreen, useWindowSize } from '../../utils'
 
 const useStyles = makeStyles(theme => ({
     scrollView: {
-      scrollSnapType: isMobile ? 'y proximity' : 'y mandatory',
+      scrollSnapType: 'y mandatory',
       WebkitOverflowScrolling: 'touch',
       overflowY: 'auto',
       overflowX: 'hidden',
@@ -15,7 +14,12 @@ const useStyles = makeStyles(theme => ({
       [theme.breakpoints.down('sm')]: {
         scrollBehavior: 'auto',
       },
+
+      ".smallScreen &": {
+        scrollSnapType: 'none',
+      },
     },
+    smallScreen: {},
 
     scrollPage: {
         display: 'flex',
@@ -46,6 +50,7 @@ const useStyles = makeStyles(theme => ({
   export default function ScrollableView(props) {
     const { children } = props
     const classes = useStyles()
+    const isBigScreen = useBigScreen()
     return (
     <div className={classes.scrollView} {...props}>
         {children}

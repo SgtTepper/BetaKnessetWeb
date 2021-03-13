@@ -127,8 +127,12 @@
 	}
 
 	.mid-content .chat {
+		background-color: #ffffff11;
 		max-height: 70vh;
-		margin-bottom: 2em;
+		margin: 0 .5em 2em;
 		overflow-y: auto;
+		border-radius: .5em;
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
 	}
 }

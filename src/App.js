@@ -66,6 +66,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function App() {
   const [disclaimerApproved, setDisclaimerApproved] = useSessionStorage('disclaimerApproved', false)
+  const isBigScreen = useBigScreen()
   const classes = useStyles()
 
   if (config.showOverloadedScreen)
@@ -74,7 +75,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <DisclaimerDialog open={!disclaimerApproved} setOpen={b => setDisclaimerApproved(!b)} />
-      <div className={clsx(classes.root)}>
+      <div className={clsx(classes.root, isBigScreen ? "bigScreen" : "smallScreen")}>
         <Router>
           <NavigationBar />
           <ScrollableView>

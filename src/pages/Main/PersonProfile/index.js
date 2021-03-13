@@ -9,7 +9,7 @@ import WordCloud from '../../../components/WordCloud'
 import PersonBills from './PersonBills'
 import PersonBillsStats from './PersonBillsStats'
 import config from '../../../config'
-import { useCancellableFetch, useNavigate, imageOrDefault, usePersonID, getFullName } from '../../../utils'
+import { useBigScreen, useCancellableFetch, useNavigate, imageOrDefault, usePersonID, getFullName } from '../../../utils'
 import { ScrollPage } from '../../../components/ScrollableView'
 import PersonSearch from '../../../components/PersonSearch'
 import './index.css'
@@ -38,6 +38,7 @@ const useStyles = makeStyles({
 
 const PersonProfile = React.memo(function () {
   const personID = usePersonID()
+  const isBigScreen = useBigScreen()
   const [persons, setPersons] = useState({})
   const [fallbackPerson, setFallbackPerson] = useState(null)
   const serverFetch = useCancellableFetch()
@@ -69,7 +70,7 @@ const PersonProfile = React.memo(function () {
   const chosenPerson = person || fallbackPerson
 
   return (
-      <ScrollPage parentStyle={{backgroundColor: '#091022'}} limit id='person'>
+      <ScrollPage parentStyle={{backgroundColor: '#091022'}} limit={isBigScreen} id='person'>
         {personID 
           && <PersonView persons={persons} person={chosenPerson} />}
         {!personID
