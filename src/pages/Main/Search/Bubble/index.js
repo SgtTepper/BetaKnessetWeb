@@ -202,7 +202,7 @@ const Chart = React.memo(function ({query, setLoading}) {
               else if (n.data.query)
                 navigate({q: n.data.query})
               else if (n.data.query !== undefined) {
-                setData(makeDefaultBubbles(defaultBubbles))    
+                setData(makeDefaultBubbles(defaultBubbles, isBigScreen))    
                 setGuideOpen(true)                          
               }
             }}
@@ -235,8 +235,7 @@ const PersonPreview = React.memo(function ({onClose, details, query}) {
 
 const PersonShortName = React.memo(function ({...props}) {
   const {FirstName, LastName, ratio} = props
-  const windowSize = useWindowSize()
-  const isBigScreen = windowSize.width >= maxWidth
+  const isBigScreen = useBigScreen()
   const minRatio = isBigScreen ? minRatioForImage : minRatioForImageSmallScreen
 
   return (
