@@ -25,6 +25,7 @@
     "react-chartjs-2": "^2.11.1",
     "react-device-detect": "^1.15.0",
     "react-dom": "^17.0.1",
+    "react-force-graph": "^1.39.2",
     "react-google-charts": "^3.0.15",
     "react-highlight-words": "^0.17.0",
     "react-infinite-scroll-component": "^6.0.0",

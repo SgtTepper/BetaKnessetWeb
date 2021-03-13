@@ -123,6 +123,10 @@ export default function NavigationBar() {
         navigate: {location: '/apps/votes'},
         contents: "הצבעות",
       },
+      {
+        navigate: {location: '/graph'},
+        contents: "גרף",
+      },
     ]
 
     const links = [

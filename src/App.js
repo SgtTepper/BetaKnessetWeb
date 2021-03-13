@@ -29,6 +29,7 @@ const Document = lazy(() => import('./pages/Document'))
 const Quotes = lazy(() => import('./pages/Quotes'))
 const Calendar = lazy(() => import('./pages/Calendar'))
 const FrameApp = lazy(() => import('./pages/FrameApp'))
+const Graph = lazy(() => import('./pages/Graph'))
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -103,6 +104,9 @@ export default function App() {
                 )} />
                 <Route path="/calendar" render={(props) => (
                   <Calendar {...props} />
+                )} />
+                <Route path="/graph" render={(props) => (
+                  <Graph {...props} />
                 )} />
 
                 {config.apps.map(app => (
