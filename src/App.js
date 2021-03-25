@@ -148,6 +148,7 @@ function DisclaimerDialog(props) {
             <p>
               הנהלת האתר אינה נושאת באחריות על טעויות שייתכנו. השימוש באתר ושיתוף המידע שבאתר הוא באחריות המשתמש בלבד.
             </p>
+            <p>התמונות באתר לקוחות <a href="https://main.knesset.gov.il/" rel="noreferrer" target="_blank"><u>מאתר הכנסת</u></a> וכן <a href="https://he.wikipedia.org/" rel="noreferrer" target="_blank"><u>מויקיפדיה</u></a>.</p>
         </Dialog>
     )
 }
