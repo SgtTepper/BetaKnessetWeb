@@ -1,3 +1,32 @@
+# Updating Election Data
+### Setup Environment
+1) Install a react IDE (We use WebStorm)
+2) Clone this Repo
+3) Open a new branch
+4) install [node-js](https://nodejs.org/en/)
+5) install yarn: `brew install yarn`
+6) build environment: `yarn build`
+
+### Download Votes
+1) Clone [BetaKnessetData repo](https://github.com/SgtTepper/BetaKnessetData)
+2) Install DBeaver
+3) Connect to DB
+------
+
+### Choose interesting votes
+1) hand pick interesting votes. Use the following queries to help
+    a)
+2) Fill by hand the table `Votes_Interesting`
+
+### Update Votes Tables
+1) In `BetaKnessetWeb/SQL_Queries` you can find the list of queries that need to be run * The order of the queries below is important!*
+2) See what parties don't have a logo using `1_check_parties_without_logo.sql` and fill by hand a link to the party logo in Votes_PartyLogo
+3) Create release candidate tables (rc)
+    1) run `2_create_Votes_Person2Code.sql` to create release candidate of Votes_Person2Code
+    2) update the following columns by hand based on the current party list: Faction, PlaceInList, faction_picture
+    3) run `3_create_Votes_People_in_knesset.sql`
+4) Rename current `Votes_...` tables to `old_Votes...`
+5) Rename `rc_Votes...` to `Votes_...` and check that everything works.
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
