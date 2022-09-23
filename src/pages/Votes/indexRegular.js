@@ -15,7 +15,7 @@ import Loader from "../../components/VotesLoader";
 import ChipsArray from "./ChipsArray";
 import PlayCircleFilledTwoTone from "@material-ui/icons/PlayCircleFilledTwoTone";
 import AlertDialogSlide from "./HakVotes/AlertDialogSlide";
-import logo from './VotingLogo.png'
+import logo from './VotingLogo2022.png'
 import config from "../../config.json";
 
 function useQuery() {

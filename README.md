@@ -11,22 +11,26 @@
 1) Clone [BetaKnessetData repo](https://github.com/SgtTepper/BetaKnessetData)
 2) Install DBeaver
 3) Connect to DB
-------
+4) Run the script in `Votes_new_site.ipynb`
+5) Clone Votes table into `rc_Votes` (can be found in `BetaKnessetWeb/SQL_Queries/1_create_rc_tables.sql`
 
 ### Choose interesting votes
-1) hand pick interesting votes. Use the following queries to help
-    a)
-2) Fill by hand the table `Votes_Interesting`
+1) hand pick interesting votes. Use the following queries to help: `BetaKnessetWeb/SQL_Queries/0_interesting_votes_candidates.sql`
+2) Clone `Votes_Interesting` table into `rc_Votes_Interesting` (can be found in `BetaKnessetWeb/SQL_Queries/1_create_rc_tables.sql`
+3) Fill by hand the table `rc_Votes_Interesting` 
 
 ### Update Votes Tables
 1) In `BetaKnessetWeb/SQL_Queries` you can find the list of queries that need to be run * The order of the queries below is important!*
-2) See what parties don't have a logo using `1_check_parties_without_logo.sql` and fill by hand a link to the party logo in Votes_PartyLogo
-3) Create release candidate tables (rc)
+2)Create release candidate tables (rc)
     1) run `2_create_Votes_Person2Code.sql` to create release candidate of Votes_Person2Code
     2) update the following columns by hand based on the current party list: Faction, PlaceInList, faction_picture
     3) run `3_create_Votes_People_in_knesset.sql`
-4) Rename current `Votes_...` tables to `old_Votes...`
-5) Rename `rc_Votes...` to `Votes_...` and check that everything works.
+3)See what parties don't have a logo using `1_check_parties_without_logo.sql` and fill by hand a link to the party logo in Votes_PartyLogo
+4)Also update Votes_PartyLogo
+5)Rename current `Votes_...` tables to `old_Votes...`
+6)Rename `rc_Votes...` to `Votes_...` and check that everything works.
+7)Create index for important tables. See `4_create_indices.sql`
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

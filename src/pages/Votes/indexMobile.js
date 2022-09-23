@@ -16,7 +16,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import Loader from "../../components/VotesMobileLoader";
 import PlayCircleFilledTwoTone from "@material-ui/icons/PlayCircleFilledTwoTone";
 import ChipsArrayMobile from "./ChipsArrayMobile";
-import logo from './VotingLogo.png'
+import logo from './VotingLogo2022.png'
 import AlertDialogSlide from "./HakVotesMobile/AlertDialogSlide";
 import config from "../../config.json";
 
