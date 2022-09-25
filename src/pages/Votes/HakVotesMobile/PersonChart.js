@@ -93,9 +93,9 @@ const PersonChart = React.memo(function ({setLoading, queryString, setWorstParty
                 var counter = 0
                 var max_difference = 0
                 var worst_party = ''
-                var worst_party_value = 0
+                var worst_party_value = 100
                 var best_party = ''
-                var best_party_value = 0
+                var best_party_value = -100
                 var best_party_img = ''
                 var worst_party_img = ''
                 for (const key in parties){
