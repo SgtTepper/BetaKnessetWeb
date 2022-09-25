@@ -108,14 +108,15 @@ const PersonChart = React.memo(function ({setLoading, queryString, setWorstParty
                             max_difference = faction.size
                         }
                     }
-                    var mean_score = color/counter
-                    if (mean_score > best_party_value){
-                        best_party_value = mean_score
+                    var mean_score_for_best_party = (color-0.1* (10-faction.result.votes_agreed+faction.result.votes_absent+ faction.result.votes_absent)) / counter
+                    var mean_score_for_worst_party = (color +0.1* (10-faction.result.votes_agreed+faction.result.votes_absent+ faction.result.votes_absent)) / counter
+                    if (mean_score_for_best_party > best_party_value){
+                        best_party_value = mean_score_for_best_party
                         best_party = key
                         best_party_img=  parties[key][0].faction_picture
                     }
-                    if (mean_score < worst_party_value){
-                        worst_party_value = mean_score
+                    if (mean_score_for_worst_party < worst_party_value){
+                        worst_party_value = mean_score_for_worst_party
                         worst_party = key
                         worst_party_img=parties[key][0].faction_picture
                     }
@@ -129,7 +130,7 @@ const PersonChart = React.memo(function ({setLoading, queryString, setWorstParty
                             backgroundSize: 'contain',
                             border: 'thin solid #ddd',
                         },
-                        color:mean_score,
+                        color:mean_score_for_worst_party,
                     })
                 }
                 setWorstParty(worst_party)
