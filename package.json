@@ -29,7 +29,7 @@
     "react-highlight-words": "^0.17.0",
     "react-infinite-scroll-component": "^6.0.0",
     "react-lazyload": "^3.2.0",
-    "react-particles-js": "^3.4.1",
+    "react-particles": "latest",
     "react-responsive": "^8.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",

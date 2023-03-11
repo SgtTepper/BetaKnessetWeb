@@ -85,7 +85,7 @@ export default React.memo(function PersonBillsStats({personID, filter, setFilter
         pointerEvents: 'none'}}
       >
         <div style={{fontSize: '155%'}}>{total}</div>
-        <div>חוקים</div>
+        <div>הצעות חוק</div>
       </div>
       <Doughnut
         data={doughnutData} 

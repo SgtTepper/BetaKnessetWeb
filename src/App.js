@@ -6,7 +6,7 @@ import {
   Route
 } from "react-router-dom"
 import { CircularProgress, ThemeProvider } from '@material-ui/core'
-import Particles from 'react-particles-js'
+import Particles from 'react-particles'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Modal from '@material-ui/core/Modal'
