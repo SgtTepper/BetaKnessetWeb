@@ -62,7 +62,7 @@ export function useSearchParams() {
 
 export function useQuery() {
   const urlQuery = useSearchParams()
-  return urlQuery.get("q") || ""
+  return (urlQuery.get("q") || "").replace('״', '"').replace('׳', "'")
 }
 
 export function usePersonID() {
