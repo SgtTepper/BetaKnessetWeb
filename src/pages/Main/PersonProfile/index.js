@@ -14,6 +14,7 @@ import { ScrollPage } from '../../../components/ScrollableView'
 import PersonSearch from '../../../components/PersonSearch'
 import './index.css'
 import { makeStyles } from '@material-ui/core'
+import Timeline from './Timeline'
 
 const useStyles = makeStyles({
   selection: {
@@ -100,7 +101,12 @@ const PersonView = React.memo(function ({persons, person}) {
         }
       </div>
       <div className="mini-content">        
-        <WordCloud />
+        {/* <WordCloud /> */}
+        <div className="content-wrapper">
+            <div className="content-rtl">
+              <Timeline personID={person?.PersonID} />
+          </div>
+        </div>
       </div>
       <div className="mid-content">
           <div className="content-wrapper">
