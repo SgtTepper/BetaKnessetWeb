@@ -1,18 +1,18 @@
 {
-  "gitUrl": "https://github.com/SgtTepper/BetaKnessetWeb",
-  "server": "https://betaknesset.azurewebsites.net/api",
-  "server_debug": "http://localhost:7071/api",
-  
-  "defaultBubblesCount": 25,
-  "defaultBubblesCountMobile": 17,
-  "wordcloudCount": 60,
-  "wordcloudCountMobile": 25,
-  "apps":[
-    {
-      "name": "votes",
-      "title": "הצבעות",
-      "url": "https://beta-knesset-votes-simulator.vercel.app/"
-    }
-  ],
-  "showOverloadedScreen": false
+    "gitUrl": "https://github.com/SgtTepper/BetaKnessetWeb",
+    "server": "https://betaknesset.azurewebsites.net/api",
+    "server_debug": "http://localhost:7071/api",
+
+    "defaultBubblesCount": 25,
+    "defaultBubblesCountMobile": 17,
+    "wordcloudCount": 60,
+    "wordcloudCountMobile": 25,
+    "apps": [
+        {
+            "name": "votes",
+            "title": "הצבעות",
+            "url": "https://beta-knesset-votes-simulator.vercel.app/"
+        }
+    ],
+    "showOverloadedScreen": false
 }

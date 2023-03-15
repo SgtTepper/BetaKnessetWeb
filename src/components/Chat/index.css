@@ -7,7 +7,7 @@
     left: 0px;
     width: 100%;
     height: 50px;
-    background: rgba(82,179,217,0.9);
+    background: rgba(82, 179, 217, 0.9);
     z-index: 100;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -33,34 +33,34 @@
     right: 30px;
     width: 40px;
     height: 40px;
-    background-color: rgba(255,255,255,0.98);
+    background-color: rgba(255, 255, 255, 0.98);
     border-radius: 100%;
     -webkit-border-radius: 100%;
     -moz-border-radius: 100%;
     -ms-border-radius: 100%;
     margin-right: 15px;
-    }
-.back:active {
-    background: rgba(255,255,255,0.2);
 }
-.name{
+.back:active {
+    background: rgba(255, 255, 255, 0.2);
+}
+.name {
     position: absolute;
     top: 3px;
     right: 110px;
-    font-family: 'Lato';
+    font-family: "Lato";
     font-size: 25px;
     font-weight: 300;
-    color: rgba(255,255,255,0.98);
+    color: rgba(255, 255, 255, 0.98);
     cursor: default;
 }
-.last{
+.last {
     position: absolute;
     top: 30px;
     right: 115px;
-    font-family: 'Lato';
+    font-family: "Lato";
     font-size: 11px;
     font-weight: 400;
-    color: rgba(255,255,255,0.6);
+    color: rgba(255, 255, 255, 0.6);
     cursor: default;
 }
 
@@ -77,7 +77,7 @@
 .chat li {
     margin: 0;
     margin-top: 1.5em;
-    padding: .5rem 0 .5rem .5rem;
+    padding: 0.5rem 0 0.5rem 0.5rem;
     overflow: hidden;
     display: flex;
 }
@@ -91,7 +91,7 @@
     -webkit-border-radius: 100%;
     -moz-border-radius: 100%;
     -ms-border-radius: 100%;
-    background-color: rgba(245,245,245,0.9);
+    background-color: rgba(245, 245, 245, 0.9);
 }
 .chat .avatar .img {
     width: 40px;
@@ -100,9 +100,9 @@
     -webkit-border-radius: 100%;
     -moz-border-radius: 100%;
     -ms-border-radius: 100%;
-    background-color: rgba(245,245,245,0.9);
+    background-color: rgba(245, 245, 245, 0.9);
     background-position: center;
-    background-size:100% auto;
+    background-size: 100% auto;
     background-repeat: no-repeat;
 }
 .chat .day {
@@ -111,8 +111,14 @@
     text-align: center;
     color: #c0c0c0;
     height: 20px;
-    text-shadow: 7px 0px 0px #e5e5e5, 6px 0px 0px #e5e5e5, 5px 0px 0px #e5e5e5, 4px 0px 0px #e5e5e5, 3px 0px 0px #e5e5e5, 2px 0px 0px #e5e5e5, 1px 0px 0px #e5e5e5, 1px 0px 0px #e5e5e5, 0px 0px 0px #e5e5e5, -1px 0px 0px #e5e5e5, -2px 0px 0px #e5e5e5, -3px 0px 0px #e5e5e5, -4px 0px 0px #e5e5e5, -5px 0px 0px #e5e5e5, -6px 0px 0px #e5e5e5, -7px 0px 0px #e5e5e5;
-    box-shadow: inset 20px 0px 0px #e5e5e5, inset -20px 0px 0px #e5e5e5, inset 0px -2px 0px #d7d7d7;
+    text-shadow: 7px 0px 0px #e5e5e5, 6px 0px 0px #e5e5e5, 5px 0px 0px #e5e5e5,
+        4px 0px 0px #e5e5e5, 3px 0px 0px #e5e5e5, 2px 0px 0px #e5e5e5,
+        1px 0px 0px #e5e5e5, 1px 0px 0px #e5e5e5, 0px 0px 0px #e5e5e5,
+        -1px 0px 0px #e5e5e5, -2px 0px 0px #e5e5e5, -3px 0px 0px #e5e5e5,
+        -4px 0px 0px #e5e5e5, -5px 0px 0px #e5e5e5, -6px 0px 0px #e5e5e5,
+        -7px 0px 0px #e5e5e5;
+    box-shadow: inset 20px 0px 0px #e5e5e5, inset -20px 0px 0px #e5e5e5,
+        inset 0px -2px 0px #d7d7d7;
     line-height: 38px;
     margin-top: 5px;
     margin-bottom: 20px;
@@ -135,7 +141,7 @@
 
 .self .msg {
     border-top-right-radius: 0px;
-    box-shadow: -1px 2px 0px #D4D4D4;
+    box-shadow: -1px 2px 0px #d4d4d4;
 }
 .self .avatar:after {
     content: "";
@@ -145,7 +151,7 @@
     right: 0px;
     width: 0px;
     height: 0px;
-    border: 7px solid rgba(245,245,245,0.9);
+    border: 7px solid rgba(245, 245, 245, 0.9);
     border-left-color: transparent;
     border-bottom-color: transparent;
 }
@@ -172,17 +178,17 @@
     border: 5px solid rgba(211, 222, 255, 0.9);
     border-right-color: transparent;
     border-top-color: transparent;
-    box-shadow: 0px 2px 0px #D4D4D4;
+    box-shadow: 0px 2px 0px #d4d4d4;
 }
 
 .msg {
-    background: rgba(245,245,245,0.9);
+    background: rgba(245, 245, 245, 0.9);
     min-width: 50px;
     padding: 10px;
     border-radius: 2px;
     box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.07);
     position: relative;
-    transition: background-color .2s;
+    transition: background-color 0.2s;
 }
 
 .not-in-protocol .msg:hover {
@@ -190,7 +196,7 @@
 }
 
 .not-in-protocol.expanded .msg {
-    background: rgba(233, 211, 191, 0.9)!important;
+    background: rgba(233, 211, 191, 0.9) !important;
 }
 
 .in-protocol .msg {
@@ -205,25 +211,27 @@
     font-size: 0.8rem;
     margin: 0 0 0.2rem 0;
     color: #777;
-    transition: all .2s;
+    transition: all 0.2s;
     word-spacing: nowrap;
 }
 
 .msg .go-suffix {
     font-weight: bold;
-    transition: color .2s ease-in;
+    transition: color 0.2s ease-in;
 }
-.expanded .msg .go-suffix, .expanded .msg svg,
-.msg:hover .go-suffix, .msg:hover svg {
+.expanded .msg .go-suffix,
+.expanded .msg svg,
+.msg:hover .go-suffix,
+.msg:hover svg {
     color: rgb(43, 86, 160);
 }
-
 
 .other .msg p {
     color: #474747;
 }
 
-.msg .speaker, .other .msg .speaker {
+.msg .speaker,
+.other .msg .speaker {
     font-weight: bold;
     color: #7092a3;
     font-size: 70%;
@@ -235,7 +243,7 @@
     width: 450px;
     border-radius: 5px;
     box-shadow: 0px 0px 3px #eee;
-    transition: all .4s cubic-bezier(0.565, -0.260, 0.255, 1.410);
+    transition: all 0.4s cubic-bezier(0.565, -0.26, 0.255, 1.41);
     cursor: default;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -244,13 +252,13 @@
 }
 @media screen and (max-width: 800px) {
     .msg img {
-    width: 300px;
-}
+        width: 300px;
+    }
 }
 @media screen and (max-width: 550px) {
     .msg img {
-    width: 200px;
-}
+        width: 200px;
+    }
 }
 
 .msg time {
@@ -268,8 +276,8 @@
     -ms-user-select: none;
 }
 
-.msg time .date-string:after{
-    content:"◴";
+.msg time .date-string:after {
+    content: "◴";
     color: #ddd;
     font-family: FontAwesome;
     display: inline-block;
@@ -277,24 +285,26 @@
 }
 
 .msg time a {
-    color :#6e96ac;
+    color: #6e96ac;
     font-size: 110%;
     vertical-align: middle;
-    transition: color .25s;
+    transition: color 0.25s;
 }
 
-.msg time a:hover, .expanded time a {
+.msg time a:hover,
+.expanded time a {
     color: #2b617e;
 }
 
 .other .msg time {
-    color: #888
+    color: #888;
 }
 .other .msg time .date-string:after {
     color: #aaa;
 }
 
-.continuation .avatar, .continuation.other::before {
+.continuation .avatar,
+.continuation.other::before {
     visibility: hidden;
 }
 .continuation .speaker {
@@ -305,7 +315,7 @@
     margin: 0;
 }
 
-emoji{
+emoji {
     display: inline-block;
     height: 18px;
     width: 18px;
@@ -315,21 +325,47 @@ emoji{
     margin-left: 2px;
     transform: translate3d(0px, 3px, 0px);
 }
-emoji.please{background-image: url(https://imgur.com/ftowh0s.png);}
-emoji.lmao{background-image: url(https://i.imgur.com/MllSy5N.png);}
-emoji.happy{background-image: url(https://imgur.com/5WUpcPZ.png);}
-emoji.pizza{background-image: url(https://imgur.com/voEvJld.png);}
-emoji.cryalot{background-image: url(https://i.imgur.com/UUrRRo6.png);}
-emoji.books{background-image: url(https://i.imgur.com/UjZLf1R.png);}
-emoji.moai{background-image: url(https://imgur.com/uSpaYy8.png);}
-emoji.suffocated{background-image: url(https://i.imgur.com/jfTyB5F.png);}
-emoji.scream{background-image: url(https://i.imgur.com/tOLNJgg.png);}
-emoji.hearth_blue{background-image: url(https://i.imgur.com/gR9juts.png);}
-emoji.funny{background-image: url(https://i.imgur.com/qKia58V.png);}
+emoji.please {
+    background-image: url(https://imgur.com/ftowh0s.png);
+}
+emoji.lmao {
+    background-image: url(https://i.imgur.com/MllSy5N.png);
+}
+emoji.happy {
+    background-image: url(https://imgur.com/5WUpcPZ.png);
+}
+emoji.pizza {
+    background-image: url(https://imgur.com/voEvJld.png);
+}
+emoji.cryalot {
+    background-image: url(https://i.imgur.com/UUrRRo6.png);
+}
+emoji.books {
+    background-image: url(https://i.imgur.com/UjZLf1R.png);
+}
+emoji.moai {
+    background-image: url(https://imgur.com/uSpaYy8.png);
+}
+emoji.suffocated {
+    background-image: url(https://i.imgur.com/jfTyB5F.png);
+}
+emoji.scream {
+    background-image: url(https://i.imgur.com/tOLNJgg.png);
+}
+emoji.hearth_blue {
+    background-image: url(https://i.imgur.com/gR9juts.png);
+}
+emoji.funny {
+    background-image: url(https://i.imgur.com/qKia58V.png);
+}
 
 @-webikt-keyframes pulse {
-  from { opacity: 0; }
-  to { opacity: 0.5; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.5;
+    }
 }
 
 /* T Y P E */
@@ -370,19 +406,19 @@ input.textarea {
 .chat li .share-buttons {
     text-align: center;
     opacity: 0;
-    transform: scaleY(0) scaleX(.9); 
-    transition: opacity .05s ease-in-out, transform .15s cubic-bezier(1,.32,.82,1.6);
+    transform: scaleY(0) scaleX(0.9);
+    transition: opacity 0.05s ease-in-out,
+        transform 0.15s cubic-bezier(1, 0.32, 0.82, 1.6);
 }
 .chat li:hover .share-buttons {
     opacity: 1;
-    transform: scale(1); 
+    transform: scale(1);
 }
 
-@media screen and (max-width: 600px),
-	   screen and (max-height: 400px) {
-    .chat li .share-buttons { 
+@media screen and (max-width: 600px), screen and (max-height: 400px) {
+    .chat li .share-buttons {
         opacity: 1;
-        transform: scale(1); 
+        transform: scale(1);
     }
 }
 
@@ -393,18 +429,18 @@ input.textarea {
     height: 30px;
     top: 0;
     left: 0;
-    padding: 0 2em 0 .5em;
+    padding: 0 2em 0 0.5em;
     display: flex;
     justify-items: flex-end;
     align-items: center;
-    transition: opacity .2s ease-in;
-    font-family: 'Secular One', sans-serif;
+    transition: opacity 0.2s ease-in;
+    font-family: "Secular One", sans-serif;
 }
 .msg:hover .click-for-more {
     opacity: 1;
 }
 .click-for-more > * {
-    padding: 0 .25em;
+    padding: 0 0.25em;
 }
 .click-for-more a {
     color: #333;

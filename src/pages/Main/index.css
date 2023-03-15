@@ -1,70 +1,71 @@
-#top, #quotes, #calendar {
-  place-content: flex-start;
-  flex-direction: column;
-  place-items: center;
+#top,
+#quotes,
+#calendar {
+    place-content: flex-start;
+    flex-direction: column;
+    place-items: center;
 }
 
 .rv-treemap__leaf__content {
-  align-self: stretch;
-  justify-self: stretch;
-  display: flex;
-  justify-items: stretch;
-  align-items: stretch;
-  width: 100%;
-  padding: 0!important;
-  padding-bottom: 7.5%!important;
+    align-self: stretch;
+    justify-self: stretch;
+    display: flex;
+    justify-items: stretch;
+    align-items: stretch;
+    width: 100%;
+    padding: 0 !important;
+    padding-bottom: 7.5% !important;
 }
 
 .share-buttons > * {
-  text-align: center;
-  margin: 0 .15em;
+    text-align: center;
+    margin: 0 0.15em;
 }
 
-
 @keyframes pulse {
-  0% {
-    transform: translate(-10%, 8%);
-  }
-  100% {
-    transform: translate(14%, -8%);
-  }
-  100% {
-    transform: translate(8%, 15%);
-  }
+    0% {
+        transform: translate(-10%, 8%);
+    }
+    100% {
+        transform: translate(14%, -8%);
+    }
+    100% {
+        transform: translate(8%, 15%);
+    }
 }
 
 .suggestion {
-  display: flex;
-  place-items: center;
-  align-items: center;
-  width: 100%;
-  padding: 0 5%;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 100%;
-  transition: font-size .2s;
+    display: flex;
+    place-items: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 5%;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 100%;
+    transition: font-size 0.2s;
 }
 
 .suggestion:hover {
-  font-size: 110%;
+    font-size: 110%;
 }
 
 .person-bubble {
-  background-color: rgba(158, 82, 31, 0.15);
-  transition: all .3s;
+    background-color: rgba(158, 82, 31, 0.15);
+    transition: all 0.3s;
 }
 .person-bubble:hover {
-  background-color: rgba(255, 255, 255, 0);
+    background-color: rgba(255, 255, 255, 0);
 }
 
 .person-bubble .person-name {
-  text-align: center;
-  width: 100%;
-  background-color: black;
-  opacity: .7; 
-  padding: .5em 1em;
-  transition: all .3s;
-  }
+    text-align: center;
+    width: 100%;
+    background-color: black;
+    opacity: 0.7;
+    padding: 0.5em 1em;
+    transition: all 0.3s;
+}
 .person-bubble:hover .person-name {
-  background-color: #001177;
+    background-color: #001177;
 }

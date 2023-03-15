@@ -6,12 +6,12 @@ body {
     justify-content: center;
   }
   */
-  
-  .wrapper {
-    width: 100%;
-  }
 
-  .chat-container {
+.wrapper {
+    width: 100%;
+}
+
+.chat-container {
     margin: 30px;
     padding: 30px;
     background: #fff;
@@ -19,60 +19,62 @@ body {
     flex-direction: column;
     max-height: 60vh;
     overflow: hidden;
-  }
-  
-  .wrapper-cell {
+}
+
+.wrapper-cell {
     display: flex;
     margin-bottom: 30px;
-  }
-  
-  @-webkit-keyframes placeHolderShimmer {
+}
+
+@-webkit-keyframes placeHolderShimmer {
     0% {
-      background-position: 468px 0;
+        background-position: 468px 0;
     }
     100% {
-      background-position: -468px 0;
+        background-position: -468px 0;
     }
-  }
-  
-  @keyframes placeHolderShimmer {
+}
+
+@keyframes placeHolderShimmer {
     0% {
-      background-position: 468px 0;
+        background-position: 468px 0;
     }
     100% {
-      background-position: -468px 0;
+        background-position: -468px 0;
     }
-  }
-  .animated-background, .text-line, .image {
+}
+.animated-background,
+.text-line,
+.image {
     -webkit-animation-duration: 1.25s;
-            animation-duration: 1.25s;
+    animation-duration: 1.25s;
     -webkit-animation-fill-mode: forwards;
-            animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
     -webkit-animation-iteration-count: infinite;
-            animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
     -webkit-animation-name: placeHolderShimmer;
-            animation-name: placeHolderShimmer;
+    animation-name: placeHolderShimmer;
     -webkit-animation-timing-function: linear;
-            animation-timing-function: linear;
+    animation-timing-function: linear;
     background: #e6e6e6;
     background: linear-gradient(to left, #e6e6e6 8%, #e0e0e0 18%, #e6e6e6 33%);
     background-size: 800px 104px;
     height: 96px;
     position: relative;
-  }
-  
-  .image {
+}
+
+.image {
     height: 60px;
     width: 60px;
-  }
-  
-  .text {
+}
+
+.text {
     flex-grow: 1;
     margin-right: 20px;
-  }
-  
-  .text-line {
+}
+
+.text-line {
     height: 10px;
     width: 100%;
     margin: 4px 0;
-  }
+}
