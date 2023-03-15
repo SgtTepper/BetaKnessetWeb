@@ -1,13 +1,13 @@
 import React from 'react'
-import { FacebookIcon, TwitterIcon, WhatsappIcon, FacebookShareButton, TwitterShareButton, WhatsappShareButton } from "react-share";
+import { TelegramIcon, TwitterIcon, WhatsappIcon, TelegramShareButton, TwitterShareButton, WhatsappShareButton } from "react-share";
 
 export default function ShareButtons({Text, Speaker, FilePath}) {
     const size = 18
     return (
         <div className='share-buttons'>
-            <FacebookShareButton url={FilePath} quote={`${Speaker}: "${Text}"`}>
-                <FacebookIcon size={size} round />
-            </FacebookShareButton>
+            <TelegramShareButton url={FilePath} title={`${Speaker}: "${Text}"}`}>
+                <TelegramIcon size={size} round />
+            </TelegramShareButton>
             <TwitterShareButton url={FilePath} title={`${Speaker}: "${Text.substring(0, 500)}${Text.length > 500 ? "..." : ''}"`}>
                 <TwitterIcon size={size} round />
             </TwitterShareButton>

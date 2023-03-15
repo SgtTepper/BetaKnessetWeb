@@ -6,8 +6,8 @@ import {ScrollIntoView} from 'rrc'
 import { imageOrDefault, useIndex } from "../../utils"
 import QuoteFooter from "../QuoteFooter"
 
-const ColorHash = require('color-hash')
-const colorHash = new ColorHash({lightness: .4})
+const ColorHash = require('color-hash').default;
+const colorHash = new ColorHash({lightness: .4});
 
 export default function Chat({items}) {
     const index = useIndex()
