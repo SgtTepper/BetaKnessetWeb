@@ -18,6 +18,7 @@ import { useNavigate, useBigScreen } from '../../utils'
 import config from '../../config.json'
 import AboutDialog from './About'
 import ContactUsDialog from './ContactUs'
+import DisclaimerDialog from './Disclaimer'
 
 const useStyles = makeStyles({
     title: {
@@ -100,6 +101,7 @@ const useStyles = makeStyles({
 export default function NavigationBar() {
     const [ aboutOpen, setAboutOpen ] = useState(false)
     const [ contactUsOpen, setContactUsOpen ] = useState(false)
+    const [ disclaimerOpen, setDisclaimerOpen ] = useState(false)
     const isBigScreen = useBigScreen()
 
     const nav = [
@@ -127,12 +129,16 @@ export default function NavigationBar() {
 
     const links = [
       {
+        callback: () => setAboutOpen(true),
+        contents: "אודות",
+      },
+      {
         callback: () => setContactUsOpen(true),
         contents: "צרו קשר",
       },
       {
-        callback: () => setAboutOpen(true),
-        contents: "אודות",
+        callback: () => setDisclaimerOpen(true),
+        contents: "גילוי נאות",
       },
     ]
 
@@ -144,6 +150,7 @@ export default function NavigationBar() {
     <>
       <AboutDialog open={aboutOpen} setOpen={setAboutOpen} />
       <ContactUsDialog open={contactUsOpen} setOpen={setContactUsOpen} />
+      <DisclaimerDialog open={disclaimerOpen} setOpen={setDisclaimerOpen} />
       {main}
     </>
 )
