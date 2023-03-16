@@ -33,7 +33,9 @@ import { SearchDialog } from "../../../../components/QuotesSearch";
 import defaultBubbles from "../../../../defaultTopics";
 import { Typography } from "@material-ui/core";
 import { getDocumentLink } from "../../../../components/DocumentLink";
+import { v4 as uuidv4 } from 'uuid';
 
+const uuid = uuidv4();
 const minSize = 50;
 const maxWidth = 750;
 const maxHeightRatio = 0.75;
@@ -154,7 +156,7 @@ const Chart = React.memo(function ({ query, setLoading }) {
             setError(null);
             try {
                 let res = await serverFetch(
-                    `${config.server}/Keywords?keyword=${cleanQuery}`
+                    `${config.server}/Keywords?keyword=${cleanQuery}&uuid=${uuid}`
                 );
                 if (!res.length) {
                     setError(
