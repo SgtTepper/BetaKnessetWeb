@@ -233,6 +233,11 @@ export default React.memo(function Calendar() {
                 >
                     לו״ז הכנסת
                 </Typography>
+                <Typography style={{ textAlign: "center", margin: ".3em 0" }}>
+                    <a href="https://calendar.google.com/calendar/u/1?cid=YmV0YWtuZXNzZXRAZ21haWwuY29t">
+                        לחצו כאן להוספת הלו״ז ל Google Calendar שלכם
+                    </a>
+                </Typography>
                 {isBigScreen ? <CalendarView /> : <MobileCalendarView />}
             </div>
         </ScrollPage>
