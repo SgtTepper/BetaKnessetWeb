@@ -184,7 +184,7 @@ function ControlledAccordions({ data, isFiltered }) {
                         }}
                         variant="h5"
                     >
-                        לא מצאנו חוקים
+                        לא מצאנו הצעות חוק
                         {!isFiltered && " שהח״כ יזם"}
                     </Typography>
                 )}
