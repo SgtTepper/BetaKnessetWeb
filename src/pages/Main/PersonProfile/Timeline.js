@@ -7,10 +7,8 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 import TimelineDot from '@mui/lab/TimelineDot';
-import FastfoodIcon from '@mui/icons-material/Fastfood';
-import LaptopMacIcon from '@mui/icons-material/LaptopMac';
-import HotelIcon from '@mui/icons-material/Hotel';
-import RepeatIcon from '@mui/icons-material/Repeat';
+import Diversity3Icon from '@mui/icons-material/Diversity3';
+import WorkIcon from '@mui/icons-material/Work';
 import Typography from '@mui/material/Typography';
 import { toNiceDate, useCancellableFetch } from '../../../utils'
 
@@ -44,8 +42,37 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
-function MyTimelineItem({knessetNum, mainText, startDate}) {
+function MyTimelineItem({type, knessetNum, mainText, startDate}) {
     const classes = useStyles();
+
+    let timelineDot = null;
+    switch (type) {
+      case "faction":
+        timelineDot = (
+          <TimelineDot className={classes.circle} color="text">
+            <Typography>{knessetNum}</Typography>
+          </TimelineDot>
+        );
+        break;
+
+      case "committee":
+        timelineDot = (
+          <TimelineDot className={classes.circle} sx={{ bgcolor: "transparent" }}>
+            <Diversity3Icon />
+          </TimelineDot>
+        );
+        break;
+
+      case "position":
+        timelineDot = (
+          <TimelineDot className={classes.circle} sx={{ bgcolor: "transparent" }}>
+            <WorkIcon sx={{ color: "error.main" }} />
+          </TimelineDot>
+        );
+        break;
+    }
+
+  
     return (
           <TimelineItem className={classes.item}>
             <TimelineOppositeContent
@@ -57,9 +84,7 @@ function MyTimelineItem({knessetNum, mainText, startDate}) {
             </TimelineOppositeContent>
             <TimelineSeparator>
               <TimelineConnector />
-              <TimelineDot className={classes.circle} color="primary">
-                <Typography>{knessetNum}</Typography>
-              </TimelineDot>
+              {timelineDot}
               <TimelineConnector />
             </TimelineSeparator>
             <TimelineContent sx={{ py: '12px', px: 2 }}>
@@ -83,15 +108,15 @@ export default function CustomizedTimeline({personID}) {
       if (personID == null) {
         return;
       }
-      setLoading(true)
-      setData([])
+      setLoading(true);
+      setData([]);
       try {
-        const res = await serverFetch(`${config.server}/PersonPositions?PersonID=${personID}`)
-        setData(res.reverse())
+        const res = await serverFetch(`${config.server}/PersonPositions?PersonID=${personID}`);
+        setData(res.reverse());
       } catch (e) {
-        console.error(e)
+        console.error(e);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
     })()
   }, [setLoading, personID, serverFetch]);
@@ -101,46 +126,36 @@ export default function CustomizedTimeline({personID}) {
   }
 
   // aggregate faction data
-  const factions = []
-  let lastFaction = null
+  const factions = [];
+  let lastFaction = null;
   for (const p of data) {
     if (p.FactionName != null && p.FactionName != lastFaction) {
-      factions.push({faction: p.FactionName, startDate: p.StartDate, knessetNum: p.KnessetNum})
-      lastFaction = p.FactionName
+      factions.push({type: "faction", description: p.FactionName, startDate: p.StartDate, knessetNum: p.KnessetNum});
+      lastFaction = p.FactionName;
     }
   }
 
+  const positions = [];
+  for (const p of data) {
+    // (government?) positions
+    if (p.DutyDesc != null)
+      positions.push({type: "position", description: p.DutyDesc || p.CommitteeName, startDate: p.StartDate, knessetNum: p.KnessetNum});
+    // committe positions
+    else if (p.CommitteeName != null && p.Description != null)
+      positions.push({type: "committee", description: `${p.Description} - ${p.CommitteeName}`, startDate: p.StartDate, knessetNum: p.KnessetNum});
+  }
+
+  // combine to one array
+  positions.push(...factions);
+
+  // sort by date
+  positions.sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
+
   return (
       <Timeline position="alternate" className={classes.timeline}>
-        {factions.map(({faction, startDate, knessetNum}, i) => (
-          <MyTimelineItem key={i} knessetNum={knessetNum} mainText={faction} startDate={startDate} />
+        {positions.map(({type, description, startDate, knessetNum}, i) => (
+          <MyTimelineItem key={i} type={type} knessetNum={knessetNum} mainText={description} startDate={startDate} />
         ))}
       </Timeline>
   );
 } 
-/*
-
-          <TimelineItem key={i} className={classes.item}>
-            <TimelineOppositeContent
-              sx={{ m: 'auto 0' }}
-              align="right"
-              variant="body2"
-              className={classes.content}
-            >
-            </TimelineOppositeContent>
-            <TimelineSeparator>
-              <TimelineConnector />
-              <TimelineDot className={classes.circle} color="primary">
-                <Typography>{knessetNum}</Typography>
-              </TimelineDot>
-              <TimelineConnector />
-            </TimelineSeparator>
-            <TimelineContent sx={{ py: '12px', px: 2 }}>
-              <Typography variant="h6" component="span">
-                {faction}
-              </Typography>
-              <Typography className={classes.content}>{toNiceDate(new Date(startDate))}</Typography>
-            </TimelineContent>
-          </TimelineItem>
-        ))}
-        */
