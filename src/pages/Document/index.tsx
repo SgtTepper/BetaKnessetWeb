@@ -1,6 +1,8 @@
+// @ts-nocheck
+
 import React, { useState, useEffect } from "react";
 import clsx from "clsx";
-import { useParams } from "react-router-dom";
+import { RouteComponentProps, useParams } from "react-router-dom";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -18,7 +20,7 @@ import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
 import Fab from "@material-ui/core/Fab";
 import QuotesLoader from "../../components/QuotesLoader";
 import Chat from "../../components/Chat";
-import config from "../../config";
+import config from "../../config.json";
 import {
     useCancellableFetch,
     useBigScreen,
@@ -84,23 +86,29 @@ const useStyles = makeStyles({
     drawerPaper: {},
 });
 
-const DocumentQuotes = React.memo(function ({ type }) {
+const DocumentQuotes = React.memo(function ({
+    type,
+}: RouteComponentProps<{
+    id: string;
+}> & { type: string }) {
     const classes = useStyles();
-    const { id } = useParams();
+    const { id } = useParams<{ id: string }>();
     const [loading, setLoading] = useState(true);
     const isBigScreen = useBigScreen();
     const [drawerOpen, setDrawerOpen] = useState(true);
-    const createToggleDrawer = (open) => (event) => {
-        if (
-            event &&
-            event.type === "keydown" &&
-            (event.key === "Tab" || event.key === "Shift")
-        ) {
-            return;
-        }
+    const createToggleDrawer =
+        (open: boolean) =>
+        (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+            if (
+                event &&
+                event.type === "keydown" &&
+                (event.key === "Tab" || event.key === "Shift")
+            ) {
+                return;
+            }
 
-        setDrawerOpen(open);
-    };
+            setDrawerOpen(open);
+        };
 
     return (
         <ScrollPage
