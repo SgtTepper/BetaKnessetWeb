@@ -167,7 +167,7 @@ function OverloadScreen() {
     useEffect(() => {
         const refresh = () => window.location.reload();
 
-        const timer = setTimeout(() => refresh(), 2000);
+        const timer = setTimeout(() => refresh(), 30000);
 
         return () => {
             clearTimeout(timer);
