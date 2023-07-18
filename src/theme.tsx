@@ -26,12 +26,9 @@ const theme = createMuiTheme({
         secondary: {
             main: "#90756d",
         },
-        pronounced: {
-            main: "white",
-        },
     },
     typography: {
-        fontFamily: ['"Secular One"', "sans-serif"],
+        fontFamily: '"Secular One"',
     },
 });
 export default theme;

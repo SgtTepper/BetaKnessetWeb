@@ -1,6 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import { useBigScreen, useWindowSize } from "../../utils";
+import { CSSProperties, PropsWithChildren } from "react";
 
 const useStyles = makeStyles((theme) => ({
     scrollView: {
@@ -46,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function ScrollableView(props) {
+export default function ScrollableView(props: PropsWithChildren) {
     const { children } = props;
     const classes = useStyles();
     return (
@@ -63,14 +64,21 @@ export function ScrollPage({
     style,
     className,
     ...props
-}) {
+}: PropsWithChildren<{
+    className?: string;
+    style?: CSSProperties;
+    parentStyle?: CSSProperties;
+    limit: boolean;
+    id?: string;
+}>) {
     const classes = useStyles();
 
     // XXX hack for 100% screen scrollable size (flex 100% doesnt work well for all browsers)
     const windowSize = useWindowSize();
     const isBigScreen = useBigScreen();
     const minHeight = limit
-        ? windowSize.height - (isBigScreen ? 55 : 48)
+        ? // TODO: Extract this nested ternary operation into an independent statement.sonarlint(typescript:S3358)
+          windowSize.height - (isBigScreen ? 55 : 48)
         : "initial";
 
     return (

@@ -1,7 +1,7 @@
 import React from "react";
 import "./index.css";
 
-export default function ChatLoader({ show }) {
+export default function ChatLoader({ show }: { show?: boolean }) {
     if (!show) return null;
     return (
         <div className="wrapper">

@@ -84,7 +84,11 @@ export default function App() {
                         <CustomParticles />
                         <Suspense fallback={<LightweightLoader />}>
                             <Switch>
-                                <Route path="/" exact component={Main} />
+                                <Route
+                                    path="/"
+                                    exact
+                                    render={(props) => <Main {...props} />}
+                                />
                                 <Route
                                     path="/document/plenum/:id"
                                     render={(props) => (
