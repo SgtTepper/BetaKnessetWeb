@@ -28,7 +28,7 @@ const theme = createMuiTheme({
         },
     },
     typography: {
-        fontFamily: '"Secular One"',
+        fontFamily: `"Secular One", sans-serif`,
     },
 });
 export default theme;
