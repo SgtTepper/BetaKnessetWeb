@@ -4,9 +4,9 @@ import PersonProfile from "./PersonProfile";
 import "./index.css";
 // @ts-ignore TODO: upgrade it
 import { ScrollIntoView } from "rrc";
-import { RouteComponentProps, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-export default function Main(props: RouteComponentProps) {
+export default function Main() {
     const location = useLocation();
     return (
         <ScrollIntoView id={location.hash}>

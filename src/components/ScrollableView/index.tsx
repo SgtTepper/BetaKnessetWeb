@@ -47,14 +47,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function ScrollableView(props: PropsWithChildren) {
-    const { children } = props;
+export default function ScrollableView({ children }: PropsWithChildren) {
     const classes = useStyles();
-    return (
-        <div className={classes.scrollView} {...props}>
-            {children}
-        </div>
-    );
+    return <div className={classes.scrollView}>{children}</div>;
 }
 
 export function ScrollPage({
