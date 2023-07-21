@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import clsx from "clsx";
-import { useParams } from "react-router-dom";
+import { RouteComponentProps, useParams } from "react-router-dom";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -18,7 +18,7 @@ import ChatBubbleIcon from "@material-ui/icons/ChatBubble";
 import Fab from "@material-ui/core/Fab";
 import QuotesLoader from "../../components/QuotesLoader";
 import Chat from "../../components/Chat";
-import config from "../../config";
+import config from "../../config.json";
 import {
     useCancellableFetch,
     useBigScreen,
@@ -29,6 +29,7 @@ import {
 } from "../../utils";
 import { ScrollPage } from "../../components/ScrollableView";
 import ChatLoader from "../../components/ChatLoader";
+import { Quote } from "../../@types";
 
 const useStyles = makeStyles({
     root: {
@@ -84,13 +85,18 @@ const useStyles = makeStyles({
     drawerPaper: {},
 });
 
-const DocumentQuotes = React.memo(function ({ type }) {
+const DocumentQuotes = React.memo(function ({
+    type,
+}: RouteComponentProps<{
+    id: string;
+}> & { type: string }) {
     const classes = useStyles();
-    const { id } = useParams();
+    const { id } = useParams<{ id: string }>();
     const [loading, setLoading] = useState(true);
     const isBigScreen = useBigScreen();
     const [drawerOpen, setDrawerOpen] = useState(true);
-    const createToggleDrawer = (open) => (event) => {
+    // TODO : understand how to reimplement
+    const createToggleDrawer = (open: boolean) => (event: any) => {
         if (
             event &&
             event.type === "keydown" &&
@@ -152,8 +158,12 @@ const QuoteView = React.memo(function ({
     documentID,
     documentType,
     setLoading,
+}: {
+    documentID: string;
+    documentType: string;
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<Quote[]>([]);
 
     const personID = usePersonID();
     const query = useQuery();
@@ -165,9 +175,9 @@ const QuoteView = React.memo(function ({
             if (!documentID) return;
             setLoading(true);
             try {
-                const quotes = await serverFetch(
+                const quotes = (await serverFetch(
                     `${config.server}/DocumentQuotes?documentId=${documentID}&documentType=${documentType}&index=${index}`
-                );
+                )) as Quote[];
                 setData(quotes);
             } catch (e) {
                 // TODO handle errors
@@ -179,7 +189,7 @@ const QuoteView = React.memo(function ({
         })();
     }, [documentID, documentType, index, setLoading, serverFetch]);
 
-    let prevSpeaker = null;
+    let prevSpeaker: string | null = null;
     return (
         <div
             style={{
@@ -210,9 +220,28 @@ const QuoteView = React.memo(function ({
     );
 });
 
-const Metadata = React.memo(function ({ documentID, documentType }) {
+const Metadata = React.memo(function ({
+    documentID,
+    documentType,
+}: {
+    documentID: string;
+    documentType: string;
+}) {
     const classes = useStyles();
-    const [metadata, setMetadata] = useState(null);
+    const [metadata, setMetadata] = useState<
+        | [
+              {
+                  Name?: string;
+                  KnessetNum?: string;
+                  StartDate?: string;
+                  Ordinal?: string;
+                  BroadcastUrl?: string;
+                  FilePath?: string;
+                  ItemName?: never[];
+              }
+          ]
+        | null
+    >(null);
     const serverFetch = useCancellableFetch();
 
     useEffect(() => {
@@ -258,7 +287,7 @@ const Metadata = React.memo(function ({ documentID, documentType }) {
                     <Typography className={classes.pos} color="textSecondary">
                         הכנסת ה-{md.KnessetNum}
                         {bull}
-                        {toNiceDate(new Date(md.StartDate))}
+                        {md.StartDate && toNiceDate(new Date(md.StartDate))}
                     </Typography>
                 )}
                 <Typography variant="body2" component="div">
@@ -325,7 +354,7 @@ const Metadata = React.memo(function ({ documentID, documentType }) {
     );
 });
 
-const FullProtocolButton = React.memo(function ({ url }) {
+const FullProtocolButton = React.memo(function ({ url }: { url: string }) {
     if (!url) return null;
     return (
         <div
@@ -338,7 +367,7 @@ const FullProtocolButton = React.memo(function ({ url }) {
             }}
         >
             <Button
-                color="textSecondary"
+                color="secondary"
                 variant="contained"
                 size="large"
                 style={{ margin: "1em" }}

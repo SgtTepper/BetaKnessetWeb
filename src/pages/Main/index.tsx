@@ -1,8 +1,8 @@
-import React from "react";
 import Search from "./Search";
 import PersonProfile from "./PersonProfile";
 
 import "./index.css";
+// @ts-ignore TODO: upgrade it
 import { ScrollIntoView } from "rrc";
 import { useLocation } from "react-router-dom";
 

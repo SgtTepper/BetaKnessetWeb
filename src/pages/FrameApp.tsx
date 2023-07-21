@@ -1,8 +1,12 @@
 import React from "react";
 
 import { ScrollPage } from "../components/ScrollableView";
+import { RouteComponentProps } from "react-router-dom";
 
-const FrameApp = React.memo(function ({ url, title }) {
+const FrameApp = React.memo(function ({
+    url,
+    title,
+}: RouteComponentProps & { title?: string; url?: string }) {
     return (
         <ScrollPage limit>
             <iframe

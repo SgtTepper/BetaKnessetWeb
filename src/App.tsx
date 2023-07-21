@@ -10,7 +10,7 @@ import Fade from "@material-ui/core/Fade";
 import Backdrop from "@material-ui/core/Backdrop";
 import Container from "@material-ui/core/Container";
 
-import config from "./config";
+import config from "./config.json";
 import theme from "./theme";
 import { useBigScreen } from "./utils";
 import particlesConfig from "./particles.config.json";
@@ -84,7 +84,7 @@ export default function App() {
                         <CustomParticles />
                         <Suspense fallback={<LightweightLoader />}>
                             <Switch>
-                                <Route path="/" exact component={Main} />
+                                <Route path="/" exact render={() => <Main />} />
                                 <Route
                                     path="/document/plenum/:id"
                                     render={(props) => (
@@ -148,7 +148,16 @@ function CustomParticles() {
     const classes = useStyles();
 
     if (!isBigScreen) return null;
-    return <Particles params={particlesConfig} className={classes.particles} />;
+    return (
+        <Particles
+            params={{
+                ...particlesConfig,
+                interactivity: {},
+                particles: { move: {} },
+            }}
+            className={classes.particles}
+        />
+    );
 }
 
 function OverloadScreen() {
@@ -156,7 +165,13 @@ function OverloadScreen() {
 
     // refresh automatically
     useEffect(() => {
-        setTimeout(() => (window.location.href = window.location), 30000);
+        const refresh = () => window.location.reload();
+
+        const timer = setTimeout(() => refresh(), 30000);
+
+        return () => {
+            clearTimeout(timer);
+        };
     }, []);
 
     return (

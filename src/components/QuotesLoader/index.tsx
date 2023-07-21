@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import TextTransition, { presets } from "react-text-transition";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
@@ -86,22 +86,23 @@ const useStyles = makeStyles({
     },
 });
 
-const Loader = React.memo(function ({ show }) {
+const Loader = React.memo(function ({ show }: { show: boolean }) {
     const classes = useStyles();
     const isBigScreen = useBigScreen();
     const shuffled = useMemo(() => [...quotes], []);
     const [index, setIndex] = useState(0);
-    const intervalId = useRef(null);
 
     useEffect(() => {
         if (show) {
             shuffleArray(shuffled);
-            intervalId.current = setInterval(
+            const intervalId = setInterval(
                 () => setIndex((index) => index + 1),
                 4000
             );
-        } else {
-            clearInterval(intervalId.current);
+
+            return () => {
+                clearInterval(intervalId);
+            };
         }
     }, [show, shuffled]);
 
@@ -110,10 +111,9 @@ const Loader = React.memo(function ({ show }) {
     const contents = isBigScreen ? (
         <>
             <CircularProgress />
-            <TextTransition
-                text={<Quote {...currentQuote} />}
-                springConfig={presets.wobbly}
-            />
+            <TextTransition springConfig={presets.wobbly}>
+                <Quote {...currentQuote} />
+            </TextTransition>
         </>
     ) : (
         <>
@@ -121,10 +121,9 @@ const Loader = React.memo(function ({ show }) {
                 <CircularProgress />
             </div>
             <div style={{ flex: 1, textAlign: "center" }}>
-                <TextTransition
-                    text={<Quote {...currentQuote} />}
-                    springConfig={presets.wobbly}
-                />
+                <TextTransition springConfig={presets.wobbly}>
+                    <Quote {...currentQuote} />
+                </TextTransition>
             </div>
             <div style={{ flex: 2 }} />
         </>
@@ -143,7 +142,13 @@ const Loader = React.memo(function ({ show }) {
     );
 });
 
-const Quote = React.memo(function ({ name, quote }) {
+const Quote = React.memo(function ({
+    name,
+    quote,
+}: {
+    name: string;
+    quote: string;
+}) {
     const classes = useStyles();
     return (
         <div className={classes.quote}>
