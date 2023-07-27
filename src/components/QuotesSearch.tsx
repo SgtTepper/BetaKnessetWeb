@@ -193,6 +193,7 @@ export function WhiteQuotesSearch({
 }: {
     placeholder: string;
     style?: React.CSSProperties;
+    showReset?: boolean;
 }) {
     return (
         <QuotesSearch
