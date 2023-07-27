@@ -2,7 +2,10 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import Dialog from "../Dialog";
 
-export default function DisclaimerDialog(props) {
+export default function DisclaimerDialog(props: {
+    open: boolean;
+    setOpen: (value: boolean) => void;
+}) {
     return (
         <Dialog {...props} closeText={"אישור"}>
             <Typography color="primary" variant="h4" component="h4">
