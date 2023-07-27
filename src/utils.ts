@@ -104,7 +104,7 @@ export function useNavigate() {
         }: {
             location?: string;
             hash?: string;
-            q?: string;
+            q?: string | null;
             personID?: number | null;
         }) => {
             const urlParams = new URLSearchParams(params);
