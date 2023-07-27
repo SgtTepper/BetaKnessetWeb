@@ -72,6 +72,7 @@
     ]
   },
   "devDependencies": {
+    "@types/chart.js": "^2.9.37",
     "@types/react-highlight-words": "^0.16.4",
     "@types/rrc": "^0.10.10"
   }
