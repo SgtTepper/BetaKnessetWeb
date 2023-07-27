@@ -2,8 +2,13 @@ import React from "react";
 import ShareButtons from "./ShareButtons";
 import { toNiceDate, useQuery } from "../utils";
 import DocumentLink, { getDocumentLink } from "./DocumentLink";
+import { Quote } from "../@types";
 
-export default function QuoteFooter(props) {
+export default function QuoteFooter(
+    props: Quote & {
+        isInProtocol: boolean;
+    }
+) {
     const { StartDate, TopicName, Text, Speaker, isInProtocol } = props;
     const query = useQuery();
     return (

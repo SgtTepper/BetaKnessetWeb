@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import { useState, PropsWithChildren } from "react";
 import Typography from "@material-ui/core/Typography";
 import Dialog from "./Dialog";
 import IconButton from "@material-ui/core/IconButton";
 import InfoRoundedIcon from "@material-ui/icons/InfoRounded";
 
-export default function Explainer({ children, style }) {
+export default function Explainer({
+    children,
+    style,
+}: PropsWithChildren<{ style?: React.CSSProperties }>) {
     const [open, setOpen] = useState(false);
     return (
         <>

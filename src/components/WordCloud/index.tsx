@@ -2,12 +2,16 @@ import React, { lazy, Suspense, useState, useEffect } from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 import Explainer from "../Explainer";
-import config from "../../config";
+import config from "../../config.json";
 import { useBigScreen, useCancellableFetch, usePersonID } from "../../utils";
+import { Options } from "react-wordcloud";
 
 const ReactWordcloud = lazy(() => import("react-wordcloud"));
 
-const options = {
+const options: Omit<
+    Options,
+    "svgAttributes" | "textAttributes" | "tooltipOptions"
+> = {
     colors: ["#40b2e6", "#53b4e0", "#4f91ab", "#8aaebd", "#bad3de", "#d8e3e8"],
     rotations: 3,
     rotationAngles: [-5, 5],
@@ -18,15 +22,19 @@ const options = {
     enableOptimizations: true,
     enableTooltip: false,
     deterministic: true,
+    fontStyle: "",
+    scale: "log",
+    spiral: "archimedean",
+    transitionDuration: 0,
 };
-const minSize = [200, 300];
+const minSize: [number, number] = [200, 300];
 
 export default React.memo(function WordCloud() {
     const personID = usePersonID();
     return <CachedWordCloud personID={personID} />;
 });
 
-const CachedWordCloud = React.memo(({ personID }) => {
+const CachedWordCloud = React.memo(({ personID }: { personID?: number }) => {
     const isBigScreen = useBigScreen();
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState(null);
@@ -58,7 +66,9 @@ const CachedWordCloud = React.memo(({ personID }) => {
     }
     if (!data) return null;
 
-    options.transitionDuration = isBigScreen ? 400 : 0;
+    if (isBigScreen) {
+        options.transitionDuration = 400;
+    }
 
     return (
         <Suspense fallback={<CircularProgress />}>
@@ -81,7 +91,7 @@ const CachedWordCloud = React.memo(({ personID }) => {
     );
 });
 
-function WordCloudExplainer(props) {
+function WordCloudExplainer(props: { style?: React.CSSProperties }) {
     return (
         <Explainer {...props}>
             <p>

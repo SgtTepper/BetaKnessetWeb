@@ -7,8 +7,13 @@ import {
     TwitterShareButton,
     WhatsappShareButton,
 } from "react-share";
+import { Quote } from "../@types";
 
-export default function ShareButtons({ Text, Speaker, FilePath }) {
+export default function ShareButtons({
+    Text,
+    Speaker,
+    FilePath,
+}: Pick<Quote, "Speaker" | "FilePath" | "Text">) {
     const size = 18;
     return (
         <div className="share-buttons">
