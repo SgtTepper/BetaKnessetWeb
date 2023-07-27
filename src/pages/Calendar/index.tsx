@@ -9,10 +9,33 @@ import Typography from "@material-ui/core/Typography";
 
 import { ScrollPage } from "../../components/ScrollableView";
 import "./index.css";
-import config from "../../config";
+import config from "../../config.json";
 import { useBigScreen } from "../../utils";
 
-const CalendarComponent = React.memo(function ({ loading, ...props }) {
+interface CalendarEvent {
+    sessionType: number;
+    sessionID: number;
+    filePath: string;
+    name: string;
+    startDate: string;
+    finishDate: string;
+    broadcastUrl: null;
+}
+
+const CalendarComponent = React.memo(function ({
+    loading,
+    ...props
+}: Pick<
+    FullCalendar["props"],
+    | "plugins"
+    | "headerToolbar"
+    | "footerToolbar"
+    | "events"
+    | "datesSet"
+    | "eventClick"
+> & {
+    loading: number;
+}) {
     return (
         <div className="calendar demo-app">
             <div className="demo-app-main" style={{ position: "relative" }}>
@@ -50,7 +73,10 @@ const CalendarComponent = React.memo(function ({ loading, ...props }) {
     );
 });
 
-class CalendarView extends React.PureComponent {
+class CalendarView extends React.PureComponent<
+    unknown,
+    { currentEvents: Record<number, CalendarEvent>; loading: number }
+> {
     state = {
         currentEvents: {},
         loading: 0,
@@ -78,27 +104,35 @@ class CalendarView extends React.PureComponent {
         );
     }
 
-    handleEventClick = (selectInfo) => {
+    handleEventClick = (
+        selectInfo: Parameters<
+            NonNullable<FullCalendar["props"]["eventClick"]>
+        >[0]
+    ) => {
         console.debug(selectInfo);
     };
 
-    handleEvents = (events) => {
+    handleEvents = (events: Record<number, CalendarEvent>) => {
         this.setState({
             currentEvents: events,
         });
     };
-    handleDates(fetchInfo) {
+    handleDates(
+        fetchInfo: Parameters<NonNullable<FullCalendar["props"]["datesSet"]>>[0]
+    ) {
         this.setState((s) => ({ loading: s.loading + 1 }));
         // TODO copy from https://fullcalendar.io/docs/events-function
         fetch(
             `${
                 config.server
             }/KnessetSchedule?StartDate=${fetchInfo.start.toISOString()}&FinishDate=${fetchInfo.end.toISOString()}`,
-            fetchInfo
+            fetchInfo as RequestInit
         )
             .then((res) => res.json())
             .then((data) => {
-                const events = {};
+                console.log(data);
+
+                const events: Record<number, CalendarEvent> = {};
                 for (const r of data) {
                     events[r.result.sessionID] = {
                         id: r.result.sessionID,
@@ -118,7 +152,7 @@ class CalendarView extends React.PureComponent {
     }
 }
 
-function Event(eventInfo) {
+function Event(eventInfo: any) {
     const { event } = eventInfo;
     const { extendedProps } = event;
 
@@ -132,7 +166,15 @@ function Event(eventInfo) {
     }
 }
 
-function CommitteeEvent({ event, items, filePath }) {
+function CommitteeEvent({
+    event,
+    items,
+    filePath,
+}: {
+    event: { title: string };
+    items: any[];
+    filePath: string;
+}) {
     return (
         <div
             onClick={() =>
@@ -162,7 +204,7 @@ function CommitteeEvent({ event, items, filePath }) {
     );
 }
 
-function PlenumEvent({ event, items, filePath }) {
+function PlenumEvent({ items, filePath }: { items: any[]; filePath: string }) {
     return (
         <div
             onClick={() =>
@@ -216,7 +258,7 @@ class MobileCalendarView extends CalendarView {
     }
 }
 
-function truncateName(n, l) {
+function truncateName(n: string, l: number) {
     if (n.length < l) return n;
     return n.substring(0, l) + "...";
 }
