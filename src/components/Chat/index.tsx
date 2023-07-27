@@ -1,15 +1,24 @@
-import React from "react";
 import Highlighter from "react-highlight-words";
 import clsx from "clsx";
 import "./index.css";
 import { ScrollIntoView } from "rrc";
 import { imageOrDefault, useIndex } from "../../utils";
 import QuoteFooter from "../QuoteFooter";
+import { Quote } from "../../@types";
 
 const ColorHash = require("color-hash").default;
 const colorHash = new ColorHash({ lightness: 0.4 });
 
-export default function Chat({ items }) {
+export default function Chat({
+    items,
+}: {
+    items: (Quote & {
+        isContinuation: boolean;
+        isSpeaker: boolean;
+        highlight: string;
+        isInProtocol: boolean;
+    })[];
+}) {
     const index = useIndex();
     return (
         <ScrollIntoView id={`#q${index}`}>
@@ -22,7 +31,14 @@ export default function Chat({ items }) {
     );
 }
 
-function ChatItem(props) {
+function ChatItem(
+    props: Quote & {
+        isContinuation: boolean;
+        isSpeaker: boolean;
+        highlight: string;
+        isInProtocol: boolean;
+    }
+) {
     const {
         Index,
         Text,
@@ -41,7 +57,7 @@ function ChatItem(props) {
                 isSpeaker === true ? "self" : "other",
                 isContinuation && "continuation"
             )}
-            id={isInProtocol ? `q${Index}` : null}
+            id={isInProtocol ? `q${Index}` : undefined}
         >
             <div className="avatar">
                 <div

@@ -70,5 +70,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-highlight-words": "^0.16.4",
+    "@types/rrc": "^0.10.10"
   }
 }
