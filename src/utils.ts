@@ -102,10 +102,10 @@ export function useNavigate() {
             personID,
             ...params
         }: {
-            location: string;
+            location?: string;
             hash?: string;
             q?: string;
-            personID?: number;
+            personID?: number | null;
         }) => {
             const urlParams = new URLSearchParams(params);
 

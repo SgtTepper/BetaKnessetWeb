@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useLayoutEffect, CSSProperties } from "react";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import PersonIcon from "@material-ui/icons/Person";
@@ -6,8 +6,17 @@ import ClearIcon from "@material-ui/icons/Clear";
 import IconButton from "@material-ui/core/IconButton";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { usePersonID, useNavigate, getFullName } from "../utils";
+import { Person } from "../@types";
 
-const PersonSearch = React.memo(function ({ persons, style, variant }) {
+const PersonSearch = React.memo(function ({
+    persons,
+    style,
+    variant = "outlined",
+}: {
+    persons: Record<number, Person>;
+    style?: CSSProperties;
+    variant?: "standard" | "filled" | "outlined";
+}) {
     const navigate = useNavigate();
     const personID = usePersonID();
     const [inputValue, setInputValue] = useState("");
@@ -25,22 +34,22 @@ const PersonSearch = React.memo(function ({ persons, style, variant }) {
                 }}
             >
                 <Autocomplete
-                    options={Object.keys(persons)}
-                    getOptionLabel={(id) => getFullName(persons[id])}
-                    getOptionSelected={(id) => parseInt(id) === personID}
-                    value={personID || 0}
-                    onChange={(event, newValue) => {
-                        navigate({ personID: newValue });
+                    options={Object.values(persons)}
+                    getOptionLabel={(person) => getFullName(person)}
+                    getOptionSelected={(person) => person.PersonID === personID}
+                    value={persons[personID ?? 0]}
+                    onChange={(_, newValue) => {
+                        navigate({ personID: newValue.PersonID });
                     }}
                     inputValue={inputValue}
-                    onInputChange={(event, newInputValue) => {
+                    onInputChange={(_, newInputValue) => {
                         setInputValue(newInputValue);
                     }}
                     style={{ flexGrow: 1 }}
                     renderInput={(params) => (
                         <TextField
                             {...params}
-                            variant={variant || "outlined"}
+                            variant={variant}
                             placeholder='שם של ח"כ'
                             InputProps={{
                                 ...params.InputProps,
