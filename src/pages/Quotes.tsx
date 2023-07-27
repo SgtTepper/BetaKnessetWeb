@@ -5,9 +5,10 @@ import { ScrollPage } from "../components/ScrollableView";
 import Loader from "../components/ChatLoader";
 import Chat from "../components/Chat";
 import { WhiteQuotesSearch } from "../components/QuotesSearch";
-import config from "../config";
+import config from "../config.json";
 import { useBigScreen, useCancellableFetch, useQuery } from "../utils";
-import defaultTopics from "../defaultTopics";
+import defaultTopics from "../defaultTopics.json";
+import { Quote } from "../@types";
 
 const Quotes = React.memo(function () {
     const [loading, setLoading] = useState(false);
@@ -16,14 +17,16 @@ const Quotes = React.memo(function () {
     const isBigScreen = useBigScreen();
     const prefix = isBigScreen ? "כל נושא שהוא, " : "";
     const serverFetch = useCancellableFetch();
-    const [data, setData] = useState({});
+    const [data, setData] = useState<{ count: number; quotes: Quote[] } | null>(
+        null
+    );
     const query = useQuery();
 
     const cleanQuery = query.replace("״", '"').replace("׳", "'");
 
     useEffect(() => {
         (async () => {
-            setData({});
+            setData(null);
             if (!cleanQuery.length) return;
             setLoading(true);
             try {
@@ -34,7 +37,7 @@ const Quotes = React.memo(function () {
             } catch (e) {
                 // TODO handle errors - (ex: when multi term search is empty)
                 console.error(e);
-                setData({});
+                setData(null);
             } finally {
                 setLoading(false);
             }
@@ -75,7 +78,7 @@ const Quotes = React.memo(function () {
                             <WhiteQuotesSearch
                                 placeholder={`${prefix}לדוגמא "${randomTopic}"`}
                             />
-                            {data.count > 0 && (
+                            {data && data.count > 0 && (
                                 <Typography
                                     style={{ textAlign: "left", color: "#ddd" }}
                                 >
@@ -100,7 +103,10 @@ const Quotes = React.memo(function () {
                     >
                         <div style={{ maxWidth: "850px", width: "100%" }}>
                             <Loader show={loading} />
-                            {!loading && query.length && data.count === 0 ? (
+                            {data &&
+                            !loading &&
+                            query.length &&
+                            data.count === 0 ? (
                                 <>
                                     <Typography
                                         variant="h6"
@@ -115,7 +121,7 @@ const Quotes = React.memo(function () {
                                     </Typography>
                                 </>
                             ) : null}
-                            {!loading && data.count > 0 && (
+                            {data && !loading && data.count > 0 && (
                                 <QuoteView query={query} quotes={data.quotes} />
                             )}
                         </div>
@@ -127,7 +133,13 @@ const Quotes = React.memo(function () {
 });
 export default Quotes;
 
-const QuoteView = React.memo(function ({ query, quotes }) {
+const QuoteView = React.memo(function ({
+    query,
+    quotes,
+}: {
+    query: string;
+    quotes: Quote[];
+}) {
     return (
         <Chat
             items={quotes.map((d) => ({
@@ -138,6 +150,6 @@ const QuoteView = React.memo(function ({ query, quotes }) {
     );
 });
 
-function numberWithCommas(x) {
+function numberWithCommas(x: number) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }

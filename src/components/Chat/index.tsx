@@ -12,12 +12,13 @@ const colorHash = new ColorHash({ lightness: 0.4 });
 export default function Chat({
     items,
 }: {
-    items: (Quote & {
-        isContinuation: boolean;
-        isSpeaker: boolean;
-        highlight: string;
-        isInProtocol: boolean;
-    })[];
+    items: (Quote &
+        Partial<{
+            isContinuation: boolean;
+            isSpeaker: boolean;
+            highlight: string;
+            isInProtocol: boolean;
+        }>)[];
 }) {
     const index = useIndex();
     return (
@@ -32,12 +33,13 @@ export default function Chat({
 }
 
 function ChatItem(
-    props: Quote & {
-        isContinuation: boolean;
-        isSpeaker: boolean;
-        highlight: string;
-        isInProtocol: boolean;
-    }
+    props: Quote &
+        Partial<{
+            isContinuation: boolean;
+            isSpeaker: boolean;
+            highlight: string;
+            isInProtocol: boolean;
+        }>
 ) {
     const {
         Index,

@@ -6,7 +6,7 @@ import { Quote } from "../@types";
 
 export default function QuoteFooter(
     props: Quote & {
-        isInProtocol: boolean;
+        isInProtocol?: boolean;
     }
 ) {
     const { StartDate, TopicName, Text, Speaker, isInProtocol } = props;
