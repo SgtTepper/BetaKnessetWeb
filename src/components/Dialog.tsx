@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -12,7 +12,16 @@ const DialogContent = withStyles((theme) => ({
     },
 }))(MuiDialogContent);
 
-export default function SiteDialog({ children, open, setOpen, closeText }) {
+export default function SiteDialog({
+    children,
+    open,
+    setOpen,
+    closeText,
+}: PropsWithChildren<{
+    open: boolean;
+    setOpen: (value: boolean) => void;
+    closeText: string;
+}>) {
     const handleClose = () => {
         setOpen(false);
     };
