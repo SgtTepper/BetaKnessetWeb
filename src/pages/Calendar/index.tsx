@@ -130,8 +130,6 @@ class CalendarView extends React.PureComponent<
         )
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
-
                 const events: Record<number, CalendarEvent> = {};
                 for (const r of data) {
                     events[r.result.sessionID] = {
