@@ -20,6 +20,14 @@ import AboutDialog from "./About";
 import ContactUsDialog from "./ContactUs";
 import DisclaimerDialog from "./Disclaimer";
 
+interface Nav {
+    navigate: {
+        location: string;
+        hash?: string;
+    };
+    contents: string;
+}
+
 const useStyles = makeStyles({
     title: {
         whiteSpace: "nowrap",
@@ -103,7 +111,7 @@ export default function NavigationBar() {
     const [disclaimerOpen, setDisclaimerOpen] = useState(false);
     const isBigScreen = useBigScreen();
 
-    const nav = [
+    const nav: Nav[] = [
         {
             navigate: { location: "/", hash: "#top" },
             contents: "ראשי",
@@ -185,20 +193,30 @@ function Logo() {
     );
 }
 
-const NavBar = React.memo(function ({ nav, links }) {
+const NavBar = React.memo(function ({
+    nav,
+    links,
+}: {
+    nav: Nav[];
+    links: {
+        callback: () => void;
+        contents: string;
+    }[];
+}) {
     const classes = useStyles();
     const navigateFn = useNavigate();
     return (
         <>
-            <AppBar position="static" className={classes.appBar}>
+            {/* TODO add appBar class or delete className */}
+            <AppBar position="static">
                 <div className={classes.gridContainer}>
                     <div className={classes.nav}>
-                        {nav.map(({ contents, navigate, callback }) => {
-                            const cb = navigate
-                                ? () => navigateFn(navigate)
-                                : callback;
+                        {nav.map(({ contents, navigate }) => {
                             return (
-                                <Button onClick={cb} key={contents}>
+                                <Button
+                                    onClick={() => navigateFn(navigate)}
+                                    key={contents}
+                                >
                                     {contents}
                                 </Button>
                             );
@@ -208,12 +226,9 @@ const NavBar = React.memo(function ({ nav, links }) {
                     <Logo />
                     <div className={classes.links}>
                         <div className={classes.flexSpacer} />
-                        {links.map(({ contents, navigate, callback }) => {
-                            const cb = navigate
-                                ? () => navigateFn(navigate)
-                                : callback;
+                        {links.map(({ contents, callback }) => {
                             return (
-                                <Button onClick={cb} key={contents}>
+                                <Button onClick={callback} key={contents}>
                                     {contents}
                                 </Button>
                             );
@@ -230,17 +245,28 @@ const NavBar = React.memo(function ({ nav, links }) {
                     </div>
                 </div>
             </AppBar>
-            <div className={classes.spacer} />
+            {/* TODO add spacer class or delete className */}
+            <div />
         </>
     );
 });
 
-const NavDrawer = React.memo(function ({ nav, links }) {
+const NavDrawer = React.memo(function ({
+    nav,
+    links,
+}: {
+    nav: Nav[];
+    links: {
+        callback: () => void;
+        contents: string;
+    }[];
+}) {
     const classes = useStyles();
     const navigateFn = useNavigate();
     const [drawerOpen, setDrawerOpen] = useState(false);
 
-    const createToggleDrawer = (open) => (event) => {
+    // TODO : find the correct type
+    const createToggleDrawer = (open: boolean) => (event: any) => {
         if (
             event.type === "keydown" &&
             (event.key === "Tab" || event.key === "Shift")
@@ -267,10 +293,9 @@ const NavDrawer = React.memo(function ({ nav, links }) {
                     }}
                 >
                     <List>
-                        {nav.map(({ contents, navigate, callback }) => {
+                        {nav.map(({ contents, navigate }) => {
                             const cb = () => {
-                                if (navigate) navigateFn(navigate);
-                                else callback();
+                                navigateFn(navigate);
                                 setDrawerOpen(false);
                             };
                             return (
@@ -280,12 +305,13 @@ const NavDrawer = React.memo(function ({ nav, links }) {
                             );
                         })}
                         <Divider />
-                        {links.map(({ contents, navigate, callback }) => {
-                            const cb = navigate
-                                ? () => navigateFn(navigate)
-                                : callback;
+                        {links.map(({ contents, callback }) => {
                             return (
-                                <ListItem button onClick={cb} key={contents}>
+                                <ListItem
+                                    button
+                                    onClick={callback}
+                                    key={contents}
+                                >
                                     <ListItemText primary={contents} />
                                 </ListItem>
                             );

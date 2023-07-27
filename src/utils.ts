@@ -103,8 +103,8 @@ export function useNavigate() {
             ...params
         }: {
             location: string;
-            hash: string;
-            q: string;
+            hash?: string;
+            q?: string;
             personID?: number;
         }) => {
             const urlParams = new URLSearchParams(params);
