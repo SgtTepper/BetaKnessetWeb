@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Bar } from "react-chartjs-2";
-import type { ChartOptions } from "chart.js";
+import { Bar, ChartDataFunction } from "react-chartjs-2";
+import type { ChartData, ChartOptions } from "chart.js";
 
 import { useQuery, useCancellableFetch } from "../../../utils";
 
@@ -44,9 +44,8 @@ const CachedHistogramView = React.memo(function HistogramView({
 
     if (!data.length || data.every((d) => !d.counter)) return null;
 
-    // TODO: check if it really need to be like that since it not assignable to the types
-    const dataFn = (canvas: any) => {
-        const ctx = canvas.getContext("2d");
+    const dataFn: ChartDataFunction<ChartData> = (canvas) => {
+        const ctx = (canvas as HTMLCanvasElement).getContext("2d")!;
         const gradient = ctx.createLinearGradient(0, 0, 0, 140);
         gradient.addColorStop(0, "rgba(0,100,255,.6)");
         gradient.addColorStop(1, "rgba(0,100,255,.2)");
@@ -96,7 +95,6 @@ const CachedHistogramView = React.memo(function HistogramView({
                 top: 5,
             },
         },
-        // TODO: check if it really need to be here since it not assignable to the types
         datasets: {
             barPercentage: 0.95,
         },

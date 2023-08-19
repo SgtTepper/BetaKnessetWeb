@@ -24,8 +24,8 @@ export default React.memo(function PersonBills({
     personID,
     filter,
 }: {
-    personID: number;
-    filter: Filter["Desc"];
+    personID?: number;
+    filter: Filter["Desc"] | null;
 }) {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState<Bill[]>([]);

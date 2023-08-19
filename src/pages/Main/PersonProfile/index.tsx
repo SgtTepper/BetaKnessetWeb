@@ -8,7 +8,7 @@ import PersonQuotes from "./PersonQuotes";
 import WordCloud from "../../../components/WordCloud";
 import PersonBills from "./PersonBills";
 import PersonBillsStats from "./PersonBillsStats";
-import config from "../../../config";
+import config from "../../../config.json";
 import {
     useBigScreen,
     useCancellableFetch,
@@ -21,6 +21,17 @@ import { ScrollPage } from "../../../components/ScrollableView";
 import PersonSearch from "../../../components/PersonSearch";
 import "./index.css";
 import { makeStyles } from "@material-ui/core";
+import { FallbackPerson, Filter, Person, Position } from "../../../@types";
+type MinimalPerson = Pick<
+    Person,
+    | "imgPath"
+    | "LastName"
+    | "FirstName"
+    | "PersonID"
+    | "KnessetNum"
+    | "FactionName"
+>;
+type PersonsDict = Record<PropertyKey, Person>;
 
 const useStyles = makeStyles({
     selection: {
@@ -46,15 +57,19 @@ const useStyles = makeStyles({
 const PersonProfile = React.memo(function () {
     const personID = usePersonID();
     const isBigScreen = useBigScreen();
-    const [persons, setPersons] = useState({});
-    const [fallbackPerson, setFallbackPerson] = useState(null);
+    const [persons, setPersons] = useState<PersonsDict>({});
+    const [fallbackPerson, setFallbackPerson] =
+        useState<ReturnType<typeof parseResponse>>(null);
     const serverFetch = useCancellableFetch();
-    const person = useMemo(() => persons[personID], [persons, personID]);
+    const person = useMemo(
+        () => (personID !== undefined ? persons[personID] : null),
+        [persons, personID]
+    );
 
     useEffect(() => {
         (async () => {
             const res = await serverFetch(`${config.server}/PersonGetAll`);
-            const mapping = {};
+            const mapping: PersonsDict = {};
             for (const p of res) {
                 mapping[parseInt(p.PersonID)] = p;
             }
@@ -89,8 +104,14 @@ const PersonProfile = React.memo(function () {
 });
 export default PersonProfile;
 
-const PersonView = React.memo(function ({ persons, person }) {
-    const [billsFilter, setBillsFilter] = useState(null);
+const PersonView = React.memo(function ({
+    persons,
+    person,
+}: {
+    persons: PersonsDict;
+    person: MinimalPerson | null;
+}) {
+    const [billsFilter, setBillsFilter] = useState<Filter["Desc"] | null>(null);
 
     return (
         <div
@@ -145,15 +166,19 @@ const PersonView = React.memo(function ({ persons, person }) {
     );
 });
 
-const PersonSelectionView = React.memo(function ({ persons }) {
+const PersonSelectionView = React.memo(function ({
+    persons,
+}: {
+    persons: PersonsDict;
+}) {
     const classes = useStyles();
     const navigate = useNavigate();
 
-    const rands = new Set();
+    const rands = new Set<number>();
     const ids = Object.keys(persons);
     while (rands.size < 5 && rands.size < ids.length) {
-        const index = parseInt(Math.random() * ids.length);
-        rands.add(ids[index]);
+        const index = Math.floor(Math.random() * ids.length);
+        rands.add(parseInt(ids[index]));
     }
 
     return (
@@ -225,7 +250,11 @@ const PersonSelectionView = React.memo(function ({ persons }) {
     );
 });
 
-const PersonAvatar = React.memo(function ({ person }) {
+const PersonAvatar = React.memo(function ({
+    person,
+}: {
+    person: MinimalPerson;
+}) {
     if (!person) return <CircularProgress />;
 
     const name = getFullName(person);
@@ -279,46 +308,67 @@ const PersonAvatar = React.memo(function ({ person }) {
     );
 });
 
-function parseResponse(contents) {
+function parseResponse(contents: FallbackPerson[]) {
     if (contents.length === 0) return null;
 
+    const {
+        PersonID,
+        FirstName,
+        LastName,
+        Email,
+        GenderDesc,
+        imgPath,
+        BirthCountry,
+        BirthDate,
+        CityName,
+        FamilyStatus,
+        ChildrenNumber,
+        FactionName,
+        KnessetNum,
+    } = contents[0];
+
     // take generic values
-    const general = {};
-    for (const property of [
-        "PersonID",
-        "FirstName",
-        "LastName",
-        "Email",
-        "GenderDesc",
-        "imgPath",
-        "BirthCountry",
-        "BirthDate",
-        "CityName",
-        "FamilyStatus",
-        "ChildrenNumber",
-    ]) {
-        general[property] = contents[0][property];
-    }
+    const general = {
+        PersonID,
+        FirstName,
+        LastName,
+        Email,
+        GenderDesc,
+        imgPath,
+        BirthCountry,
+        BirthDate,
+        CityName,
+        FamilyStatus,
+        ChildrenNumber,
+        FactionName,
+        KnessetNum,
+        Name: `${FirstName} ${LastName}`,
+    };
 
-    general["Name"] = `${general.FirstName} ${general.LastName}`;
-
-    const positions = contents.map((p) => {
-        const ret = {};
-        for (const property of [
-            "PersonToPositionID",
-            "DutyDesc",
-            "GovMinistryName",
-            "FactionName",
-            "KnessetNum",
-            "DutyDesc",
-            "IsCurrent",
-            "PositionStartDate",
-            "PositionFinishDate",
-        ]) {
-            ret[property] = p[property];
+    const positions = contents.map(
+        ({
+            PersonToPositionID,
+            DutyDesc,
+            GovMinistryName,
+            FactionName,
+            KnessetNum,
+            IsCurrent,
+            PositionStartDate,
+            PositionFinishDate,
+        }) => {
+            const ret = {
+                PersonToPositionID,
+                DutyDesc,
+                GovMinistryName,
+                FactionName,
+                KnessetNum,
+                IsCurrent,
+                PositionStartDate,
+                PositionFinishDate,
+            };
+            return ret;
         }
-        return ret;
-    });
+    );
 
     return {
         ...general,
@@ -327,8 +377,8 @@ function parseResponse(contents) {
     };
 }
 
-function getPositionsByKnesset(positions) {
-    const res = {};
+function getPositionsByKnesset(positions: Position[]) {
+    const res: Record<number, Position[]> = {};
     for (const pos of positions) {
         if (!res[pos.KnessetNum]) res[pos.KnessetNum] = [];
         res[pos.KnessetNum].push(pos);

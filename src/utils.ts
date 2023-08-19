@@ -38,7 +38,11 @@ export function shuffleArray<T>(array: T[]) {
     }
 }
 
-export function imageOrDefault(url: string, identifier: string, size = 32) {
+export function imageOrDefault(
+    url: string | null,
+    identifier: string,
+    size = 32
+) {
     if (url) return url;
 
     return `https://www.gravatar.com/avatar/${hashCode(
@@ -58,7 +62,7 @@ function hashCode(str: string) {
     return hash;
 }
 
-export const getFullName = (p?: Person) => {
+export const getFullName = (p?: Pick<Person, "FirstName" | "LastName">) => {
     if (!p) return "";
     const { FirstName, LastName } = p;
     return `${FirstName} ${LastName}`;

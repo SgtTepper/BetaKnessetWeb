@@ -8,7 +8,7 @@ import { useQuery, useCancellableFetch } from "../../../utils";
 import { WhiteQuotesSearch } from "../../../components/QuotesSearch";
 import { Quote } from "../../../@types";
 
-const PersonQuotes = React.memo(function ({ personID }: { personID: number }) {
+const PersonQuotes = React.memo(function ({ personID }: { personID?: number }) {
     const [loading, setLoading] = useState(false);
 
     return (
@@ -35,7 +35,7 @@ const QuoteView = React.memo(function ({
     loading,
     setLoading,
 }: {
-    personID: number;
+    personID?: number;
     loading: boolean;
     setLoading: (value: boolean) => void;
 }) {

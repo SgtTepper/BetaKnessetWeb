@@ -12,8 +12,8 @@ export default React.memo(function PersonBillsStats({
     filter,
     setFilter,
 }: {
-    personID: number;
-    filter: Filter["Desc"];
+    personID?: number;
+    filter: Filter["Desc"] | null;
     setFilter: (value: Filter["Desc"] | null) => void;
 }) {
     const [data, setData] = useState<Filter[]>([]);
@@ -117,7 +117,7 @@ export default React.memo(function PersonBillsStats({
     );
 });
 
-function getStatusColor(status: Filter["Desc"], filter: Filter["Desc"]) {
+function getStatusColor(status: Filter["Desc"], filter: Filter["Desc"] | null) {
     if (status === filter) return getStatusColorHover(status);
     switch (status) {
         case "בתהליך":
