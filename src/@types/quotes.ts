@@ -8,6 +8,6 @@ export interface Quote {
     Text: string;
     Index: number;
     PersonID: number;
-    SessionType: string;
+    SessionType: "Committee" | "Plenum";
     imgPath: string;
 }

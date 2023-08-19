@@ -13,7 +13,7 @@ import Container from "@material-ui/core/Container";
 import config from "./config.json";
 import theme from "./theme";
 import { useBigScreen } from "./utils";
-import particlesConfig from "./particles.config.json";
+import particlesConfig from "./particles.config";
 import NavigationBar from "./components/NavigationBar";
 import ScrollableView from "./components/ScrollableView";
 
@@ -148,16 +148,7 @@ function CustomParticles() {
     const classes = useStyles();
 
     if (!isBigScreen) return null;
-    return (
-        <Particles
-            params={{
-                ...particlesConfig,
-                interactivity: {},
-                particles: { move: {} },
-            }}
-            className={classes.particles}
-        />
-    );
+    return <Particles params={particlesConfig} className={classes.particles} />;
 }
 
 function OverloadScreen() {

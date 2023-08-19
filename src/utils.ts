@@ -2,12 +2,13 @@ import { useCallback, useState, useEffect, useRef } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import axiosRetry from "axios-retry";
-import axios from "axios";
+import axios, { CancelTokenSource, CancelToken } from "axios";
+import { Person } from "./@types";
 
 axiosRetry(axios, { retries: 3 });
 
 /** helpers **/
-export const toNiceDate = (d, hours = false) => {
+export const toNiceDate = (d: Date, hours = false) => {
     let date = `${d.getDate()}.${d.getMonth() + 1}.${(d.getFullYear() % 100)
         .toString()
         .padStart(2, "0")}`;
@@ -19,7 +20,7 @@ export const toNiceDate = (d, hours = false) => {
     return date;
 };
 
-export function cleanTextFromDB(text) {
+export function cleanTextFromDB(text: string) {
     if (text[0] === "״" || text[0] === '"') {
         text = text.substring(1);
     }
@@ -30,14 +31,18 @@ export function cleanTextFromDB(text) {
     return text.replace(/"+/g, '"').replace(/״+/g, "״");
 }
 
-export function shuffleArray(array) {
+export function shuffleArray<T>(array: T[]) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     }
 }
 
-export function imageOrDefault(url, identifier, size = 32) {
+export function imageOrDefault(
+    url: string | null,
+    identifier: string,
+    size = 32
+) {
     if (url) return url;
 
     return `https://www.gravatar.com/avatar/${hashCode(
@@ -45,7 +50,7 @@ export function imageOrDefault(url, identifier, size = 32) {
     )}?s=${size}&d=identicon&r=PG`;
 }
 
-function hashCode(str) {
+function hashCode(str: string) {
     var hash = 0,
         i,
         chr;
@@ -57,7 +62,7 @@ function hashCode(str) {
     return hash;
 }
 
-export const getFullName = (p) => {
+export const getFullName = (p?: Pick<Person, "FirstName" | "LastName">) => {
     if (!p) return "";
     const { FirstName, LastName } = p;
     return `${FirstName} ${LastName}`;
@@ -94,13 +99,24 @@ export function useNavigate() {
     const history = useHistory();
 
     return useCallback(
-        ({ location, hash, q, personID, ...params }) => {
+        ({
+            location,
+            hash,
+            q,
+            personID,
+            ...params
+        }: {
+            location?: string;
+            hash?: string;
+            q?: string | null;
+            personID?: number | null;
+        }) => {
             const urlParams = new URLSearchParams(params);
 
             q = q !== undefined ? q : currentQuery;
             if (q) urlParams.append("q", q);
             personID = personID !== undefined ? personID : currentPersonID;
-            if (personID) urlParams.append("personID", personID);
+            if (personID) urlParams.append("personID", personID.toString());
 
             history.push(
                 `${location || currentLocation.pathname}?${urlParams}${
@@ -112,7 +128,14 @@ export function useNavigate() {
     );
 }
 
-async function serverFetch({ url, params }) {
+async function serverFetch({
+    url,
+    params,
+}: {
+    url: string;
+    cancelToken: CancelToken;
+    params?: string;
+}) {
     return (
         await axios.get(url, {
             params,
@@ -157,10 +180,10 @@ export function useBigScreen() {
 }
 
 // from https://usehooks.com/useLocalStorage/
-export function useSessionStorage(key, initialValue) {
+export function useSessionStorage<T>(key: string, initialValue: T) {
     // State to store our value
     // Pass initial state function to useState so logic is only executed once
-    const [storedValue, setStoredValue] = useState(() => {
+    const [storedValue, setStoredValue] = useState<T>(() => {
         try {
             // Get from session storage by key
             const item = window.sessionStorage.getItem(key);
@@ -175,7 +198,7 @@ export function useSessionStorage(key, initialValue) {
 
     // Return a wrapped version of useState's setter function that ...
     // ... persists the new value to sessionStorage.
-    const setValue = (value) => {
+    const setValue = (value: T) => {
         try {
             // Allow value to be a function so we have same API as useState
             const valueToStore =
@@ -194,8 +217,8 @@ export function useSessionStorage(key, initialValue) {
 }
 
 export function useCancellableFetch() {
-    const cancelSource = useRef(null);
-    return useCallback(async (url) => {
+    const cancelSource = useRef<CancelTokenSource | null>(null);
+    return useCallback(async (url: string) => {
         if (cancelSource.current) {
             cancelSource.current.cancel("Cancelled by hook");
         }

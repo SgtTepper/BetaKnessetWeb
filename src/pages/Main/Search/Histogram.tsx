@@ -1,12 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { Bar } from "react-chartjs-2";
+import { Bar, ChartDataFunction } from "react-chartjs-2";
+import type { ChartData, ChartOptions } from "chart.js";
+
 import { useQuery, useCancellableFetch } from "../../../utils";
 
-import config from "../../../config";
+import config from "../../../config.json";
 
-const CachedHistogramView = React.memo(function HistogramView({ query }) {
+const CachedHistogramView = React.memo(function HistogramView({
+    query,
+}: {
+    query: string;
+}) {
     const [loading, setLoading] = useState(false);
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<
+        {
+            counter: number;
+            month: number;
+            year: number;
+        }[]
+    >([]);
     const serverFetch = useCancellableFetch();
 
     useEffect(() => {
@@ -32,8 +44,8 @@ const CachedHistogramView = React.memo(function HistogramView({ query }) {
 
     if (!data.length || data.every((d) => !d.counter)) return null;
 
-    const dataFn = (canvas) => {
-        const ctx = canvas.getContext("2d");
+    const dataFn: ChartDataFunction<ChartData> = (canvas) => {
+        const ctx = (canvas as HTMLCanvasElement).getContext("2d")!;
         const gradient = ctx.createLinearGradient(0, 0, 0, 140);
         gradient.addColorStop(0, "rgba(0,100,255,.6)");
         gradient.addColorStop(1, "rgba(0,100,255,.2)");
@@ -41,9 +53,7 @@ const CachedHistogramView = React.memo(function HistogramView({ query }) {
         return {
             labels: data.map(
                 (d) =>
-                    `${d.month}.${(parseInt(d.year) % 100)
-                        .toString()
-                        .padStart(2, "0")}`
+                    `${d.month}.${(d.year % 100).toString().padStart(2, "0")}`
             ),
             datasets: [
                 {
@@ -67,13 +77,14 @@ const CachedHistogramView = React.memo(function HistogramView({ query }) {
         };
     };
 
-    const options = {
+    const options: ChartOptions & { datasets: { barPercentage: number } } = {
         responsive: true,
         maintainAspectRatio: false,
 
         onClick: function (evt, element) {
-            if (!element.length) return;
-            const { month, year, counter } = data[element[0]._index];
+            if (!element?.length) return;
+            const { month, year, counter } =
+                data[(element[0] as { _index: number })._index];
             if (!counter) return;
 
             // TODO
@@ -118,7 +129,7 @@ const CachedHistogramView = React.memo(function HistogramView({ query }) {
                 tooltip.displayColors = false;
             },
             callbacks: {
-                label: function (tooltipItem, data) {
+                label: function (tooltipItem) {
                     return `${tooltipItem.yLabel} תוצאות`;
                 },
             },

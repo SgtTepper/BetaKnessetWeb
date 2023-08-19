@@ -27,7 +27,10 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function ContactUsDialog(props) {
+export default function ContactUsDialog(props: {
+    open: boolean;
+    setOpen: (value: boolean) => void;
+}) {
     const classes = useStyles();
 
     return (
@@ -101,6 +104,33 @@ export default function ContactUsDialog(props) {
                 />
             </div>
             <p style={{ textAlign: "center" }}>
+                <p>
+                    אם אתם רוצים <b>לשפר את איכות הקוד</b>
+                </p>
+                <p>
+                    כמו{" "}
+                    <u>
+                        <a
+                            href="https://github.com/SgtTepper/BetaKnessetWeb/pull/22"
+                            rel="noreferrer"
+                            target="_blank"
+                        >
+                            מעבר מJS ל TS
+                        </a>
+                    </u>{" "}
+                    שעשה
+                </p>
+            </p>
+            <div className={classes.root}>
+                <NamedAvatar
+                    classStyle={classes.medium}
+                    imageUrl={"https://github.com/yedidyar.png"}
+                    linkedinUrl={"https://www.linkedin.com/in/yedidya-rashi/"}
+                    EngName={"yedidya rashi"}
+                    HebName={"ידידיה ראשי"}
+                />
+            </div>
+            <p style={{ textAlign: "center" }}>
                 אתם מוזמנים לפנות אלינו בכתובת
             </p>
             <p style={{ textAlign: "center" }}>
@@ -112,7 +142,19 @@ export default function ContactUsDialog(props) {
     );
 }
 
-function NamedAvatar({ classStyle, imageUrl, linkedinUrl, EngName, HebName }) {
+function NamedAvatar({
+    classStyle,
+    imageUrl,
+    linkedinUrl,
+    EngName,
+    HebName,
+}: {
+    classStyle?: string;
+    imageUrl: string;
+    linkedinUrl: string;
+    EngName: string;
+    HebName: string;
+}) {
     return (
         <div style={{ textAlign: "center" }}>
             <IconButton

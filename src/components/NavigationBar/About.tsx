@@ -1,7 +1,10 @@
 import Dialog from "../Dialog";
 import { Typography } from "@material-ui/core";
 
-export default function AboutDialog(props) {
+export default function AboutDialog(props: {
+    open: boolean;
+    setOpen: (value: boolean) => void;
+}) {
     return (
         <Dialog {...props} closeText={"מגניב"}>
             <Typography color="primary" variant="h4" component="h4">

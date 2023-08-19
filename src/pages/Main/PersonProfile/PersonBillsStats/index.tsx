@@ -2,15 +2,21 @@ import React, { useState, useEffect } from "react";
 import { Doughnut } from "react-chartjs-2";
 import "chartjs-plugin-datalabels";
 import Explainer from "../../../../components/Explainer";
-import config from "../../../../config";
+import config from "../../../../config.json";
 import { useCancellableFetch } from "../../../../utils";
+import { Filter } from "../../../../@types";
+import type { ChartOptions } from "chart.js";
 
 export default React.memo(function PersonBillsStats({
     personID,
     filter,
     setFilter,
+}: {
+    personID?: number;
+    filter: Filter["Desc"] | null;
+    setFilter: (value: Filter["Desc"] | null) => void;
 }) {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<Filter[]>([]);
     const serverFetch = useCancellableFetch();
 
     useEffect(() => {
@@ -42,9 +48,7 @@ export default React.memo(function PersonBillsStats({
                     filter === x.Desc ? "white" : getStatusColor(x.Desc, filter)
                 ),
                 hoverBorderColor: data.map((x) =>
-                    filter === x.Desc
-                        ? "white"
-                        : getStatusColorHover(x.Desc, filter)
+                    filter === x.Desc ? "white" : getStatusColorHover(x.Desc)
                 ),
                 borderWidth: data.map((x) => (filter === x.Desc ? 5 : 0)),
                 hoverBorderWidth: 5,
@@ -52,7 +56,7 @@ export default React.memo(function PersonBillsStats({
         ],
     };
 
-    const options = {
+    const options: ChartOptions = {
         legend: {
             display: false,
             position: "right",
@@ -64,14 +68,25 @@ export default React.memo(function PersonBillsStats({
                 textAlign: "center",
                 formatter: function (value, context) {
                     if (value / total < 0.05) return "";
-                    return context.chart.data.labels[context.dataIndex];
+                    return context?.chart?.data?.labels?.[context.dataIndex];
                 },
             },
         },
         onClick: function (evt, element) {
-            if (element[0] && data[element[0]._index].Desc) {
-                if (filter === data[element[0]._index].Desc) setFilter(null);
-                else setFilter(data[element[0]._index].Desc);
+            if (
+                element &&
+                element[0] &&
+                data[(element[0] as { _index: number })._index].Desc
+            ) {
+                if (
+                    filter ===
+                    data[(element[0] as { _index: number })._index].Desc
+                )
+                    setFilter(null);
+                else
+                    setFilter(
+                        data[(element[0] as { _index: number })._index].Desc
+                    );
             } else setFilter(null);
         },
     };
@@ -102,7 +117,7 @@ export default React.memo(function PersonBillsStats({
     );
 });
 
-function getStatusColor(status, filter) {
+function getStatusColor(status: Filter["Desc"], filter: Filter["Desc"] | null) {
     if (status === filter) return getStatusColorHover(status);
     switch (status) {
         case "בתהליך":
@@ -115,7 +130,7 @@ function getStatusColor(status, filter) {
             return "#3366CC";
     }
 }
-function getStatusColorHover(status) {
+function getStatusColorHover(status: Filter["Desc"]) {
     switch (status) {
         case "בתהליך":
             return "#FFaa22";
@@ -128,7 +143,11 @@ function getStatusColorHover(status) {
     }
 }
 
-function BillExplainer(props) {
+function BillExplainer(
+    props: React.PropsWithChildren<{
+        style?: React.CSSProperties;
+    }>
+) {
     return (
         <Explainer {...props}>
             <p>ח"כים יכולים גם ליזום הצעות חוק וגם להצטרף להצעות חוק.</p>

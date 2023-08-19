@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useLayoutEffect, useRef } from "react";
+import React, { useCallback, useState, useLayoutEffect } from "react";
 import Dialog from "./Dialog";
 import { Typography } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
@@ -12,11 +12,15 @@ import { useQuery, useNavigate } from "../utils";
 
 const QuotesSearch = React.memo(function ({
     style,
-    variant,
     placeholder,
+    variant = "outlined",
     showReset = true,
+}: {
+    style?: React.CSSProperties;
+    variant?: "standard" | "filled" | "outlined";
+    placeholder?: string;
+    showReset?: boolean;
 }) {
-    const textRef = useRef();
     const navigate = useNavigate();
     const query = useQuery();
     const [queryInput, setQueryInput] = useState(query);
@@ -47,11 +51,10 @@ const QuotesSearch = React.memo(function ({
 
                 <TextField
                     color="primary"
-                    variant={variant || "outlined"}
+                    variant={variant}
                     placeholder={placeholder}
                     value={queryInput}
-                    inputRef={textRef}
-                    onInput={(e) => setQueryInput(e.target.value)}
+                    onChange={(e) => setQueryInput(e.target.value)}
                     style={{ flexGrow: 1 }}
                     InputProps={{
                         style,
@@ -116,11 +119,17 @@ const QuotesSearch = React.memo(function ({
     );
 });
 
-export function SearchDialog(props) {
+export function SearchDialog(props: {
+    open: boolean;
+    setOpen: (value: boolean) => void;
+}) {
     const { setOpen } = props;
     const navigate = useNavigate();
 
-    const showQuotes = (e, q) => {
+    const showQuotes = (
+        e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+        q: string
+    ) => {
         e.preventDefault();
         navigate({ q });
         setOpen(false);
@@ -178,7 +187,14 @@ export function SearchDialog(props) {
 
 export default QuotesSearch;
 
-export function WhiteQuotesSearch({ style, ...props }) {
+export function WhiteQuotesSearch({
+    style,
+    ...props
+}: {
+    placeholder: string;
+    style?: React.CSSProperties;
+    showReset?: boolean;
+}) {
     return (
         <QuotesSearch
             style={{

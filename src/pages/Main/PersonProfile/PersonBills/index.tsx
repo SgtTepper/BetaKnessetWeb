@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { IconButton, Tooltip } from "@material-ui/core";
 import clsx from "clsx";
-import config from "../../../../config";
+import config from "../../../../config.json";
 import { makeStyles } from "@material-ui/core/styles";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
@@ -18,10 +18,17 @@ import HelpOutlineRoundedIcon from "@material-ui/icons/HelpOutlineRounded";
 
 import Dialog from "../../../../components/Dialog";
 import { useCancellableFetch } from "../../../../utils";
+import { Bill, BillDocument, Filter } from "../../../../@types";
 
-export default React.memo(function PersonBills({ personID, filter }) {
+export default React.memo(function PersonBills({
+    personID,
+    filter,
+}: {
+    personID?: number;
+    filter: Filter["Desc"] | null;
+}) {
     const [loading, setLoading] = useState(true);
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<Bill[]>([]);
     const classes = useStyles();
     const serverFetch = useCancellableFetch();
 
@@ -92,13 +99,20 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function ControlledAccordions({ data, isFiltered }) {
+function ControlledAccordions({
+    data,
+    isFiltered,
+}: {
+    data: Bill[];
+    isFiltered: boolean;
+}) {
     const classes = useStyles();
-    const [expanded, setExpanded] = React.useState(false);
-    const [dialog, setDialog] = React.useState(null);
-    const handleChange = (panel) => (event, isExpanded) => {
-        setExpanded(isExpanded ? panel : false);
-    };
+    const [expanded, setExpanded] = React.useState<boolean | string>(false);
+    const [dialog, setDialog] = React.useState<Bill | null>(null);
+    const handleChange =
+        (panel: string) => (_: React.ChangeEvent<{}>, isExpanded: boolean) => {
+            setExpanded(isExpanded ? panel : false);
+        };
 
     return (
         <div className={classes.root}>
@@ -192,7 +206,7 @@ function ControlledAccordions({ data, isFiltered }) {
         </div>
     );
 }
-function ClickableDocs({ documents }) {
+function ClickableDocs({ documents }: { documents: BillDocument[] }) {
     return (
         <>
             {documents.map((x) => (
@@ -229,7 +243,7 @@ function ClickableDocs({ documents }) {
     );
 }
 
-function StatusToIcon({ statusID, desc }) {
+function StatusToIcon({ statusID, desc }: { statusID: number; desc: string }) {
     const classes = useStyles();
     let icon = <></>;
     switch (statusID) {
@@ -279,7 +293,7 @@ function StatusToIcon({ statusID, desc }) {
     );
 }
 
-function getReducedType(bill) {
+function getReducedType(bill: Bill) {
     switch (bill.statusID) {
         case 177:
             return "נעצרה";

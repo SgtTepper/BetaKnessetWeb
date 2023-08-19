@@ -3,11 +3,12 @@ import Typography from "@material-ui/core/Typography";
 
 import Loader from "../../../components/ChatLoader";
 import Chat from "../../../components/Chat";
-import config from "../../../config";
+import config from "../../../config.json";
 import { useQuery, useCancellableFetch } from "../../../utils";
 import { WhiteQuotesSearch } from "../../../components/QuotesSearch";
+import { Quote } from "../../../@types";
 
-const PersonQuotes = React.memo(function ({ personID }) {
+const PersonQuotes = React.memo(function ({ personID }: { personID?: number }) {
     const [loading, setLoading] = useState(false);
 
     return (
@@ -29,8 +30,16 @@ const PersonQuotes = React.memo(function ({ personID }) {
 });
 export default PersonQuotes;
 
-const QuoteView = React.memo(function ({ personID, loading, setLoading }) {
-    const [data, setData] = useState([]);
+const QuoteView = React.memo(function ({
+    personID,
+    loading,
+    setLoading,
+}: {
+    personID?: number;
+    loading: boolean;
+    setLoading: (value: boolean) => void;
+}) {
+    const [data, setData] = useState<Quote[]>([]);
     const query = useQuery();
     const serverFetch = useCancellableFetch();
 
